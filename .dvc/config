@@ -1,0 +1,6 @@
+[cache]
+    dir = /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/1-areas/science/dvc-cache
+    shared = group
+    type = reflink
+[core]
+    autostage = true
