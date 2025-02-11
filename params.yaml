@@ -1,0 +1,5 @@
+extract:
+  bin_size: '10ms'
+  min_firing_rate: 0.1
+  max_spike_coincidence: 0.2
+  verbose: True

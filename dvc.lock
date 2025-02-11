@@ -1,0 +1,63 @@
+schema: '2.0'
+stages:
+  extract_dwight@2025-01-07-reward-type_medium_cst-rtt-dco:
+    cmd: python scripts/extract_trial_frame.py --path 
+      data/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium_cst-rtt-dco_sorted.mat
+      --out 
+      results/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium_cst-rtt-dco_tf.pkl
+      --block reward-type_medium_cst-rtt-dco --bin_size 10ms
+    deps:
+    - path: 
+        data/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium_cst-rtt-dco_sorted.mat
+      hash: md5
+      md5: ff17229ed7166de03a6d8a95c5d43f70
+      size: 357282032
+    params:
+      params.yaml:
+        extract.bin_size: 10ms
+    outs:
+    - path: 
+        results/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium_cst-rtt-dco_tf.pkl
+      hash: md5
+      md5: d46b5e190d5729b5a8b27058f91e1d19
+      size: 57849219
+  extract_dwight@2025-01-07-reward-type_medium-large_cst-rtt-dco:
+    cmd: python scripts/extract_trial_frame.py --path 
+      data/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium-large_cst-rtt-dco_sorted.mat
+      --out 
+      results/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium-large_cst-rtt-dco_tf.pkl
+      --block reward-type_medium-large_cst-rtt-dco --bin_size 10ms
+    deps:
+    - path: 
+        data/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium-large_cst-rtt-dco_sorted.mat
+      hash: md5
+      md5: 6ebab48109d40b8a66355172b0826861
+      size: 1501593328
+      isexec: true
+    params:
+      params.yaml:
+        extract.bin_size: 10ms
+    outs:
+    - path: 
+        results/dwight/2025-01-07/Dwight_2025-01-07_reward-type_medium-large_cst-rtt-dco_tf.pkl
+      hash: md5
+      md5: 042d6dbbc9335a7aa26e61d5e549c63d
+      size: 170816964
+  extract_dwight@2025-01-07-reward-type-choice:
+    cmd: python scripts/extract_trial_frame.py --path data/dwight/2025-01-07/Dwight_2025-01-07_reward-type-choice_sorted.mat
+      --out results/dwight/2025-01-07/Dwight_2025-01-07_reward-type-choice_tf.pkl
+      --block reward-type-choice --bin_size 10ms
+    deps:
+    - path: data/dwight/2025-01-07/Dwight_2025-01-07_reward-type-choice_sorted.mat
+      hash: md5
+      md5: bc01f906a700ba664a6a1abb43479976
+      size: 532558654
+      isexec: true
+    params:
+      params.yaml:
+        extract.bin_size: 10ms
+    outs:
+    - path: results/dwight/2025-01-07/Dwight_2025-01-07_reward-type-choice_tf.pkl
+      hash: md5
+      md5: 18aced0e42e956dac45e36ce207a58cc
+      size: 91306544
