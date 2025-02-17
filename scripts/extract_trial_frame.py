@@ -33,7 +33,6 @@ if __name__ == '__main__':
         'path',
         type=str,
         help='Path to the data file',
-        required=True,
     )
     parser.add_argument(
         '--out',

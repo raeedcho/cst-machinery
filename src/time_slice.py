@@ -41,7 +41,7 @@ def reindex_trial_from_time(trial: pd.DataFrame,reference_time: pd.Timedelta, ti
             index= lambda time: time-reference_time,
             level=timecol,
         )
-        .rename_axis(index={'time': 'relative time'})
+        # .rename_axis(index={'time': 'relative time'})
     )
 
 def reindex_trial_from_event(trial: pd.DataFrame,event: str, timecol: str='time') -> pd.DataFrame:

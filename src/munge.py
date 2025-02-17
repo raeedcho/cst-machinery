@@ -6,6 +6,9 @@ def get_index_level(df,level=None):
         level = df.index.names
     return df.reset_index(level=level)[level]
 
+def multivalue_xs(df: pd.DataFrame,keys: list,level,**kwargs) -> pd.DataFrame:
+    return pd.concat([df.xs(key=key,level=level,drop_level=False,**kwargs) for key in keys])
+
 def group_average(td,keys=[]):
     return (
         td

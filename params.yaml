@@ -3,3 +3,9 @@ extract:
   min_firing_rate: 0.1
   max_spike_coincidence: 0.2
   verbose: True
+combine_session:
+  verbose: True
+dwight_block_combination:
+  - reward-type_medium_cst-rtt-dco
+  - reward-type_medium-large_cst-rtt-dco
+  - reward-type-choice
