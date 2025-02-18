@@ -187,3 +187,29 @@ stages:
       hash: md5
       md5: 7607796fec9e1755b5b7b89111be9bd9
       size: 278993994
+  context_axis@0:
+    cmd: python scripts/get_context_axis.py results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.pkl
+      --out results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
+      --verbose
+    deps:
+    - path: results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.pkl
+      hash: md5
+      md5: 7607796fec9e1755b5b7b89111be9bd9
+      size: 278993994
+    - path: scripts/get_context_axis.py
+      hash: md5
+      md5: 10161080e77db72cec06f2ae9ebfbe0e
+      size: 3736
+    params:
+      params.yaml:
+        context_axis:
+          verbose: true
+    outs:
+    - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.log
+      hash: md5
+      md5: 5ac07f8ca6704aee2943eab1ab7f2280
+      size: 98677
+    - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
+      hash: md5
+      md5: 727d4a46fbba76d1887eddeda952777c
+      size: 1283895

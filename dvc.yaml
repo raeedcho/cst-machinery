@@ -27,8 +27,15 @@ stages:
         - results/trialframe/${item.monkey}/${item.date}/Dwight_${item.date}_tf.log
   # extract_prez:
     # date: ['2022-07-21']
-  # context_axis:
-  #   foreach:
-  #     - date: '2025-01-07'
-  #   do:
-  #     cmd: python scripts/get_context_axis.py results/dwight/${item.date}/Dwight_${item.date}_tf.pkl --out results/dwight/${item.date}/Dwight_${item.date}_context_axis.pkl ${context_axis}
+  context_axis:
+    foreach: ${monkey_sessions}
+    do:
+      cmd: python scripts/get_context_axis.py results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.pkl --out results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg ${context_axis}
+      params:
+        - context_axis
+      deps:
+        - scripts/get_context_axis.py
+        - results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.pkl
+      outs:
+        - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
+        - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.log
