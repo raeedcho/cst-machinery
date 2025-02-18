@@ -1,5 +1,5 @@
 import numpy as np
-# import torch
+from .time_slice import reindex_trial_from_event
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.decomposition import TruncatedSVD,PCA
 
@@ -125,8 +125,10 @@ class SoftnormScaler(BaseEstimator,TransformerMixin):
         return X / (self.activity_range_ + self.norm_const)
 
 class BaselineShifter(BaseEstimator,TransformerMixin):
-    def __init__(self, baseline_state='pretrial'):
-        self.baseline_state = baseline_state
+    def __init__(self, ref_event: str, ref_slice: slice, timecol: str='time'):
+        self.ref_event = ref_event
+        self.ref_slice = ref_slice
+        self.timecol = timecol
 
     def fit(self,X,y=None):
         return self
@@ -134,9 +136,10 @@ class BaselineShifter(BaseEstimator,TransformerMixin):
     def transform(self,X):
         baseline = (
             X
-            .groupby('state',observed=True)
-            .get_group(self.baseline_state)
-            .groupby('trial',observed=True)
+            .groupby('trial_id',group_keys=False)
+            .apply(reindex_trial_from_event,event=self.ref_event,timecol=self.timecol)
+            .loc[(slice(None),self.ref_slice),:]
+            .groupby('trial_id')
             .agg(lambda s: np.nanmean(s,axis=0))
         )
         return X - baseline
