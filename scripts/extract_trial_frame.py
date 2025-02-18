@@ -24,7 +24,7 @@ def main(args):
     )
     logger.info(f'Composed trial frame from {input_path}')
 
-    trial_frame.to_pickle(output_path)
+    trial_frame.to_parquet(output_path)
     logger.info(f'Saved trial frame to {output_path}')
 
 if __name__ == '__main__':

@@ -14,8 +14,8 @@ def main(args):
         level=logging.DEBUG if args.verbose else logging.WARNING,
     )
     
-    block_names = [file.stem.split('_')[2] for file in input_path.glob('*.pkl')]
-    block_frames = [pd.read_pickle(file) for file in input_path.glob('*.pkl')]
+    block_names = [file.stem.split('_')[2] for file in input_path.glob('*.parquet')]
+    block_frames = [pd.read_parquet(file) for file in input_path.glob('*.parquet')]
     logger.info(f'Loaded blocks from {input_path}')
     logger.debug(f'Block names: {block_names}')
 
@@ -23,7 +23,7 @@ def main(args):
         pd.concat(block_frames)
         .dropna(axis='columns',how='any')
     )
-    concat_frame.to_pickle(output_path)
+    concat_frame.to_parquet(output_path)
     logger.info(f'Wrote combined session frame to {output_path}')
 
 if __name__ == '__main__':

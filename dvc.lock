@@ -46,7 +46,7 @@ stages:
   extract_dwight@2025-01-07-reward-type-choice:
     cmd: python scripts/extract_trial_frame.py data/dwight/2025-01-07/Dwight_2025-01-07_reward-type-choice_sorted.mat
       --out 
-      results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.pkl
+      results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.parquet
       --block reward-type-choice --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence
       0.2 --verbose
     deps:
@@ -61,8 +61,8 @@ stages:
       size: 532558654
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: bfc4a7aecd418c21f1f2d0734d7b7577
-      size: 2105
+      md5: 6bebc14750ea17483cb65cdc9762a90b
+      size: 2106
     params:
       params.yaml:
         extract:
@@ -74,18 +74,18 @@ stages:
     - path: 
         results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.log
       hash: md5
-      md5: b8d3420d3f48adaba6b6cd932e56bb39
-      size: 521
+      md5: d537c7a318f11bc02412cd1bb9f2ca60
+      size: 525
     - path: 
-        results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.pkl
+        results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.parquet
       hash: md5
-      md5: 9a5f5c72ba1d7f87e3afc627f372778a
-      size: 76874065
+      md5: cc2e3c3fe0c10193794f29953a254246
+      size: 3893531
   extract_dwight@2025-01-07-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       data/dwight/2025-01-07/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_sorted.mat
       --out 
-      results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.pkl
+      results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.parquet
       --block reward-type-medium-cst-rtt-dco --bin_size 10ms --min_firing_rate 0.1
       --max_spike_coincidence 0.2 --verbose
     deps:
@@ -101,8 +101,8 @@ stages:
       size: 357282032
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: bfc4a7aecd418c21f1f2d0734d7b7577
-      size: 2105
+      md5: 6bebc14750ea17483cb65cdc9762a90b
+      size: 2106
     params:
       params.yaml:
         extract:
@@ -114,18 +114,18 @@ stages:
     - path: 
         results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.log
       hash: md5
-      md5: e50acea15d99cb653219db4f414752dc
-      size: 557
+      md5: 45721d7098930a2f3375acdafd524e65
+      size: 561
     - path: 
-        results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.pkl
+        results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.parquet
       hash: md5
-      md5: e42aa7d6efb72c28f9422a189a212368
-      size: 51293765
+      md5: 2141b8c591d2301f6a3c1803142e3bbe
+      size: 2655531
   extract_dwight@2025-01-07-reward-type-medium-large-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       data/dwight/2025-01-07/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_sorted.mat
       --out 
-      results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.pkl
+      results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.parquet
       --block reward-type-medium-large-cst-rtt-dco --bin_size 10ms --min_firing_rate
       0.1 --max_spike_coincidence 0.2 --verbose
     deps:
@@ -141,8 +141,8 @@ stages:
       size: 1501593328
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: bfc4a7aecd418c21f1f2d0734d7b7577
-      size: 2105
+      md5: 6bebc14750ea17483cb65cdc9762a90b
+      size: 2106
     params:
       params.yaml:
         extract:
@@ -154,26 +154,26 @@ stages:
     - path: 
         results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.log
       hash: md5
-      md5: 60183a8ecbaa49595d03c5d55421d6ba
-      size: 575
+      md5: 2440a30ddaa5fa5ade5baeea0ca4b6d8
+      size: 579
     - path: 
-        results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.pkl
+        results/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.parquet
       hash: md5
-      md5: 70bfc3be1aba667bf723505f17884cac
-      size: 153683477
+      md5: eb65aecb4538de1963343c80dd9fb8f8
+      size: 7640159
   combine_session@0:
     cmd: python scripts/combine_session.py results/trialframe/Dwight/2025-01-07/blocks/
-      --out results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.pkl --verbose
+      --out results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet --verbose
     deps:
     - path: results/trialframe/Dwight/2025-01-07/blocks/
       hash: md5
-      md5: 56a1e5edb8ad9fc4c522f3464190dbee.dir
-      size: 281853290
-      nfiles: 7
+      md5: 0047f3a2ccdbaa3691c01e4ed6e53e63.dir
+      size: 296042700
+      nfiles: 10
     - path: scripts/combine_session.py
       hash: md5
-      md5: 9ef3b966141d1b2f2949bc04ee7f04a6
-      size: 1421
+      md5: 2bc503e71e3270bced1901917775c9a1
+      size: 1431
     params:
       params.yaml:
         combine_session:
@@ -181,25 +181,25 @@ stages:
     outs:
     - path: results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.log
       hash: md5
-      md5: 56c4368ea1c0d6c1d9e222d2dafc22f8
-      size: 310
-    - path: results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.pkl
+      md5: 7501968053820c4bbae575b944b8de75
+      size: 314
+    - path: results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       hash: md5
-      md5: 7607796fec9e1755b5b7b89111be9bd9
-      size: 278993994
+      md5: 1f28c14e9bae63f0145ecb8041457e67
+      size: 13165163
   context_axis@0:
-    cmd: python scripts/get_context_axis.py results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.pkl
+    cmd: python scripts/get_context_axis.py results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       --out results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
       --verbose
     deps:
-    - path: results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.pkl
+    - path: results/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       hash: md5
-      md5: 7607796fec9e1755b5b7b89111be9bd9
-      size: 278993994
+      md5: 1f28c14e9bae63f0145ecb8041457e67
+      size: 13165163
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 10161080e77db72cec06f2ae9ebfbe0e
-      size: 3736
+      md5: a6b6043391de67dfe1bcaa3077f5956e
+      size: 3737
     params:
       params.yaml:
         context_axis:
@@ -207,9 +207,9 @@ stages:
     outs:
     - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.log
       hash: md5
-      md5: 5ac07f8ca6704aee2943eab1ab7f2280
-      size: 98677
+      md5: 8824ef855eb0027c73d7dd205f2d1da4
+      size: 98681
     - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: 727d4a46fbba76d1887eddeda952777c
-      size: 1283895
+      md5: cbcf7fab9579606d87f04d15c4714a95
+      size: 1282937

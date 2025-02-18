@@ -3,7 +3,7 @@ stages:
     matrix:
       date: ['2025-01-07']
       block: ['reward-type-medium-cst-rtt-dco', 'reward-type-medium-large-cst-rtt-dco', 'reward-type-choice']
-    cmd: python scripts/extract_trial_frame.py data/dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat --out results/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.pkl --block ${item.block} ${extract}
+    cmd: python scripts/extract_trial_frame.py data/dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat --out results/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.parquet --block ${item.block} ${extract}
     params:
       - extract
     deps:
@@ -11,31 +11,31 @@ stages:
       - data/dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
     outs:
-      - results/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.pkl
+      - results/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.parquet
       - results/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.log
   combine_session:
     foreach: ${monkey_sessions}
     do:
-      cmd: python scripts/combine_session.py results/trialframe/${item.monkey}/${item.date}/blocks/ --out results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.pkl ${combine_session}
+      cmd: python scripts/combine_session.py results/trialframe/${item.monkey}/${item.date}/blocks/ --out results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet ${combine_session}
       params:
         - combine_session
       deps:
         - scripts/combine_session.py
         - results/trialframe/${item.monkey}/${item.date}/blocks/
       outs:
-        - results/trialframe/${item.monkey}/${item.date}/Dwight_${item.date}_tf.pkl
+        - results/trialframe/${item.monkey}/${item.date}/Dwight_${item.date}_tf.parquet
         - results/trialframe/${item.monkey}/${item.date}/Dwight_${item.date}_tf.log
   # extract_prez:
     # date: ['2022-07-21']
   context_axis:
     foreach: ${monkey_sessions}
     do:
-      cmd: python scripts/get_context_axis.py results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.pkl --out results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg ${context_axis}
+      cmd: python scripts/get_context_axis.py results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg ${context_axis}
       params:
         - context_axis
       deps:
         - scripts/get_context_axis.py
-        - results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.pkl
+        - results/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
         - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
         - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.log

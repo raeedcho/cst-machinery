@@ -39,7 +39,7 @@ def process_trial_frame(input_path: Path) -> pd.DataFrame:
         'Hold Center (RTT Cue)': 'Hold Center (Task Cue)',
     }
     return (
-        pd.read_pickle(input_path)
+        pd.read_parquet(input_path)
         .set_index(['block','task','result','state'],append=True)
         ['motor cortex']
         .pipe(src.munge.multivalue_xs,keys=['CST','RTT'],level='task')
