@@ -164,13 +164,13 @@ stages:
     deps:
     - path: results/dwight/2025-01-07/blocks/
       hash: md5
-      md5: b521d4fac82ade51f851ebafcab6d93c.dir
-      size: 281852927
-      nfiles: 6
+      md5: afa27a413010a72e3140b4bde34c8059.dir
+      size: 281853250
+      nfiles: 7
     - path: scripts/combine_session.py
       hash: md5
-      md5: 39223f0e9a0f8c85ff19adf44cb64264
-      size: 1331
+      md5: 9ef3b966141d1b2f2949bc04ee7f04a6
+      size: 1421
     params:
       params.yaml:
         combine_session:
@@ -182,5 +182,5 @@ stages:
       size: 288
     - path: results/dwight/2025-01-07/Dwight_2025-01-07_tf.pkl
       hash: md5
-      md5: 4018a7b1abff235bd1d99d10432daf20
-      size: 287539685
+      md5: 7607796fec9e1755b5b7b89111be9bd9
+      size: 278993994

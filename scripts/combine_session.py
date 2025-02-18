@@ -19,7 +19,11 @@ def main(args):
     logger.info(f'Loaded blocks from {input_path}')
     logger.debug(f'Block names: {block_names}')
 
-    pd.concat(block_frames).to_pickle(output_path)
+    concat_frame = (
+        pd.concat(block_frames)
+        .dropna(axis='columns',how='any')
+    )
+    concat_frame.to_pickle(output_path)
     logger.info(f'Wrote combined session frame to {output_path}')
 
 if __name__ == '__main__':
