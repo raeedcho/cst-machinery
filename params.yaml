@@ -1,3 +1,10 @@
+monkey_sessions:
+  - monkey: 'Dwight'
+    date: '2025-01-07'
+    blocks:
+      - reward-type-medium-cst-rtt-dco
+      - reward-type-medium-large-cst-rtt-dco
+      - reward-type-choice
 extract:
   bin_size: '10ms'
   min_firing_rate: 0.1
