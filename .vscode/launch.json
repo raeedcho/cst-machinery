@@ -11,8 +11,8 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": [
-                "results/dwight/2025-01-07/blocks/",
-                "--out", "results/temp.pkl",
+                "/Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_sorted.mat",
+                "--out", "results/temp.parquet",
                 "--verbose",
             ]
         }

@@ -65,6 +65,12 @@ if __name__ == '__main__':
         default=0.2,
     )
     parser.add_argument(
+        '--rate_artifact_threshold',
+        type=float,
+        help='Maximum firing rate threshold for neurons to get rid of artifacts',
+        default=350,
+    )
+    parser.add_argument(
         '-v',
         '--verbose',
         help='Verbosity',
