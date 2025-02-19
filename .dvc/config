@@ -4,3 +4,6 @@
     type = reflink
 [core]
     autostage = true
+    remote = localremote
+['remote "localremote"']
+    url = /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/1-areas/science/dvc-store
