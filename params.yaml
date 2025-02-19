@@ -1,3 +1,4 @@
+raw_data_dir: '/Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/preTD'
 monkey_sessions:
   - monkey: 'Dwight'
     date: '2025-01-07'
