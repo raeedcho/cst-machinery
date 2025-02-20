@@ -40,7 +40,7 @@ def process_trial_frame(input_path: Path) -> pd.DataFrame:
     }
     return (
         pd.read_parquet(input_path)
-        .set_index(['block','task','result','state'],append=True)
+        .set_index(['task','result','state'],append=True)
         ['motor cortex']
         .pipe(src.munge.multivalue_xs,keys=['CST','RTT'],level='task')
         .xs(level='result',key='success')
