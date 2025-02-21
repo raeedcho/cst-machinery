@@ -206,8 +206,8 @@ stages:
       size: 10734307
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: a6b6043391de67dfe1bcaa3077f5956e
-      size: 3737
+      md5: 38bf72ce01370358e9e03b359c033c7d
+      size: 3729
     params:
       params.yaml:
         context_axis:
@@ -219,8 +219,8 @@ stages:
       size: 98670
     - path: results/context_axis/Prez/2022-07-21/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: 61d9732bbde4f293b5f0539a14274019
-      size: 1019718
+      md5: 66a19422b5c098cfafc7c440e0d4bcb8
+      size: 1020344
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -449,8 +449,8 @@ stages:
       size: 16852471
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: a6b6043391de67dfe1bcaa3077f5956e
-      size: 3737
+      md5: 38bf72ce01370358e9e03b359c033c7d
+      size: 3729
     params:
       params.yaml:
         context_axis:
@@ -462,8 +462,8 @@ stages:
       size: 98678
     - path: results/context_axis/Dwight/2025-01-01/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: f39b368e2a4773d203b36970b7a022a9
-      size: 1422320
+      md5: c7e0ad1efd951f9d686961946033deda
+      size: 1420528
   context_axis@2:
     cmd: python scripts/get_context_axis.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       --out results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
@@ -475,8 +475,8 @@ stages:
       size: 12545099
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: a6b6043391de67dfe1bcaa3077f5956e
-      size: 3737
+      md5: 38bf72ce01370358e9e03b359c033c7d
+      size: 3729
     params:
       params.yaml:
         context_axis:
@@ -488,5 +488,101 @@ stages:
       size: 98678
     - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: d48fb8cf2f4d5f24efb6362c65799cd6
-      size: 1250935
+      md5: 7daecbf337638f2f21652e58409d4feb
+      size: 1251190
+  cross_task_decoding@0:
+    cmd: python scripts/cross_task_decoding.py data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
+      --out results/cross-task-decoding/Prez/2022-07-21/ --verbose
+    deps:
+    - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
+      hash: md5
+      md5: 783ad441616f0a73e46082b8ac3ee44c
+      size: 10734307
+    - path: scripts/cross_task_decoding.py
+      hash: md5
+      md5: aa0977a52499587ec9a54663f652de2b
+      size: 7166
+    params:
+      params.yaml:
+        cross_task_decoding:
+          verbose: true
+    outs:
+    - path: 
+        results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_cross-task-decoding.log
+      hash: md5
+      md5: faaf059a9d698ef3c95d16e07069ae4b
+      size: 196884
+    - path: 
+        results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
+      hash: md5
+      md5: 0c9292511c7ad41f436f3d335bd10c94
+      size: 25070
+    - path: 
+        results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
+      hash: md5
+      md5: d9858ffbd709ea2694d0b949e9653d51
+      size: 185122
+  cross_task_decoding@1:
+    cmd: python scripts/cross_task_decoding.py data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
+      --out results/cross-task-decoding/Dwight/2025-01-01/ --verbose
+    deps:
+    - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
+      hash: md5
+      md5: 5528124397d6fbbc029ee35c06210102
+      size: 16852471
+    - path: scripts/cross_task_decoding.py
+      hash: md5
+      md5: aa0977a52499587ec9a54663f652de2b
+      size: 7166
+    params:
+      params.yaml:
+        cross_task_decoding:
+          verbose: true
+    outs:
+    - path: 
+        results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_cross-task-decoding.log
+      hash: md5
+      md5: 0b05c67f8395e69e5c51d2a19f00c1ec
+      size: 196884
+    - path: 
+        results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
+      hash: md5
+      md5: de2f81e3f3670730f0bd87c1b3a5c923
+      size: 24845
+    - path: 
+        results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
+      hash: md5
+      md5: 13f4dc5ef3cde157de111a930adba7cd
+      size: 230890
+  cross_task_decoding@2:
+    cmd: python scripts/cross_task_decoding.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
+      --out results/cross-task-decoding/Dwight/2025-01-07/ --verbose
+    deps:
+    - path: data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
+      hash: md5
+      md5: a0ee7933c79bf6901fce15514adbc508
+      size: 12545099
+    - path: scripts/cross_task_decoding.py
+      hash: md5
+      md5: aa0977a52499587ec9a54663f652de2b
+      size: 7166
+    params:
+      params.yaml:
+        cross_task_decoding:
+          verbose: true
+    outs:
+    - path: 
+        results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_cross-task-decoding.log
+      hash: md5
+      md5: eebd13e486196b0d5ec90d4c06c039d7
+      size: 196884
+    - path: 
+        results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
+      hash: md5
+      md5: 082eb1bc8731d41ee14957776ad4c697
+      size: 25736
+    - path: 
+        results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
+      hash: md5
+      md5: e5e27b9550b4f016ba3df23df6b2e19a
+      size: 219546

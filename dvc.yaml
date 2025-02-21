@@ -51,3 +51,16 @@ stages:
       outs:
         - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
         - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.log
+  cross_task_decoding:
+    foreach: ${monkey_sessions}
+    do:
+      cmd: python scripts/cross_task_decoding.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${cross_task_decoding}
+      params:
+        - cross_task_decoding
+      deps:
+        - scripts/cross_task_decoding.py
+        - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+      outs:
+        - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
+        - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
+        - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_cross-task-decoding.log

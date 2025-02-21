@@ -16,3 +16,5 @@ combine_session:
   verbose: True
 context_axis:
   verbose: True
+cross_task_decoding:
+  verbose: True
