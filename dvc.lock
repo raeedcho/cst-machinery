@@ -500,8 +500,8 @@ stages:
       size: 10734307
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: aa0977a52499587ec9a54663f652de2b
-      size: 7166
+      md5: ba30ecd048ad85e6fb20e3f38468f480
+      size: 7604
     params:
       params.yaml:
         cross_task_decoding:
@@ -510,18 +510,23 @@ stages:
     - path: 
         results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_cross-task-decoding.log
       hash: md5
-      md5: faaf059a9d698ef3c95d16e07069ae4b
-      size: 196884
+      md5: 49f50cef81084b3e82f5df5cc91e00e1
+      size: 295250
     - path: 
         results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 0c9292511c7ad41f436f3d335bd10c94
+      md5: 752af0fa15c88e7df9f5e54016d764fb
       size: 25070
     - path: 
         results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: d9858ffbd709ea2694d0b949e9653d51
+      md5: 0bdcc27b33827ba85f3dbeda302c32c4
       size: 185122
+    - path: results/cross-task-decoding/Prez/2022-07-21/trials/
+      hash: md5
+      md5: 5d6be65332d317da5fafa0466b57b307.dir
+      size: 12159075
+      nfiles: 260
   cross_task_decoding@1:
     cmd: python scripts/cross_task_decoding.py data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
       --out results/cross-task-decoding/Dwight/2025-01-01/ --verbose
@@ -532,8 +537,8 @@ stages:
       size: 16852471
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: aa0977a52499587ec9a54663f652de2b
-      size: 7166
+      md5: 07fa18a69e208f9c51277cd29d0a4cf0
+      size: 7633
     params:
       params.yaml:
         cross_task_decoding:
@@ -542,18 +547,23 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_cross-task-decoding.log
       hash: md5
-      md5: 0b05c67f8395e69e5c51d2a19f00c1ec
-      size: 196884
+      md5: aa255cb475944739cdbffd218013f405
+      size: 295250
     - path: 
         results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: de2f81e3f3670730f0bd87c1b3a5c923
+      md5: 58bc32706692bc0982923eda6ba7a3b2
       size: 24845
     - path: 
         results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 13f4dc5ef3cde157de111a930adba7cd
+      md5: 0627246d144eb317a9bdddf663997434
       size: 230890
+    - path: results/cross-task-decoding/Dwight/2025-01-01/trials/
+      hash: md5
+      md5: 19eae8cd6dc345067d311feddf27c88b.dir
+      size: 16345533
+      nfiles: 364
   cross_task_decoding@2:
     cmd: python scripts/cross_task_decoding.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       --out results/cross-task-decoding/Dwight/2025-01-07/ --verbose
@@ -564,8 +574,8 @@ stages:
       size: 12545099
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: aa0977a52499587ec9a54663f652de2b
-      size: 7166
+      md5: 07fa18a69e208f9c51277cd29d0a4cf0
+      size: 7633
     params:
       params.yaml:
         cross_task_decoding:
@@ -574,15 +584,20 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_cross-task-decoding.log
       hash: md5
-      md5: eebd13e486196b0d5ec90d4c06c039d7
-      size: 196884
+      md5: 5a9d361e215000299db068863eb6ec2e
+      size: 295250
     - path: 
         results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 082eb1bc8731d41ee14957776ad4c697
+      md5: 7a9f770ba712998762e89ab9b4413866
       size: 25736
     - path: 
         results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: e5e27b9550b4f016ba3df23df6b2e19a
+      md5: 54c5914153f750a441c71863d919421c
       size: 219546
+    - path: results/cross-task-decoding/Dwight/2025-01-07/trials/
+      hash: md5
+      md5: a3f0d19880f2f06a53b5883b2f65c9e6.dir
+      size: 15365462
+      nfiles: 344

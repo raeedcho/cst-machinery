@@ -72,6 +72,16 @@ def main(args):
     task_score_heatmap.figure.savefig(output_folder / f'{monkey}_{date}_decoder-task-score-heatmap.svg')
     scores_plot.figure.savefig(output_folder / f'{monkey}_{date}_decoder-trial-scores-scatter.svg')
 
+    if not (output_folder / 'trials').exists():
+        (output_folder / 'trials').mkdir()
+    for trial_id in hand_data.index.get_level_values('trial_id').unique():
+        trial_fig = plot_trial_predictions(
+            true_data=hand_data.loc[trial_id,'x'],
+            pred_data=trial_predictions.loc[trial_id,:],
+        )
+        trial_fig.savefig(output_folder / 'trials' / f'{monkey}_{date}_trial-{trial_id}_predictions.svg')
+        plt.close(trial_fig)
+
 def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
     state_mapper = {
         'Control System': 'Go Cue',
@@ -155,27 +165,35 @@ def score_groups(true_data: pd.Series,pred_data: pd.DataFrame, grouper: str)->pd
     )
 
 def plot_trial_predictions(true_data: pd.Series,pred_data: pd.DataFrame)->plt.Figure:
-    trials_to_plot=[119,169]
-    g=sns.relplot(
-        data=td_pred.loc[np.isin(td_pred['trial_id'],trials_to_plot)],
-        x='Time from go cue (s)',
-        y=f'{hand_or_cursor} {pos_or_vel} (cm/s)',
-        hue='Model',
-        # hue_order=[f'{hand_or_cursor} {pos_or_vel}','CST calibrated','RTT calibrated','Dual calibrated'],
-        # palette=['k','C0','C1','0.5'],
-        hue_order=[f'{hand_or_cursor} {pos_or_vel}','CST calibrated','RTT calibrated'],
-        palette=['k','C0','C1'],
-        kind='line',
-        row='trial_id',
-        row_order=trials_to_plot,
-        height=4,
-        aspect=2,
+    data = (
+        pred_data
+        .assign(true=true_data)
+        .stack(level='model')
+        .to_frame('hand velocity')
     )
-    g.axes[0,0].set_yticks([-200,0,200])
-    g.axes[0,0].set_xticks([0,2,4,6])
-    sns.despine(fig=g.fig,trim=True)
+    task = munge.get_index_level(data,'task').unique()
+    assert len(task)==1, 'Data contains multiple trials'
+
+    fig,ax = plt.subplots(figsize=(6,3))
+    sns.lineplot(
+        data=data,
+        x='time',
+        y='hand velocity',
+        hue='model',
+        hue_order=['true','Dual','CST-trained','RTT-trained'],
+        palette=['k','0.5','C0','C1'],
+        ax=ax,
+    )
+    ax.set(
+        xlabel='time (s)',
+        ylabel='hand velocity (cm/s)',
+        title=munge.get_index_level(data,'task').unique(),    
+    )
+    ax.axvline(0, color='k', linestyle='--')
+    sns.despine(ax=ax,trim=True)
     
-    return g.figure
+    return fig
+
 class TaskTrainedDecoder(BaseEstimator,RegressorMixin):
     """
     A linear regression model trained on data from only a single task.

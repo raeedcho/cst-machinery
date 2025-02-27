@@ -64,3 +64,4 @@ stages:
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_cross-task-decoding.log
+        - results/cross-task-decoding/${item.monkey}/${item.date}/trials/
