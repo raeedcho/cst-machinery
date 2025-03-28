@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from typing import Union
+from pandas._libs.tslibs.nattype import NaTType
 
 from .munge import get_index_level
 
@@ -34,7 +36,9 @@ def get_state_transition_times(state_list: pd.Series, timecol: str='time') -> pd
     
     return state_transition_times
 
-def reindex_trial_from_time(trial: pd.DataFrame,reference_time: pd.Timedelta, timecol: str='time') -> pd.DataFrame:
+from typing import Optional
+
+def reindex_trial_from_time(trial: pd.DataFrame,reference_time: Union[pd.Timedelta,NaTType], timecol: str='time') -> pd.DataFrame:
     return (
         trial
         .rename(
@@ -80,7 +84,7 @@ def get_epoch_data(data: pd.DataFrame,epochs: dict, timecol: str='time'):
         (
             data
             .groupby('trial_id',group_keys=False)
-            .apply(reindex_trial_from_event,event,timecol=timecol)
+            .apply(lambda df: reindex_trial_from_event(df,event=event,timecol=timecol))
             .assign(phase=event)
             .set_index('phase',append=True)
             .loc[(slice(None),event_slice),:]

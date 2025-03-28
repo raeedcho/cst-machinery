@@ -21,6 +21,9 @@ def main(args):
         smile_data,
         block=args.block,
         bin_size=args.bin_size,
+        min_firing_rate=args.min_firing_rate,
+        max_spike_coincidence=args.max_spike_coincidence,
+        rate_artifact_threshold=args.rate_artifact_threshold,
     )
     logger.info(f'Composed trial frame from {input_path}')
 

@@ -8,6 +8,7 @@ stages:
       - extract
     deps:
       - scripts/extract_trial_frame.py
+      - src/
       - ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
     outs:
@@ -22,6 +23,7 @@ stages:
       - extract
     deps:
       - scripts/extract_trial_frame.py
+      - src/
       - ${raw_data_dir}/Prez/${item.date}/Prez_${item.date}_${item.block}_sorted.mat
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
     outs:
@@ -35,6 +37,7 @@ stages:
         - combine_session
       deps:
         - scripts/combine_session.py
+        - src/
         - data/trialframe/${item.monkey}/${item.date}/blocks/
       outs:
         - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
@@ -47,10 +50,12 @@ stages:
         - context_axis
       deps:
         - scripts/get_context_axis.py
+        - src/
         - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
-        - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
         - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.log
+      plots:
+        - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
   cross_task_decoding:
     foreach: ${monkey_sessions}
     do:
@@ -59,9 +64,11 @@ stages:
         - cross_task_decoding
       deps:
         - scripts/cross_task_decoding.py
+        - src/
         - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
+        - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_cross-task-decoding.log
+      plots:
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
-        - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_cross-task-decoding.log
         - results/cross-task-decoding/${item.monkey}/${item.date}/trials/

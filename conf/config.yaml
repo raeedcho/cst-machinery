@@ -1,4 +1,10 @@
+defaults:
+  - boilerplate: lfads-torch
+  - model: cst-rtt
+  - _self_
+
 raw_data_dir: '/Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format'
+log_dir: 'logs/'
 monkey_sessions:
   - monkey: 'Prez'
     date: '2022-07-21'

@@ -20,6 +20,7 @@ from sklearn.model_selection import (
 )
 from sklearn.metrics import explained_variance_score, r2_score, make_scorer
 from sklearn.base import RegressorMixin,BaseEstimator
+from sklearn.pipeline import make_pipeline
 
 def main(args):
     input_path = Path(args.path)
@@ -69,14 +70,18 @@ def main(args):
     scores_plot.plot_marginals(sns.rugplot,height=0.1,palette=['C0','C1'])
     scores_plot.refline(x=0,y=0)
 
-    task_score_heatmap.figure.savefig(output_folder / f'{monkey}_{date}_decoder-task-score-heatmap.svg')
+    heatmap_fig = task_score_heatmap.get_figure()
+    if heatmap_fig is not None:
+        heatmap_fig.savefig(output_folder / f'{monkey}_{date}_decoder-task-score-heatmap.svg')
     scores_plot.figure.savefig(output_folder / f'{monkey}_{date}_decoder-trial-scores-scatter.svg')
 
     if not (output_folder / 'trials').exists():
         (output_folder / 'trials').mkdir()
     for trial_id in hand_data.index.get_level_values('trial_id').unique():
+        true_data = hand_data.loc[trial_id,'x']
+        assert isinstance(true_data,pd.Series), f"Only one value in trial{trial_id}"
         trial_fig = plot_trial_predictions(
-            true_data=hand_data.loc[trial_id,'x'],
+            true_data=true_data,
             pred_data=trial_predictions.loc[trial_id,:],
         )
         trial_fig.savefig(output_folder / 'trials' / f'{monkey}_{date}_trial-{trial_id}_predictions.svg')
@@ -95,21 +100,24 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
         .xs(level='result',key='success')
         .rename(index=state_mapper, level='state')
         .groupby('trial_id', group_keys=False)
-        .apply(time_slice.reindex_trial_from_event, event='Go Cue')
+        .apply(lambda df: time_slice.reindex_trial_from_event(df, event='Go Cue'))
     )
     trim_pipeline = lambda df: (
         df
         .loc[(slice(None),slice('-0.5 sec','3sec')),:]
     )
 
+    scale_PCA_pipeline = make_pipeline(
+        crystal_models.SoftnormScaler(),
+        PCA(n_components=15),
+    )
     neural_data = (
         preproc
         ['motor cortex']
         .groupby('trial_id')
         .transform(smile_extract.smooth_data, dt=0.01,std=0.1,backend='convolve')
-        .pipe(crystal_models.SoftnormScaler().fit_transform)
         .pipe(lambda df: pd.DataFrame(
-            PCA(n_components=15).fit_transform(df),
+            scale_PCA_pipeline.fit_transform(df),
             index=df.index,
         ))
         .pipe(trim_pipeline)
@@ -118,7 +126,7 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
     hand_data = (
         preproc
         ['hand position']
-        .pipe(timeseries.estimate_kinematic_derivative, deriv=1, cutoff=30)
+        .pipe(lambda df: timeseries.estimate_kinematic_derivative(df, deriv=1, cutoff=30))
         .pipe(trim_pipeline)
     )
 
