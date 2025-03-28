@@ -22,7 +22,7 @@ callbacks:
     mode: min
     patience: 200
     min_delta: 0
-    # burn_in_period: ${max:${sum:${model.l2_start_epoch},${model.l2_increase_epoch}},${sum:${model.kl_start_epoch},${model.kl_increase_epoch}}}
+    burn_in_period: ${max:${sum:${model.l2_start_epoch},${model.l2_increase_epoch}},${sum:${model.kl_start_epoch},${model.kl_increase_epoch}}}
   learning_rate_monitor:
     _target_: pytorch_lightning.callbacks.LearningRateMonitor
     logging_interval: epoch
