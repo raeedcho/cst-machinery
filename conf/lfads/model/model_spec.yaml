@@ -1,0 +1,63 @@
+MODEL:
+  # CD_PASS_RATE: 0.0
+  # CD_RATE: 0.3
+  # CELL_CLIP: 5.0
+  # CI_ENC_DIM: 80
+  # CI_LAG: 1
+  # CON_DIM: 80
+  # CO_DIM: 4
+  # CO_PRIOR_NVAR: 0.1
+  # CO_PRIOR_TAU: 10.0
+  # DATA_DIM: 156
+  # DROPOUT_RATE: 0.05
+  ENC_INPUT_DIM: -1
+  # EXT_INPUT_DIM: 0
+  # FAC_DIM: 40
+  # GEN_DIM: 100
+  # IC_DIM: 100
+  # IC_ENC_DIM: 20
+  # IC_POST_VAR_MIN: 0.0001
+  # IC_PRIOR_VAR: 0.1
+  SAMPLE_POSTERIORS: true
+  # SEQ_LEN: 60
+  SV_RATE: 0.0
+  SV_SEED: 0
+TRAIN:
+  # ADAM_EPSILON: 1.0e-07
+  # BATCH_SIZE: 250
+  DATA:
+    AUGMENT:
+      JITTER_WIDTH: 2
+    DIR: /snel/share/share/data/cst/rtt-cst/data/pre-lfads
+    PREFIX: Prez_20220721_RTTCST
+  EAGER_MODE: false
+  ENCODERS_ONLY: false
+  # KL:
+  #   CO_WEIGHT: 2.0e-06
+  #   IC_WEIGHT: 1.0e-07
+  #   INCREASE_EPOCH: 100
+  #   START_EPOCH: 0
+  # L2:
+  #   CI_ENC_SCALE: 0.0
+  #   CON_SCALE: 0.00040741446541662336
+  #   GEN_SCALE: 0.00021600820741402065
+  #   IC_ENC_SCALE: 0.0
+  #   INCREASE_EPOCH: 10
+  #   READIN_SCALE: 0.005
+  #   START_EPOCH: 0
+  # LOG_HPS: false
+  LOSS_SCALE: 1.0
+  # LR:
+  #   DECAY: 0.95
+  #   INIT: 0.002
+  #   PATIENCE: 6
+  #   STOP: 1.0e-05
+  # MAX_EPOCHS: 100
+  MAX_GRAD_NORM: 200.0
+  MODEL_DIR: /snel/share/runs/cst/230328_random_search_L2/tuneDay0_9_TRAIN.L2.CON_SCALE=0.00040741,TRAIN.L2.GEN_SCALE=0.00021601,TRAIN.L2.INCREASE_EPOCH=10_2023-03-28_16-51-12kjy7vr9s/model_output
+  NLL_MEAN: true
+  OVERWRITE: true
+  # PATIENCE: 10
+  PBT_MODE: false
+  TUNE_MODE: true
+  # USE_TB: true

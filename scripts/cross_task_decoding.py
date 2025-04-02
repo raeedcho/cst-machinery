@@ -25,13 +25,14 @@ from sklearn.pipeline import make_pipeline
 def main(args):
     input_path = Path(args.path)
     output_folder = Path(args.out)
+    log_dir = Path(args.logdir)
 
     monkey = input_path.stem.split('_')[0]
     date = input_path.stem.split('_')[1]
 
     logging.basicConfig(
-        filename=output_folder / f'{monkey}_{date}_cross-task-decoding.log',
-        level=logging.DEBUG if args.verbose else logging.WARNING,
+        filename=log_dir/ 'cross-task-decoding' / f'{monkey}_{date}_cross-task-decoding.log',
+        level=args.loglevel,
     )
 
     tf = pd.read_parquet(input_path)
@@ -246,9 +247,17 @@ if __name__=='__main__':
         required=True,
     )
     parser.add_argument(
-        '--verbose',
-        action='store_true',
-        help='Enable verbose logging',
+        '--logdir',
+        type=str,
+        help='Logging directory',
+        default='logs/',
+    )
+    parser.add_argument(
+        '--loglevel',
+        type=str,
+        help='Logging level',
+        default='WARNING',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
     )
     
     args = parser.parse_args()

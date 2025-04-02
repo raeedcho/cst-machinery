@@ -1,10 +1,97 @@
-boilerplate:
+lfads:
+  datamodule:
+    _target_: lfads_torch.datamodules.BasicDataModule
+    datafile_pattern: /Users/raeed/codebase/0-projects/cst-rtt/cst-machinery/hydra_plugins/../data/pre-lfads-tensors/Prez_2022-07-21_cst-rtt_tensors.hdf5
+    batch_keys:
+    - behavior
+    attr_keys:
+    - psth
+    - train_cond_idx
+    - valid_cond_idx
+    - train_decode_mask
+    - valid_decode_mask
+    batch_size: 250
+  model:
+    _target_: lfads_torch.model.LFADS
+    encod_data_dim: 156
+    encod_seq_len: 60
+    recon_seq_len: 60
+    ext_input_dim: 0
+    ic_enc_seq_len: 0
+    ic_enc_dim: 20
+    ci_enc_dim: 80
+    ci_lag: 1
+    con_dim: 80
+    co_dim: 4
+    ic_dim: 100
+    gen_dim: 100
+    fac_dim: 40
+    readin:
+    - _target_: torch.nn.Identity
+    readout:
+      _target_: torch.nn.ModuleList
+      modules:
+      - _target_: lfads_torch.modules.readin_readout.FanInLinear
+        in_features: 40
+        out_features: 156
+    train_aug_stack:
+      _target_: lfads_torch.modules.augmentations.AugmentationStack
+      transforms:
+      - _target_: lfads_torch.modules.augmentations.CoordinatedDropout
+        cd_rate: 0.3
+        cd_pass_rate: 0.0
+        ic_enc_seq_len: 0
+      batch_order:
+      - 0
+      loss_order:
+      - 0
+    infer_aug_stack:
+      _target_: lfads_torch.modules.augmentations.AugmentationStack
+    reconstruction:
+    - _target_: lfads_torch.modules.recons.Poisson
+    variational: true
+    co_prior:
+      _target_: lfads_torch.modules.priors.AutoregressiveMultivariateNormal
+      tau: 10.0
+      nvar: 0.1
+      shape: 4
+    ic_prior:
+      _target_: lfads_torch.modules.priors.MultivariateNormal
+      mean: 0
+      variance: 0.1
+      shape: 100
+    ic_post_var_min: 0.0001
+    dropout_rate: 0.05
+    cell_clip: 5.0
+    loss_scale: 10000.0
+    recon_reduce_mean: true
+    lr_init: 0.002
+    lr_stop: 1.0e-05
+    lr_decay: 0.95
+    lr_patience: 6
+    lr_adam_beta1: 0.9
+    lr_adam_beta2: 0.999
+    lr_adam_epsilon: 1.0e-07
+    lr_scheduler: false
+    weight_decay: 0.0
+    l2_start_epoch: 0
+    l2_increase_epoch: 10
+    l2_ic_enc_scale: 0.0
+    l2_ci_enc_scale: 0.0
+    l2_gen_scale: 0.00021600820741402065
+    l2_con_scale: 0.00040741446541662336
+    kl_start_epoch: 0
+    kl_increase_epoch: 100
+    kl_ic_scale: 1.0e-07
+    kl_co_scale: 2.0e-06
+  seed: 0
+  ignore_warnings: false
   trainer:
     _target_: pytorch_lightning.Trainer
     accelerator: mps
     devices: 1
     gradient_clip_val: 200
-    max_epochs: 1000
+    max_epochs: 100
     log_every_n_steps: 5
   callbacks:
     model_checkpoint:
@@ -20,8 +107,9 @@ boilerplate:
       _target_: lfads_torch.extensions.tune.EarlyStoppingWithBurnInPeriod
       monitor: valid/recon_smth
       mode: min
-      patience: 200
+      patience: 10
       min_delta: 0
+      burn_in_period: 100
     learning_rate_monitor:
       _target_: pytorch_lightning.callbacks.LearningRateMonitor
       logging_interval: epoch
@@ -42,81 +130,10 @@ boilerplate:
       _target_: lfads_torch.post_run.analysis.run_posterior_sampling
       filename: lfads_output.h5
       num_samples: 50
-model:
-  _target_: lfads_torch.model.LFADS
-  encod_data_dim: 137
-  encod_seq_len: 35
-  recon_seq_len: 45
-  ext_input_dim: 0
-  ic_enc_seq_len: 0
-  ic_enc_dim: 64
-  ci_enc_dim: 64
-  ci_lag: 1
-  con_dim: 64
-  co_dim: 4
-  ic_dim: 64
-  gen_dim: 200
-  fac_dim: 100
-  readin:
-  - _target_: torch.nn.Identity
-  readout:
-    _target_: torch.nn.ModuleList
-    modules:
-    - _target_: lfads_torch.modules.readin_readout.FanInLinear
-      in_features: 100
-      out_features: 182
-  train_aug_stack:
-    _target_: lfads_torch.modules.augmentations.AugmentationStack
-    transforms:
-    - _target_: lfads_torch.modules.augmentations.CoordinatedDropout
-      cd_rate: 0.3
-      cd_pass_rate: 0.0
-      ic_enc_seq_len: 0
-    batch_order:
-    - 0
-    loss_order:
-    - 0
-  infer_aug_stack:
-    _target_: lfads_torch.modules.augmentations.AugmentationStack
-  reconstruction:
-  - _target_: lfads_torch.modules.recons.Poisson
-  variational: true
-  co_prior:
-    _target_: lfads_torch.modules.priors.AutoregressiveMultivariateNormal
-    tau: 10.0
-    nvar: 0.1
-    shape: 4
-  ic_prior:
-    _target_: lfads_torch.modules.priors.MultivariateNormal
-    mean: 0
-    variance: 0.1
-    shape: 64
-  ic_post_var_min: 0.0001
-  dropout_rate: 0.3
-  cell_clip: 5.0
-  loss_scale: 10000.0
-  recon_reduce_mean: true
-  lr_init: 0.004
-  lr_stop: 1.0e-05
-  lr_decay: 0.95
-  lr_patience: 6
-  lr_adam_beta1: 0.9
-  lr_adam_beta2: 0.999
-  lr_adam_epsilon: 1.0e-08
-  lr_scheduler: false
-  weight_decay: 0.0
-  l2_start_epoch: 0
-  l2_increase_epoch: 80
-  l2_ic_enc_scale: 0.0
-  l2_ci_enc_scale: 0.0
-  l2_gen_scale: 0.0
-  l2_con_scale: 0.0
-  kl_start_epoch: 0
-  kl_increase_epoch: 80
-  kl_ic_scale: 1.0e-07
-  kl_co_scale: 1.0e-07
 raw_data_dir: /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-log_dir: logs/
+logging:
+  logdir: logs
+  loglevel: INFO
 monkey_sessions:
 - monkey: Prez
   date: '2022-07-21'
@@ -129,10 +146,3 @@ extract:
   min_firing_rate: 0.1
   max_spike_coincidence: 0.2
   rate_artifact_threshold: 350
-  verbose: true
-combine_session:
-  verbose: true
-context_axis:
-  verbose: true
-cross_task_decoding:
-  verbose: true

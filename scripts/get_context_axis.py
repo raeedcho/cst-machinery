@@ -17,10 +17,11 @@ from src.crystal_models import SoftnormScaler
 def main(args):
     input_path = Path(args.path)
     output_path = Path(args.out)
+    log_dir = Path(args.logdir)
 
     logging.basicConfig(
-        filename=output_path.with_suffix('.log'),
-        level=logging.DEBUG if args.verbose else logging.WARNING,
+        filename=log_dir / 'context_axis' / f'{output_path.stem}.log',
+        level=args.loglevel,
     )
 
     data = process_trial_frame(input_path)
@@ -124,9 +125,17 @@ if __name__ == '__main__':
         required=True,
     )
     parser.add_argument(
-        '--verbose',
-        action='store_true',
-        help='Enable verbose logging',
+        '--logdir',
+        type=str,
+        help='Logging directory',
+        default='logs/',
+    )
+    parser.add_argument(
+        '--loglevel',
+        type=str,
+        help='Logging level',
+        default='WARNING',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
     )
     
     args = parser.parse_args()

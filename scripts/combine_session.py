@@ -8,10 +8,11 @@ logger = logging.getLogger(__name__)
 def main(args):
     input_path = Path(args.folder)
     output_path = Path(args.out)
+    log_dir = Path(args.logdir)
 
     logging.basicConfig(
-        filename=output_path.with_suffix('.log'),
-        level=logging.DEBUG if args.verbose else logging.WARNING,
+        filename=log_dir / 'combine' / f'{output_path.stem}.log',
+        level=args.loglevel,
     )
     
     block_names = [file.stem.split('_')[2] for file in input_path.glob('*.parquet')]
@@ -40,10 +41,17 @@ if __name__ == '__main__':
         required=True,
     )
     parser.add_argument(
-        '-v',
-        '--verbose',
-        help='Verbosity',
-        action='store_true',
+        '--logdir',
+        type=str,
+        help='Logging directory',
+        default='logs/',
+    )
+    parser.add_argument(
+        '--loglevel',
+        type=str,
+        help='Logging level',
+        default='WARNING',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
     )
 
     args = parser.parse_args()

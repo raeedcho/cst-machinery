@@ -8,10 +8,11 @@ logger = logging.getLogger(__name__)
 def main(args):
     input_path = Path(args.path)
     output_path = Path(args.out)
+    log_dir = Path(args.logdir)
 
     logging.basicConfig(
-        filename=output_path.with_suffix('.log'),
-        level=logging.INFO if args.verbose else logging.WARNING,
+        filename=log_dir / 'extract' / f'{output_path.stem}.log',
+        level=args.loglevel,
     )
 
     smile_data = smile_extract.direct_load_smile_data(input_path)
@@ -74,10 +75,17 @@ if __name__ == '__main__':
         default=350,
     )
     parser.add_argument(
-        '-v',
-        '--verbose',
-        help='Verbosity',
-        action='store_true',
+        '--logdir',
+        type=str,
+        help='Logging directory',
+        default='logs/',
+    )
+    parser.add_argument(
+        '--loglevel',
+        type=str,
+        help='Logging level',
+        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
+        default='WARNING',
     )
     # TODO: add arguments somehow for the following:
     # - resampling window (default ('kaiser', 20))

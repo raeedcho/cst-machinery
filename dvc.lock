@@ -48,8 +48,8 @@ stages:
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/Dwight_2025-01-07_reward-type-choice_sorted.mat
       --out 
       data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.parquet
-      --block reward-type-choice --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence
-      0.2 --rate_artifact_threshold 350 --verbose
+      --block reward-type-choice --logdir logs --loglevel INFO --bin_size 10ms --min_firing_rate
+      0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold 350
     deps:
     - path: 
         /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/Dwight_2025-01-07_reward-type-choice_sorted.mat
@@ -64,13 +64,13 @@ stages:
       nfiles: 27
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: 75f1e0b92a3b615ff2fbeba671973473
-      size: 2463
+      md5: 9b04ca62fea980ecb91c207c0569b490
+      size: 2677
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
         extract:
@@ -78,25 +78,27 @@ stages:
           min_firing_rate: 0.1
           max_spike_coincidence: 0.2
           rate_artifact_threshold: 350
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.log
-      hash: md5
-      md5: 2e04ad7aa0728ec3e5d7c929fced1cf3
-      size: 911
     - path: 
         data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-choice_tf.parquet
       hash: md5
-      md5: e32dad4e30306df26659f5d03c407941
+      md5: 9f197587076cf53b34d0bf92efb0a14d
       size: 3558562
+    - path: logs/extract/Dwight_2025-01-07_reward-type-choice_tf.log
+      hash: md5
+      md5: 2e04ad7aa0728ec3e5d7c929fced1cf3
+      size: 911
   extract_dwight@2025-01-07-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_sorted.mat
       --out 
       data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.parquet
-      --block reward-type-medium-cst-rtt-dco --bin_size 10ms --min_firing_rate 0.1
-      --max_spike_coincidence 0.2 --rate_artifact_threshold 350 --verbose
+      --block reward-type-medium-cst-rtt-dco --logdir logs --loglevel INFO --bin_size
+      10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
     deps:
     - path: 
         /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -111,13 +113,13 @@ stages:
       nfiles: 27
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: 75f1e0b92a3b615ff2fbeba671973473
-      size: 2463
+      md5: 9b04ca62fea980ecb91c207c0569b490
+      size: 2677
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
         extract:
@@ -125,25 +127,27 @@ stages:
           min_firing_rate: 0.1
           max_spike_coincidence: 0.2
           rate_artifact_threshold: 350
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.log
-      hash: md5
-      md5: 07ea5ed3b1d680d4896ea1827de875a7
-      size: 947
     - path: 
         data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.parquet
       hash: md5
-      md5: 2141b8c591d2301f6a3c1803142e3bbe
+      md5: 8fa332231dc58a3dbce75911706ff036
       size: 2655531
+    - path: logs/extract/Dwight_2025-01-07_reward-type-medium-cst-rtt-dco_tf.log
+      hash: md5
+      md5: 07ea5ed3b1d680d4896ea1827de875a7
+      size: 947
   extract_dwight@2025-01-07-reward-type-medium-large-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_sorted.mat
       --out 
       data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.parquet
-      --block reward-type-medium-large-cst-rtt-dco --bin_size 10ms --min_firing_rate
-      0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold 350 --verbose
+      --block reward-type-medium-large-cst-rtt-dco --logdir logs --loglevel INFO --bin_size
+      10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
     deps:
     - path: 
         /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_sorted.mat
@@ -158,13 +162,13 @@ stages:
       nfiles: 27
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: 75f1e0b92a3b615ff2fbeba671973473
-      size: 2463
+      md5: 9b04ca62fea980ecb91c207c0569b490
+      size: 2677
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
         extract:
@@ -172,87 +176,92 @@ stages:
           min_firing_rate: 0.1
           max_spike_coincidence: 0.2
           rate_artifact_threshold: 350
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.log
-      hash: md5
-      md5: e162f91b2057b98d529ed312fc37b10e
-      size: 965
     - path: 
         data/trialframe/Dwight/2025-01-07/blocks/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.parquet
       hash: md5
-      md5: 63e0b0311bb729a67f4a0c2cc37907ba
+      md5: 7b5fa15016c4bca050c4035f916bcb89
       size: 7329167
+    - path: logs/extract/Dwight_2025-01-07_reward-type-medium-large-cst-rtt-dco_tf.log
+      hash: md5
+      md5: e162f91b2057b98d529ed312fc37b10e
+      size: 965
   combine_session@0:
     cmd: python scripts/combine_session.py data/trialframe/Prez/2022-07-21/blocks/
-      --out data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet --verbose
+      --out data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet --logdir logs
+      --loglevel INFO
     deps:
     - path: data/trialframe/Prez/2022-07-21/blocks/
       hash: md5
-      md5: 274225c86f09d2ecd6d002dd30d4d12d.dir
-      size: 10735237
-      nfiles: 3
+      md5: 79a179208db0ea6a1c5c7009498c3758.dir
+      size: 10734372
+      nfiles: 2
     - path: scripts/combine_session.py
       hash: md5
-      md5: 2bc503e71e3270bced1901917775c9a1
-      size: 1431
+      md5: 1ee241b619babdec79402b893c381999
+      size: 1644
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        combine_session:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.log
-      hash: md5
-      md5: 3937847a94f4ad0d8c9d82ba1f4305b2
-      size: 217
     - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
       hash: md5
-      md5: 783ad441616f0a73e46082b8ac3ee44c
+      md5: b24ed58b046c38e40f6ccc32a3790160
       size: 10734307
+    - path: logs/combine/Prez_2022-07-21_tf.log
+      hash: md5
+      md5: b1a68fbc02b5770856acfe3d17fa456e
+      size: 177
   context_axis@0:
     cmd: python scripts/get_context_axis.py data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
       --out results/context_axis/Prez/2022-07-21/Prez_2022-07-21_context_axis.svg
-      --verbose
+      --logdir logs --loglevel INFO
     deps:
     - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
       hash: md5
-      md5: 783ad441616f0a73e46082b8ac3ee44c
+      md5: b24ed58b046c38e40f6ccc32a3790160
       size: 10734307
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 38bf72ce01370358e9e03b359c033c7d
-      size: 3729
+      md5: dace6785a22b676254fb1c55e1491d53
+      size: 3948
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        context_axis:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: results/context_axis/Prez/2022-07-21/Prez_2022-07-21_context_axis.log
+    - path: logs/context_axis/Prez_2022-07-21_context_axis.log
       hash: md5
-      md5: e8daef05103d95f45d0fe2fe41d0a693
-      size: 98670
+      md5: 7a2a7f12fdc0751f528cf85f883679ff
+      size: 241
     - path: results/context_axis/Prez/2022-07-21/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: cbe7d51b8c91030a61ab4a01d0725dcc
-      size: 1021347
+      md5: 8efdaf5f37be00af9176eb6e90c27796
+      size: 1021084
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
       --out 
       data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_tf.parquet
-      --block reward-type-medium-cst-rtt-dco --bin_size 10ms --min_firing_rate 0.1
-      --max_spike_coincidence 0.2 --rate_artifact_threshold 350 --verbose
+      --block reward-type-medium-cst-rtt-dco --logdir logs --loglevel INFO --bin_size
+      10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
     deps:
     - path: 
         /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -267,13 +276,13 @@ stages:
       nfiles: 27
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: 75f1e0b92a3b615ff2fbeba671973473
-      size: 2463
+      md5: 9b04ca62fea980ecb91c207c0569b490
+      size: 2677
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
         extract:
@@ -281,25 +290,27 @@ stages:
           min_firing_rate: 0.1
           max_spike_coincidence: 0.2
           rate_artifact_threshold: 350
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_tf.log
-      hash: md5
-      md5: b8c62ac68e88228df9b3165ccd2e2fd1
-      size: 947
     - path: 
         data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_tf.parquet
       hash: md5
-      md5: 13ccfa23eb82e16a81c2040cc2ff13e0
-      size: 7946461
+      md5: 1b2732df1fa5ca8097b978289a70d8a6
+      size: 7946439
+    - path: logs/extract/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_tf.log
+      hash: md5
+      md5: b8c62ac68e88228df9b3165ccd2e2fd1
+      size: 947
   extract_dwight@2025-01-01-reward-type-medium-large-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-large-cst-rtt-dco_sorted.mat
       --out 
       data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-medium-large-cst-rtt-dco_tf.parquet
-      --block reward-type-medium-large-cst-rtt-dco --bin_size 10ms --min_firing_rate
-      0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold 350 --verbose
+      --block reward-type-medium-large-cst-rtt-dco --logdir logs --loglevel INFO --bin_size
+      10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
     deps:
     - path: 
         /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-large-cst-rtt-dco_sorted.mat
@@ -314,13 +325,13 @@ stages:
       nfiles: 27
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: 75f1e0b92a3b615ff2fbeba671973473
-      size: 2463
+      md5: 9b04ca62fea980ecb91c207c0569b490
+      size: 2677
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
         extract:
@@ -328,25 +339,26 @@ stages:
           min_firing_rate: 0.1
           max_spike_coincidence: 0.2
           rate_artifact_threshold: 350
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-medium-large-cst-rtt-dco_tf.log
-      hash: md5
-      md5: 3d30abe802798a504484c6522e3f2e01
-      size: 966
     - path: 
         data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-medium-large-cst-rtt-dco_tf.parquet
       hash: md5
-      md5: 316c7f805824154a80c8032e876b3a0f
-      size: 5182032
+      md5: d1cc1aef0c2c1547809398d1796b7759
+      size: 5182018
+    - path: logs/extract/Dwight_2025-01-01_reward-type-medium-large-cst-rtt-dco_tf.log
+      hash: md5
+      md5: 3d30abe802798a504484c6522e3f2e01
+      size: 966
   extract_dwight@2025-01-01-reward-type-choice:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-choice_sorted.mat
       --out 
       data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-choice_tf.parquet
-      --block reward-type-choice --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence
-      0.2 --rate_artifact_threshold 350 --verbose
+      --block reward-type-choice --logdir logs --loglevel INFO --bin_size 10ms --min_firing_rate
+      0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold 350
     deps:
     - path: 
         /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-choice_sorted.mat
@@ -361,13 +373,13 @@ stages:
       nfiles: 27
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: 75f1e0b92a3b615ff2fbeba671973473
-      size: 2463
+      md5: 9b04ca62fea980ecb91c207c0569b490
+      size: 2677
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
         extract:
@@ -375,24 +387,25 @@ stages:
           min_firing_rate: 0.1
           max_spike_coincidence: 0.2
           rate_artifact_threshold: 350
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-choice_tf.log
-      hash: md5
-      md5: fbb0218fbd283e55db17554d6f232f74
-      size: 912
     - path: 
         data/trialframe/Dwight/2025-01-01/blocks/Dwight_2025-01-01_reward-type-choice_tf.parquet
       hash: md5
-      md5: 4bd432016d50a6f8faec3fe6691aa393
-      size: 5262113
+      md5: 2da93fcc2205b8011aaa85a85244d998
+      size: 5262122
+    - path: logs/extract/Dwight_2025-01-01_reward-type-choice_tf.log
+      hash: md5
+      md5: fbb0218fbd283e55db17554d6f232f74
+      size: 912
   extract_prez@2022-07-21-cst-rtt:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Prez/2022-07-21/Prez_2022-07-21_cst-rtt_sorted.mat
       --out data/trialframe/Prez/2022-07-21/blocks/Prez_2022-07-21_cst-rtt_tf.parquet
-      --block cst-rtt --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence
-      0.2 --rate_artifact_threshold 350 --verbose
+      --block cst-rtt --logdir logs --loglevel INFO --bin_size 10ms --min_firing_rate
+      0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold 350
     deps:
     - path: 
         /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Prez/2022-07-21/Prez_2022-07-21_cst-rtt_sorted.mat
@@ -407,13 +420,13 @@ stages:
       nfiles: 27
     - path: scripts/extract_trial_frame.py
       hash: md5
-      md5: 75f1e0b92a3b615ff2fbeba671973473
-      size: 2463
+      md5: 9b04ca62fea980ecb91c207c0569b490
+      size: 2677
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
         extract:
@@ -421,263 +434,274 @@ stages:
           min_firing_rate: 0.1
           max_spike_coincidence: 0.2
           rate_artifact_threshold: 350
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: data/trialframe/Prez/2022-07-21/blocks/Prez_2022-07-21_cst-rtt_tf.log
+    - path: data/trialframe/Prez/2022-07-21/blocks/Prez_2022-07-21_cst-rtt_tf.parquet
+      hash: md5
+      md5: b24ed58b046c38e40f6ccc32a3790160
+      size: 10734307
+    - path: logs/extract/Prez_2022-07-21_cst-rtt_tf.log
       hash: md5
       md5: 1a84a0bdfd9c112d1bc9a81c51c2ff10
       size: 865
-    - path: data/trialframe/Prez/2022-07-21/blocks/Prez_2022-07-21_cst-rtt_tf.parquet
-      hash: md5
-      md5: 783ad441616f0a73e46082b8ac3ee44c
-      size: 10734307
   combine_session@1:
     cmd: python scripts/combine_session.py data/trialframe/Dwight/2025-01-01/blocks/
-      --out data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet --verbose
+      --out data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet --logdir
+      logs --loglevel INFO
     deps:
     - path: data/trialframe/Dwight/2025-01-01/blocks/
       hash: md5
-      md5: 305f5cb71dd4de148469887acc7322c0.dir
-      size: 18393766
-      nfiles: 7
+      md5: d5e54c46777f43bb0f546e939892c1e5.dir
+      size: 18390914
+      nfiles: 4
     - path: scripts/combine_session.py
       hash: md5
-      md5: 2bc503e71e3270bced1901917775c9a1
-      size: 1431
+      md5: 1ee241b619babdec79402b893c381999
+      size: 1644
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        combine_session:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.log
-      hash: md5
-      md5: facc99f8ee42e12d9a754b70898bb9d9
-      size: 308
     - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
       hash: md5
-      md5: 5528124397d6fbbc029ee35c06210102
-      size: 16852471
+      md5: 97f29fe64d7fd15684daa34951709b1d
+      size: 16852444
+    - path: logs/combine/Dwight_2025-01-01_tf.log
+      hash: md5
+      md5: 617ce59db0f35c0a56db4939c929607e
+      size: 183
   combine_session@2:
     cmd: python scripts/combine_session.py data/trialframe/Dwight/2025-01-07/blocks/
-      --out data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet --verbose
+      --out data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet --logdir
+      logs --loglevel INFO
     deps:
     - path: data/trialframe/Dwight/2025-01-07/blocks/
       hash: md5
-      md5: b13ab30272bdf039ea2f45966ddcb71c.dir
-      size: 13546425
-      nfiles: 7
+      md5: 5398b334dee928ca8f7ba41255a86a28.dir
+      size: 13543602
+      nfiles: 4
     - path: scripts/combine_session.py
       hash: md5
-      md5: 2bc503e71e3270bced1901917775c9a1
-      size: 1431
+      md5: 1ee241b619babdec79402b893c381999
+      size: 1644
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        combine_session:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.log
-      hash: md5
-      md5: d5f5f5f1c5cfd8f0ead99d99642e9b97
-      size: 308
     - path: data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       hash: md5
-      md5: a0ee7933c79bf6901fce15514adbc508
+      md5: 0fee6ab0657ff10e8e34781bcb37b373
       size: 12545099
+    - path: logs/combine/Dwight_2025-01-07_tf.log
+      hash: md5
+      md5: d135979d9cad417611bfee1beb12ab8e
+      size: 183
   context_axis@1:
     cmd: python scripts/get_context_axis.py data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
       --out results/context_axis/Dwight/2025-01-01/Dwight_2025-01-01_context_axis.svg
-      --verbose
+      --logdir logs --loglevel INFO
     deps:
     - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
       hash: md5
-      md5: 5528124397d6fbbc029ee35c06210102
-      size: 16852471
+      md5: 97f29fe64d7fd15684daa34951709b1d
+      size: 16852444
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 38bf72ce01370358e9e03b359c033c7d
-      size: 3729
+      md5: dace6785a22b676254fb1c55e1491d53
+      size: 3948
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        context_axis:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: results/context_axis/Dwight/2025-01-01/Dwight_2025-01-01_context_axis.log
+    - path: logs/context_axis/Dwight_2025-01-01_context_axis.log
       hash: md5
-      md5: 1e52c35d1bc11dfd4094913c365ecf4a
-      size: 98678
+      md5: 95dc8fafc46328b8df2fa929408c3e89
+      size: 249
     - path: results/context_axis/Dwight/2025-01-01/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: e06070ee477aa1a55c105320e36287b5
-      size: 1418470
+      md5: 40a7be6b3c960edf3cd31e4337d7a2cc
+      size: 1418737
   context_axis@2:
     cmd: python scripts/get_context_axis.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       --out results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
-      --verbose
+      --logdir logs --loglevel INFO
     deps:
     - path: data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       hash: md5
-      md5: a0ee7933c79bf6901fce15514adbc508
+      md5: 0fee6ab0657ff10e8e34781bcb37b373
       size: 12545099
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 38bf72ce01370358e9e03b359c033c7d
-      size: 3729
+      md5: dace6785a22b676254fb1c55e1491d53
+      size: 3948
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        context_axis:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.log
+    - path: logs/context_axis/Dwight_2025-01-07_context_axis.log
       hash: md5
-      md5: 4f8c502fd188963be2e0d80e3268c21b
-      size: 98678
+      md5: 9bca71d2872b7d694453cf6aa892c4cb
+      size: 249
     - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: f5d3b328d63f258fa7a177b011681f7e
-      size: 1249255
+      md5: 43b6e585f6d8fb1dc9eb9f284bc34d83
+      size: 1251843
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
-      --out results/cross-task-decoding/Prez/2022-07-21/ --verbose
+      --out results/cross-task-decoding/Prez/2022-07-21/ --logdir logs --loglevel
+      INFO
     deps:
     - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
       hash: md5
-      md5: 783ad441616f0a73e46082b8ac3ee44c
+      md5: b24ed58b046c38e40f6ccc32a3790160
       size: 10734307
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 5af359257e0c906ab7f298dd3d37fb02
-      size: 7947
+      md5: 20a98b8a017e285a248a770ae39e9e71
+      size: 8162
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        cross_task_decoding:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_cross-task-decoding.log
+    - path: logs/cross-task-decoding/Prez_2022-07-21_cross-task-decoding.log
       hash: md5
-      md5: 5768283bc5f697cd5958c5131a8a1d96
-      size: 295250
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
     - path: 
         results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 299c9d32c346bf394cfc38918e85f0d9
+      md5: 0027b960c6b4b8ed7d4784faf5c333b6
       size: 25070
     - path: 
         results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 60403267c6da06db004027c9d24c29df
+      md5: b0e15ab6c53567a394f529bdfbdbd81f
       size: 185126
     - path: results/cross-task-decoding/Prez/2022-07-21/trials/
       hash: md5
-      md5: b8c96cf659455059752999d6ca671ab2.dir
+      md5: 18c9fddb08f2fbf45fcd001be652dfc1.dir
       size: 12159075
       nfiles: 260
   cross_task_decoding@1:
     cmd: python scripts/cross_task_decoding.py data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
-      --out results/cross-task-decoding/Dwight/2025-01-01/ --verbose
+      --out results/cross-task-decoding/Dwight/2025-01-01/ --logdir logs --loglevel
+      INFO
     deps:
     - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
       hash: md5
-      md5: 5528124397d6fbbc029ee35c06210102
-      size: 16852471
+      md5: 97f29fe64d7fd15684daa34951709b1d
+      size: 16852444
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 5af359257e0c906ab7f298dd3d37fb02
-      size: 7947
+      md5: 20a98b8a017e285a248a770ae39e9e71
+      size: 8162
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        cross_task_decoding:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_cross-task-decoding.log
+    - path: logs/cross-task-decoding/Dwight_2025-01-01_cross-task-decoding.log
       hash: md5
-      md5: d21e05cb255a5a3a59e7d3c575b9c2da
-      size: 295250
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
     - path: 
         results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 143fb89c6231fe6f6f1cb1e1c13f679f
+      md5: 5d381785123e45d6d690ce0ef029ebab
       size: 24845
     - path: 
         results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: fe40e9eacfaacdad2b747942f6770f56
+      md5: 7842c9455b59af8f23ec986b2090994f
       size: 230866
     - path: results/cross-task-decoding/Dwight/2025-01-01/trials/
       hash: md5
-      md5: daca15a1b014bac28fd60c5d1a9613d6.dir
+      md5: 681059cf6122bc3edcacc0ab62cecf23.dir
       size: 16345533
       nfiles: 364
   cross_task_decoding@2:
     cmd: python scripts/cross_task_decoding.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
-      --out results/cross-task-decoding/Dwight/2025-01-07/ --verbose
+      --out results/cross-task-decoding/Dwight/2025-01-07/ --logdir logs --loglevel
+      INFO
     deps:
     - path: data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       hash: md5
-      md5: a0ee7933c79bf6901fce15514adbc508
+      md5: 0fee6ab0657ff10e8e34781bcb37b373
       size: 12545099
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 5af359257e0c906ab7f298dd3d37fb02
-      size: 7947
+      md5: 20a98b8a017e285a248a770ae39e9e71
+      size: 8162
     - path: src/
       hash: md5
-      md5: 0cab513b7cee3d8a4afc55afc5cbe814.dir
-      size: 46887
-      nfiles: 12
+      md5: 224206aec137e6679697390e097c41ce.dir
+      size: 50999
+      nfiles: 13
     params:
       params.yaml:
-        cross_task_decoding:
-          verbose: true
+        logging:
+          logdir: logs
+          loglevel: INFO
     outs:
-    - path: 
-        results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_cross-task-decoding.log
+    - path: logs/cross-task-decoding/Dwight_2025-01-07_cross-task-decoding.log
       hash: md5
-      md5: cd4fb042a36537d7dfdc60fd535f26a7
-      size: 295250
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
     - path: 
         results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 58ae2f0e844a06af7da9131af7401b83
+      md5: fa53bcd813e2b6975ddfe9c22e8e9694
       size: 25736
     - path: 
         results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 0b1572e98fd3484d326986f94bb833ca
+      md5: 009fd6a7e58b1de5d0f81317ea62c162
       size: 219529
     - path: results/cross-task-decoding/Dwight/2025-01-07/trials/
       hash: md5
-      md5: 38ddf233d7b23bfdf39a93c9985ec10d.dir
+      md5: 3d8b2bf9a3d36ece25e4e4fbc209ca86.dir
       size: 15365462
       nfiles: 344

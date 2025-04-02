@@ -3,9 +3,10 @@ stages:
     matrix:
       date: ['2025-01-01','2025-01-07']
       block: ['reward-type-medium-cst-rtt-dco', 'reward-type-medium-large-cst-rtt-dco', 'reward-type-choice']
-    cmd: python scripts/extract_trial_frame.py ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat --out data/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.parquet --block ${item.block} ${extract}
+    cmd: python scripts/extract_trial_frame.py ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat --out data/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.parquet --block ${item.block} ${logging} ${extract}
     params:
       - extract
+      - logging
     deps:
       - scripts/extract_trial_frame.py
       - src/
@@ -13,14 +14,15 @@ stages:
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
     outs:
       - data/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.parquet
-      - data/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.log
+      - ${logging.logdir}/extract/Dwight_${item.date}_${item.block}_tf.log
   extract_prez:
     matrix:
       date: ['2022-07-21']
       block: ['cst-rtt']
-    cmd: python scripts/extract_trial_frame.py ${raw_data_dir}/Prez/${item.date}/Prez_${item.date}_${item.block}_sorted.mat --out data/trialframe/Prez/${item.date}/blocks/Prez_${item.date}_${item.block}_tf.parquet --block ${item.block} ${extract}
+    cmd: python scripts/extract_trial_frame.py ${raw_data_dir}/Prez/${item.date}/Prez_${item.date}_${item.block}_sorted.mat --out data/trialframe/Prez/${item.date}/blocks/Prez_${item.date}_${item.block}_tf.parquet --block ${item.block} ${logging} ${extract}
     params:
       - extract
+      - logging
     deps:
       - scripts/extract_trial_frame.py
       - src/
@@ -28,47 +30,70 @@ stages:
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
     outs:
       - data/trialframe/Prez/${item.date}/blocks/Prez_${item.date}_${item.block}_tf.parquet
-      - data/trialframe/Prez/${item.date}/blocks/Prez_${item.date}_${item.block}_tf.log
+      - ${logging.logdir}/extract/Prez_${item.date}_${item.block}_tf.log
   combine_session:
     foreach: ${monkey_sessions}
     do:
-      cmd: python scripts/combine_session.py data/trialframe/${item.monkey}/${item.date}/blocks/ --out data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet ${combine_session}
+      cmd: python scripts/combine_session.py data/trialframe/${item.monkey}/${item.date}/blocks/ --out data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet ${logging}
       params:
-        - combine_session
+        - logging
       deps:
         - scripts/combine_session.py
         - src/
         - data/trialframe/${item.monkey}/${item.date}/blocks/
       outs:
         - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-        - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.log
+        - ${logging.logdir}/combine/${item.monkey}_${item.date}_tf.log
   context_axis:
     foreach: ${monkey_sessions}
     do:
-      cmd: python scripts/get_context_axis.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg ${context_axis}
+      cmd: python scripts/get_context_axis.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg ${logging}
       params:
-        - context_axis
+        - logging
       deps:
         - scripts/get_context_axis.py
         - src/
         - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
-        - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.log
+        - ${logging.logdir}/context_axis/${item.monkey}_${item.date}_context_axis.log
       plots:
         - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
   cross_task_decoding:
     foreach: ${monkey_sessions}
     do:
-      cmd: python scripts/cross_task_decoding.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${cross_task_decoding}
+      cmd: python scripts/cross_task_decoding.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${logging}
       params:
-        - cross_task_decoding
+        - logging
       deps:
         - scripts/cross_task_decoding.py
         - src/
         - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
-        - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_cross-task-decoding.log
+        - ${logging.logdir}/cross-task-decoding/${item.monkey}_${item.date}_cross-task-decoding.log
       plots:
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
         - results/cross-task-decoding/${item.monkey}/${item.date}/trials/
+  # prep_lfads_tensors:
+  #   foreach: ${monkey_sessions}
+  #   do:
+  #     cmd: python scripts/prep_lfads_tensors.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5 ${logging} ${prep_lfads_tensors}
+  #     params:
+  #       - prep_lfads_tensors
+  #     deps:
+  #       - scripts/prep_lfads_tensors.py
+  #       - src/
+  #       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+  #     outs:
+  #       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+  # run_lfads:
+  #   cmd: python scripts/run_lfads.py -f params.yaml
+  #   params:
+  #     - model
+  #     - trainer
+  #     - callbacks
+  #     - logger
+  #     - posterior_sampling
+  #   deps:
+  #     - scripts/run_lfads.py
+  #     - src/
