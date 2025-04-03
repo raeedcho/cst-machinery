@@ -74,18 +74,18 @@ stages:
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
         - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
         - results/cross-task-decoding/${item.monkey}/${item.date}/trials/
-  # prep_lfads_tensors:
-  #   foreach: ${monkey_sessions}
-  #   do:
-  #     cmd: python scripts/prep_lfads_tensors.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5 ${logging} ${prep_lfads_tensors}
-  #     params:
-  #       - prep_lfads_tensors
-  #     deps:
-  #       - scripts/prep_lfads_tensors.py
-  #       - src/
-  #       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-  #     outs:
-  #       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+  prep_lfads_tensors:
+    foreach: ${monkey_sessions}
+    do:
+      cmd: python scripts/prep_lfads_tensors.py data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5 ${logging} ${prep_lfads_tensors}
+      params:
+        - prep_lfads_tensors
+      deps:
+        - scripts/prep_lfads_tensors.py
+        - src/
+        - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+      outs:
+        - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
   # run_lfads:
   #   cmd: python scripts/run_lfads.py -f params.yaml
   #   params:
