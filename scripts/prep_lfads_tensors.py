@@ -7,6 +7,7 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 from src.chop_merge import chop_data
+from src.munge import get_index_level
 
 from sklearn.model_selection import GroupShuffleSplit, ShuffleSplit
 import h5py
@@ -14,10 +15,15 @@ import h5py
 def main(args):
     input_path = Path(args.path)
     output_path = Path(args.out)
-    log_dir = Path(args.logdir)
+    log_dir = Path(args.logdir) / 'prep-lfads-tensors'
 
+    if not log_dir.exists():
+        log_dir.mkdir(parents=True, exist_ok=True)
+    if not output_path.exists():
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+    
     logging.basicConfig(
-        filename=log_dir / 'prep-lfads-tensors' / f'{output_path.stem}.log',
+        filename=log_dir / f'{output_path.stem}.log',
         level=args.loglevel,
     )
     
@@ -30,7 +36,7 @@ def main(args):
         overlap=args.overlap,
     )
     logger.info(f'Chopped data into {len(chops)} segments')
-    logger.info(f'Chop shape: {chops.shape}')
+    logger.info(f'Chop shape: {np.stack(chops).shape}')
 
     save_chops(
         chops,
@@ -100,22 +106,24 @@ def save_chops(chops: pd.DataFrame, output_path: Path, group_split: bool = False
     with h5py.File(output_path, 'w') as f:
         f.create_dataset('train_encod_data', data=np.stack(train_chops.values), compression='gzip')
         f.create_dataset('train_recon_data', data=np.stack(train_chops.values), compression='gzip')
-        f.create_dataset('train_index', data=train_chops.index, compression='gzip')
+        f.create_dataset('train_trial_id', data=get_index_level(train_chops,'trial_id'), compression='gzip')
+        f.create_dataset('train_chop_id', data=get_index_level(train_chops,'chop_id'), compression='gzip')
         f.create_dataset('valid_encod_data', data=np.stack(valid_chops.values), compression='gzip')
         f.create_dataset('valid_recon_data', data=np.stack(valid_chops.values), compression='gzip')
-        f.create_dataset('valid_index', data=valid_chops.index, compression='gzip')
+        f.create_dataset('valid_trial_id', data=get_index_level(valid_chops,'trial_id'), compression='gzip')
+        f.create_dataset('valid_chop_id', data=get_index_level(valid_chops,'chop_id'), compression='gzip')
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Extract and save trial frame from SMILE data')
     parser.add_argument(
-        'folder',
+        'path',
         type=str,
-        help='Folder containing the data files to combine into one session DataFrame',
+        help='path to the input file',
     )
     parser.add_argument(
         '--out',
         type=str,
-        help='Path to the output directory',
+        help='Path to the output file',
         required=True,
     )
     parser.add_argument(
