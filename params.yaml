@@ -117,14 +117,9 @@ lfads:
     accelerator: auto
     devices: 1
     gradient_clip_val: 200
-    max_epochs: 10
+    max_epochs: 100
     log_every_n_steps: 5
   logger:
-    tensorboard_logger:
-      _target_: pytorch_lightning.loggers.TensorBoardLogger
-      save_dir: tb_logs
-      version: ''
-      name: ''
     dvclive_logger:
       _target_: src.lfads_dvc.DVCLiveLFADSLogger
       save_dvc_exp: false

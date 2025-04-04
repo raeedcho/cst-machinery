@@ -107,14 +107,3 @@ stages:
       outs:
       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
       - logs/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
-  run_lfads:
-    cmd: python scripts/run_lfads.py
-    params:
-      - lfads
-    deps:
-      - data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
-    outs:
-      - results/lfads/temp/tb_logs
-      - results/lfads/temp/dvclive
-      - results/lfads/temp/lightning_checkpoints
-      - results/lfads/temp/lfads_output_Prez_2022-07-21_tensors.h5
