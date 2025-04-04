@@ -1,6 +1,7 @@
 defaults:
   - datamodule: Prez_2022-07-21_cst-rtt
   - model: Prez_2022-07-21_cst-rtt
+  - callbacks: plots
 
 seed: 0
 ignore_warnings: False
@@ -10,7 +11,7 @@ trainer:
   accelerator: "mps"
   devices: 1
   gradient_clip_val: 200
-  max_epochs: 100 #
+  max_epochs: 20 #
   log_every_n_steps: 5
 
 callbacks:
@@ -42,9 +43,11 @@ logger:
     name: ""
   tensorboard_logger:
     _target_: pytorch_lightning.loggers.TensorBoardLogger
-    save_dir: "."
+    save_dir: "tb_logs"
     version: ""
     name: ""
+  dvclive_logger:
+    _target_: dvclive.lightning.DVCLiveLogger
 
 posterior_sampling:
   use_best_ckpt: True

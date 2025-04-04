@@ -88,14 +88,11 @@ stages:
       outs:
         - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
         - logs/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
-  # run_lfads:
-  #   cmd: python scripts/run_lfads.py -f params.yaml
-  #   params:
-  #     - model
-  #     - trainer
-  #     - callbacks
-  #     - logger
-  #     - posterior_sampling
-  #   deps:
-  #     - scripts/run_lfads.py
-  #     - src/
+  run_lfads:
+    cmd: python scripts/run_lfads.py
+    params:
+      - lfads
+    deps:
+      - data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
+    outs:
+      - results/lfads/temp

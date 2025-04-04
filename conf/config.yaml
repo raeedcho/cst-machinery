@@ -22,3 +22,5 @@ prep_lfads_tensors:
   window_len: 60
   overlap: 20
   group_split: False
+run_lfads:
+  run_dir: 'results/lfads'

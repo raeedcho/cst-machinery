@@ -1,11 +1,9 @@
 _target_: lfads_torch.datamodules.BasicDataModule
-datafile_pattern: ${relpath:data/pre-lfads-tensors/Prez_2022-07-21_cst-rtt_tensors.hdf5}
-batch_keys:
-  - behavior
+datafile_pattern: ${relpath:data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5}
+batch_keys: []
 attr_keys:
-  - psth
-  - train_cond_idx
-  - valid_cond_idx
-  - train_decode_mask
-  - valid_decode_mask
+  - train_trial_id
+  - train_chop_id
+  - valid_trial_id
+  - valid_chop_id
 batch_size: 250
