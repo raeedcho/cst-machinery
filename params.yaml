@@ -115,7 +115,7 @@ lfads:
     accelerator: mps
     devices: 1
     gradient_clip_val: 200
-    max_epochs: 20
+    max_epochs: 2
     log_every_n_steps: 5
   logger:
     csv_logger:

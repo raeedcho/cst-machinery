@@ -940,7 +940,7 @@ stages:
             accelerator: mps
             devices: 1
             gradient_clip_val: 200
-            max_epochs: 20
+            max_epochs: 2
             log_every_n_steps: 5
           logger:
             csv_logger:
@@ -960,8 +960,22 @@ stages:
               filename: lfads_output.h5
               num_samples: 50
     outs:
-    - path: results/lfads/temp
+    - path: results/lfads/temp/csv_logs
       hash: md5
-      md5: 1b9b30d99a28c877ecd10535ad55f4bc.dir
-      size: 503362021
-      nfiles: 7
+      md5: f52351783d9ce837bfb41daf2ddca2b7.dir
+      size: 5363
+      nfiles: 2
+    - path: results/lfads/temp/lfads_output_Prez_2022-07-21_tensors.h5
+      hash: md5
+      md5: 7b020c67d83737d69966dd94724dcc71
+      size: 495876030
+    - path: results/lfads/temp/lightning_checkpoints
+      hash: md5
+      md5: 33615eda37f786f4c278a1efd7761fcc.dir
+      size: 6415908
+      nfiles: 2
+    - path: results/lfads/temp/tb_logs
+      hash: md5
+      md5: 0b8e2cb92ff3718de2ad8f7703dda4ef.dir
+      size: 1012995
+      nfiles: 2

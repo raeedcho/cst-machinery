@@ -95,4 +95,7 @@ stages:
     deps:
       - data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
     outs:
-      - results/lfads/temp
+      - results/lfads/temp/tb_logs
+      - results/lfads/temp/csv_logs
+      - results/lfads/temp/lightning_checkpoints
+      - results/lfads/temp/lfads_output_Prez_2022-07-21_tensors.h5
