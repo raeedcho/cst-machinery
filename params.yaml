@@ -39,6 +39,8 @@ lfads:
         cd_rate: 0.3
         cd_pass_rate: 0.0
         ic_enc_seq_len: 0
+      - _target_: lfads_torch.modules.augmentations.SpikeJitter
+        width: 2
       batch_order:
       - 0
       loss_order:
@@ -84,11 +86,11 @@ lfads:
     kl_co_scale: 2.0e-06
   callbacks:
     raster_plot:
-      _target_: lfads_torch.callbacks.RasterPlot
-      log_every_n_epochs: 100
+      _target_: src.lfads_callbacks.RasterPlot
+      log_every_n_epochs: 5
     trajectory_plot:
-      _target_: lfads_torch.callbacks.TrajectoryPlot
-      log_every_n_epochs: 100
+      _target_: src.lfads_callbacks.TrajectoryPlot
+      log_every_n_epochs: 5
     model_checkpoint:
       _target_: pytorch_lightning.callbacks.ModelCheckpoint
       monitor: valid/recon_smth
@@ -112,17 +114,12 @@ lfads:
   ignore_warnings: false
   trainer:
     _target_: pytorch_lightning.Trainer
-    accelerator: mps
+    accelerator: auto
     devices: 1
     gradient_clip_val: 200
     max_epochs: 10
-    log_every_n_steps: 2
+    log_every_n_steps: 5
   logger:
-    csv_logger:
-      _target_: pytorch_lightning.loggers.CSVLogger
-      save_dir: csv_logs
-      version: ''
-      name: ''
     tensorboard_logger:
       _target_: pytorch_lightning.loggers.TensorBoardLogger
       save_dir: tb_logs
@@ -130,6 +127,7 @@ lfads:
       name: ''
     dvclive_logger:
       _target_: src.lfads_dvc.DVCLiveLFADSLogger
+      save_dvc_exp: false
   posterior_sampling:
     use_best_ckpt: true
     fn:

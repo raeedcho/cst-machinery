@@ -1,7 +1,7 @@
 raster_plot:
-  _target_: lfads_torch.callbacks.RasterPlot
-  log_every_n_epochs: 100
+  _target_: src.lfads_callbacks.RasterPlot
+  log_every_n_epochs: 5
 
 trajectory_plot:
-  _target_: lfads_torch.callbacks.TrajectoryPlot
-  log_every_n_epochs: 100
+  _target_: src.lfads_callbacks.TrajectoryPlot
+  log_every_n_epochs: 5

@@ -33,6 +33,8 @@ train_aug_stack:
       cd_rate: 0.3 #
       cd_pass_rate: 0.0 #
       ic_enc_seq_len: ${lfads.model.ic_enc_seq_len}
+    - _target_: lfads_torch.modules.augmentations.SpikeJitter
+      width: 2 #
   batch_order: [0]
   loss_order: [0]
 infer_aug_stack:

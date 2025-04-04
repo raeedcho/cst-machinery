@@ -18,7 +18,7 @@ MODEL:
   # IC_ENC_DIM: 20
   # IC_POST_VAR_MIN: 0.0001
   # IC_PRIOR_VAR: 0.1
-  SAMPLE_POSTERIORS: true
+  # SAMPLE_POSTERIORS: true
   # SEQ_LEN: 60
   SV_RATE: 0.0
   SV_SEED: 0
@@ -26,10 +26,10 @@ TRAIN:
   # ADAM_EPSILON: 1.0e-07
   # BATCH_SIZE: 250
   DATA:
-    AUGMENT:
-      JITTER_WIDTH: 2
-    DIR: /snel/share/share/data/cst/rtt-cst/data/pre-lfads
-    PREFIX: Prez_20220721_RTTCST
+    # AUGMENT:
+      # JITTER_WIDTH: 2
+    # DIR: /snel/share/share/data/cst/rtt-cst/data/pre-lfads
+    # PREFIX: Prez_20220721_RTTCST
   EAGER_MODE: false
   ENCODERS_ONLY: false
   # KL:
