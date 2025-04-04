@@ -68,9 +68,9 @@ stages:
       size: 2677
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         extract:
@@ -117,9 +117,9 @@ stages:
       size: 2677
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         extract:
@@ -166,9 +166,9 @@ stages:
       size: 2677
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         extract:
@@ -205,9 +205,9 @@ stages:
       size: 1644
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -237,9 +237,9 @@ stages:
       size: 3948
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -252,8 +252,8 @@ stages:
       size: 241
     - path: results/context_axis/Prez/2022-07-21/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: 24897d06cd172d5a080ccf69380e178e
-      size: 1020186
+      md5: 97c1cb62eec26ed86d8790675a0b02b4
+      size: 1018486
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -280,9 +280,9 @@ stages:
       size: 2677
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         extract:
@@ -329,9 +329,9 @@ stages:
       size: 2677
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         extract:
@@ -377,9 +377,9 @@ stages:
       size: 2677
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         extract:
@@ -424,9 +424,9 @@ stages:
       size: 2677
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         extract:
@@ -462,9 +462,9 @@ stages:
       size: 1644
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -495,9 +495,9 @@ stages:
       size: 1644
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: 66f0096625108130ae3f05df3952c058.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -527,9 +527,9 @@ stages:
       size: 3948
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -542,8 +542,8 @@ stages:
       size: 249
     - path: results/context_axis/Dwight/2025-01-01/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: 07bf988ca82330f4612789c9abdcdc32
-      size: 1419053
+      md5: 5005cea8c44f8646a3e5ccb154b5f23f
+      size: 1416921
   context_axis@2:
     cmd: python scripts/get_context_axis.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       --out results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
@@ -559,9 +559,9 @@ stages:
       size: 3948
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -574,8 +574,8 @@ stages:
       size: 249
     - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: fa203fb5d56c7040aae87b83848983da
-      size: 1251924
+      md5: 5241291b7460a7c1c851767d16e9d191
+      size: 1250177
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
       --out results/cross-task-decoding/Prez/2022-07-21/ --logdir logs --loglevel
@@ -591,9 +591,9 @@ stages:
       size: 8162
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -607,16 +607,16 @@ stages:
     - path: 
         results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: bf6a389842962dcbaab90fe00b27fd8d
+      md5: b7fe6b1e5262b09d92ee41085069a58f
       size: 25070
     - path: 
         results/cross-task-decoding/Prez/2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 2beff71eaeecdef64a45d69a91569bdb
+      md5: db13c8b3cdf6ecfd6eb13cf255e4fbc4
       size: 185126
     - path: results/cross-task-decoding/Prez/2022-07-21/trials/
       hash: md5
-      md5: 4e7211b0973301e115d293dfa1feac52.dir
+      md5: 2e65f140aaec1b35f167738e6e6b174a.dir
       size: 12159075
       nfiles: 260
   cross_task_decoding@1:
@@ -634,9 +634,9 @@ stages:
       size: 8162
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -650,16 +650,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: fc583a434be696629e662f0946aacdf0
+      md5: 80576b5c43743a063e2a7f02b8426bc8
       size: 24845
     - path: 
         results/cross-task-decoding/Dwight/2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: fd97248af37a9d5eb2118c84af148942
+      md5: e6d6b7b0cf0a255a3a39dca0b2da7a39
       size: 230866
     - path: results/cross-task-decoding/Dwight/2025-01-01/trials/
       hash: md5
-      md5: 10f877f9d2358186da86a39a7aa2d264.dir
+      md5: c0490f094be6830d87b22859d93f5de2.dir
       size: 16345533
       nfiles: 364
   cross_task_decoding@2:
@@ -677,9 +677,9 @@ stages:
       size: 8162
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -693,16 +693,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 096cb22af3a7ef9ce896002e0bd68d60
+      md5: 7a85cec1a84cdc2d5c9d109d3d1d95c6
       size: 25736
     - path: 
         results/cross-task-decoding/Dwight/2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: af91fa866733119125c40690d07f5570
+      md5: d222341dab942d3ce1930337f909a3fc
       size: 219529
     - path: results/cross-task-decoding/Dwight/2025-01-07/trials/
       hash: md5
-      md5: f62f15c7f69e18facad085e7fd320cf4.dir
+      md5: d3af0da312c2e7612ac83907dd4226ee.dir
       size: 15365462
       nfiles: 344
   prep_lfads_tensors@0:
@@ -720,9 +720,9 @@ stages:
       size: 4848
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -735,8 +735,8 @@ stages:
     outs:
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
-      md5: feee0006cde684527ee6d4739d67f2ce
-      size: 19256510
+      md5: 377f22be5d3945a6f607e42f4942d2d9
+      size: 19255888
     - path: logs/prep-lfads-tensors/Prez_2022-07-21_tensors.log
       hash: md5
       md5: 8e2a8352ca423ee4b2371eaf88260a97
@@ -756,9 +756,9 @@ stages:
       size: 4848
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -771,8 +771,8 @@ stages:
     outs:
     - path: data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5
       hash: md5
-      md5: 57d49c213cb973b3bb646d96be821ed9
-      size: 28998149
+      md5: be66705c53b7eedc41f86f8790d77bc7
+      size: 29002680
     - path: logs/prep-lfads-tensors/Dwight_2025-01-01_tensors.log
       hash: md5
       md5: 72d76adf768b934c2922f5ee007e1c19
@@ -792,9 +792,9 @@ stages:
       size: 4848
     - path: src/
       hash: md5
-      md5: bf2c069790467a250823d98973a80e67.dir
-      size: 54631
-      nfiles: 14
+      md5: a4c3f7f62444f2632febca81c482de5d.dir
+      size: 57811
+      nfiles: 16
     params:
       params.yaml:
         logging:
@@ -807,8 +807,8 @@ stages:
     outs:
     - path: data/pre-lfads-tensors/Dwight_2025-01-07_tensors.hdf5
       hash: md5
-      md5: 038b9c3bbfbd217d16ae59b10271953b
-      size: 20796617
+      md5: 30ef2bfd02a8bf2c078535cc4a77cadf
+      size: 20794359
     - path: logs/prep-lfads-tensors/Dwight_2025-01-07_tensors.log
       hash: md5
       md5: d3cd2a8f0c87d39dd4fd217d2575f53b

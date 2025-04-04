@@ -97,5 +97,6 @@ stages:
     outs:
       - results/lfads/temp/tb_logs
       - results/lfads/temp/csv_logs
+      - results/lfads/temp/dvclive
       - results/lfads/temp/lightning_checkpoints
       - results/lfads/temp/lfads_output_Prez_2022-07-21_tensors.h5

@@ -11,8 +11,8 @@ trainer:
   accelerator: "mps"
   devices: 1
   gradient_clip_val: 200
-  max_epochs: 2 #
-  log_every_n_steps: 5
+  max_epochs: 10 #
+  log_every_n_steps: 2
 
 callbacks:
   model_checkpoint:
@@ -46,8 +46,8 @@ logger:
     save_dir: "tb_logs"
     version: ""
     name: ""
-  # dvclive_logger:
-  #   _target_: dvclive.lightning.DVCLiveLogger
+  dvclive_logger:
+    _target_: src.lfads_dvc.DVCLiveLFADSLogger
 
 posterior_sampling:
   use_best_ckpt: True
