@@ -32,7 +32,7 @@ def main(args):
         level=args.loglevel,
     )
 
-    os.chdir(run_dir)
+    # os.chdir(run_dir)
     train_model(
         config_path=args.config,
         # checkpoint_dir='./lightning_checkpoints',

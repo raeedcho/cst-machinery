@@ -111,8 +111,9 @@ stages:
     foreach: ${lfads_sessions}
     do:
       cmd: python scripts/train_lfads.py 
-        data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
-        --out results/lfads/${item.monkey}_${item.date}_lfads.h5 ${logging}
+        --config conf/lfads/lfads-torch.yaml
+        --dataset '${item.monkey}_${item.date}'
+        ${logging}
         ${run_lfads}
       params:
       - run_lfads
