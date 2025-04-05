@@ -6,6 +6,6 @@
     autostage = true
     remote = localremote
 [hydra]
-    enabled = True
+    enabled = False
 ['remote "localremote"']
     url = /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/1-areas/science/dvc-store

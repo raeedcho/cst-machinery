@@ -1,7 +1,9 @@
 defaults:
-  - datamodule: Prez_2022-07-21_cst-rtt
-  - model: Prez_2022-07-21_cst-rtt
+  - dataset_info: Prez_2022-07-21
+  - datamodule: single_session_datamodule
+  - model: single_session_model
   - callbacks: plots
+  - _self_
 
 seed: 0
 ignore_warnings: False
@@ -30,7 +32,7 @@ callbacks:
     mode: min
     patience: 10 #
     min_delta: 0
-    burn_in_period: ${max:${sum:${lfads.model.l2_start_epoch},${lfads.model.l2_increase_epoch}},${sum:${lfads.model.kl_start_epoch},${lfads.model.kl_increase_epoch}}}
+    burn_in_period: ${max:${sum:${model.l2_start_epoch},${model.l2_increase_epoch}},${sum:${model.kl_start_epoch},${model.kl_increase_epoch}}}
   learning_rate_monitor:
     _target_: pytorch_lightning.callbacks.LearningRateMonitor
     logging_interval: epoch

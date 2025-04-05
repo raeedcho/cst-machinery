@@ -1,5 +1,5 @@
 _target_: lfads_torch.datamodules.BasicDataModule
-datafile_pattern: ${relpath:data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5}
+datafile_pattern: ${dataset_info.filename}
 batch_keys: []
 attr_keys:
   - train_trial_id

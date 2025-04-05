@@ -1,0 +1,4 @@
+filename: ${relpath:data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5}
+tensor_shape:
+  num_neurons: 155
+  num_time_bins: 60
