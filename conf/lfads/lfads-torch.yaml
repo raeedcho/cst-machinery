@@ -13,7 +13,7 @@ trainer:
   accelerator: "auto"
   devices: 1
   gradient_clip_val: 200
-  max_epochs: 100 #
+  max_epochs: 20 #
   log_every_n_steps: 5
 
 callbacks:
@@ -24,7 +24,7 @@ callbacks:
     save_top_k: 1
     save_last: True
     verbose: False
-    dirpath: ${relpath:results/lfads/${dataset_info.dataset_name}/lightning_checkpoints}
+    dirpath: lightning_checkpoints
     auto_insert_metric_name: False
   early_stopping:
     _target_: lfads_torch.extensions.tune.EarlyStoppingWithBurnInPeriod
@@ -41,7 +41,7 @@ logger:
   dvclive_logger:
     _target_: src.lfads_dvc.DVCLiveLFADSLogger
     save_dvc_exp: False
-    log_model: "all"
+    log_model: False
 
 posterior_sampling:
   use_best_ckpt: True

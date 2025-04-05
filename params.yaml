@@ -9,6 +9,9 @@ monkey_sessions:
   date: '2025-01-01'
 - monkey: Dwight
   date: '2025-01-07'
+lfads_sessions:
+- monkey: Prez
+  date: '2022-07-21'
 extract:
   bin_size: 10ms
   min_firing_rate: 0.1
@@ -18,5 +21,5 @@ prep_lfads_tensors:
   window_len: 60
   overlap: 20
   group_split: false
-run_lfads:
-  run_dir: results/lfads
+train_lfads:
+  config: ../conf/lfads/lfads-torch.yaml

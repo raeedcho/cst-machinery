@@ -110,18 +110,18 @@ stages:
   train_lfads:
     foreach: ${lfads_sessions}
     do:
-      cmd: python scripts/train_lfads.py 
-        --config conf/lfads/lfads-torch.yaml
+      cmd: python scripts/train_lfads.py
         --dataset '${item.monkey}_${item.date}'
-        ${logging}
-        ${run_lfads}
+        ${logging} ${train_lfads}
       params:
-      - run_lfads
+      - train_lfads
       - logging
       deps:
-      - scripts/run_lfads.py
+      - scripts/train_lfads.py
       - src/
       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
       outs:
-      - results/lfads/${item.monkey}_${item.date}_lfads.h5
-      - ${logging.logdir}/train-lfads/${item.monkey}_${item.date}_lfads.log
+      - ${logging.logdir}/train-lfads/${item.monkey}_${item.date}.log
+      - results/lfads/${item.monkey}_${item.date}/lightning_checkpoints
+      - results/lfads/${item.monkey}_${item.date}/dvclive
+      - results/lfads/${item.monkey}_${item.date}/lfads_model.pt
