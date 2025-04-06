@@ -95,8 +95,9 @@ stages:
     do:
       cmd: python scripts/prep_lfads_tensors.py 
         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-        --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5 ${logging}
-        ${prep_lfads_tensors}
+        --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+        --info_path conf/lfads/dataset_info/${item.monkey}_${item.date}.yaml
+        ${logging} ${prep_lfads_tensors}
       params:
       - prep_lfads_tensors
       - logging
@@ -120,6 +121,7 @@ stages:
       - scripts/train_lfads.py
       - src/
       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+      - conf/lfads/
       outs:
       - ${logging.logdir}/train-lfads/${item.monkey}_${item.date}.log
       - results/lfads/${item.monkey}_${item.date}/lightning_checkpoints

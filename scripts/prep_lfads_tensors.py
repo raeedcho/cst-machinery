@@ -1,4 +1,4 @@
-from omegaconf import OmegaConf
+import yaml
 import argparse
 import logging
 logger = logging.getLogger(__name__)
@@ -44,6 +44,22 @@ def main(args):
         group_split=args.group_split,
     )
     logger.info(f'Saved tensors to {output_path}')
+
+    if args.info_path is not None:
+        dataset_info = {
+            'dataset_name': output_path.name,
+            'tensor_shape': {
+                'num_neurons': np.stack(chops).shape[2],
+                'num_time_bins': np.stack(chops).shape[1],
+            }
+        }
+
+        info_path = Path(args.info_path)
+        if not info_path.exists():
+            info_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(info_path, 'w') as f:
+            yaml.dump(dataset_info, f)
+        logger.info(f'Saved dataset info to {info_path}')
 
 def prep_neural_chops(trial_frame: pd.DataFrame, window_len: int, overlap: int) -> pd.DataFrame:
     """Prepare neural tensors for LFADS training.
@@ -125,6 +141,12 @@ if __name__ == "__main__":
         type=str,
         help='Path to the output file',
         required=True,
+    )
+    parser.add_argument(
+        '--info_path',
+        type=str,
+        help='Path to the output dataset info file',
+        default=None,
     )
     parser.add_argument(
         '--logdir',
