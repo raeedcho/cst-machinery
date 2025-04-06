@@ -127,3 +127,4 @@ stages:
       - results/lfads/${item.monkey}_${item.date}/lightning_checkpoints
       - results/lfads/${item.monkey}_${item.date}/dvclive
       - results/lfads/${item.monkey}_${item.date}/lfads_model.pt
+      - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5

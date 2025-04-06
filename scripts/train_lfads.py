@@ -98,6 +98,10 @@ def train_model(
         ckpt_path = trainer.checkpoint_callback.best_model_path
         model.load_state_dict(torch.load(ckpt_path)["state_dict"])
 
+    if torch.cuda.is_available():
+        model = model.to("cuda")
+    call(config.posterior_sampling.fn, model=model, datamodule=datamodule)
+
     return model
 
 if __name__ == "__main__":

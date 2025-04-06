@@ -1,7 +1,7 @@
 raster_plot:
   _target_: src.lfads_callbacks.RasterPlot
-  log_every_n_epochs: 20
+  log_every_n_epochs: 2
 
 trajectory_plot:
   _target_: src.lfads_callbacks.TrajectoryPlot
-  log_every_n_epochs: 20
+  log_every_n_epochs: 2
