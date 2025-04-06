@@ -819,8 +819,8 @@ stages:
     deps:
     - path: conf/lfads/
       hash: md5
-      md5: 67f5a93be8a16200cfb267f1237e71b5.dir
-      size: 5733
+      md5: f90598dbd4da564b28692a4118e94540.dir
+      size: 5722
       nfiles: 8
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
@@ -849,15 +849,15 @@ stages:
       size: 458
     - path: results/lfads/Prez_2022-07-21/dvclive
       hash: md5
-      md5: 11e4afca0b0e919721c9f455224306e0.dir
-      size: 1688776
-      nfiles: 49
+      md5: 324a7630db9f65f39c498a131625ec39.dir
+      size: 3344264
+      nfiles: 55
     - path: results/lfads/Prez_2022-07-21/lfads_model.pt
       hash: md5
-      md5: c4947b0a0926806644740742afa7fdd5
+      md5: 8b788ea93c03bee3c9cbc3fc5b2e1706
       size: 1070222
     - path: results/lfads/Prez_2022-07-21/lightning_checkpoints
       hash: md5
-      md5: 7e10555a653dde77fd7bfdd3423b3bdf.dir
+      md5: 3fc6dc740e3df194eab2bc0224eae12f.dir
       size: 6415908
       nfiles: 2
