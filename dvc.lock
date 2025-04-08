@@ -828,8 +828,8 @@ stages:
       size: 19257221
     - path: scripts/train_lfads.py
       hash: md5
-      md5: f306537279e09e8d076734f8e1e81f24
-      size: 4186
+      md5: 9bc23da3fd51d3261558ff1ecfa1520f
+      size: 4257
     - path: src/
       hash: md5
       md5: 5bc52eadbcc2240e4a3e0d013ce299e5.dir
@@ -849,7 +849,7 @@ stages:
       size: 757
     - path: results/lfads/Prez_2022-07-21/dvclive
       hash: md5
-      md5: ea6124507cbec1a94f929b2693a413c6.dir
+      md5: 4077c1bea86f3fc7b940638a4c15e2fe.dir
       size: 3344264
       nfiles: 55
     - path: results/lfads/Prez_2022-07-21/lfads_model.pt
@@ -864,4 +864,108 @@ stages:
       hash: md5
       md5: 3fc6dc740e3df194eab2bc0224eae12f.dir
       size: 6415908
+      nfiles: 2
+  train_lfads@1:
+    cmd: python scripts/train_lfads.py --dataset 'Dwight_2025-01-01' --logdir logs
+      --loglevel INFO --config ../conf/lfads/lfads-torch.yaml
+    deps:
+    - path: conf/lfads/
+      hash: md5
+      md5: f90598dbd4da564b28692a4118e94540.dir
+      size: 5722
+      nfiles: 8
+    - path: data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5
+      hash: md5
+      md5: 1841dd3b89ad0bc456c4abfb766b140c
+      size: 29000633
+    - path: scripts/train_lfads.py
+      hash: md5
+      md5: 9bc23da3fd51d3261558ff1ecfa1520f
+      size: 4257
+    - path: src/
+      hash: md5
+      md5: 5bc52eadbcc2240e4a3e0d013ce299e5.dir
+      size: 75012
+      nfiles: 18
+    params:
+      params.yaml:
+        logging:
+          logdir: logs
+          loglevel: INFO
+        train_lfads:
+          config: ../conf/lfads/lfads-torch.yaml
+    outs:
+    - path: logs/train-lfads/Dwight_2025-01-01.log
+      hash: md5
+      md5: a7eedc824e3fc9f994a22789e126b84c
+      size: 759
+    - path: results/lfads/Dwight_2025-01-01/dvclive
+      hash: md5
+      md5: 6a09b68e0b81378b03822bc7a6bf3750.dir
+      size: 3438381
+      nfiles: 55
+    - path: results/lfads/Dwight_2025-01-01/lfads_model.pt
+      hash: md5
+      md5: 5660ea196aded38f4f1bbed6c7a15942
+      size: 1003534
+    - path: results/lfads/Dwight_2025-01-01/lfads_output_Dwight_2025-01-01_tensors.h5
+      hash: md5
+      md5: b379a2c2ec817e334927e81ca7ca80c2
+      size: 715216953
+    - path: results/lfads/Dwight_2025-01-01/lightning_checkpoints
+      hash: md5
+      md5: 8400ab25ed12b00cbf3b8f5a322a4f68.dir
+      size: 6015780
+      nfiles: 2
+  train_lfads@2:
+    cmd: python scripts/train_lfads.py --dataset 'Dwight_2025-01-07' --logdir logs
+      --loglevel INFO --config ../conf/lfads/lfads-torch.yaml
+    deps:
+    - path: conf/lfads/
+      hash: md5
+      md5: f90598dbd4da564b28692a4118e94540.dir
+      size: 5722
+      nfiles: 8
+    - path: data/pre-lfads-tensors/Dwight_2025-01-07_tensors.hdf5
+      hash: md5
+      md5: 7e537c27b892711e899dcdf8f7d38551
+      size: 20794919
+    - path: scripts/train_lfads.py
+      hash: md5
+      md5: 9bc23da3fd51d3261558ff1ecfa1520f
+      size: 4257
+    - path: src/
+      hash: md5
+      md5: 5bc52eadbcc2240e4a3e0d013ce299e5.dir
+      size: 75012
+      nfiles: 18
+    params:
+      params.yaml:
+        logging:
+          logdir: logs
+          loglevel: INFO
+        train_lfads:
+          config: ../conf/lfads/lfads-torch.yaml
+    outs:
+    - path: logs/train-lfads/Dwight_2025-01-07.log
+      hash: md5
+      md5: 9078810b50db11e46aee60c9fd6c8b2a
+      size: 759
+    - path: results/lfads/Dwight_2025-01-07/dvclive
+      hash: md5
+      md5: 8f0e38e6cdf7be40325375dbe82b9e2a.dir
+      size: 3489620
+      nfiles: 55
+    - path: results/lfads/Dwight_2025-01-07/lfads_model.pt
+      hash: md5
+      md5: 5932d2ba8060e31f39f24501e2b885dc
+      size: 982990
+    - path: results/lfads/Dwight_2025-01-07/lfads_output_Dwight_2025-01-07_tensors.h5
+      hash: md5
+      md5: 3f29be269e14b5d16243a2fcb7388d89
+      size: 506167239
+    - path: results/lfads/Dwight_2025-01-07/lightning_checkpoints
+      hash: md5
+      md5: 94560a8a172f486374d4ff7b75665ea5.dir
+      size: 5892516
       nfiles: 2

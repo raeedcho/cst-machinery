@@ -36,6 +36,9 @@ def main(args):
     os.chdir(run_dir)
     model = train_model(
         config_path=args.config,
+        overrides={
+            "dataset_info": dataset_str,
+        }
         # checkpoint_dir='./lightning_checkpoints',
     )
 

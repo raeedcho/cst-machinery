@@ -12,6 +12,10 @@ monkey_sessions:
 lfads_sessions:
 - monkey: Prez
   date: '2022-07-21'
+- monkey: Dwight
+  date: '2025-01-01'
+- monkey: Dwight
+  date: '2025-01-07'
 extract:
   bin_size: 10ms
   min_firing_rate: 0.1
