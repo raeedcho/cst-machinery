@@ -103,7 +103,6 @@ def save_chops(chops: pd.DataFrame, output_path: Path, group_split: bool = False
         The path to save the tensors to.
     """
     
-    # TODO: make this some sort of hydra config instantiation
     if group_split:
         splitter = GroupShuffleSplit(
             n_splits=1,

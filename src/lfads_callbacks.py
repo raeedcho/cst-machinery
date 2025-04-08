@@ -158,6 +158,7 @@ class RasterPlot(pl.Callback):
                 fig,
                 trainer.global_step,
             )
+            plt.close(fig)
 
 
 class TrajectoryPlot(pl.Callback):
@@ -230,6 +231,7 @@ class TrajectoryPlot(pl.Callback):
                 fig,
                 trainer.global_step,
             )
+            plt.close(fig)
 
 
 class TestEval(pl.Callback):

@@ -1,5 +1,4 @@
 import pandas as pd
-import smile_extract
 from pathlib import Path
 import argparse
 import logging

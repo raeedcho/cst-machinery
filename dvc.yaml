@@ -13,7 +13,6 @@ stages:
     - logging
     deps:
     - scripts/extract_trial_frame.py
-    - src/
     - ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat
     - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
     outs:
@@ -32,7 +31,6 @@ stages:
     - logging
     deps:
     - scripts/extract_trial_frame.py
-    - src/
     - ${raw_data_dir}/Prez/${item.date}/Prez_${item.date}_${item.block}_sorted.mat
     - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
     outs:
@@ -49,11 +47,50 @@ stages:
       - logging
       deps:
       - scripts/combine_session.py
-      - src/
       - data/trialframe/${item.monkey}/${item.date}/blocks/
       outs:
       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       - ${logging.logdir}/combine/${item.monkey}_${item.date}_tf.log
+  prep_lfads_tensors:
+    foreach: ${monkey_sessions}
+    do:
+      cmd: python scripts/prep_lfads_tensors.py 
+        data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+        --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+        --info_path conf/lfads/dataset_info/${item.monkey}_${item.date}.yaml
+        ${logging} ${prep_lfads_tensors}
+      params:
+      - prep_lfads_tensors
+      - logging
+      deps:
+      - scripts/prep_lfads_tensors.py
+      - src/munge.py
+      - src/chop_merge.py
+      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+      outs:
+      - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+      - ${logging.logdir}/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
+  train_lfads:
+    foreach: ${lfads_sessions}
+    do:
+      cmd: python scripts/train_lfads.py
+        --dataset '${item.monkey}_${item.date}'
+        ${logging} ${train_lfads}
+      params:
+      - train_lfads
+      - logging
+      deps:
+      - scripts/train_lfads.py
+      - src/lfads_dvc.py
+      - src/lfads_callbacks.py
+      - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+      - conf/lfads/
+      outs:
+      - ${logging.logdir}/train-lfads/${item.monkey}_${item.date}.log
+      - results/lfads/${item.monkey}_${item.date}/lightning_checkpoints
+      - results/lfads/${item.monkey}_${item.date}/dvclive
+      - results/lfads/${item.monkey}_${item.date}/lfads_model.pt
+      - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
   context_axis:
     foreach: ${monkey_sessions}
     do:
@@ -90,41 +127,3 @@ stages:
       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
       - results/cross-task-decoding/${item.monkey}/${item.date}/trials/
-  prep_lfads_tensors:
-    foreach: ${monkey_sessions}
-    do:
-      cmd: python scripts/prep_lfads_tensors.py 
-        data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-        --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
-        --info_path conf/lfads/dataset_info/${item.monkey}_${item.date}.yaml
-        ${logging} ${prep_lfads_tensors}
-      params:
-      - prep_lfads_tensors
-      - logging
-      deps:
-      - scripts/prep_lfads_tensors.py
-      - src/
-      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-      outs:
-      - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
-      - ${logging.logdir}/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
-  train_lfads:
-    foreach: ${lfads_sessions}
-    do:
-      cmd: python scripts/train_lfads.py
-        --dataset '${item.monkey}_${item.date}'
-        ${logging} ${train_lfads}
-      params:
-      - train_lfads
-      - logging
-      deps:
-      - scripts/train_lfads.py
-      - src/
-      - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
-      - conf/lfads/
-      outs:
-      - ${logging.logdir}/train-lfads/${item.monkey}_${item.date}.log
-      - results/lfads/${item.monkey}_${item.date}/lightning_checkpoints
-      - results/lfads/${item.monkey}_${item.date}/dvclive
-      - results/lfads/${item.monkey}_${item.date}/lfads_model.pt
-      - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
