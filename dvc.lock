@@ -201,13 +201,8 @@ stages:
       nfiles: 2
     - path: scripts/combine_session.py
       hash: md5
-      md5: 1ee241b619babdec79402b893c381999
-      size: 1644
-    - path: src/
-      hash: md5
-      md5: 5bc52eadbcc2240e4a3e0d013ce299e5.dir
-      size: 75012
-      nfiles: 18
+      md5: 91e9651e49fd16de9262c1f70e84047d
+      size: 1623
     params:
       params.yaml:
         logging:
@@ -701,13 +696,16 @@ stages:
       size: 10734307
     - path: scripts/prep_lfads_tensors.py
       hash: md5
-      md5: 4f7e62fbc114a6e0180d7b11596fce01
-      size: 5530
-    - path: src/
+      md5: 7bb88ca1c3b5764f38ac3ae4a6b6c4de
+      size: 5468
+    - path: src/chop_merge.py
       hash: md5
-      md5: 5bc52eadbcc2240e4a3e0d013ce299e5.dir
-      size: 75012
-      nfiles: 18
+      md5: b86e60d6bc73d65b0ad800e78f14bf4d
+      size: 4112
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
     params:
       params.yaml:
         logging:
@@ -720,8 +718,8 @@ stages:
     outs:
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
-      md5: 041577e7b33dd90b33bb021eb1654b29
-      size: 19257221
+      md5: f22e2a449d76853efbb4cba8fc43abd7
+      size: 19254083
     - path: logs/prep-lfads-tensors/Prez_2022-07-21_tensors.log
       hash: md5
       md5: 014edadf43341af6150e1123a2ccffe9
@@ -815,17 +813,20 @@ stages:
       nfiles: 8
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
-      md5: 041577e7b33dd90b33bb021eb1654b29
-      size: 19257221
+      md5: f22e2a449d76853efbb4cba8fc43abd7
+      size: 19254083
     - path: scripts/train_lfads.py
       hash: md5
       md5: 9bc23da3fd51d3261558ff1ecfa1520f
       size: 4257
-    - path: src/
+    - path: src/lfads_callbacks.py
       hash: md5
-      md5: 604d59a2a2fc7280a5cedbc343f97b03.dir
-      size: 75026
-      nfiles: 18
+      md5: f1d51c845916be911a53550a8ffc3f28
+      size: 9550
+    - path: src/lfads_dvc.py
+      hash: md5
+      md5: dfe8b4f0ff4095f88b84e99c46570b72
+      size: 1299
     params:
       params.yaml:
         logging:
@@ -840,20 +841,20 @@ stages:
       size: 666
     - path: results/lfads/Prez_2022-07-21/dvclive
       hash: md5
-      md5: 5a540f9214124948c847e03ff5fd77c9.dir
-      size: 8939087
-      nfiles: 71
+      md5: 6816d0c6407486da32e6de3b98025c47.dir
+      size: 7023312
+      nfiles: 65
     - path: results/lfads/Prez_2022-07-21/lfads_model.pt
       hash: md5
-      md5: f8e061e6afc508d74a026e87dd3f21e0
+      md5: 80542030a30693db40ea8736dcc3cfbe
       size: 1070222
     - path: results/lfads/Prez_2022-07-21/lfads_output_Prez_2022-07-21_tensors.h5
       hash: md5
-      md5: f1439423a36de603ce16480655876cad
-      size: 495876741
+      md5: cad5e15b9fd8f967d3430baa03cac56a
+      size: 495873603
     - path: results/lfads/Prez_2022-07-21/lightning_checkpoints
       hash: md5
-      md5: dc2335f9b57c9e9c9860372bd60e906e.dir
+      md5: fca079f4ddc7b50c67355c71d893fc2f.dir
       size: 6415908
       nfiles: 2
   train_lfads@1:
