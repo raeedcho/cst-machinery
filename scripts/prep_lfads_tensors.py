@@ -75,8 +75,8 @@ def prep_neural_chops(trial_frame: pd.DataFrame, window_len: int, overlap: int) 
 
     Returns
     -------
-    np.ndarray
-        The prepared neural tensors.
+    pd.DataFrame
+        The prepared neural tensors, indexed by trial_id and chop_id.
     """
     
     tensors = (
