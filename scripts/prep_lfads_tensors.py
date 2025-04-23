@@ -36,7 +36,7 @@ def main(args):
         overlap=args.overlap,
     )
     logger.info(f'Chopped data into {len(chops)} segments')
-    logger.info(f'Chop shape: {np.stack(chops).shape}')
+    logger.info(f'Chop shape: {np.stack(chops).shape}') # type: ignore
 
     save_chops(
         chops,
@@ -49,8 +49,8 @@ def main(args):
         dataset_info = {
             'dataset_name': output_path.name,
             'tensor_shape': {
-                'num_neurons': np.stack(chops).shape[2],
-                'num_time_bins': np.stack(chops).shape[1],
+                'num_neurons': np.stack(chops).shape[2], # type: ignore
+                'num_time_bins': np.stack(chops).shape[1], # type: ignore
             }
         }
 
@@ -61,7 +61,7 @@ def main(args):
             yaml.dump(dataset_info, f)
         logger.info(f'Saved dataset info to {info_path}')
 
-def prep_neural_chops(trial_frame: pd.DataFrame, window_len: int, overlap: int) -> pd.DataFrame:
+def prep_neural_chops(trial_frame: pd.DataFrame, window_len: int, overlap: int) -> pd.Series:
     """Prepare neural tensors for LFADS training.
 
     Parameters
@@ -92,7 +92,7 @@ def prep_neural_chops(trial_frame: pd.DataFrame, window_len: int, overlap: int) 
     )
     return chops
 
-def save_chops(chops: pd.DataFrame, output_path: Path, group_split: bool = False) -> None:
+def save_chops(chops: pd.Series, output_path: Path, group_split: bool = False) -> None:
     """Save the chops to the specified output path.
 
     Parameters
@@ -114,7 +114,7 @@ def save_chops(chops: pd.DataFrame, output_path: Path, group_split: bool = False
             test_size=0.2,
         )
 
-    train_idx, valid_idx = next(splitter.split(chops, groups=chops.index.get_level_values(0)))
+    train_idx, valid_idx = next(splitter.split(chops, groups=chops.index.get_level_values(0))) # type: ignore
     train_chops = chops.iloc[train_idx]
     valid_chops = chops.iloc[valid_idx]
 

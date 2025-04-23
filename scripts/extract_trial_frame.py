@@ -15,7 +15,7 @@ def main(args):
         level=args.loglevel,
     )
 
-    smile_data = smile_extract.direct_load_smile_data(input_path)
+    smile_data = smile_extract.direct_load_smile_data(str(input_path))
     logger.info(f'Loaded data from {input_path}')
 
     trial_frame = smile_extract.compose_session_frame(

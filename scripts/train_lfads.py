@@ -12,6 +12,8 @@ import warnings
 from glob import glob
 from pathlib import Path
 
+from typing import Union
+
 import pytorch_lightning as pl
 import torch
 import hydra
@@ -47,19 +49,19 @@ def main(args):
     logger.info(f'Saved model as lfads_model.pt')
 
 def train_model(
+    config_path: str,
     overrides: dict = {},
-    config_path: str = None,
-    checkpoint_dir: str = None,
+    checkpoint_dir: Union[str, None] = None,
 ) -> pl.LightningModule:
     # load config
-    config_path = Path(config_path)
-    overrides = [f"{k}={v}" for k, v in flatten(overrides).items()]
+    config_path_obj:Path = Path(config_path)
+    flat_overrides: list[str] = [f"{k}={v}" for k, v in flatten(overrides).items()]
     with hydra.initialize(
-        config_path=config_path.parent,
+        config_path=str(config_path_obj.parent),
         job_name="train_lfads",
         version_base="1.1",
     ):
-        config = hydra.compose(config_name=config_path.name, overrides=overrides)
+        config = hydra.compose(config_name=config_path_obj.name, overrides=flat_overrides)
 
     # Avoid flooding the console with output during multi-model runs
     if config.ignore_warnings:

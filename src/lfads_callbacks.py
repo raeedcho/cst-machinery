@@ -12,7 +12,6 @@ from src.lfads_dvc import DVCLiveLFADSLogger
 
 plt.switch_backend("Agg")
 
-
 def has_image_loggers(loggers):
     """Checks whether any image loggers are available.
 
@@ -23,9 +22,9 @@ def has_image_loggers(loggers):
     """
     logger_list = loggers if isinstance(loggers, list) else [loggers]
     for logger in logger_list:
-        if isinstance(logger, pl.loggers.TensorBoardLogger):
+        if isinstance(logger, pl.loggers.TensorBoardLogger): # type: ignore
             return True
-        elif isinstance(logger, pl.loggers.WandbLogger):
+        elif isinstance(logger, pl.loggers.WandbLogger): # type: ignore
             return True
         elif isinstance(logger, DVCLiveLFADSLogger):
             return True
@@ -53,9 +52,9 @@ def log_figure(loggers, name, fig, step):
     # Distribute image to all image loggers
     logger_list = loggers if isinstance(loggers, list) else [loggers]
     for logger in logger_list:
-        if isinstance(logger, pl.loggers.TensorBoardLogger):
+        if isinstance(logger, pl.loggers.TensorBoardLogger): # type: ignore
             logger.experiment.add_figure(name, fig, step)
-        elif isinstance(logger, pl.loggers.WandbLogger):
+        elif isinstance(logger, pl.loggers.WandbLogger): # type: ignore
             logger.log_image(name, [image], step)
         elif isinstance(logger, DVCLiveLFADSLogger):
             logger.experiment.log_image(f"{name}/{logger.experiment.step}.png", image)
@@ -97,9 +96,9 @@ class RasterPlot(pl.Callback):
             return
         # Get data samples from the dataloaders
         if self.split == "valid":
-            dataloader = trainer.datamodule.val_dataloader()
+            dataloader = trainer.datamodule.val_dataloader() # type: ignore
         else:
-            dataloader = trainer.datamodule.train_dataloader(shuffle=False)
+            dataloader = trainer.datamodule.train_dataloader(shuffle=False) # type: ignore
         batch = next(iter(dataloader))
         # Determine which sessions are in the batch
         sessions = sorted(batch.keys())
@@ -109,16 +108,16 @@ class RasterPlot(pl.Callback):
         output = pl_module.predict_step(
             batch=batch,
             batch_idx=None,
-            sample_posteriors=True,
+            sample_posteriors=True, # type: ignore
         )
         # Discard the extra data - only the SessionBatches are relevant here
-        batch = {s: b[0] for s, b in batch.items()}
+        batch = {s: b[0] for s, b in batch.items()} # type: ignore
         # Log a few example outputs for each session
         for s in sessions:
             # Convert everything to numpy
-            encod_data = batch[s].encod_data.detach().cpu().numpy()
-            recon_data = batch[s].recon_data.detach().cpu().numpy()
-            truth = batch[s].truth.detach().cpu().numpy()
+            encod_data = batch[s].encod_data.detach().cpu().numpy() # type: ignore
+            recon_data = batch[s].recon_data.detach().cpu().numpy() # type: ignore
+            truth = batch[s].truth.detach().cpu().numpy() # type: ignore
             means = output[s].output_params.detach().cpu().numpy()
             inputs = output[s].gen_inputs.detach().cpu().numpy()
             # Compute data sizes
@@ -193,7 +192,7 @@ class TrajectoryPlot(pl.Callback):
         if not has_image_loggers(trainer.loggers):
             return
         # Get only the validation dataloaders
-        pred_dls = trainer.datamodule.predict_dataloader()
+        pred_dls = trainer.datamodule.predict_dataloader() # type: ignore
         dataloaders = {s: dls["valid"] for s, dls in pred_dls.items()}
         # Compute outputs and plot for one session at a time
         for s, dataloader in dataloaders.items():
@@ -202,7 +201,7 @@ class TrajectoryPlot(pl.Callback):
                 # Move data to the right device
                 batch = send_batch_to_device({s: batch}, pl_module.device)
                 # Perform the forward pass through the model
-                output = pl_module.predict_step(batch, None, sample_posteriors=False)[s]
+                output = pl_module.predict_step(batch, None, sample_posteriors=False)[s] # type: ignore
                 latents.append(output.factors)
             latents = torch.cat(latents).detach().cpu().numpy()
             # Reduce dimensionality if necessary
@@ -237,12 +236,12 @@ class TrajectoryPlot(pl.Callback):
 class TestEval(pl.Callback):
     def on_validation_epoch_end(self, trainer, pl_module):
         test_batch = send_batch_to_device(
-            trainer.datamodule.test_data[0][0], pl_module.device
+            trainer.datamodule.test_data[0][0], pl_module.device # type: ignore
         )
-        _, esl, edd = test_batch.encod_data.shape
+        _, esl, edd = test_batch.encod_data.shape # type: ignore
         test_output = pl_module(test_batch, output_means=False)[0]
         test_recon = pl_module.recon[0].compute_loss(
-            test_batch.encod_data,
+            test_batch.encod_data, # type: ignore
             test_output.output_params[:, :esl, :edd],
         )
         pl_module.log("test/recon", test_recon)
