@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import logging
 
 logger = logging.getLogger(__name__)
@@ -124,3 +125,75 @@ def merge_chops(data, overlap, orig_len=None, smooth_pwr=2):
         merged = np.concatenate([merged, nans])
 
     return merged
+
+def frame_to_chops(neural_frame: pd.DataFrame, window_len: int, overlap: int) -> pd.Series:
+    """Prepare neural tensors for LFADS training from trial frame-formatted data.
+
+    Parameters
+    ----------
+    neural_frame : pd.DataFrame
+        a dataframe of neural data to be chopped, indexed by trial_id and time into trial.
+    window_len : int
+        The length of the window to chop the data into.
+    overlap : int
+        The overlap between windows.
+
+    Returns
+    -------
+    pd.Series
+        The prepared neural tensors, indexed by trial_id and chop_id.
+    """
+    
+    tensors = (
+        neural_frame
+        .groupby('trial_id')
+        .apply(lambda df: chop_data(df.values, overlap=overlap, window=window_len)) # type: ignore
+    )
+    chops = pd.concat(
+        [pd.Series(list(tensor)) for tensor in tensors],
+        axis=0,
+        keys=tensors.index,
+        names=['trial_id','chop_id']
+    )
+    return chops
+
+def chops_to_frame(chops: pd.Series, orig_frame: pd.DataFrame, overlap: int, smooth_pwr: float) -> pd.DataFrame:
+    """Convert chops back to a DataFrame of neural data.
+
+    Parameters
+    ----------
+    chops : pd.Series
+        The chops to convert back to a DataFrame.
+    window_len : int
+        The length of the window used to chop the data.
+    overlap : int
+        The overlap between windows.
+    orig_frame : pd.DataFrame
+        The original DataFrame of neural data.
+
+    Returns
+    -------
+    pd.DataFrame
+        The converted DataFrame of neural data.
+    """
+
+    merged_chops = pd.concat(
+        [
+            pd.DataFrame(
+                merge_chops(
+                    np.stack(trial_chops.values), # type: ignore
+                    overlap=overlap,
+                    smooth_pwr=2,
+                    orig_len=orig_frame.loc[trial_id].shape[0],
+                ),
+                columns=orig_frame.columns,
+                index=orig_frame.loc[trial_id].index,
+            )
+            for trial_id,trial_chops in chops.groupby('trial_id')
+        ],
+        axis=0,
+        keys=[trial_id for trial_id, _ in chops.groupby('trial_id')],
+        names=orig_frame.index.names,
+    )
+
+    return merged_chops

@@ -1,4 +1,7 @@
 raw_data_dir: /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+directory_structure:
+  trialframe_dir: data/trialframe
+  lfads_dir: results/lfads
 logging:
   logdir: logs
   loglevel: INFO

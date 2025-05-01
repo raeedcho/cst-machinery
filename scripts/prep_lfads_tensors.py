@@ -6,7 +6,7 @@ logger = logging.getLogger(__name__)
 from pathlib import Path
 import pandas as pd
 import numpy as np
-from src.chop_merge import chop_data
+from src.chop_merge import frame_to_chops
 from src.munge import get_index_level
 
 from sklearn.model_selection import GroupShuffleSplit, ShuffleSplit
@@ -30,8 +30,8 @@ def main(args):
     tf = pd.read_parquet(input_path)
     logger.info(f'Loaded data from {input_path}')
 
-    chops = prep_neural_chops(
-        tf,
+    chops = frame_to_chops(
+        tf['motor cortex'], # type: ignore
         window_len=args.window_len,
         overlap=args.overlap,
     )
@@ -60,37 +60,6 @@ def main(args):
         with open(info_path, 'w') as f:
             yaml.dump(dataset_info, f)
         logger.info(f'Saved dataset info to {info_path}')
-
-def prep_neural_chops(trial_frame: pd.DataFrame, window_len: int, overlap: int) -> pd.Series:
-    """Prepare neural tensors for LFADS training.
-
-    Parameters
-    ----------
-    trial_frame : pd.DataFrame
-        The trial frame to be prepared.
-    window_len : int
-        The length of the window to chop the data into.
-    overlap : int
-        The overlap between windows.
-
-    Returns
-    -------
-    pd.DataFrame
-        The prepared neural tensors, indexed by trial_id and chop_id.
-    """
-    
-    tensors = (
-        trial_frame['motor cortex']
-        .groupby('trial_id')
-        .apply(lambda df: chop_data(df.values, overlap=overlap, window=window_len))
-    )
-    chops = pd.concat(
-        [pd.Series(list(tensor)) for tensor in tensors],
-        axis=0,
-        keys=tensors.index,
-        names=['trial_id','chop_id']
-    )
-    return chops
 
 def save_chops(chops: pd.Series, output_path: Path, group_split: bool = False) -> None:
     """Save the chops to the specified output path.

@@ -73,6 +73,7 @@ stages:
   train_lfads:
     foreach: ${lfads_sessions}
     do:
+      frozen: true
       cmd: python scripts/train_lfads.py
         --dataset '${item.monkey}_${item.date}'
         ${logging} ${train_lfads}
@@ -91,6 +92,23 @@ stages:
       - results/lfads/${item.monkey}_${item.date}/dvclive
       - results/lfads/${item.monkey}_${item.date}/lfads_model.pt
       - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
+  merge_lfads_outputs:
+    foreach: ${lfads_sessions}
+    do:
+      cmd: python scripts/merge_lfads_outputs.py --dataset ${item.monkey}_${item.date} --overlap ${prep_lfads_tensors.overlap} ${directory_structure} ${logging}
+      params:
+      - directory_structure
+      - logging
+      - prep_lfads_tensors.overlap
+      deps:
+      - scripts/merge_lfads_outputs.py
+      - src/chop_merge.py
+      - src/munge.py
+      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+      - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
+      outs:
+      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_neural-lfads-rates.parquet
+      - ${logging.logdir}/merge-lfads-outputs/${item.monkey}_${item.date}.log
   context_axis:
     foreach: ${monkey_sessions}
     do:

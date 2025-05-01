@@ -1,1 +1,7 @@
-{}
+{
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.ipynb": "jupyter-notebook",
+        "file:/**/*.parquet": "jupyter-data-wrangler"
+    }
+}
