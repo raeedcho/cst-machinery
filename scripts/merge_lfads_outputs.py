@@ -15,8 +15,8 @@ def main(args):
     dataset: str = args.dataset
     monkey, session_date = dataset.split('_')
 
-    trialframe_folder: Path = Path(args.trialframe_dir) / monkey / session_date
-    trialframe_path: Path = trialframe_folder / f'{dataset}_tf.parquet'
+    trialframe_folder: Path = Path(args.trialframe_dir) / dataset
+    trialframe_path: Path = trialframe_folder / f'{dataset}_neural-spikes-binned.parquet'
     lfads_tensors_path: Path = Path(args.lfads_dir) / dataset / f'lfads_output_{dataset}_tensors.h5'
     log_dir: Path = Path(args.logdir) / 'merge-lfads-outputs'
 
@@ -28,7 +28,7 @@ def main(args):
         level=args.loglevel,
     )
     
-    tf = pd.read_parquet(trialframe_path)
+    binned_spikes = pd.read_parquet(trialframe_path)
     logger.info(f'Loaded data from {trialframe_path}')
 
     with h5py.File(lfads_tensors_path, 'r') as f:
@@ -40,7 +40,7 @@ def main(args):
         chops,
         overlap=args.overlap,
         smooth_pwr=2,
-        orig_frame=tf['motor cortex'], # type: ignore
+        orig_frame=binned_spikes, # type: ignore
     )
     logger.info(f'Converted chops to frame with shape {lfads_counts.shape}')
 

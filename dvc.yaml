@@ -17,26 +17,11 @@ stages:
       - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_hand-pos.parquet
       - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
       - ${dir_structure.log_dir}/extract/${item.monkey}_${item.date}.log
-#   extract_trialframes:
-#     foreach: ${monkey_sessions}
-#     do:
-#       cmd: python scripts/extract_trial_frame.py --dataset ${item.monkey}_${item.date} ${dir_structure} ${logging} ${extract}
-#       params:
-#       - extract
-#       - logging
-#       - dir_structure
-#       deps:
-#       - scripts/extract_trial_frame.py
-#       - ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat
-#       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
-#       outs:
-#       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-#       - ${dir_structure.log_dir}/extract/${item.monkey}_${item.date}_tf.log
   prep_lfads_tensors:
     foreach: ${monkey_sessions}
     do:
       cmd: python scripts/prep_lfads_tensors.py 
-        data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+        data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
         --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
         --info_path conf/lfads/dataset_info/${item.monkey}_${item.date}.yaml
         ${logging} ${prep_lfads_tensors} ${dir_structure}
@@ -47,7 +32,7 @@ stages:
       - scripts/prep_lfads_tensors.py
       - src/munge.py
       - src/chop_merge.py
-      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
       outs:
       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
       - ${dir_structure.log_dir}/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
@@ -85,44 +70,44 @@ stages:
       - scripts/merge_lfads_outputs.py
       - src/chop_merge.py
       - src/munge.py
-      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-binned-spikes.parquet
       - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
       outs:
-      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_neural-lfads-rates.parquet
+      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-lfads-rates.parquet
       - ${dir_structure.log_dir}/merge-lfads-outputs/${item.monkey}_${item.date}.log
-  context_axis:
-    foreach: ${monkey_sessions}
-    do:
-      cmd: python scripts/get_context_axis.py 
-        data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-        --out 
-        results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
-        ${dir_structure} ${logging}
-      params:
-      - logging
-      deps:
-      - scripts/get_context_axis.py
-      - src/
-      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-      outs:
-      - ${dir_structure.log_dir}/context_axis/${item.monkey}_${item.date}_context_axis.log
-      plots:
-      - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
-  cross_task_decoding:
-    foreach: ${monkey_sessions}
-    do:
-      cmd: python scripts/cross_task_decoding.py 
-        data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-        --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${logging} ${dir_structure}
-      params:
-      - logging
-      deps:
-      - scripts/cross_task_decoding.py
-      - src/
-      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-      outs:
-      - ${dir_structure.log_dir}/cross-task-decoding/${item.monkey}_${item.date}_cross-task-decoding.log
-      plots:
-      - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
-      - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
-      - results/cross-task-decoding/${item.monkey}/${item.date}/trials/
+#   context_axis:
+#     foreach: ${monkey_sessions}
+#     do:
+#       cmd: python scripts/get_context_axis.py 
+#         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+#         --out 
+#         results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
+#         ${dir_structure} ${logging}
+#       params:
+#       - logging
+#       deps:
+#       - scripts/get_context_axis.py
+#       - src/
+#       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+#       outs:
+#       - ${dir_structure.log_dir}/context_axis/${item.monkey}_${item.date}_context_axis.log
+#       plots:
+#       - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
+#   cross_task_decoding:
+#     foreach: ${monkey_sessions}
+#     do:
+#       cmd: python scripts/cross_task_decoding.py 
+#         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+#         --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${logging} ${dir_structure}
+#       params:
+#       - logging
+#       deps:
+#       - scripts/cross_task_decoding.py
+#       - src/
+#       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+#       outs:
+#       - ${dir_structure.log_dir}/cross-task-decoding/${item.monkey}_${item.date}_cross-task-decoding.log
+#       plots:
+#       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
+#       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
+#       - results/cross-task-decoding/${item.monkey}/${item.date}/trials/

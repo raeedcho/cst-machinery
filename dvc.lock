@@ -656,18 +656,20 @@ stages:
       size: 15365462
       nfiles: 344
   prep_lfads_tensors@0:
-    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
+    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
       --out data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5 --info_path conf/lfads/dataset_info/Prez_2022-07-21.yaml
-      --logdir logs --loglevel INFO --window_len 60 --overlap 20
+      --loglevel INFO --window_len 60 --overlap 20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
     deps:
-    - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
       hash: md5
-      md5: b24ed58b046c38e40f6ccc32a3790160
-      size: 10734307
+      md5: 4b3fec641775a1018912891a578d61d6
+      size: 6512056
     - path: scripts/prep_lfads_tensors.py
       hash: md5
-      md5: 44159b8c7b8a466066a958f79219484e
-      size: 4731
+      md5: bf25093776a3d85fa36356dde16a0083
+      size: 4747
     - path: src/chop_merge.py
       hash: md5
       md5: 8531dc550be2e4d8f54437d5fc0ec86f
@@ -679,7 +681,6 @@ stages:
     params:
       params.yaml:
         logging:
-          logdir: logs
           loglevel: INFO
         prep_lfads_tensors:
           window_len: 60
@@ -688,12 +689,12 @@ stages:
     outs:
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
-      md5: 867c3c18683e801ac9b7ac240d1cf324
-      size: 19253935
+      md5: 23eadf37cfc019c419e104a237f4967d
+      size: 26281374
     - path: logs/prep-lfads-tensors/Prez_2022-07-21_tensors.log
       hash: md5
-      md5: 014edadf43341af6150e1123a2ccffe9
-      size: 342
+      md5: bcc36d04ec595554ca07a1e3da454b37
+      size: 360
   prep_lfads_tensors@1:
     cmd: python scripts/prep_lfads_tensors.py data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
       --out data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5 --info_path conf/lfads/dataset_info/Dwight_2025-01-01.yaml

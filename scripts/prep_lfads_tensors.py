@@ -15,7 +15,7 @@ import h5py
 def main(args):
     input_path = Path(args.path)
     output_path = Path(args.out)
-    log_dir = Path(args.logdir) / 'prep-lfads-tensors'
+    log_dir = Path(args.log_dir) / 'prep-lfads-tensors'
 
     if not log_dir.exists():
         log_dir.mkdir(parents=True, exist_ok=True)
@@ -27,11 +27,11 @@ def main(args):
         level=args.loglevel,
     )
     
-    tf = pd.read_parquet(input_path)
+    binned_spikes = pd.read_parquet(input_path)
     logger.info(f'Loaded data from {input_path}')
 
     chops = frame_to_chops(
-        tf['motor cortex'], # type: ignore
+        binned_spikes, # type: ignore
         window_len=args.window_len,
         overlap=args.overlap,
     )
@@ -117,7 +117,7 @@ if __name__ == "__main__":
         default=None,
     )
     parser.add_argument(
-        '--logdir',
+        '--log_dir',
         type=str,
         help='Logging directory',
         default='logs/',
@@ -147,5 +147,5 @@ if __name__ == "__main__":
         help='Use group split for train/valid split',
     )
 
-    args = parser.parse_args()
+    args, _= parser.parse_known_args()
     main(args)
