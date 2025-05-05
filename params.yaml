@@ -1,9 +1,9 @@
-raw_data_dir: /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-directory_structure:
+dir_structure:
+  raw_data_dir: /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
   trialframe_dir: data/trialframe
   lfads_dir: results/lfads
+  log_dir: logs
 logging:
-  logdir: logs
   loglevel: INFO
 monkey_sessions:
 - monkey: Prez

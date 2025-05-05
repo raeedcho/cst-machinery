@@ -1,56 +1,37 @@
 stages:
-  extract_dwight:
-    matrix:
-      date: ['2025-01-01', '2025-01-07']
-      block: [reward-type-medium-cst-rtt-dco, reward-type-medium-large-cst-rtt-dco,
-        reward-type-choice]
-    cmd: python scripts/extract_trial_frame.py ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat
-      --out 
-      data/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.parquet
-      --block ${item.block} ${logging} ${extract}
-    params:
-    - extract
-    - logging
-    deps:
-    - scripts/extract_trial_frame.py
-    - ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat
-    - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
-    outs:
-    - data/trialframe/Dwight/${item.date}/blocks/Dwight_${item.date}_${item.block}_tf.parquet
-    - ${logging.logdir}/extract/Dwight_${item.date}_${item.block}_tf.log
-  extract_prez:
-    matrix:
-      date: ['2022-07-21']
-      block: [cst-rtt]
-    cmd: python scripts/extract_trial_frame.py ${raw_data_dir}/Prez/${item.date}/Prez_${item.date}_${item.block}_sorted.mat
-      --out 
-      data/trialframe/Prez/${item.date}/blocks/Prez_${item.date}_${item.block}_tf.parquet
-      --block ${item.block} ${logging} ${extract}
-    params:
-    - extract
-    - logging
-    deps:
-    - scripts/extract_trial_frame.py
-    - ${raw_data_dir}/Prez/${item.date}/Prez_${item.date}_${item.block}_sorted.mat
-    - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
-    outs:
-    - data/trialframe/Prez/${item.date}/blocks/Prez_${item.date}_${item.block}_tf.parquet
-    - ${logging.logdir}/extract/Prez_${item.date}_${item.block}_tf.log
-  combine_session:
+  extract:
     foreach: ${monkey_sessions}
     do:
-      cmd: python scripts/combine_session.py data/trialframe/${item.monkey}/${item.date}/blocks/
-        --out 
-        data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-        ${logging}
+      cmd: python scripts/extract_normalized_data.py --dataset ${item.monkey}_${item.date} ${dir_structure} ${logging} ${extract}
       params:
+      - extract
       - logging
+      - dir_structure
       deps:
-      - scripts/combine_session.py
-      - data/trialframe/${item.monkey}/${item.date}/blocks/
+      - scripts/extract_normalized_data.py
+      - ${dir_structure.raw_data_dir}/${item.monkey}/${item.date}/
+      - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       outs:
-      - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-      - ${logging.logdir}/combine/${item.monkey}_${item.date}_tf.log
+      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_meta.parquet
+      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
+      - ${dir_structure.log_dir}/extract/${item.monkey}_${item.date}.log
+#   extract_trialframes:
+#     foreach: ${monkey_sessions}
+#     do:
+#       cmd: python scripts/extract_trial_frame.py --dataset ${item.monkey}_${item.date} ${dir_structure} ${logging} ${extract}
+#       params:
+#       - extract
+#       - logging
+#       - dir_structure
+#       deps:
+#       - scripts/extract_trial_frame.py
+#       - ${raw_data_dir}/Dwight/${item.date}/Dwight_${item.date}_${item.block}_sorted.mat
+#       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
+#       outs:
+#       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
+#       - ${dir_structure.log_dir}/extract/${item.monkey}_${item.date}_tf.log
   prep_lfads_tensors:
     foreach: ${monkey_sessions}
     do:
@@ -58,7 +39,7 @@ stages:
         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
         --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
         --info_path conf/lfads/dataset_info/${item.monkey}_${item.date}.yaml
-        ${logging} ${prep_lfads_tensors}
+        ${logging} ${prep_lfads_tensors} ${dir_structure}
       params:
       - prep_lfads_tensors
       - logging
@@ -69,14 +50,14 @@ stages:
       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
-      - ${logging.logdir}/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
+      - ${dir_structure.log_dir}/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
   train_lfads:
     foreach: ${lfads_sessions}
     do:
       frozen: true
       cmd: python scripts/train_lfads.py
         --dataset '${item.monkey}_${item.date}'
-        ${logging} ${train_lfads}
+        ${logging} ${train_lfads} ${dir_structure}
       params:
       - train_lfads
       - logging
@@ -87,7 +68,7 @@ stages:
       - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
       - conf/lfads/
       outs:
-      - ${logging.logdir}/train-lfads/${item.monkey}_${item.date}.log
+      - ${dir_structure.log_dir}/train-lfads/${item.monkey}_${item.date}.log
       - results/lfads/${item.monkey}_${item.date}/lightning_checkpoints
       - results/lfads/${item.monkey}_${item.date}/dvclive
       - results/lfads/${item.monkey}_${item.date}/lfads_model.pt
@@ -95,9 +76,9 @@ stages:
   merge_lfads_outputs:
     foreach: ${lfads_sessions}
     do:
-      cmd: python scripts/merge_lfads_outputs.py --dataset ${item.monkey}_${item.date} --overlap ${prep_lfads_tensors.overlap} ${directory_structure} ${logging}
+      cmd: python scripts/merge_lfads_outputs.py --dataset ${item.monkey}_${item.date} --overlap ${prep_lfads_tensors.overlap} ${dir_structure} ${logging}
       params:
-      - directory_structure
+      - dir_structure
       - logging
       - prep_lfads_tensors.overlap
       deps:
@@ -108,7 +89,7 @@ stages:
       - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
       outs:
       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_neural-lfads-rates.parquet
-      - ${logging.logdir}/merge-lfads-outputs/${item.monkey}_${item.date}.log
+      - ${dir_structure.log_dir}/merge-lfads-outputs/${item.monkey}_${item.date}.log
   context_axis:
     foreach: ${monkey_sessions}
     do:
@@ -116,7 +97,7 @@ stages:
         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
         --out 
         results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
-        ${logging}
+        ${dir_structure} ${logging}
       params:
       - logging
       deps:
@@ -124,7 +105,7 @@ stages:
       - src/
       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
-      - ${logging.logdir}/context_axis/${item.monkey}_${item.date}_context_axis.log
+      - ${dir_structure.log_dir}/context_axis/${item.monkey}_${item.date}_context_axis.log
       plots:
       - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
   cross_task_decoding:
@@ -132,7 +113,7 @@ stages:
     do:
       cmd: python scripts/cross_task_decoding.py 
         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-        --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${logging}
+        --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${logging} ${dir_structure}
       params:
       - logging
       deps:
@@ -140,7 +121,7 @@ stages:
       - src/
       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
       outs:
-      - ${logging.logdir}/cross-task-decoding/${item.monkey}_${item.date}_cross-task-decoding.log
+      - ${dir_structure.log_dir}/cross-task-decoding/${item.monkey}_${item.date}_cross-task-decoding.log
       plots:
       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg

@@ -12,9 +12,10 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet",
-                "--out", "results/temp.hdf5",
-                "--logdir", "logs",
+                "--dataset", "Prez_2022-07-21",
+                "--raw_data_dir", "/Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format",
+                "--trialframe_dir", "data/trialframe",
+                "--log_dir", "logs",
                 "--loglevel", "DEBUG",
             ]
         },

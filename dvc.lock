@@ -1066,3 +1066,217 @@ stages:
       hash: md5
       md5: 8e14ba59d233c83b43359c5e84514b45
       size: 381
+  extract_meta@1:
+    cmd: python scripts/extract_meta.py --dataset Dwight_2025-01-01 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: 
+        /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/
+      hash: md5
+      md5: d089cae7a13d9ec2147a266e7c479302.dir
+      size: 2139767329
+      nfiles: 5
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
+      hash: md5
+      md5: 8b93ffe2a36e942dfdb5df11fba353a4.dir
+      size: 84526
+      nfiles: 27
+    - path: scripts/extract_meta.py
+      hash: md5
+      md5: 039909486d83ae54898c64708bb709e1
+      size: 2543
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+    outs:
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
+      hash: md5
+      md5: 1d99c3ffe83a1cf9a485a032a7234289
+      size: 18901
+    - path: logs/extract_meta/Dwight_2025-01-01.log
+      hash: md5
+      md5: 11d1e6523e01d3f79fde22eb25fd2ed3
+      size: 287
+  extract@1:
+    cmd: python scripts/extract_normalized_data.py --dataset Dwight_2025-01-01 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
+    deps:
+    - path: 
+        /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/
+      hash: md5
+      md5: d089cae7a13d9ec2147a266e7c479302.dir
+      size: 2139767329
+      nfiles: 5
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
+      hash: md5
+      md5: 8b93ffe2a36e942dfdb5df11fba353a4.dir
+      size: 84526
+      nfiles: 27
+    - path: scripts/extract_normalized_data.py
+      hash: md5
+      md5: 7901d30f07eb739f363e079ea6881886
+      size: 5654
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        extract:
+          bin_size: 10ms
+          min_firing_rate: 0.1
+          max_spike_coincidence: 0.2
+          rate_artifact_threshold: 350
+        logging:
+          loglevel: INFO
+    outs:
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
+      hash: md5
+      md5: 1253e031957fb8570ed3a38b8eb688ca
+      size: 102368475
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
+      hash: md5
+      md5: 1d99c3ffe83a1cf9a485a032a7234289
+      size: 18901
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
+      hash: md5
+      md5: ba161a5f8dc88fb94a6d2e9109f3b949
+      size: 10219040
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
+      hash: md5
+      md5: 764080f12fa8bd9310227bc068bd24ce
+      size: 94831
+    - path: logs/extract/Dwight_2025-01-01.log
+      hash: md5
+      md5: e5b0f08cda8a11b64e0dca8c8823312a
+      size: 1704
+  extract@0:
+    cmd: python scripts/extract_normalized_data.py --dataset Prez_2022-07-21 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
+    deps:
+    - path: 
+        /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Prez/2022-07-21/
+      hash: md5
+      md5: 111571759bc34c04f7b58188c7e1b513.dir
+      size: 243833997
+      nfiles: 3
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
+      hash: md5
+      md5: 8b93ffe2a36e942dfdb5df11fba353a4.dir
+      size: 84526
+      nfiles: 27
+    - path: scripts/extract_normalized_data.py
+      hash: md5
+      md5: 7901d30f07eb739f363e079ea6881886
+      size: 5654
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        extract:
+          bin_size: 10ms
+          min_firing_rate: 0.1
+          max_spike_coincidence: 0.2
+          rate_artifact_threshold: 350
+        logging:
+          loglevel: INFO
+    outs:
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
+      hash: md5
+      md5: 5a635eeb0f9ffbeb9b7cc3f36c35888f
+      size: 72218174
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_meta.parquet
+      hash: md5
+      md5: 8b875db5572c7a55dc899e7ca25e99e5
+      size: 10014
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
+      hash: md5
+      md5: 4b3fec641775a1018912891a578d61d6
+      size: 6512056
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
+      hash: md5
+      md5: a83c7def39bb003658289e857f45e545
+      size: 163452
+    - path: logs/extract/Prez_2022-07-21.log
+      hash: md5
+      md5: c452e7dd807a5655c9520bbfa64460a3
+      size: 943
+  extract@2:
+    cmd: python scripts/extract_normalized_data.py --dataset Dwight_2025-01-07 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
+    deps:
+    - path: 
+        /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-07/
+      hash: md5
+      md5: be8a6424db5894c3970bc3c1cba3702b.dir
+      size: 2391442477
+      nfiles: 5
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
+      hash: md5
+      md5: 8b93ffe2a36e942dfdb5df11fba353a4.dir
+      size: 84526
+      nfiles: 27
+    - path: scripts/extract_normalized_data.py
+      hash: md5
+      md5: 7901d30f07eb739f363e079ea6881886
+      size: 5654
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        extract:
+          bin_size: 10ms
+          min_firing_rate: 0.1
+          max_spike_coincidence: 0.2
+          rate_artifact_threshold: 350
+        logging:
+          loglevel: INFO
+    outs:
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
+      hash: md5
+      md5: ab4dcf9ef9f344154d79e434c5aa2bc8
+      size: 77734512
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
+      hash: md5
+      md5: 72ea541a4cf91b54e2e9b2e7c8e45245
+      size: 16985
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-spikes-binned.parquet
+      hash: md5
+      md5: a19d200539cd91d48203f90064e91450
+      size: 7345949
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
+      hash: md5
+      md5: 7da60759cda7559fe8ba13ab42735334
+      size: 67860
+    - path: logs/extract/Dwight_2025-01-07.log
+      hash: md5
+      md5: 24483692feb7d9a896ffc4b0a3399b6a
+      size: 1702
