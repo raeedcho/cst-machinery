@@ -672,8 +672,8 @@ stages:
       size: 4747
     - path: src/chop_merge.py
       hash: md5
-      md5: 8531dc550be2e4d8f54437d5fc0ec86f
-      size: 6310
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
     - path: src/munge.py
       hash: md5
       md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
@@ -689,8 +689,8 @@ stages:
     outs:
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
-      md5: 23eadf37cfc019c419e104a237f4967d
-      size: 26281374
+      md5: 16efc1f0f5837244faf2a5020ae10632
+      size: 26282443
     - path: logs/prep-lfads-tensors/Prez_2022-07-21_tensors.log
       hash: md5
       md5: bcc36d04ec595554ca07a1e3da454b37
@@ -774,26 +774,28 @@ stages:
       md5: 07f9b181e29c8a8f259c4f774f40aab4
       size: 350
   train_lfads@0:
-    cmd: python scripts/train_lfads.py --dataset 'Prez_2022-07-21' --logdir logs --loglevel
-      INFO --config ../conf/lfads/lfads-torch.yaml
+    cmd: python scripts/train_lfads.py --dataset 'Prez_2022-07-21' --loglevel INFO
+      --config ../conf/lfads/lfads-torch.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
     deps:
     - path: conf/lfads/
       hash: md5
-      md5: 1de98a8e13657f1af1e292dd99c15bdf.dir
-      size: 5725
+      md5: 0f6f6c6a97b97bc78abfcdc7170d2984.dir
+      size: 5723
       nfiles: 8
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
-      md5: f22e2a449d76853efbb4cba8fc43abd7
-      size: 19254083
+      md5: 16efc1f0f5837244faf2a5020ae10632
+      size: 26282443
     - path: scripts/train_lfads.py
       hash: md5
-      md5: 9bc23da3fd51d3261558ff1ecfa1520f
-      size: 4257
+      md5: 703f0dfdc313cc2cc3cc97fed98d3b31
+      size: 4342
     - path: src/lfads_callbacks.py
       hash: md5
-      md5: f1d51c845916be911a53550a8ffc3f28
-      size: 9550
+      md5: f4a3b89cf09e1cc1d2131d755727f150
+      size: 9789
     - path: src/lfads_dvc.py
       hash: md5
       md5: dfe8b4f0ff4095f88b84e99c46570b72
@@ -801,31 +803,30 @@ stages:
     params:
       params.yaml:
         logging:
-          logdir: logs
           loglevel: INFO
         train_lfads:
           config: ../conf/lfads/lfads-torch.yaml
     outs:
     - path: logs/train-lfads/Prez_2022-07-21.log
       hash: md5
-      md5: 31ab50b96ba16eddcd72a43a2af28f45
-      size: 666
+      md5: 4531cf81e77c397448a04c236584ecf8
+      size: 756
     - path: results/lfads/Prez_2022-07-21/dvclive
       hash: md5
-      md5: 6816d0c6407486da32e6de3b98025c47.dir
-      size: 7023312
-      nfiles: 65
+      md5: 85616b6292425dd71416c8a06c6f8318.dir
+      size: 1130226
+      nfiles: 47
     - path: results/lfads/Prez_2022-07-21/lfads_model.pt
       hash: md5
-      md5: 80542030a30693db40ea8736dcc3cfbe
+      md5: 42bb50994763089c8a3db5e3eece518c
       size: 1070222
     - path: results/lfads/Prez_2022-07-21/lfads_output_Prez_2022-07-21_tensors.h5
       hash: md5
-      md5: cad5e15b9fd8f967d3430baa03cac56a
-      size: 495873603
+      md5: 79e04dcd6ed0647a407d7c9ae19dd0df
+      size: 691532363
     - path: results/lfads/Prez_2022-07-21/lightning_checkpoints
       hash: md5
-      md5: fca079f4ddc7b50c67355c71d893fc2f.dir
+      md5: 180b4b8ce6487e8929e30035264d3a92.dir
       size: 6415908
       nfiles: 2
   train_lfads@1:
@@ -940,47 +941,51 @@ stages:
       nfiles: 2
   merge_lfads_outputs@0:
     cmd: python scripts/merge_lfads_outputs.py --dataset Prez_2022-07-21 --overlap
-      20 --trialframe_dir data/trialframe --lfads_dir results/lfads --logdir logs
-      --loglevel INFO
+      20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
     deps:
-    - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
       hash: md5
-      md5: b24ed58b046c38e40f6ccc32a3790160
-      size: 10734307
+      md5: 4b3fec641775a1018912891a578d61d6
+      size: 6512056
     - path: results/lfads/Prez_2022-07-21/lfads_output_Prez_2022-07-21_tensors.h5
       hash: md5
-      md5: cad5e15b9fd8f967d3430baa03cac56a
-      size: 495873603
+      md5: 79e04dcd6ed0647a407d7c9ae19dd0df
+      size: 691532363
     - path: scripts/merge_lfads_outputs.py
       hash: md5
-      md5: 1d27ba9fdf0df35b9eefc2998e0e325f
-      size: 4033
+      md5: e4f7d07d234b0fddf9876584bd91c1bf
+      size: 4043
     - path: src/chop_merge.py
       hash: md5
-      md5: 8531dc550be2e4d8f54437d5fc0ec86f
-      size: 6310
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
     - path: src/munge.py
       hash: md5
       md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
       size: 1155
     params:
       params.yaml:
-        directory_structure:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
           lfads_dir: results/lfads
+          log_dir: logs
         logging:
-          logdir: logs
           loglevel: INFO
         prep_lfads_tensors.overlap: 20
     outs:
-    - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
       hash: md5
-      md5: f59b560b94837fe2a2c7904553f06081
-      size: 294053827
+      md5: 95d13b55fffb0acfc1de46ba88c9998e
+      size: 377830594
     - path: logs/merge-lfads-outputs/Prez_2022-07-21.log
       hash: md5
-      md5: b7990b56564dacf9bd4a9c098b742b59
-      size: 369
+      md5: 8b46336e1636b513f6a8d12a351c9201
+      size: 387
   merge_lfads_outputs@1:
     cmd: python scripts/merge_lfads_outputs.py --dataset Dwight_2025-01-01 --overlap
       20 --trialframe_dir data/trialframe --lfads_dir results/lfads --logdir logs
@@ -1185,8 +1190,8 @@ stages:
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 7901d30f07eb739f363e079ea6881886
-      size: 5654
+      md5: 5e9458cc543d0bfa46d203acb7318db3
+      size: 5669
     params:
       params.yaml:
         dir_structure:

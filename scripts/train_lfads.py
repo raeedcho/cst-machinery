@@ -27,7 +27,7 @@ def main(args):
     if not run_dir.exists():
         run_dir.mkdir(parents=True, exist_ok=True)
 
-    log_dir = Path(args.logdir) / 'train-lfads'
+    log_dir = Path(args.log_dir) / 'train-lfads'
     if not log_dir.exists():
         log_dir.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
@@ -124,7 +124,7 @@ if __name__ == "__main__":
         default='Prez_2022-07-21',
     )
     parser.add_argument(
-        '--logdir',
+        '--log_dir',
         type=str,
         help='Logging directory',
         default='logs/',
@@ -137,5 +137,5 @@ if __name__ == "__main__":
         choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
     )
 
-    args = parser.parse_args()
+    args,_ = parser.parse_known_args()
     main(args)

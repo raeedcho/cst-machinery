@@ -17,6 +17,7 @@
                 "--trialframe_dir", "data/trialframe",
                 "--log_dir", "logs",
                 "--loglevel", "DEBUG",
+                "--overlap", "20",
             ]
         },
         {

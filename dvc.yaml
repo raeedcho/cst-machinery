@@ -39,7 +39,7 @@ stages:
   train_lfads:
     foreach: ${lfads_sessions}
     do:
-      frozen: true
+      # frozen: true
       cmd: python scripts/train_lfads.py
         --dataset '${item.monkey}_${item.date}'
         ${logging} ${train_lfads} ${dir_structure}
@@ -70,7 +70,7 @@ stages:
       - scripts/merge_lfads_outputs.py
       - src/chop_merge.py
       - src/munge.py
-      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-binned-spikes.parquet
+      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
       - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
       outs:
       - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-lfads-rates.parquet

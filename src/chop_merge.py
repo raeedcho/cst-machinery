@@ -184,16 +184,14 @@ def chops_to_frame(chops: pd.Series, orig_frame: pd.DataFrame, overlap: int, smo
                     np.stack(trial_chops.values), # type: ignore
                     overlap=overlap,
                     smooth_pwr=2,
-                    orig_len=orig_frame.loc[trial_id].shape[0],
+                    orig_len=orig_frame.groupby('trial_id').get_group(trial_id).shape[0],
                 ),
                 columns=orig_frame.columns,
-                index=orig_frame.loc[trial_id].index,
+                index=orig_frame.groupby('trial_id').get_group(trial_id).index,
             )
             for trial_id,trial_chops in chops.groupby('trial_id')
         ],
         axis=0,
-        keys=[trial_id for trial_id, _ in chops.groupby('trial_id')],
-        names=orig_frame.index.names,
     )
 
     return merged_chops
