@@ -3,30 +3,39 @@ dir_structure:
   trialframe_dir: data/trialframe
   lfads_dir: results/lfads
   log_dir: logs
+
 logging:
   loglevel: INFO
-monkey_sessions:
+
+datasets:
 - monkey: Prez
   date: '2022-07-21'
+  dataset_name: Prez_2022-07-21
 - monkey: Dwight
   date: '2025-01-01'
+  dataset_name: Dwight_2025-01-01
 - monkey: Dwight
   date: '2025-01-07'
-# - monkey: Sulley
-#   date: '2025-05-06'
-lfads_datasets:
-- 'Prez_2022-07-21'
-- 'Dwight_2025-01-01'
-- 'Dwight_2025-01-07'
-# - 'Sulley_2025-05-06'
+  dataset_name: Dwight_2025-01-07
+- monkey: Sulley
+  date: '2025-05-06'
+  dataset_name: Sulley_2025-05-06
+
 extract:
   bin_size: 10ms
   min_firing_rate: 0.1
   max_spike_coincidence: 0.2
   rate_artifact_threshold: 350
+
+smooth_firing_rates:
+  window_len: 60
+  overlap: 20
+  group_split: true
+
 prep_lfads_tensors:
   window_len: 60
   overlap: 20
-  group_split: false
+  group_split: true
+
 train_lfads:
   config: ../conf/lfads/lfads-torch.yaml

@@ -12,7 +12,7 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "--dataset", "Prez_2022-07-21",
+                "--dataset", "Sulley_2025-05-06",
                 "--raw_data_dir", "/Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format",
                 "--trialframe_dir", "data/trialframe",
                 "--log_dir", "logs",

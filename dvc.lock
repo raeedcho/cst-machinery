@@ -1133,8 +1133,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 8b93ffe2a36e942dfdb5df11fba353a4.dir
-      size: 84526
+      md5: 72588543888d7772eccb70498c9997bb.dir
+      size: 84594
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -1191,8 +1191,8 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 8b93ffe2a36e942dfdb5df11fba353a4.dir
-      size: 84526
+      md5: 72588543888d7772eccb70498c9997bb.dir
+      size: 84594
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -1249,8 +1249,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 8b93ffe2a36e942dfdb5df11fba353a4.dir
-      size: 84526
+      md5: 72588543888d7772eccb70498c9997bb.dir
+      size: 84594
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -1420,8 +1420,8 @@ stages:
     deps:
     - path: conf/lfads/
       hash: md5
-      md5: 0f6f6c6a97b97bc78abfcdc7170d2984.dir
-      size: 5723
+      md5: 1de98a8e13657f1af1e292dd99c15bdf.dir
+      size: 5725
       nfiles: 8
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
@@ -1448,24 +1448,24 @@ stages:
     outs:
     - path: logs/train-lfads/Prez_2022-07-21.log
       hash: md5
-      md5: 4531cf81e77c397448a04c236584ecf8
-      size: 756
+      md5: 31ab50b96ba16eddcd72a43a2af28f45
+      size: 666
     - path: results/lfads/Prez_2022-07-21/dvclive
       hash: md5
-      md5: f78c77cedc19210dff7c1bb1cb287f88.dir
-      size: 1130226
-      nfiles: 47
+      md5: 55ec1d32676e9209acf97943453a41ac.dir
+      size: 7217912
+      nfiles: 65
     - path: results/lfads/Prez_2022-07-21/lfads_model.pt
       hash: md5
-      md5: 42bb50994763089c8a3db5e3eece518c
+      md5: deab66283b5ca644532fac084eae67ac
       size: 1070222
     - path: results/lfads/Prez_2022-07-21/lfads_output_Prez_2022-07-21_tensors.h5
       hash: md5
-      md5: 79e04dcd6ed0647a407d7c9ae19dd0df
+      md5: d976fd190856e63e35b5bf071590fdf7
       size: 691532363
     - path: results/lfads/Prez_2022-07-21/lightning_checkpoints
       hash: md5
-      md5: 180b4b8ce6487e8929e30035264d3a92.dir
+      md5: 5a2e800d985a6fcc8041a929f3aa0e4e.dir
       size: 6415908
       nfiles: 2
   train_lfads@Dwight_2025-01-01:
@@ -1721,3 +1721,241 @@ stages:
       hash: md5
       md5: 5b4ce146fe09ae2509115fdd319f6a48
       size: 399
+  extract@3:
+    cmd: python scripts/extract_normalized_data.py --dataset Sulley_2025-05-06 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
+      350
+    deps:
+    - path: 
+        /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Sulley/2025-05-06/
+      hash: md5
+      md5: ce26cfeda35d267b8a9fb6154dbd9c66.dir
+      size: 1080578509
+      nfiles: 6
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
+      hash: md5
+      md5: 72588543888d7772eccb70498c9997bb.dir
+      size: 84594
+      nfiles: 27
+    - path: scripts/extract_normalized_data.py
+      hash: md5
+      md5: 5e9458cc543d0bfa46d203acb7318db3
+      size: 5669
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        extract:
+          bin_size: 10ms
+          min_firing_rate: 0.1
+          max_spike_coincidence: 0.2
+          rate_artifact_threshold: 350
+        logging:
+          loglevel: INFO
+    outs:
+    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_hand-pos.parquet
+      hash: md5
+      md5: 8cd86eacdbdbd82c62af966aebcbb85f
+      size: 1228396
+    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_meta.parquet
+      hash: md5
+      md5: 97e9c126e2b433cb8683fcd8369d713c
+      size: 10240
+    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-spikes-binned.parquet
+      hash: md5
+      md5: e8f887f743cea415baaf9bb680efb45d
+      size: 2342766
+    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_states.parquet
+      hash: md5
+      md5: 8559cad15c62298ccb325174aa1421a1
+      size: 51864
+    - path: logs/extract/Sulley_2025-05-06.log
+      hash: md5
+      md5: 2492af094ea9cb404c9d964f25c171ba
+      size: 962
+  smooth_firing_rates@0:
+    cmd: python scripts/smooth_firing_rates.py --dataset Prez_2022-07-21 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
+      hash: md5
+      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
+      size: 2819
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
+      hash: md5
+      md5: 4b3fec641775a1018912891a578d61d6
+      size: 6512056
+    - path: scripts/smooth_firing_rates.py
+      hash: md5
+      md5: 315a5ab685748e239c0c943bd312f187
+      size: 2535
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+        smooth_firing_rates:
+          window_len: 60
+          overlap: 20
+          group_split: true
+    outs:
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
+      hash: md5
+      md5: b616c9a41aa4669a3bc6f391e5518e42
+      size: 319419540
+    - path: logs/smooth-firing-rates/Prez_2022-07-21.log
+      hash: md5
+      md5: d3d2109b3837c8e1fa77c50322c95b36
+      size: 222
+  smooth_firing_rates@3:
+    cmd: python scripts/smooth_firing_rates.py --dataset Sulley_2025-05-06 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
+      hash: md5
+      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
+      size: 2819
+    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-spikes-binned.parquet
+      hash: md5
+      md5: e8f887f743cea415baaf9bb680efb45d
+      size: 2342766
+    - path: scripts/smooth_firing_rates.py
+      hash: md5
+      md5: 315a5ab685748e239c0c943bd312f187
+      size: 2535
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+        smooth_firing_rates:
+          window_len: 60
+          overlap: 20
+          group_split: true
+    outs:
+    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-smooth-rates.parquet
+      hash: md5
+      md5: b35a2aba7674158fc5cc52c33c785b37
+      size: 125078727
+    - path: logs/smooth-firing-rates/Sulley_2025-05-06.log
+      hash: md5
+      md5: 127a1669e66ef125400242fef86350f9
+      size: 230
+  smooth_firing_rates@2:
+    cmd: python scripts/smooth_firing_rates.py --dataset Dwight_2025-01-07 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
+      hash: md5
+      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
+      size: 2819
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-spikes-binned.parquet
+      hash: md5
+      md5: a19d200539cd91d48203f90064e91450
+      size: 7345949
+    - path: scripts/smooth_firing_rates.py
+      hash: md5
+      md5: 315a5ab685748e239c0c943bd312f187
+      size: 2535
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+        smooth_firing_rates:
+          window_len: 60
+          overlap: 20
+          group_split: true
+    outs:
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
+      hash: md5
+      md5: 0c867b7f8707094728ad4c2dc06fe3f7
+      size: 330905378
+    - path: logs/smooth-firing-rates/Dwight_2025-01-07.log
+      hash: md5
+      md5: 63c00e4d40ccf73f62483be273d0b43a
+      size: 230
+  smooth_firing_rates@1:
+    cmd: python scripts/smooth_firing_rates.py --dataset Dwight_2025-01-01 --raw_data_dir
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
+      hash: md5
+      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
+      size: 2819
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
+      hash: md5
+      md5: ba161a5f8dc88fb94a6d2e9109f3b949
+      size: 10219040
+    - path: scripts/smooth_firing_rates.py
+      hash: md5
+      md5: 315a5ab685748e239c0c943bd312f187
+      size: 2535
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+        smooth_firing_rates:
+          window_len: 60
+          overlap: 20
+          group_split: true
+    outs:
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
+      hash: md5
+      md5: 913ef56c8cb4bd74e9ce6bdedf62c6c8
+      size: 443628518
+    - path: logs/smooth-firing-rates/Dwight_2025-01-01.log
+      hash: md5
+      md5: 424e81aed5b829dac4028ba60eb27ebb
+      size: 230

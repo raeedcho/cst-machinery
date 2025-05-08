@@ -1,8 +1,8 @@
 stages:
   extract:
-    foreach: ${monkey_sessions}
+    foreach: ${datasets}
     do:
-      cmd: python scripts/extract_normalized_data.py --dataset ${item.monkey}_${item.date} ${dir_structure} ${logging} ${extract}
+      cmd: python scripts/extract_normalized_data.py --dataset ${item.dataset_name} ${dir_structure} ${logging} ${extract}
       params:
       - extract
       - logging
@@ -12,18 +12,34 @@ stages:
       - ${dir_structure.raw_data_dir}/${item.monkey}/${item.date}/
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       outs:
-      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_meta.parquet
-      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_states.parquet
-      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_hand-pos.parquet
-      - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
-      - ${dir_structure.log_dir}/extract/${item.monkey}_${item.date}.log
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
+      - ${dir_structure.log_dir}/extract/${item.dataset_name}.log
+  smooth_firing_rates:
+    foreach: ${datasets}
+    do:
+      cmd: python scripts/smooth_firing_rates.py --dataset ${item.dataset_name} ${dir_structure} ${logging}
+      params:
+      - logging
+      - dir_structure
+      - smooth_firing_rates
+      deps:
+      - scripts/smooth_firing_rates.py
+      - src/munge.py
+      - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
+      outs:
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-smooth-rates.parquet
+      - ${dir_structure.log_dir}/smooth-firing-rates/${item.dataset_name}.log
   prep_lfads_tensors:
-    foreach: ${lfads_datasets}
+    foreach: ${datasets}
     do:
       cmd: python scripts/prep_lfads_tensors.py 
-        data/trialframe/${item}/${item}_neural-spikes-binned.parquet
-        --out data/pre-lfads-tensors/${item}_tensors.hdf5
-        --info_path conf/lfads/dataset_info/${item}.yaml
+        data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
+        --out data/pre-lfads-tensors/${item.dataset_name}_tensors.hdf5
+        --info_path conf/lfads/dataset_info/${item.dataset_name}.yaml
         ${logging} ${prep_lfads_tensors} ${dir_structure}
       params:
       - prep_lfads_tensors
@@ -32,16 +48,16 @@ stages:
       - scripts/prep_lfads_tensors.py
       - src/munge.py
       - src/chop_merge.py
-      - data/trialframe/${item}/${item}_neural-spikes-binned.parquet
+      - data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
       outs:
-      - data/pre-lfads-tensors/${item}_tensors.hdf5
-      - ${dir_structure.log_dir}/prep-lfads-tensors/${item}_tensors.log
+      - data/pre-lfads-tensors/${item.dataset_name}_tensors.hdf5
+      - ${dir_structure.log_dir}/prep-lfads-tensors/${item.dataset_name}_tensors.log
   train_lfads:
-    foreach: ${lfads_datasets}
+    foreach: ${datasets}
     do:
       # frozen: true
       cmd: python scripts/train_lfads.py
-        --dataset ${item}
+        --dataset ${item.dataset_name}
         ${logging} ${train_lfads} ${dir_structure}
       params:
       - train_lfads
@@ -50,18 +66,18 @@ stages:
       - scripts/train_lfads.py
       - src/lfads_dvc.py
       - src/lfads_callbacks.py
-      - data/pre-lfads-tensors/${item}_tensors.hdf5
+      - data/pre-lfads-tensors/${item.dataset_name}_tensors.hdf5
       - conf/lfads/
       outs:
-      - ${dir_structure.log_dir}/train-lfads/${item}.log
-      - results/lfads/${item}/lightning_checkpoints
-      - results/lfads/${item}/dvclive
-      - results/lfads/${item}/lfads_model.pt
-      - results/lfads/${item}/lfads_output_${item}_tensors.h5
+      - ${dir_structure.log_dir}/train-lfads/${item.dataset_name}.log
+      - results/lfads/${item.dataset_name}/lightning_checkpoints
+      - results/lfads/${item.dataset_name}/dvclive
+      - results/lfads/${item.dataset_name}/lfads_model.pt
+      - results/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
   merge_lfads_outputs:
-    foreach: ${lfads_datasets}
+    foreach: ${datasets}
     do:
-      cmd: python scripts/merge_lfads_outputs.py --dataset ${item} --overlap ${prep_lfads_tensors.overlap} ${dir_structure} ${logging}
+      cmd: python scripts/merge_lfads_outputs.py --dataset ${item.dataset_name} --overlap ${prep_lfads_tensors.overlap} ${dir_structure} ${logging}
       params:
       - dir_structure
       - logging
@@ -70,11 +86,11 @@ stages:
       - scripts/merge_lfads_outputs.py
       - src/chop_merge.py
       - src/munge.py
-      - data/trialframe/${item}/${item}_neural-spikes-binned.parquet
-      - results/lfads/${item}/lfads_output_${item}_tensors.h5
+      - data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
+      - results/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
       outs:
-      - data/trialframe/${item}/${item}_neural-lfads-rates.parquet
-      - ${dir_structure.log_dir}/merge-lfads-outputs/${item}.log
+      - data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
+      - ${dir_structure.log_dir}/merge-lfads-outputs/${item.dataset_name}.log
 #   context_axis:
 #     foreach: ${monkey_sessions}
 #     do:
