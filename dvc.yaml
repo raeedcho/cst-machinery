@@ -18,12 +18,12 @@ stages:
       - ${dir_structure.trialframe_dir}/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
       - ${dir_structure.log_dir}/extract/${item.monkey}_${item.date}.log
   prep_lfads_tensors:
-    foreach: ${monkey_sessions}
+    foreach: ${lfads_datasets}
     do:
       cmd: python scripts/prep_lfads_tensors.py 
-        data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
-        --out data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
-        --info_path conf/lfads/dataset_info/${item.monkey}_${item.date}.yaml
+        data/trialframe/${item}/${item}_neural-spikes-binned.parquet
+        --out data/pre-lfads-tensors/${item}_tensors.hdf5
+        --info_path conf/lfads/dataset_info/${item}.yaml
         ${logging} ${prep_lfads_tensors} ${dir_structure}
       params:
       - prep_lfads_tensors
@@ -32,16 +32,16 @@ stages:
       - scripts/prep_lfads_tensors.py
       - src/munge.py
       - src/chop_merge.py
-      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
+      - data/trialframe/${item}/${item}_neural-spikes-binned.parquet
       outs:
-      - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
-      - ${dir_structure.log_dir}/prep-lfads-tensors/${item.monkey}_${item.date}_tensors.log
+      - data/pre-lfads-tensors/${item}_tensors.hdf5
+      - ${dir_structure.log_dir}/prep-lfads-tensors/${item}_tensors.log
   train_lfads:
-    foreach: ${lfads_sessions}
+    foreach: ${lfads_datasets}
     do:
       # frozen: true
       cmd: python scripts/train_lfads.py
-        --dataset '${item.monkey}_${item.date}'
+        --dataset ${item}
         ${logging} ${train_lfads} ${dir_structure}
       params:
       - train_lfads
@@ -50,18 +50,18 @@ stages:
       - scripts/train_lfads.py
       - src/lfads_dvc.py
       - src/lfads_callbacks.py
-      - data/pre-lfads-tensors/${item.monkey}_${item.date}_tensors.hdf5
+      - data/pre-lfads-tensors/${item}_tensors.hdf5
       - conf/lfads/
       outs:
-      - ${dir_structure.log_dir}/train-lfads/${item.monkey}_${item.date}.log
-      - results/lfads/${item.monkey}_${item.date}/lightning_checkpoints
-      - results/lfads/${item.monkey}_${item.date}/dvclive
-      - results/lfads/${item.monkey}_${item.date}/lfads_model.pt
-      - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
+      - ${dir_structure.log_dir}/train-lfads/${item}.log
+      - results/lfads/${item}/lightning_checkpoints
+      - results/lfads/${item}/dvclive
+      - results/lfads/${item}/lfads_model.pt
+      - results/lfads/${item}/lfads_output_${item}_tensors.h5
   merge_lfads_outputs:
-    foreach: ${lfads_sessions}
+    foreach: ${lfads_datasets}
     do:
-      cmd: python scripts/merge_lfads_outputs.py --dataset ${item.monkey}_${item.date} --overlap ${prep_lfads_tensors.overlap} ${dir_structure} ${logging}
+      cmd: python scripts/merge_lfads_outputs.py --dataset ${item} --overlap ${prep_lfads_tensors.overlap} ${dir_structure} ${logging}
       params:
       - dir_structure
       - logging
@@ -70,11 +70,11 @@ stages:
       - scripts/merge_lfads_outputs.py
       - src/chop_merge.py
       - src/munge.py
-      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-spikes-binned.parquet
-      - results/lfads/${item.monkey}_${item.date}/lfads_output_${item.monkey}_${item.date}_tensors.h5
+      - data/trialframe/${item}/${item}_neural-spikes-binned.parquet
+      - results/lfads/${item}/lfads_output_${item}_tensors.h5
       outs:
-      - data/trialframe/${item.monkey}_${item.date}/${item.monkey}_${item.date}_neural-lfads-rates.parquet
-      - ${dir_structure.log_dir}/merge-lfads-outputs/${item.monkey}_${item.date}.log
+      - data/trialframe/${item}/${item}_neural-lfads-rates.parquet
+      - ${dir_structure.log_dir}/merge-lfads-outputs/${item}.log
 #   context_axis:
 #     foreach: ${monkey_sessions}
 #     do:

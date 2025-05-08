@@ -696,22 +696,24 @@ stages:
       md5: bcc36d04ec595554ca07a1e3da454b37
       size: 360
   prep_lfads_tensors@1:
-    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
+    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
       --out data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5 --info_path conf/lfads/dataset_info/Dwight_2025-01-01.yaml
-      --logdir logs --loglevel INFO --window_len 60 --overlap 20
+      --loglevel INFO --window_len 60 --overlap 20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
     deps:
-    - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
       hash: md5
-      md5: 97f29fe64d7fd15684daa34951709b1d
-      size: 16852444
+      md5: ba161a5f8dc88fb94a6d2e9109f3b949
+      size: 10219040
     - path: scripts/prep_lfads_tensors.py
       hash: md5
-      md5: 44159b8c7b8a466066a958f79219484e
-      size: 4731
+      md5: bf25093776a3d85fa36356dde16a0083
+      size: 4747
     - path: src/chop_merge.py
       hash: md5
-      md5: 8531dc550be2e4d8f54437d5fc0ec86f
-      size: 6310
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
     - path: src/munge.py
       hash: md5
       md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
@@ -719,7 +721,6 @@ stages:
     params:
       params.yaml:
         logging:
-          logdir: logs
           loglevel: INFO
         prep_lfads_tensors:
           window_len: 60
@@ -728,12 +729,12 @@ stages:
     outs:
     - path: data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5
       hash: md5
-      md5: 10d7621f957e59f6aa4dc6e1b0b46ea6
-      size: 28999157
+      md5: 5244af5369de6a734655b0b590a04eb9
+      size: 37782569
     - path: logs/prep-lfads-tensors/Dwight_2025-01-01_tensors.log
       hash: md5
-      md5: c3fe249c960e4b001067bb77c669ae7f
-      size: 350
+      md5: 4f617f28a6a709db76cd1b33b125dc15
+      size: 370
   prep_lfads_tensors@2:
     cmd: python scripts/prep_lfads_tensors.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
       --out data/pre-lfads-tensors/Dwight_2025-01-07_tensors.hdf5 --info_path conf/lfads/dataset_info/Dwight_2025-01-07.yaml
@@ -830,26 +831,28 @@ stages:
       size: 6415908
       nfiles: 2
   train_lfads@1:
-    cmd: python scripts/train_lfads.py --dataset 'Dwight_2025-01-01' --logdir logs
-      --loglevel INFO --config ../conf/lfads/lfads-torch.yaml
+    cmd: python scripts/train_lfads.py --dataset 'Dwight_2025-01-01' --loglevel INFO
+      --config ../conf/lfads/lfads-torch.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
     deps:
     - path: conf/lfads/
       hash: md5
-      md5: 1de98a8e13657f1af1e292dd99c15bdf.dir
-      size: 5725
+      md5: 0f6f6c6a97b97bc78abfcdc7170d2984.dir
+      size: 5723
       nfiles: 8
     - path: data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5
       hash: md5
-      md5: d011e4f07593e47cee90fce63b24a200
-      size: 29002284
+      md5: 5244af5369de6a734655b0b590a04eb9
+      size: 37782569
     - path: scripts/train_lfads.py
       hash: md5
-      md5: 9bc23da3fd51d3261558ff1ecfa1520f
-      size: 4257
+      md5: 703f0dfdc313cc2cc3cc97fed98d3b31
+      size: 4342
     - path: src/lfads_callbacks.py
       hash: md5
-      md5: f1d51c845916be911a53550a8ffc3f28
-      size: 9550
+      md5: f4a3b89cf09e1cc1d2131d755727f150
+      size: 9789
     - path: src/lfads_dvc.py
       hash: md5
       md5: dfe8b4f0ff4095f88b84e99c46570b72
@@ -857,31 +860,30 @@ stages:
     params:
       params.yaml:
         logging:
-          logdir: logs
           loglevel: INFO
         train_lfads:
           config: ../conf/lfads/lfads-torch.yaml
     outs:
     - path: logs/train-lfads/Dwight_2025-01-01.log
       hash: md5
-      md5: b524ea468a3b169a6711575d27a8a26f
-      size: 668
+      md5: 636cad3802a4d3a4a683493b2d7e63ff
+      size: 758
     - path: results/lfads/Dwight_2025-01-01/dvclive
       hash: md5
-      md5: f176982770f0ac683896b834f851bab8.dir
-      size: 5012495
-      nfiles: 59
+      md5: df3929d17b18f76cc0e18d83678ce7c7.dir
+      size: 1070473
+      nfiles: 47
     - path: results/lfads/Dwight_2025-01-01/lfads_model.pt
       hash: md5
-      md5: 5c8d2b0c8fbdcc5f99863027f6f954e0
+      md5: de7410b7ef05209b8da5ef479f984d4a
       size: 1003534
     - path: results/lfads/Dwight_2025-01-01/lfads_output_Dwight_2025-01-01_tensors.h5
       hash: md5
-      md5: f4c63cb32f11257bc9535f01965c3708
-      size: 715218604
+      md5: 3420ecd1a6434e5569a6c8a09c07e270
+      size: 927699849
     - path: results/lfads/Dwight_2025-01-01/lightning_checkpoints
       hash: md5
-      md5: 32323671b8121265f2a9a56988417e81.dir
+      md5: b6575299d38c0bba2ce05234c013615a.dir
       size: 6015780
       nfiles: 2
   train_lfads@2:
@@ -988,47 +990,51 @@ stages:
       size: 387
   merge_lfads_outputs@1:
     cmd: python scripts/merge_lfads_outputs.py --dataset Dwight_2025-01-01 --overlap
-      20 --trialframe_dir data/trialframe --lfads_dir results/lfads --logdir logs
-      --loglevel INFO
+      20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
     deps:
-    - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
       hash: md5
-      md5: 97f29fe64d7fd15684daa34951709b1d
-      size: 16852444
+      md5: ba161a5f8dc88fb94a6d2e9109f3b949
+      size: 10219040
     - path: results/lfads/Dwight_2025-01-01/lfads_output_Dwight_2025-01-01_tensors.h5
       hash: md5
-      md5: f4c63cb32f11257bc9535f01965c3708
-      size: 715218604
+      md5: 3420ecd1a6434e5569a6c8a09c07e270
+      size: 927699849
     - path: scripts/merge_lfads_outputs.py
       hash: md5
-      md5: 1d27ba9fdf0df35b9eefc2998e0e325f
-      size: 4033
+      md5: e4f7d07d234b0fddf9876584bd91c1bf
+      size: 4043
     - path: src/chop_merge.py
       hash: md5
-      md5: 8531dc550be2e4d8f54437d5fc0ec86f
-      size: 6310
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
     - path: src/munge.py
       hash: md5
       md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
       size: 1155
     params:
       params.yaml:
-        directory_structure:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
           lfads_dir: results/lfads
+          log_dir: logs
         logging:
-          logdir: logs
           loglevel: INFO
         prep_lfads_tensors.overlap: 20
     outs:
-    - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
       hash: md5
-      md5: 46398b990d966e0220e807f24de01e34
-      size: 335904969
+      md5: ce41db7e88edc5c428aec2f9c5715c57
+      size: 417909603
     - path: logs/merge-lfads-outputs/Dwight_2025-01-01.log
       hash: md5
-      md5: 78ac0fdc84fced5bd22a50b777064ab8
-      size: 381
+      md5: f7ed592fecc8e6c11d8a974b49bc2689
+      size: 399
   merge_lfads_outputs@2:
     cmd: python scripts/merge_lfads_outputs.py --dataset Dwight_2025-01-07 --overlap
       20 --trialframe_dir data/trialframe --lfads_dir results/lfads --logdir logs
@@ -1132,8 +1138,8 @@ stages:
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 7901d30f07eb739f363e079ea6881886
-      size: 5654
+      md5: 5e9458cc543d0bfa46d203acb7318db3
+      size: 5669
     params:
       params.yaml:
         dir_structure:
@@ -1248,8 +1254,8 @@ stages:
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 7901d30f07eb739f363e079ea6881886
-      size: 5654
+      md5: 5e9458cc543d0bfa46d203acb7318db3
+      size: 5669
     params:
       params.yaml:
         dir_structure:
@@ -1286,3 +1292,432 @@ stages:
       hash: md5
       md5: 24483692feb7d9a896ffc4b0a3399b6a
       size: 1702
+  prep_lfads_tensors@Prez_2022-07-21:
+    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
+      --out data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5 --info_path conf/lfads/dataset_info/Prez_2022-07-21.yaml
+      --loglevel INFO --window_len 60 --overlap 20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
+    deps:
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
+      hash: md5
+      md5: 4b3fec641775a1018912891a578d61d6
+      size: 6512056
+    - path: scripts/prep_lfads_tensors.py
+      hash: md5
+      md5: bf25093776a3d85fa36356dde16a0083
+      size: 4747
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors:
+          window_len: 60
+          overlap: 20
+          group_split: false
+    outs:
+    - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
+      hash: md5
+      md5: 16efc1f0f5837244faf2a5020ae10632
+      size: 26282443
+    - path: logs/prep-lfads-tensors/Prez_2022-07-21_tensors.log
+      hash: md5
+      md5: bcc36d04ec595554ca07a1e3da454b37
+      size: 360
+  prep_lfads_tensors@Dwight_2025-01-01:
+    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
+      --out data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5 --info_path conf/lfads/dataset_info/Dwight_2025-01-01.yaml
+      --loglevel INFO --window_len 60 --overlap 20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
+    deps:
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
+      hash: md5
+      md5: ba161a5f8dc88fb94a6d2e9109f3b949
+      size: 10219040
+    - path: scripts/prep_lfads_tensors.py
+      hash: md5
+      md5: bf25093776a3d85fa36356dde16a0083
+      size: 4747
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors:
+          window_len: 60
+          overlap: 20
+          group_split: false
+    outs:
+    - path: data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5
+      hash: md5
+      md5: 5244af5369de6a734655b0b590a04eb9
+      size: 37782569
+    - path: logs/prep-lfads-tensors/Dwight_2025-01-01_tensors.log
+      hash: md5
+      md5: 4f617f28a6a709db76cd1b33b125dc15
+      size: 370
+  prep_lfads_tensors@Dwight_2025-01-07:
+    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-spikes-binned.parquet
+      --out data/pre-lfads-tensors/Dwight_2025-01-07_tensors.hdf5 --info_path conf/lfads/dataset_info/Dwight_2025-01-07.yaml
+      --loglevel INFO --window_len 60 --overlap 20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
+    deps:
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-spikes-binned.parquet
+      hash: md5
+      md5: a19d200539cd91d48203f90064e91450
+      size: 7345949
+    - path: scripts/prep_lfads_tensors.py
+      hash: md5
+      md5: bf25093776a3d85fa36356dde16a0083
+      size: 4747
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors:
+          window_len: 60
+          overlap: 20
+          group_split: false
+    outs:
+    - path: data/pre-lfads-tensors/Dwight_2025-01-07_tensors.hdf5
+      hash: md5
+      md5: ce832a56da36323a54aad15cf569ef51
+      size: 27664836
+    - path: logs/prep-lfads-tensors/Dwight_2025-01-07_tensors.log
+      hash: md5
+      md5: 4cdece84bad0a6957c7d6aeb17f6f226
+      size: 368
+  train_lfads@Prez_2022-07-21:
+    cmd: python scripts/train_lfads.py --dataset Prez_2022-07-21 --loglevel INFO --config
+      ../conf/lfads/lfads-torch.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
+    deps:
+    - path: conf/lfads/
+      hash: md5
+      md5: 0f6f6c6a97b97bc78abfcdc7170d2984.dir
+      size: 5723
+      nfiles: 8
+    - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
+      hash: md5
+      md5: 16efc1f0f5837244faf2a5020ae10632
+      size: 26282443
+    - path: scripts/train_lfads.py
+      hash: md5
+      md5: 703f0dfdc313cc2cc3cc97fed98d3b31
+      size: 4342
+    - path: src/lfads_callbacks.py
+      hash: md5
+      md5: f4a3b89cf09e1cc1d2131d755727f150
+      size: 9789
+    - path: src/lfads_dvc.py
+      hash: md5
+      md5: dfe8b4f0ff4095f88b84e99c46570b72
+      size: 1299
+    params:
+      params.yaml:
+        logging:
+          loglevel: INFO
+        train_lfads:
+          config: ../conf/lfads/lfads-torch.yaml
+    outs:
+    - path: logs/train-lfads/Prez_2022-07-21.log
+      hash: md5
+      md5: 4531cf81e77c397448a04c236584ecf8
+      size: 756
+    - path: results/lfads/Prez_2022-07-21/dvclive
+      hash: md5
+      md5: f78c77cedc19210dff7c1bb1cb287f88.dir
+      size: 1130226
+      nfiles: 47
+    - path: results/lfads/Prez_2022-07-21/lfads_model.pt
+      hash: md5
+      md5: 42bb50994763089c8a3db5e3eece518c
+      size: 1070222
+    - path: results/lfads/Prez_2022-07-21/lfads_output_Prez_2022-07-21_tensors.h5
+      hash: md5
+      md5: 79e04dcd6ed0647a407d7c9ae19dd0df
+      size: 691532363
+    - path: results/lfads/Prez_2022-07-21/lightning_checkpoints
+      hash: md5
+      md5: 180b4b8ce6487e8929e30035264d3a92.dir
+      size: 6415908
+      nfiles: 2
+  train_lfads@Dwight_2025-01-01:
+    cmd: python scripts/train_lfads.py --dataset Dwight_2025-01-01 --loglevel INFO
+      --config ../conf/lfads/lfads-torch.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
+    deps:
+    - path: conf/lfads/
+      hash: md5
+      md5: 0f6f6c6a97b97bc78abfcdc7170d2984.dir
+      size: 5723
+      nfiles: 8
+    - path: data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5
+      hash: md5
+      md5: 5244af5369de6a734655b0b590a04eb9
+      size: 37782569
+    - path: scripts/train_lfads.py
+      hash: md5
+      md5: 703f0dfdc313cc2cc3cc97fed98d3b31
+      size: 4342
+    - path: src/lfads_callbacks.py
+      hash: md5
+      md5: f4a3b89cf09e1cc1d2131d755727f150
+      size: 9789
+    - path: src/lfads_dvc.py
+      hash: md5
+      md5: dfe8b4f0ff4095f88b84e99c46570b72
+      size: 1299
+    params:
+      params.yaml:
+        logging:
+          loglevel: INFO
+        train_lfads:
+          config: ../conf/lfads/lfads-torch.yaml
+    outs:
+    - path: logs/train-lfads/Dwight_2025-01-01.log
+      hash: md5
+      md5: 636cad3802a4d3a4a683493b2d7e63ff
+      size: 758
+    - path: results/lfads/Dwight_2025-01-01/dvclive
+      hash: md5
+      md5: e954c46ec3418deb44092c46e1c2f302.dir
+      size: 1070473
+      nfiles: 47
+    - path: results/lfads/Dwight_2025-01-01/lfads_model.pt
+      hash: md5
+      md5: de7410b7ef05209b8da5ef479f984d4a
+      size: 1003534
+    - path: results/lfads/Dwight_2025-01-01/lfads_output_Dwight_2025-01-01_tensors.h5
+      hash: md5
+      md5: 3420ecd1a6434e5569a6c8a09c07e270
+      size: 927699849
+    - path: results/lfads/Dwight_2025-01-01/lightning_checkpoints
+      hash: md5
+      md5: b6575299d38c0bba2ce05234c013615a.dir
+      size: 6015780
+      nfiles: 2
+  train_lfads@Dwight_2025-01-07:
+    cmd: python scripts/train_lfads.py --dataset Dwight_2025-01-07 --loglevel INFO
+      --config ../conf/lfads/lfads-torch.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs
+    deps:
+    - path: conf/lfads/
+      hash: md5
+      md5: 0f6f6c6a97b97bc78abfcdc7170d2984.dir
+      size: 5723
+      nfiles: 8
+    - path: data/pre-lfads-tensors/Dwight_2025-01-07_tensors.hdf5
+      hash: md5
+      md5: ce832a56da36323a54aad15cf569ef51
+      size: 27664836
+    - path: scripts/train_lfads.py
+      hash: md5
+      md5: 703f0dfdc313cc2cc3cc97fed98d3b31
+      size: 4342
+    - path: src/lfads_callbacks.py
+      hash: md5
+      md5: f4a3b89cf09e1cc1d2131d755727f150
+      size: 9789
+    - path: src/lfads_dvc.py
+      hash: md5
+      md5: dfe8b4f0ff4095f88b84e99c46570b72
+      size: 1299
+    params:
+      params.yaml:
+        logging:
+          loglevel: INFO
+        train_lfads:
+          config: ../conf/lfads/lfads-torch.yaml
+    outs:
+    - path: logs/train-lfads/Dwight_2025-01-07.log
+      hash: md5
+      md5: 97c4be14ed4a3b71f0fc149355527852
+      size: 758
+    - path: results/lfads/Dwight_2025-01-07/dvclive
+      hash: md5
+      md5: 70b174c51a97e454538548a9e242eb23.dir
+      size: 1018803
+      nfiles: 47
+    - path: results/lfads/Dwight_2025-01-07/lfads_model.pt
+      hash: md5
+      md5: 4f894410e39d296c3c54a78b00c0e651
+      size: 982990
+    - path: results/lfads/Dwight_2025-01-07/lfads_output_Dwight_2025-01-07_tensors.h5
+      hash: md5
+      md5: 533bb7717f43ee0faded8095fb246bad
+      size: 681268516
+    - path: results/lfads/Dwight_2025-01-07/lightning_checkpoints
+      hash: md5
+      md5: 7dd224f1e02ff0290989125ebdbaef75.dir
+      size: 5892516
+      nfiles: 2
+  merge_lfads_outputs@Prez_2022-07-21:
+    cmd: python scripts/merge_lfads_outputs.py --dataset Prez_2022-07-21 --overlap
+      20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
+      hash: md5
+      md5: 4b3fec641775a1018912891a578d61d6
+      size: 6512056
+    - path: results/lfads/Prez_2022-07-21/lfads_output_Prez_2022-07-21_tensors.h5
+      hash: md5
+      md5: 79e04dcd6ed0647a407d7c9ae19dd0df
+      size: 691532363
+    - path: scripts/merge_lfads_outputs.py
+      hash: md5
+      md5: e4f7d07d234b0fddf9876584bd91c1bf
+      size: 4043
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors.overlap: 20
+    outs:
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
+      hash: md5
+      md5: 95d13b55fffb0acfc1de46ba88c9998e
+      size: 377830594
+    - path: logs/merge-lfads-outputs/Prez_2022-07-21.log
+      hash: md5
+      md5: 8b46336e1636b513f6a8d12a351c9201
+      size: 387
+  merge_lfads_outputs@Dwight_2025-01-01:
+    cmd: python scripts/merge_lfads_outputs.py --dataset Dwight_2025-01-01 --overlap
+      20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
+      hash: md5
+      md5: ba161a5f8dc88fb94a6d2e9109f3b949
+      size: 10219040
+    - path: results/lfads/Dwight_2025-01-01/lfads_output_Dwight_2025-01-01_tensors.h5
+      hash: md5
+      md5: 3420ecd1a6434e5569a6c8a09c07e270
+      size: 927699849
+    - path: scripts/merge_lfads_outputs.py
+      hash: md5
+      md5: e4f7d07d234b0fddf9876584bd91c1bf
+      size: 4043
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors.overlap: 20
+    outs:
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
+      hash: md5
+      md5: ce41db7e88edc5c428aec2f9c5715c57
+      size: 417909603
+    - path: logs/merge-lfads-outputs/Dwight_2025-01-01.log
+      hash: md5
+      md5: f7ed592fecc8e6c11d8a974b49bc2689
+      size: 399
+  merge_lfads_outputs@Dwight_2025-01-07:
+    cmd: python scripts/merge_lfads_outputs.py --dataset Dwight_2025-01-07 --overlap
+      20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      INFO
+    deps:
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-spikes-binned.parquet
+      hash: md5
+      md5: a19d200539cd91d48203f90064e91450
+      size: 7345949
+    - path: results/lfads/Dwight_2025-01-07/lfads_output_Dwight_2025-01-07_tensors.h5
+      hash: md5
+      md5: 533bb7717f43ee0faded8095fb246bad
+      size: 681268516
+    - path: scripts/merge_lfads_outputs.py
+      hash: md5
+      md5: e4f7d07d234b0fddf9876584bd91c1bf
+      size: 4043
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          lfads_dir: results/lfads
+          log_dir: logs
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors.overlap: 20
+    outs:
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
+      hash: md5
+      md5: 22a50c282a79fe0210fd2ca8055ac69d
+      size: 304609966
+    - path: logs/merge-lfads-outputs/Dwight_2025-01-07.log
+      hash: md5
+      md5: 5b4ce146fe09ae2509115fdd319f6a48
+      size: 399

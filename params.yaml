@@ -12,13 +12,13 @@ monkey_sessions:
   date: '2025-01-01'
 - monkey: Dwight
   date: '2025-01-07'
-lfads_sessions:
-- monkey: Prez
-  date: '2022-07-21'
-- monkey: Dwight
-  date: '2025-01-01'
-- monkey: Dwight
-  date: '2025-01-07'
+# - monkey: Sulley
+#   date: '2025-05-06'
+lfads_datasets:
+- 'Prez_2022-07-21'
+- 'Dwight_2025-01-01'
+- 'Dwight_2025-01-07'
+# - 'Sulley_2025-05-06'
 extract:
   bin_size: 10ms
   min_firing_rate: 0.1
