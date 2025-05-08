@@ -4,11 +4,9 @@ logger = logging.getLogger(__name__)
 
 from pathlib import Path
 import pandas as pd
-import numpy as np
 from src.chop_merge import chops_to_frame
 from src.munge import get_index_level
 
-from sklearn.model_selection import GroupShuffleSplit, ShuffleSplit
 import h5py
 
 def main(args):
