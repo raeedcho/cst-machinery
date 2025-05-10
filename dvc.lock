@@ -203,37 +203,73 @@ stages:
       md5: b1a68fbc02b5770856acfe3d17fa456e
       size: 177
   context_axis@0:
-    cmd: python scripts/get_context_axis.py data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
-      --out results/context_axis/Prez/2022-07-21/Prez_2022-07-21_context_axis.svg
-      --logdir logs --loglevel INFO
+    cmd: python scripts/get_context_axis.py --dataset Prez_2022-07-21 --composition_config
+      conf/trialframe.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO
     deps:
-    - path: data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
       hash: md5
-      md5: b24ed58b046c38e40f6ccc32a3790160
-      size: 10734307
+      md5: e72b2166dadd9da5bd4cfcb7549acf9a
+      size: 7467123
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_meta.parquet
+      hash: md5
+      md5: 8b875db5572c7a55dc899e7ca25e99e5
+      size: 10014
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
+      hash: md5
+      md5: b616c9a41aa4669a3bc6f391e5518e42
+      size: 319419540
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
+      hash: md5
+      md5: a83c7def39bb003658289e857f45e545
+      size: 163452
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: dace6785a22b676254fb1c55e1491d53
-      size: 3948
-    - path: src/
+      md5: 7140c952e927e985fca22865d9c5bfcb
+      size: 5008
+    - path: src/crystal_models.py
       hash: md5
-      md5: 02da71f5087c4cb3c5ec1bf93b6f14e6.dir
-      size: 79938
-      nfiles: 18
+      md5: 7cd80b2a754e416480ce673b465a8dfc
+      size: 6737
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    - path: src/time_slice.py
+      hash: md5
+      md5: c7ab600c544d668711e340aa93abab83
+      size: 2733
     params:
       params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
         logging:
-          logdir: logs
           loglevel: INFO
+      conf/trialframe.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          motor cortex: neural-smooth-rates
+        info: meta
     outs:
-    - path: logs/context_axis/Prez_2022-07-21_context_axis.log
+    - path: logs/context_axis/Prez_2022-07-21.log
       hash: md5
-      md5: 7a2a7f12fdc0751f528cf85f883679ff
-      size: 241
-    - path: results/context_axis/Prez/2022-07-21/Prez_2022-07-21_context_axis.svg
+      md5: 78dd672b16d25927280ee33de24c3c35
+      size: 189
+    - path: results/context_axis/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: 8a467c4fc59a25496d00d679c6a6c875
-      size: 1014205
+      md5: 6b7c95baf7ec2bba19ce6ef27e260bed
+      size: 1009906
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -463,69 +499,141 @@ stages:
       md5: d135979d9cad417611bfee1beb12ab8e
       size: 183
   context_axis@1:
-    cmd: python scripts/get_context_axis.py data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
-      --out results/context_axis/Dwight/2025-01-01/Dwight_2025-01-01_context_axis.svg
-      --logdir logs --loglevel INFO
+    cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-01 --composition_config
+      conf/trialframe.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO
     deps:
-    - path: data/trialframe/Dwight/2025-01-01/Dwight_2025-01-01_tf.parquet
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
       hash: md5
-      md5: 97f29fe64d7fd15684daa34951709b1d
-      size: 16852444
+      md5: 81cbbfba0ee478e4ca86ff96b81218b0
+      size: 10193845
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
+      hash: md5
+      md5: 1d99c3ffe83a1cf9a485a032a7234289
+      size: 18901
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
+      hash: md5
+      md5: 913ef56c8cb4bd74e9ce6bdedf62c6c8
+      size: 443628518
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
+      hash: md5
+      md5: 764080f12fa8bd9310227bc068bd24ce
+      size: 94831
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: dace6785a22b676254fb1c55e1491d53
-      size: 3948
-    - path: src/
+      md5: 7140c952e927e985fca22865d9c5bfcb
+      size: 5008
+    - path: src/crystal_models.py
       hash: md5
-      md5: 02da71f5087c4cb3c5ec1bf93b6f14e6.dir
-      size: 79938
-      nfiles: 18
+      md5: 7cd80b2a754e416480ce673b465a8dfc
+      size: 6737
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    - path: src/time_slice.py
+      hash: md5
+      md5: c7ab600c544d668711e340aa93abab83
+      size: 2733
     params:
       params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
         logging:
-          logdir: logs
           loglevel: INFO
+      conf/trialframe.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          motor cortex: neural-smooth-rates
+        info: meta
     outs:
-    - path: logs/context_axis/Dwight_2025-01-01_context_axis.log
+    - path: logs/context_axis/Dwight_2025-01-01.log
       hash: md5
-      md5: 95dc8fafc46328b8df2fa929408c3e89
-      size: 249
-    - path: results/context_axis/Dwight/2025-01-01/Dwight_2025-01-01_context_axis.svg
+      md5: a27a2ecfc5cba0c81d04d261ac763f7f
+      size: 193
+    - path: results/context_axis/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: 25fe303d00527ed22a3dcb509699cee3
-      size: 1413043
+      md5: 958fe61f1ecb1ac0c67929bb5524d059
+      size: 1400274
   context_axis@2:
-    cmd: python scripts/get_context_axis.py data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
-      --out results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
-      --logdir logs --loglevel INFO
+    cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-07 --composition_config
+      conf/trialframe.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO
     deps:
-    - path: data/trialframe/Dwight/2025-01-07/Dwight_2025-01-07_tf.parquet
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
       hash: md5
-      md5: 0fee6ab0657ff10e8e34781bcb37b373
-      size: 12545099
+      md5: e9247c390f9c940249645ec4a909d997
+      size: 7995502
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
+      hash: md5
+      md5: 72ea541a4cf91b54e2e9b2e7c8e45245
+      size: 16985
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
+      hash: md5
+      md5: 0c867b7f8707094728ad4c2dc06fe3f7
+      size: 330905378
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
+      hash: md5
+      md5: 7da60759cda7559fe8ba13ab42735334
+      size: 67860
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: dace6785a22b676254fb1c55e1491d53
-      size: 3948
-    - path: src/
+      md5: 7140c952e927e985fca22865d9c5bfcb
+      size: 5008
+    - path: src/crystal_models.py
       hash: md5
-      md5: 02da71f5087c4cb3c5ec1bf93b6f14e6.dir
-      size: 79938
-      nfiles: 18
+      md5: 7cd80b2a754e416480ce673b465a8dfc
+      size: 6737
+    - path: src/munge.py
+      hash: md5
+      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
+      size: 1155
+    - path: src/time_slice.py
+      hash: md5
+      md5: c7ab600c544d668711e340aa93abab83
+      size: 2733
     params:
       params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
         logging:
-          logdir: logs
           loglevel: INFO
+      conf/trialframe.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          motor cortex: neural-smooth-rates
+        info: meta
     outs:
-    - path: logs/context_axis/Dwight_2025-01-07_context_axis.log
+    - path: logs/context_axis/Dwight_2025-01-07.log
       hash: md5
-      md5: 9bca71d2872b7d694453cf6aa892c4cb
-      size: 249
-    - path: results/context_axis/Dwight/2025-01-07/Dwight_2025-01-07_context_axis.svg
+      md5: 7a903128c0ffd498c07dfd5298603516
+      size: 193
+    - path: results/context_axis/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: fc4eb0ba1a8b4132acc8b15b2d2f0ea5
-      size: 1242915
+      md5: 6484dd4ba8458da383b816fb7c7a4b7d
+      size: 1255874
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py data/trialframe/Prez/2022-07-21/Prez_2022-07-21_tf.parquet
       --out results/cross-task-decoding/Prez/2022-07-21/ --logdir logs --loglevel
@@ -1121,7 +1229,8 @@ stages:
   extract@1:
     cmd: python scripts/extract_normalized_data.py --dataset Dwight_2025-01-01 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
       INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
       350
     deps:
@@ -1133,21 +1242,24 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 72588543888d7772eccb70498c9997bb.dir
-      size: 84594
+      md5: 06f13746c631851c4671ab2ff80f88a2.dir
+      size: 85280
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5e9458cc543d0bfa46d203acb7318db3
-      size: 5669
+      md5: 9015535f02904db794f6c29412bd13e8
+      size: 5705
     params:
       params.yaml:
         dir_structure:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         extract:
           bin_size: 10ms
           min_firing_rate: 0.1
@@ -1158,8 +1270,8 @@ stages:
     outs:
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
       hash: md5
-      md5: 1253e031957fb8570ed3a38b8eb688ca
-      size: 102368475
+      md5: 81cbbfba0ee478e4ca86ff96b81218b0
+      size: 10193845
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
       hash: md5
       md5: 1d99c3ffe83a1cf9a485a032a7234289
@@ -1179,7 +1291,8 @@ stages:
   extract@0:
     cmd: python scripts/extract_normalized_data.py --dataset Prez_2022-07-21 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
       INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
       350
     deps:
@@ -1191,21 +1304,24 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 72588543888d7772eccb70498c9997bb.dir
-      size: 84594
+      md5: 06f13746c631851c4671ab2ff80f88a2.dir
+      size: 85280
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5e9458cc543d0bfa46d203acb7318db3
-      size: 5669
+      md5: 9015535f02904db794f6c29412bd13e8
+      size: 5705
     params:
       params.yaml:
         dir_structure:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         extract:
           bin_size: 10ms
           min_firing_rate: 0.1
@@ -1216,8 +1332,8 @@ stages:
     outs:
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
       hash: md5
-      md5: 5a635eeb0f9ffbeb9b7cc3f36c35888f
-      size: 72218174
+      md5: e72b2166dadd9da5bd4cfcb7549acf9a
+      size: 7467123
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_meta.parquet
       hash: md5
       md5: 8b875db5572c7a55dc899e7ca25e99e5
@@ -1237,7 +1353,8 @@ stages:
   extract@2:
     cmd: python scripts/extract_normalized_data.py --dataset Dwight_2025-01-07 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
       INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
       350
     deps:
@@ -1249,21 +1366,24 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 72588543888d7772eccb70498c9997bb.dir
-      size: 84594
+      md5: 06f13746c631851c4671ab2ff80f88a2.dir
+      size: 85280
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5e9458cc543d0bfa46d203acb7318db3
-      size: 5669
+      md5: 9015535f02904db794f6c29412bd13e8
+      size: 5705
     params:
       params.yaml:
         dir_structure:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         extract:
           bin_size: 10ms
           min_firing_rate: 0.1
@@ -1274,8 +1394,8 @@ stages:
     outs:
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
       hash: md5
-      md5: ab4dcf9ef9f344154d79e434c5aa2bc8
-      size: 77734512
+      md5: e9247c390f9c940249645ec4a909d997
+      size: 7995502
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
       hash: md5
       md5: 72ea541a4cf91b54e2e9b2e7c8e45245
@@ -1724,7 +1844,8 @@ stages:
   extract@3:
     cmd: python scripts/extract_normalized_data.py --dataset Sulley_2025-05-06 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
       INFO --bin_size 10ms --min_firing_rate 0.1 --max_spike_coincidence 0.2 --rate_artifact_threshold
       350
     deps:
@@ -1736,21 +1857,24 @@ stages:
       nfiles: 6
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 72588543888d7772eccb70498c9997bb.dir
-      size: 84594
+      md5: 06f13746c631851c4671ab2ff80f88a2.dir
+      size: 85280
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5e9458cc543d0bfa46d203acb7318db3
-      size: 5669
+      md5: 9015535f02904db794f6c29412bd13e8
+      size: 5705
     params:
       params.yaml:
         dir_structure:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         extract:
           bin_size: 10ms
           min_firing_rate: 0.1
@@ -1761,8 +1885,8 @@ stages:
     outs:
     - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_hand-pos.parquet
       hash: md5
-      md5: 8cd86eacdbdbd82c62af966aebcbb85f
-      size: 1228396
+      md5: e20b7e7929a35e52a962bd0f0b4cca25
+      size: 133911
     - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_meta.parquet
       hash: md5
       md5: 97e9c126e2b433cb8683fcd8369d713c
@@ -1782,8 +1906,9 @@ stages:
   smooth_firing_rates@0:
     cmd: python scripts/smooth_firing_rates.py --dataset Prez_2022-07-21 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
-      INFO
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO --smoothing_std 0.1s
     deps:
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       hash: md5
@@ -1807,14 +1932,15 @@ stages:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         logging:
           loglevel: INFO
         smooth_firing_rates:
-          window_len: 60
-          overlap: 20
-          group_split: true
+          smoothing_std: 0.1s
     outs:
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
       hash: md5
@@ -1872,8 +1998,9 @@ stages:
   smooth_firing_rates@2:
     cmd: python scripts/smooth_firing_rates.py --dataset Dwight_2025-01-07 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
-      INFO
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO --smoothing_std 0.1s
     deps:
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       hash: md5
@@ -1897,14 +2024,15 @@ stages:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         logging:
           loglevel: INFO
         smooth_firing_rates:
-          window_len: 60
-          overlap: 20
-          group_split: true
+          smoothing_std: 0.1s
     outs:
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
       hash: md5
@@ -1917,8 +2045,9 @@ stages:
   smooth_firing_rates@1:
     cmd: python scripts/smooth_firing_rates.py --dataset Dwight_2025-01-01 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
-      INFO
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO --smoothing_std 0.1s
     deps:
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       hash: md5
@@ -1942,14 +2071,15 @@ stages:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         logging:
           loglevel: INFO
         smooth_firing_rates:
-          window_len: 60
-          overlap: 20
-          group_split: true
+          smoothing_std: 0.1s
     outs:
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
       hash: md5

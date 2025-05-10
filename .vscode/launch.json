@@ -12,9 +12,10 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "--dataset", "Sulley_2025-05-06",
+                "--dataset", "Prez_2022-07-21",
                 "--raw_data_dir", "/Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format",
                 "--trialframe_dir", "data/trialframe",
+                "--results_dir", "results",
                 "--log_dir", "logs",
                 "--loglevel", "DEBUG",
                 "--overlap", "20",

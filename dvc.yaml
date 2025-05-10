@@ -1,3 +1,7 @@
+vars:
+  - params.yaml
+  - conf/trialframe.yaml
+
 stages:
   extract:
     foreach: ${datasets}
@@ -20,7 +24,7 @@ stages:
   smooth_firing_rates:
     foreach: ${datasets}
     do:
-      cmd: python scripts/smooth_firing_rates.py --dataset ${item.dataset_name} ${dir_structure} ${logging}
+      cmd: python scripts/smooth_firing_rates.py --dataset ${item.dataset_name} ${dir_structure} ${logging} ${smooth_firing_rates}
       params:
       - logging
       - dir_structure
@@ -37,20 +41,21 @@ stages:
     foreach: ${datasets}
     do:
       cmd: python scripts/prep_lfads_tensors.py 
-        data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
-        --out data/pre-lfads-tensors/${item.dataset_name}_tensors.hdf5
-        --info_path conf/lfads/dataset_info/${item.dataset_name}.yaml
+        ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
+        --out ${dir_structure.pre-lfads_dir}/${item.dataset_name}_tensors.hdf5
+        --info_path ${dir_structure.config_dir}/lfads/dataset_info/${item.dataset_name}.yaml
         ${logging} ${prep_lfads_tensors} ${dir_structure}
       params:
       - prep_lfads_tensors
       - logging
+      - dir_structure
       deps:
       - scripts/prep_lfads_tensors.py
       - src/munge.py
       - src/chop_merge.py
-      - data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
       outs:
-      - data/pre-lfads-tensors/${item.dataset_name}_tensors.hdf5
+      - ${dir_structure.pre-lfads_dir}/${item.dataset_name}_tensors.hdf5
       - ${dir_structure.log_dir}/prep-lfads-tensors/${item.dataset_name}_tensors.log
   train_lfads:
     foreach: ${datasets}
@@ -58,22 +63,23 @@ stages:
       # frozen: true
       cmd: python scripts/train_lfads.py
         --dataset ${item.dataset_name}
-        ${logging} ${train_lfads} ${dir_structure}
+        --config ${dir_structure.config_dir}/lfads/lfads-torch.yaml
+        ${logging} ${dir_structure}
       params:
-      - train_lfads
       - logging
+      - dir_structure
       deps:
       - scripts/train_lfads.py
       - src/lfads_dvc.py
       - src/lfads_callbacks.py
-      - data/pre-lfads-tensors/${item.dataset_name}_tensors.hdf5
-      - conf/lfads/
+      - ${dir_structure.pre-lfads_dir}/${item.dataset_name}_tensors.hdf5
+      - ${dir_structure.config_dir}/lfads
       outs:
       - ${dir_structure.log_dir}/train-lfads/${item.dataset_name}.log
-      - results/lfads/${item.dataset_name}/lightning_checkpoints
-      - results/lfads/${item.dataset_name}/dvclive
-      - results/lfads/${item.dataset_name}/lfads_model.pt
-      - results/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
+      - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lightning_checkpoints
+      - ${dir_structure.results_dir}/lfads/${item.dataset_name}/dvclive
+      - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lfads_model.pt
+      - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
   merge_lfads_outputs:
     foreach: ${datasets}
     do:
@@ -86,29 +92,34 @@ stages:
       - scripts/merge_lfads_outputs.py
       - src/chop_merge.py
       - src/munge.py
-      - data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
-      - results/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
+      - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
       outs:
-      - data/trialframe/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       - ${dir_structure.log_dir}/merge-lfads-outputs/${item.dataset_name}.log
-#   context_axis:
-#     foreach: ${monkey_sessions}
-#     do:
-#       cmd: python scripts/get_context_axis.py 
-#         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-#         --out 
-#         results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
-#         ${dir_structure} ${logging}
-#       params:
-#       - logging
-#       deps:
-#       - scripts/get_context_axis.py
-#       - src/
-#       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-#       outs:
-#       - ${dir_structure.log_dir}/context_axis/${item.monkey}_${item.date}_context_axis.log
-#       plots:
-#       - results/context_axis/${item.monkey}/${item.date}/${item.monkey}_${item.date}_context_axis.svg
+  context_axis:
+    foreach: ${datasets}
+    do:
+      cmd: python scripts/get_context_axis.py --dataset ${item.dataset_name} 
+        --composition_config ${dir_structure.config_dir}/trialframe.yaml
+        ${dir_structure} ${logging}
+      params:
+      - logging
+      - dir_structure
+      - conf/trialframe.yaml:
+      deps:
+      - scripts/get_context_axis.py
+      - src/munge.py
+      - src/crystal_models.py
+      - src/time_slice.py
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      outs:
+      - ${dir_structure.log_dir}/context_axis/${item.dataset_name}.log
+      plots:
+      - ${dir_structure.results_dir}/context_axis/${item.dataset_name}_context_axis.svg
 #   cross_task_decoding:
 #     foreach: ${monkey_sessions}
 #     do:

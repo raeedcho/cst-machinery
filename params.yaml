@@ -1,8 +1,11 @@
 dir_structure:
   raw_data_dir: /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
   trialframe_dir: data/trialframe
+  pre-lfads_dir: data/pre-lfads-tensors
+  config_dir: conf
   lfads_dir: results/lfads
   log_dir: logs
+  results_dir: results
 
 logging:
   loglevel: INFO
@@ -17,9 +20,9 @@ datasets:
 - monkey: Dwight
   date: '2025-01-07'
   dataset_name: Dwight_2025-01-07
-- monkey: Sulley
-  date: '2025-05-06'
-  dataset_name: Sulley_2025-05-06
+# - monkey: Sulley
+#   date: '2025-05-06'
+#   dataset_name: Sulley_2025-05-06
 
 extract:
   bin_size: 10ms
@@ -28,14 +31,9 @@ extract:
   rate_artifact_threshold: 350
 
 smooth_firing_rates:
-  window_len: 60
-  overlap: 20
-  group_split: true
+  smoothing_std: 0.1s
 
 prep_lfads_tensors:
   window_len: 60
   overlap: 20
   group_split: true
-
-train_lfads:
-  config: ../conf/lfads/lfads-torch.yaml
