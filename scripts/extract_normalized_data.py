@@ -64,6 +64,7 @@ def save_states(smile_data_blocks: dict[str, list[Any]], output_path: Path, **kw
     state_list = smile_extract.concat_block_trial_func_results(
         smile_extract.get_trial_states,
         smile_data_blocks,
+        **kwargs,
     )
     state_list.to_frame().to_parquet(output_path) # type: ignore
     logger.info(f'Saved trial states to {output_path}')
@@ -72,6 +73,7 @@ def save_phasespace(smile_data_blocks: dict[str, list[Any]], output_path: Path, 
     phasespace = smile_extract.concat_block_trial_func_results(
         smile_extract.get_trial_hand_data,
         smile_data_blocks,
+        **kwargs,
     )
     phasespace.to_parquet(output_path)
     logger.info(f'Saved phasespace to {output_path}')
