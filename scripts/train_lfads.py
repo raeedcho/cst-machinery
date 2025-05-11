@@ -1,7 +1,5 @@
 import argparse
 import os
-import shutil
-from datetime import datetime
 from pathlib import Path
 
 import logging
@@ -13,6 +11,7 @@ from glob import glob
 from pathlib import Path
 
 from typing import Union
+from omegaconf import DictConfig
 
 import pytorch_lightning as pl
 import torch
@@ -35,12 +34,16 @@ def main(args):
         level=args.loglevel,
     )
 
-    os.chdir(run_dir)
-    model = train_model(
+    config = load_config(
         config_path=args.config,
         overrides={
             "dataset_info": dataset_str,
         }
+    )
+
+    os.chdir(run_dir)
+    model = train_model(
+        config=config,
         # checkpoint_dir='./lightning_checkpoints',
     )
 
@@ -48,12 +51,10 @@ def main(args):
     torch.save(model.state_dict(), "lfads_model.pt")
     logger.info(f'Saved model as lfads_model.pt')
 
-def train_model(
-    config_path: str,
-    overrides: dict = {},
-    checkpoint_dir: Union[str, None] = None,
-) -> pl.LightningModule:
-    # load config
+def load_config(config_path: str, overrides: dict = {}) -> DictConfig:
+    """
+    Load the LFADS config file and apply overrides.
+    """
     config_path_obj:Path = Path(config_path)
     flat_overrides: list[str] = [f"{k}={v}" for k, v in flatten(overrides).items()]
     with hydra.initialize(
@@ -62,7 +63,9 @@ def train_model(
         version_base="1.1",
     ):
         config = hydra.compose(config_name=config_path_obj.name, overrides=flat_overrides)
+    return config
 
+def train_model(config: DictConfig) -> pl.LightningModule:
     # Avoid flooding the console with output during multi-model runs
     if config.ignore_warnings:
         logging.getLogger("pytorch_lightning").setLevel(logging.WARNING)
@@ -76,8 +79,14 @@ def train_model(
     datamodule = instantiate(config.datamodule, _convert_="all")
     model = instantiate(config.model)
 
-    # If `checkpoint_dir` is passed, find the most recent checkpoint in the directory
-    if checkpoint_dir:
+    # if wanting to resume, find the most recent checkpoint in the directory
+    if config.resume_from_checkpoint:
+        checkpoint_dir = config.callbacks.model_checkpoint.dirpath
+        if not os.path.exists(checkpoint_dir):
+            raise FileNotFoundError(f"Checkpoint directory {checkpoint_dir} does not exist.")
+        if not os.path.isdir(checkpoint_dir):
+            raise NotADirectoryError(f"Checkpoint path {checkpoint_dir} is not a directory.")
+        # Find the most recent checkpoint file
         ckpt_pattern = os.path.join(checkpoint_dir, "*.ckpt")
         ckpt_path = max(glob(ckpt_pattern), key=os.path.getctime)
 
@@ -89,14 +98,14 @@ def train_model(
         # gpus=int(torch.cuda.is_available()),
     )
     # Temporary workaround for PTL step-resuming bug
-    if checkpoint_dir:
+    if config.resume_from_checkpoint:
         ckpt = torch.load(ckpt_path)
         trainer.fit_loop.epoch_loop._batches_that_stepped = ckpt["global_step"]
     # Train the model
     trainer.fit(
         model=model,
         datamodule=datamodule,
-        ckpt_path=ckpt_path if checkpoint_dir else None,
+        ckpt_path=ckpt_path if config.resume_from_checkpoint else None,
     )
     # Restore the best checkpoint if necessary - otherwise, use last checkpoint
     if config.posterior_sampling.use_best_ckpt:

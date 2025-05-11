@@ -1,6 +1,7 @@
 vars:
   - params.yaml
   - conf/trialframe.yaml
+  - conf/lfads/lfads-torch.yaml
 
 stages:
   extract:
@@ -63,11 +64,16 @@ stages:
       # frozen: true
       cmd: python scripts/train_lfads.py
         --dataset ${item.dataset_name}
-        --config ${dir_structure.config_dir}/lfads/lfads-torch.yaml
+        --config ../${dir_structure.config_dir}/lfads/lfads-torch.yaml
         ${logging} ${dir_structure}
       params:
       - logging
       - dir_structure
+      - conf/lfads/lfads-torch.yaml:
+      - conf/lfads/dataset_info/${item.dataset_name}.yaml:
+      - conf/lfads/callbacks/plots.yaml:
+      - conf/lfads/datamodule/single_session_datamodule.yaml:
+      - conf/lfads/model/single_session_model.yaml:
       deps:
       - scripts/train_lfads.py
       - src/lfads_dvc.py
@@ -76,7 +82,8 @@ stages:
       - ${dir_structure.config_dir}/lfads
       outs:
       - ${dir_structure.log_dir}/train-lfads/${item.dataset_name}.log
-      - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lightning_checkpoints
+      - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lightning_checkpoints:
+          persist: false
       - ${dir_structure.results_dir}/lfads/${item.dataset_name}/dvclive
       - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lfads_model.pt
       - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
