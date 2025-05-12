@@ -1,13 +1,10 @@
 import pandas as pd
 import smile_extract
-import src
 import seaborn as sns
-import matplotlib as mpl
-
-from dvclive import Live
+from matplotlib.figure import Figure
+from src.cli import with_parsed_args
 
 from pathlib import Path
-import argparse
 import logging
 logger = logging.getLogger(__name__)
 
@@ -17,8 +14,9 @@ from sklearn.pipeline import Pipeline
 from src.crystal_models import SoftnormScaler
 from src.munge import get_index_level, multivalue_xs
 from src.time_slice import reindex_trial_from_event
-from omegaconf import OmegaConf, DictConfig
+from omegaconf import OmegaConf
 
+@with_parsed_args(description='Find and plot the context axis of CST/RTT data. Output is an SVG plot.')
 def main(args):
     dataset = args.dataset
 
@@ -79,7 +77,7 @@ def fit_context_lda(data: pd.DataFrame)->Pipeline:
     lda_pipe.fit(train_data,get_index_level(train_data,'task'))
     return lda_pipe
 
-def plot_context_axis(data: pd.DataFrame, lda_pipe: Pipeline) -> mpl.figure.Figure:
+def plot_context_axis(data: pd.DataFrame, lda_pipe: Pipeline) -> Figure:
     test_data = (
         data
         .loc[(slice(None),slice(None),slice('-1 sec','3 sec')),:]
@@ -126,44 +124,4 @@ def plot_context_axis(data: pd.DataFrame, lda_pipe: Pipeline) -> mpl.figure.Figu
     return g.figure
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Find and plot the context axis of CST/RTT data. Output is an SVG plot.')
-    parser.add_argument(
-        '--dataset',
-        type=str,
-        help='Dataset name, e.g. $(monkey)_$(session_date)',
-        required=True,
-    )
-    parser.add_argument(
-        '--trialframe_dir',
-        type=str,
-        help='Path to parent folder containing trial frame outputs',
-        default='data/trialframe/',
-    )
-    parser.add_argument(
-        '--results_dir',
-        type=str,
-        help='Path to the results directory',
-        default='results/',
-    )
-    parser.add_argument(
-        '--log_dir',
-        type=str,
-        help='Logging directory',
-        default='logs/',
-    )
-    parser.add_argument(
-        '--loglevel',
-        type=str,
-        help='Logging level',
-        default='WARNING',
-        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
-    )
-    parser.add_argument(
-        '--composition_config',
-        type=str,
-        help='Path to the composition config file',
-        default='conf/trialframe.yaml',
-    )
-    
-    args, _ = parser.parse_known_args()
-    main(args)
+    main() # type: ignore
