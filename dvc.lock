@@ -228,8 +228,12 @@ stages:
       size: 163452
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 7140c952e927e985fca22865d9c5bfcb
-      size: 5008
+      md5: 033d31a6b9fd2c9124febc90deb4d444
+      size: 4019
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
     - path: src/crystal_models.py
       hash: md5
       md5: 7cd80b2a754e416480ce673b465a8dfc
@@ -268,8 +272,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: b3eb062719391471f96984cf5bd6394c
-      size: 1704971
+      md5: 85baf1b358a70b3cca617dc4eebfd1a2
+      size: 1704995
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -524,8 +528,12 @@ stages:
       size: 94831
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 7140c952e927e985fca22865d9c5bfcb
-      size: 5008
+      md5: 033d31a6b9fd2c9124febc90deb4d444
+      size: 4019
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
     - path: src/crystal_models.py
       hash: md5
       md5: 7cd80b2a754e416480ce673b465a8dfc
@@ -564,8 +572,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: c873914d53199b3dcd77f79e7f703b83
-      size: 2497881
+      md5: 916bb197101188fc15e012152a6ad2cf
+      size: 2497890
   context_axis@2:
     cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-07 --composition_config
       conf/trialframe.yaml --raw_data_dir 
@@ -592,8 +600,12 @@ stages:
       size: 67860
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 7140c952e927e985fca22865d9c5bfcb
-      size: 5008
+      md5: 033d31a6b9fd2c9124febc90deb4d444
+      size: 4019
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
     - path: src/crystal_models.py
       hash: md5
       md5: 7cd80b2a754e416480ce673b465a8dfc
@@ -632,8 +644,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: 2bb22f78b262948d9fe04bc688b8c227
-      size: 2459136
+      md5: 02662e8f7499c9708c17de3a5dc5c63f
+      size: 2459311
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py --dataset Prez_2022-07-21 --composition_config
       conf/trialframe.yaml --raw_data_dir 
