@@ -4,6 +4,25 @@ from pathlib import Path
 from typing import Callable, Optional
 
 def create_default_parser(description='Run the script with the standard arguments') -> argparse.ArgumentParser:
+    """
+    Creates and returns a default argument parser for the script.
+    Args:
+        description (str): A brief description of the script. Defaults to 
+            'Run the script with the standard arguments'.
+    Returns:
+        argparse.ArgumentParser: The configured argument parser.
+    Arguments:
+        --dataset (str, required): Dataset name, e.g., $(monkey)_$(session_date).
+        --trialframe_dir (str, optional): Path to the parent folder containing trial frame outputs.
+            Defaults to 'data/trialframe/'.
+        --results_dir (str, optional): Path to the results directory. Defaults to 'results/'.
+        --log_dir (str, optional): Logging directory. Defaults to 'logs/'.
+        --loglevel (str, optional): Logging level. Defaults to 'WARNING'. 
+            Choices are ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'].
+        --composition_config (str, optional): Path to the trialframe composition config file.
+            Defaults to 'conf/trialframe.yaml'.
+    """
+
     parser = argparse.ArgumentParser(
         description=description,
     )

@@ -2,8 +2,8 @@ import pandas as pd
 import smile_extract
 import seaborn as sns
 from matplotlib.figure import Figure
-from src.cli import with_parsed_args
 
+from omegaconf import OmegaConf
 from pathlib import Path
 import logging
 logger = logging.getLogger(__name__)
@@ -11,12 +11,16 @@ logger = logging.getLogger(__name__)
 from sklearn.decomposition import PCA, TruncatedSVD
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.pipeline import Pipeline
+
 from src.crystal_models import SoftnormScaler
 from src.munge import get_index_level, multivalue_xs
 from src.time_slice import reindex_trial_from_event
-from omegaconf import OmegaConf
+from src.cli import with_parsed_args, create_default_parser
 
-@with_parsed_args(description='Find and plot the context axis of CST/RTT data. Output is an SVG plot.')
+@with_parsed_args(
+    parser_creator=create_default_parser,
+    description='Find and plot the context axis of CST/RTT data. Output is an SVG plot.'
+)
 def main(args):
     dataset = args.dataset
 
