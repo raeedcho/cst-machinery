@@ -117,6 +117,7 @@ stages:
       deps:
       - scripts/get_context_axis.py
       - src/munge.py
+      - src/cli.py
       - src/crystal_models.py
       - src/time_slice.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
@@ -127,21 +128,30 @@ stages:
       - ${dir_structure.log_dir}/context_axis/${item.dataset_name}.log
       plots:
       - ${dir_structure.results_dir}/context_axis/${item.dataset_name}_context_axis.svg
-#   cross_task_decoding:
-#     foreach: ${monkey_sessions}
-#     do:
-#       cmd: python scripts/cross_task_decoding.py 
-#         data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-#         --out results/cross-task-decoding/${item.monkey}/${item.date}/ ${logging} ${dir_structure}
-#       params:
-#       - logging
-#       deps:
-#       - scripts/cross_task_decoding.py
-#       - src/
-#       - data/trialframe/${item.monkey}/${item.date}/${item.monkey}_${item.date}_tf.parquet
-#       outs:
-#       - ${dir_structure.log_dir}/cross-task-decoding/${item.monkey}_${item.date}_cross-task-decoding.log
-#       plots:
-#       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-task-score-heatmap.svg
-#       - results/cross-task-decoding/${item.monkey}/${item.date}/${item.monkey}_${item.date}_decoder-trial-scores-scatter.svg
-#       - results/cross-task-decoding/${item.monkey}/${item.date}/trials/
+  cross_task_decoding:
+    foreach: ${datasets}
+    do:
+      cmd: python scripts/cross_task_decoding.py --dataset ${item.dataset_name} 
+        --composition_config ${dir_structure.config_dir}/trialframe.yaml
+        ${dir_structure} ${logging}
+      params:
+      - logging
+      - dir_structure
+      - conf/trialframe.yaml:
+      deps:
+      - scripts/cross_task_decoding.py
+      - src/munge.py
+      - src/cli.py
+      - src/crystal_models.py
+      - src/time_slice.py
+      - src/timeseries.py
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      outs:
+      - ${dir_structure.log_dir}/cross-task-decoding/${item.dataset_name}.log
+      plots:
+      - results/cross-task-decoding/${item.dataset_name}/${item.dataset_name}_decoder-task-score-heatmap.svg
+      - results/cross-task-decoding/${item.dataset_name}/${item.dataset_name}_decoder-trial-scores-scatter.svg
+      - results/cross-task-decoding/${item.dataset_name}/trial-predictions/

@@ -3,9 +3,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from src import munge, time_slice, crystal_models, timeseries
+from src.cli import with_parsed_args, create_default_parser
 import smile_extract
 from pathlib import Path
-import argparse
+from omegaconf import OmegaConf
 import logging
 logger = logging.getLogger(__name__)
 
@@ -22,20 +23,30 @@ from sklearn.metrics import explained_variance_score, r2_score, make_scorer
 from sklearn.base import RegressorMixin,BaseEstimator
 from sklearn.pipeline import make_pipeline
 
+@with_parsed_args(
+    parser_creator=create_default_parser,
+    description='Cross-task decoding analysis--train on one task and test on the other.',
+)
 def main(args):
-    input_path = Path(args.path)
-    output_folder = Path(args.out)
-    log_dir = Path(args.logdir)
+    dataset = args.dataset
 
-    monkey = input_path.stem.split('_')[0]
-    date = input_path.stem.split('_')[1]
-
+    log_dir = Path(args.log_dir) / 'cross-task-decoding'
+    if not log_dir.exists():
+        log_dir.mkdir(exist_ok=True,parents=True)
     logging.basicConfig(
-        filename=log_dir/ 'cross-task-decoding' / f'{monkey}_{date}_cross-task-decoding.log',
+        filename=log_dir/ f'{dataset}.log',
         level=args.loglevel,
     )
 
-    tf = pd.read_parquet(input_path)
+    trialframe_dir = Path(args.trialframe_dir)
+    composition_config = OmegaConf.load(args.composition_config)
+    tf = smile_extract.compose_from_frames(
+        meta=pd.read_parquet(trialframe_dir / dataset / f'{dataset}_{composition_config.info}.parquet'),
+        trialframe_dict={
+            key: pd.read_parquet(trialframe_dir / dataset / f'{dataset}_{filepart}.parquet')
+            for key, filepart in composition_config.composition.items()
+        }
+    )
     neural_data, hand_data = precondition_data(tf)
 
     trial_predictions = decode_single_trials(neural_data,hand_data['x'])
@@ -71,21 +82,24 @@ def main(args):
     scores_plot.plot_marginals(sns.rugplot,height=0.1,palette=['C0','C1'])
     scores_plot.refline(x=0,y=0)
 
+    output_folder = Path(args.results_dir) / 'cross-task-decoding' / dataset
+    if not output_folder.exists():
+        output_folder.mkdir(parents=True, exist_ok=True)
+
     heatmap_fig = task_score_heatmap.get_figure()
     if heatmap_fig is not None:
-        heatmap_fig.savefig(output_folder / f'{monkey}_{date}_decoder-task-score-heatmap.svg')
-    scores_plot.figure.savefig(output_folder / f'{monkey}_{date}_decoder-trial-scores-scatter.svg')
+        heatmap_fig.savefig(output_folder / f'{dataset}_decoder-task-score-heatmap.svg')
+    scores_plot.figure.savefig(output_folder / f'{dataset}_decoder-trial-scores-scatter.svg')
 
-    if not (output_folder / 'trials').exists():
-        (output_folder / 'trials').mkdir()
-    for trial_id in hand_data.index.get_level_values('trial_id').unique():
-        true_data = hand_data.loc[trial_id,'x']
-        assert isinstance(true_data,pd.Series), f"Only one value in trial{trial_id}"
+    if not (output_folder / 'trial-predictions').exists():
+        (output_folder / 'trial-predictions').mkdir()
+    for trial_id,true_data in hand_data.groupby('trial_id'):
+        assert isinstance(true_data['x'],pd.Series), f"Only one value in trial{trial_id}"
         trial_fig = plot_trial_predictions(
-            true_data=true_data,
-            pred_data=trial_predictions.loc[trial_id,:],
+            true_data=true_data['x'],
+            pred_data=trial_predictions.groupby('trial_id').get_group(trial_id),
         )
-        trial_fig.savefig(output_folder / 'trials' / f'{monkey}_{date}_trial-{trial_id}_predictions.svg')
+        trial_fig.savefig(output_folder / 'trial-predictions' / f'{trial_id}.svg')
         plt.close(trial_fig)
 
 def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
@@ -105,7 +119,7 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
     )
     trim_pipeline = lambda df: (
         df
-        .loc[(slice(None),slice('-0.5 sec','3sec')),:]
+        .loc[(slice(None),slice(None),slice('-0.5 sec','3sec')),:]
     )
 
     scale_PCA_pipeline = make_pipeline(
@@ -234,31 +248,4 @@ class TaskTrainedDecoder(BaseEstimator,RegressorMixin):
         )
     
 if __name__=='__main__':
-    parser = argparse.ArgumentParser(description='Cross-task decoding analysis--train on one task and test on the other.')
-    parser.add_argument(
-        'path',
-        type=str,
-        help='Path to the trial frame data file',
-    )
-    parser.add_argument(
-        '--out',
-        type=str,
-        help='Path to the output directory',
-        required=True,
-    )
-    parser.add_argument(
-        '--logdir',
-        type=str,
-        help='Logging directory',
-        default='logs/',
-    )
-    parser.add_argument(
-        '--loglevel',
-        type=str,
-        help='Logging level',
-        default='WARNING',
-        choices=['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL'],
-    )
-    
-    args = parser.parse_args()
-    main(args)
+    main() # type: ignore
