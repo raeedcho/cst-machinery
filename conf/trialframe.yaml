@@ -3,4 +3,4 @@ info: 'meta'
 composition:
   state: 'states'
   hand position: 'hand-pos'
-  motor cortex: 'neural-lfads-rates'
+  motor cortex: 'neural-smooth-rates'
