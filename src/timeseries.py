@@ -15,27 +15,25 @@ def get_sample_spacing(df: pd.DataFrame) -> float:
     
     return sample_spacing
 
-def estimate_kinematic_derivative(df: pd.DataFrame, deriv: int = 1, cutoff: float = 30)->pd.DataFrame:
+def estimate_kinematic_derivative(trial_signal: pd.DataFrame, deriv: int = 1, cutoff: float = 30)->pd.DataFrame:
     # assert that columns are not a multiindex, so we know we're working with one "signal"
-    assert not isinstance(df.columns, pd.MultiIndex), 'must work with only one "signal"'
+    assert not isinstance(trial_signal.columns, pd.MultiIndex), 'must work with only one "signal"'
     assert deriv == 1, 'only first derivative is supported currently'
 
-    sample_spacing = get_sample_spacing(df)
+    sample_spacing = get_sample_spacing(trial_signal)
     samprate = 1/sample_spacing
     nyquist = samprate / 2
     normalized_cutoff = cutoff / nyquist
     assert 0 < normalized_cutoff < 1, 'cutoff frequency must be between 0 and Nyquist frequency'
     filt_b, filt_a = scs.butter(4, normalized_cutoff, 'low',output='ba') # type: ignore
     return (
-        df
-        .groupby('trial_id', group_keys=False)
-        .apply(lambda x: pd.DataFrame(
+        trial_signal
+        .pipe(lambda x: pd.DataFrame(
             scs.filtfilt(filt_b, filt_a, x.values, axis=0),
             columns=x.columns,
             index=x.index
         ))
-        .groupby('trial_id', group_keys=False)
-        .apply(lambda x: pd.DataFrame(
+        .pipe(lambda x: pd.DataFrame(
             np.gradient(x.values, sample_spacing, axis=0),
             columns=x.columns,
             index=x.index

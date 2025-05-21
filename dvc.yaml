@@ -61,7 +61,7 @@ stages:
   train_lfads:
     foreach: ${datasets}
     do:
-      # frozen: true
+      frozen: true
       cmd: python scripts/train_lfads.py
         --dataset ${item.dataset_name}
         --config ../${dir_structure.config_dir}/lfads/lfads-torch.yaml

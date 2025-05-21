@@ -1,15 +1,18 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 import seaborn as sns
 from src import munge, time_slice, crystal_models, timeseries
 from src.cli import with_parsed_args, create_default_parser
 import smile_extract
 from pathlib import Path
-from omegaconf import OmegaConf
+from omegaconf import OmegaConf,DictConfig,ListConfig
+from typing import Union
 import logging
 logger = logging.getLogger(__name__)
 
+from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LinearRegression
 from sklearn.decomposition import PCA
 from sklearn.model_selection import (
@@ -113,12 +116,14 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
         .set_index(['task','result','state'],append=True)
         .pipe(munge.multivalue_xs,keys=['CST','RTT'],level='task')
         .xs(level='result',key='success')
+        # .pipe(drop_hand_drop_trials) # type: ignore
+    )
+
+    trim_pipeline = lambda df: (
+        df
         .rename(index=state_mapper, level='state')
         .groupby('trial_id', group_keys=False)
         .apply(lambda df: time_slice.reindex_trial_from_event(df, event='Go Cue'))
-    )
-    trim_pipeline = lambda df: (
-        df
         .loc[(slice(None),slice(None),slice('-0.5 sec','3sec')),:]
     )
 
@@ -141,11 +146,41 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
     hand_data = (
         preproc
         ['hand position']
-        .pipe(lambda df: timeseries.estimate_kinematic_derivative(df, deriv=1, cutoff=30))
+        .groupby('trial_id',group_keys=False)
+        .apply(timeseries.estimate_kinematic_derivative, deriv=1, cutoff=30)
         .pipe(trim_pipeline)
     )
 
     return neural_data, hand_data
+
+def drop_hand_drop_trials(trialframe: pd.DataFrame)-> pd.DataFrame:
+    hand_pos: pd.DataFrame = trialframe['hand position'] # type: ignore
+    scaled_hand_pos = StandardScaler().fit_transform(hand_pos)
+
+    vert_hand_out_of_bounds = (
+        (scaled_hand_pos[:,1] < -3) | (scaled_hand_pos[:,1] > 3)
+    )
+
+    # Drop any trials where vert_hand_out_of_bounds is True
+    trial_ids_to_drop = hand_pos.index[vert_hand_out_of_bounds].get_level_values('trial_id').unique()
+    dropped_trials = (
+        munge.multivalue_xs(
+            trialframe,
+            keys=trial_ids_to_drop,
+            level='trial_id',
+        )
+        ['trial datetime']
+        .groupby(['task','trial_id'])
+        .count()
+    )
+    trialframe = trialframe.drop(index=trial_ids_to_drop, level='trial_id')
+
+    num_trials = len(trial_ids_to_drop)
+    num_total_trials = len(hand_pos.index.get_level_values('trial_id').unique())
+    logger.info(f'Dropped {num_trials} of {num_total_trials} trials with out-of-bounds hand position')
+    logger.debug(f'Dropped trials with timepoint count: {dropped_trials}')
+
+    return trialframe
 
 def decode_single_trials(predictor_data: pd.DataFrame, target_data: pd.Series)->pd.DataFrame:
     models = {
@@ -177,23 +212,23 @@ def score_single_trials(true_data: pd.Series,pred_data: pd.DataFrame)->pd.Series
 def score_tasks(true_data: pd.Series,pred_data: pd.DataFrame)->pd.Series:
     return score_groups(true_data,pred_data,['task','model'])
 
-def score_groups(true_data: pd.Series,pred_data: pd.DataFrame, grouper: str)->pd.Series:
+def score_groups(true_data: pd.Series,pred_data: pd.DataFrame, grouper: Union[str,list[str]])->pd.Series:
     return (
         pred_data
         .stack(level='model')
-        .to_frame('predicted')
+        .to_frame('predicted') # type: ignore
         .assign(true=true_data)
         .groupby(grouper)
-        .apply(lambda set: r2_score(set['true'],set['predicted']))
+        .apply(lambda group_set: r2_score(group_set['true'],group_set['predicted'])) # type: ignore
     )
 
-def plot_trial_predictions(true_data: pd.Series,pred_data: pd.DataFrame)->plt.Figure:
+def plot_trial_predictions(true_data: pd.Series,pred_data: pd.DataFrame)-> Figure:
     data = (
         pred_data
         .assign(true=true_data)
         .stack(level='model')
         .to_frame('hand velocity')
-    )
+    ) # type: ignore
     task = munge.get_index_level(data,'task').unique()
     assert len(task)==1, 'Data contains multiple trials'
 

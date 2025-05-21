@@ -672,8 +672,8 @@ stages:
       size: 163452
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 9b910c66a6ff27e311b55d9facddb658
-      size: 8171
+      md5: f8f951d5e67ff315d642a957b161ab3b
+      size: 9578
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -692,8 +692,8 @@ stages:
       size: 2733
     - path: src/timeseries.py
       hash: md5
-      md5: 409afa29eb422b535bb35d836f0e5474
-      size: 1680
+      md5: 8daf330e79e020f1bcdadc94c3b6f6c1
+      size: 1624
     params:
       params.yaml:
         dir_structure:
@@ -721,16 +721,16 @@ stages:
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: fec9fc7ebb930bd33c3a49ca71e3a7d1
+      md5: 478b227dbee2aa5fdff6bf54a643ca3e
       size: 24260
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: ed00570c8fb37b44dd39e974f9ae3ade
+      md5: a4e8ddf55bedd9a97bad65cec9e97939
       size: 184162
     - path: results/cross-task-decoding/Prez_2022-07-21/trial-predictions/
       hash: md5
-      md5: 54e91bbd30a8f34ec151f48b35dd8a81.dir
+      md5: f9f50ed49570695697b2e8548a1cae9d.dir
       size: 11909295
       nfiles: 260
   cross_task_decoding@1:
@@ -759,8 +759,8 @@ stages:
       size: 94831
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 9b910c66a6ff27e311b55d9facddb658
-      size: 8171
+      md5: f8f951d5e67ff315d642a957b161ab3b
+      size: 9578
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -779,8 +779,8 @@ stages:
       size: 2733
     - path: src/timeseries.py
       hash: md5
-      md5: 409afa29eb422b535bb35d836f0e5474
-      size: 1680
+      md5: 8daf330e79e020f1bcdadc94c3b6f6c1
+      size: 1624
     params:
       params.yaml:
         dir_structure:
@@ -808,16 +808,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 3fdf15cb4ed51628a56f2a92d0d91212
+      md5: 10262fd34936e89b7647e654b02d599f
       size: 25059
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: ba81a58fb82633851b69dd253342668a
+      md5: 84aad8003f234fae82fdd0634efd962d
       size: 231538
     - path: results/cross-task-decoding/Dwight_2025-01-01/trial-predictions/
       hash: md5
-      md5: 454788f088afc903aafd07bc2401b85d.dir
+      md5: 3779935af3c6872b2e23c13833975b81.dir
       size: 15828765
       nfiles: 364
   cross_task_decoding@2:
@@ -846,8 +846,8 @@ stages:
       size: 67860
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 9b910c66a6ff27e311b55d9facddb658
-      size: 8171
+      md5: f8f951d5e67ff315d642a957b161ab3b
+      size: 9578
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -866,8 +866,8 @@ stages:
       size: 2733
     - path: src/timeseries.py
       hash: md5
-      md5: 409afa29eb422b535bb35d836f0e5474
-      size: 1680
+      md5: 8daf330e79e020f1bcdadc94c3b6f6c1
+      size: 1624
     params:
       params.yaml:
         dir_structure:
@@ -895,16 +895,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 6610414e74dbce3f601f2722cf535702
+      md5: 10c22c208b50b114c9d4c01e435d8822
       size: 24844
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 7996f1afccd06aed64c6dacca9ddbf49
+      md5: a02f2707d763952f191116da6df0424b
       size: 215584
     - path: results/cross-task-decoding/Dwight_2025-01-07/trial-predictions/
       hash: md5
-      md5: 4c2ac85e5ae3c2b264dbb87d1287643f.dir
+      md5: 4f5727f113eea1767aea2a6558da7b28.dir
       size: 14885748
       nfiles: 344
   prep_lfads_tensors@0:
@@ -1893,7 +1893,7 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 06f13746c631851c4671ab2ff80f88a2.dir
+      md5: 8a6b57a9a22dcdf86f78047e9eecc405.dir
       size: 85280
       nfiles: 27
     - path: scripts/extract_normalized_data.py
@@ -1955,7 +1955,7 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 06f13746c631851c4671ab2ff80f88a2.dir
+      md5: 8a6b57a9a22dcdf86f78047e9eecc405.dir
       size: 85280
       nfiles: 27
     - path: scripts/extract_normalized_data.py
@@ -2017,7 +2017,7 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 06f13746c631851c4671ab2ff80f88a2.dir
+      md5: 8a6b57a9a22dcdf86f78047e9eecc405.dir
       size: 85280
       nfiles: 27
     - path: scripts/extract_normalized_data.py
