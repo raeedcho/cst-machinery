@@ -134,7 +134,6 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
     neural_data = (
         preproc
         ['motor cortex']
-        .groupby('trial_id')
         .pipe(lambda df: pd.DataFrame(
             scale_PCA_pipeline.fit_transform(df),
             index=df.index,
