@@ -31,7 +31,7 @@ extract:
   rate_artifact_threshold: 350
 
 smooth_firing_rates:
-  smoothing_std: 0.1s
+  smoothing_std: 0.05s
 
 prep_lfads_tensors:
   window_len: 60

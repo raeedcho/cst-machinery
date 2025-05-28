@@ -1893,8 +1893,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: f232100c077d019af19d60b09045077c.dir
-      size: 85280
+      md5: b989170532be627a48d0ec7c4d007c9b.dir
+      size: 85318
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -1955,8 +1955,8 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: f232100c077d019af19d60b09045077c.dir
-      size: 85280
+      md5: b989170532be627a48d0ec7c4d007c9b.dir
+      size: 85318
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2017,8 +2017,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: f232100c077d019af19d60b09045077c.dir
-      size: 85280
+      md5: b989170532be627a48d0ec7c4d007c9b.dir
+      size: 85318
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2559,7 +2559,7 @@ stages:
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
       conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
-      INFO --smoothing_std 0.1s
+      INFO --smoothing_std 0.05s
     deps:
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       hash: md5
@@ -2591,12 +2591,12 @@ stages:
         logging:
           loglevel: INFO
         smooth_firing_rates:
-          smoothing_std: 0.1s
+          smoothing_std: 0.05s
     outs:
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
       hash: md5
-      md5: b616c9a41aa4669a3bc6f391e5518e42
-      size: 319419540
+      md5: e171ef4175e95788f5ebb26fdc3c98a5
+      size: 241636228
     - path: logs/smooth-firing-rates/Prez_2022-07-21.log
       hash: md5
       md5: d3d2109b3837c8e1fa77c50322c95b36
@@ -2651,7 +2651,7 @@ stages:
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
       conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
-      INFO --smoothing_std 0.1s
+      INFO --smoothing_std 0.05s
     deps:
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       hash: md5
@@ -2683,12 +2683,12 @@ stages:
         logging:
           loglevel: INFO
         smooth_firing_rates:
-          smoothing_std: 0.1s
+          smoothing_std: 0.05s
     outs:
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
       hash: md5
-      md5: 0c867b7f8707094728ad4c2dc06fe3f7
-      size: 330905378
+      md5: 4d41bce90a2059c701e7a14ee7f70513
+      size: 278034686
     - path: logs/smooth-firing-rates/Dwight_2025-01-07.log
       hash: md5
       md5: 63c00e4d40ccf73f62483be273d0b43a
@@ -2698,7 +2698,7 @@ stages:
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
       conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
-      INFO --smoothing_std 0.1s
+      INFO --smoothing_std 0.05s
     deps:
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       hash: md5
@@ -2730,12 +2730,12 @@ stages:
         logging:
           loglevel: INFO
         smooth_firing_rates:
-          smoothing_std: 0.1s
+          smoothing_std: 0.05s
     outs:
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
       hash: md5
-      md5: 913ef56c8cb4bd74e9ce6bdedf62c6c8
-      size: 443628518
+      md5: fdcc00094913e28f7cfb3a8b26891342
+      size: 364332291
     - path: logs/smooth-firing-rates/Dwight_2025-01-01.log
       hash: md5
       md5: 424e81aed5b829dac4028ba60eb27ebb
