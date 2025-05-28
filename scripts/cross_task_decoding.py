@@ -135,7 +135,6 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
         preproc
         ['motor cortex']
         .groupby('trial_id')
-        .transform(smile_extract.smooth_data, dt=0.01,std=0.1,backend='convolve')
         .pipe(lambda df: pd.DataFrame(
             scale_PCA_pipeline.fit_transform(df),
             index=df.index,
