@@ -37,7 +37,7 @@ def main(args):
     lfads_counts: pd.DataFrame = chops_to_frame(
         chops,
         overlap=args.overlap,
-        smooth_pwr=2,
+        smooth_pwr=1,
         orig_frame=binned_spikes, # type: ignore
     )
     logger.info(f'Converted chops to frame with shape {lfads_counts.shape}')

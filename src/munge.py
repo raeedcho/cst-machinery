@@ -34,10 +34,10 @@ def hierarchical_assign(df,assign_dict):
         df
         .join(
             pd.concat(
-                [val(df) if callable(val) else val for val in assign_dict.values()],
+                [val(df) if callable(val) else val for val in assign_dict.values()], # type: ignore
                 axis=1,
                 keys=assign_dict.keys(),
                 names=['signal','channel'],
-            )
+            ) # type: ignore
         )
     )
