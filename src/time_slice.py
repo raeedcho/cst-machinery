@@ -5,6 +5,34 @@ from pandas._libs.tslibs.nattype import NaTType
 
 from .munge import get_index_level
 
+def slice_by_time(data: pd.DataFrame, time_slice: slice, timecol: str='time') -> pd.DataFrame:
+    '''
+    Slice a DataFrame by a time slice.
+
+    Parameters:
+    -----------
+    data : pandas.DataFrame
+        The DataFrame to be sliced.
+    slicer : slice
+        The slice object defining the time range.
+    timecol : str, optional
+        The name of the time column in the DataFrame, default is 'time'.
+
+    Returns:
+    --------
+    pandas.DataFrame
+        The sliced DataFrame.
+    '''
+    
+    assert isinstance(data, pd.DataFrame), "data must be a pandas DataFrame"
+    assert isinstance(data.index, pd.MultiIndex), "data must have a MultiIndex"
+    assert timecol in data.index.names, f"'{timecol}' is not a valid index level in the DataFrame"
+    assert isinstance(time_slice, slice), "time_slice must be a slice object"
+
+    num_indices_before_time: int = data.index.names.index(timecol)
+    multiindex_slicer: tuple[slice] = num_indices_before_time*(slice(None),) + (time_slice,)
+    return data.loc[multiindex_slicer,:]
+
 def get_state_transition_times(state_list: pd.Series, timecol: str='time') -> pd.Series:
     timestep = (
         state_list
@@ -87,7 +115,7 @@ def get_epoch_data(data: pd.DataFrame,epochs: dict, timecol: str='time'):
             .apply(lambda df: reindex_trial_from_event(df,event=event,timecol=timecol))
             .assign(phase=event)
             .set_index('phase',append=True)
-            .loc[(slice(None),event_slice),:]
+            .pipe(slice_by_time, time_slice=event_slice, timecol=timecol)
         )
         for event,event_slice in epochs.items()
     ]

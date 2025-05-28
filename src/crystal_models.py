@@ -1,7 +1,11 @@
 import numpy as np
-from .time_slice import reindex_trial_from_event
+from .time_slice import reindex_trial_from_event, slice_by_time
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.decomposition import TruncatedSVD,PCA
+from dPCA import dPCA
+import xarray
+import pandas as pd
+from typing import Union
 
 class JointSubspace(BaseEstimator,TransformerMixin):
     '''
@@ -138,7 +142,7 @@ class BaselineShifter(BaseEstimator,TransformerMixin):
             X
             .groupby('trial_id',group_keys=False)
             .apply(reindex_trial_from_event,event=self.ref_event,timecol=self.timecol)
-            .loc[(slice(None),self.ref_slice),:]
+            .pipe(slice_by_time,time_slice=self.ref_slice,timecol=self.timecol)
             .groupby('trial_id')
             .agg(lambda s: np.nanmean(s,axis=0))
         )
