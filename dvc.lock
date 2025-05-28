@@ -664,32 +664,32 @@ stages:
       size: 10014
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
       hash: md5
-      md5: b616c9a41aa4669a3bc6f391e5518e42
-      size: 319419540
+      md5: e171ef4175e95788f5ebb26fdc3c98a5
+      size: 241636228
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
       hash: md5
       md5: a83c7def39bb003658289e857f45e545
       size: 163452
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: f8f951d5e67ff315d642a957b161ab3b
-      size: 9578
+      md5: 3a3e2c2e687641ed16932a2f89f12fbc
+      size: 9682
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: ffe94f503f729812fcdc8c0fe00d6b9a
-      size: 7958
+      md5: c111b8cb595de32d173b8f51a10cdc69
+      size: 8004
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
       size: 1185
     - path: src/time_slice.py
       hash: md5
-      md5: c7ab600c544d668711e340aa93abab83
-      size: 2733
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
     - path: src/timeseries.py
       hash: md5
       md5: 8daf330e79e020f1bcdadc94c3b6f6c1
@@ -721,17 +721,17 @@ stages:
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: cbc0183236174eb5cb8688e1eb59b02c
-      size: 25621
+      md5: 71912397c9ed6d1e6884f0550f179de6
+      size: 25365
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 8dd535455afc686f1b8eecf5173f58df
-      size: 184814
+      md5: aea0175211326e3c5bf815badb54eeee
+      size: 185035
     - path: results/cross-task-decoding/Prez_2022-07-21/trial-predictions/
       hash: md5
-      md5: 2ce8f34a7748cef98f6415eb03a2fbab.dir
-      size: 11595720
+      md5: 20b4a3fe73f0ebb45aa0a40253b94701.dir
+      size: 13469170
       nfiles: 260
   cross_task_decoding@1:
     cmd: python scripts/cross_task_decoding.py --dataset Dwight_2025-01-01 --composition_config
@@ -751,32 +751,32 @@ stages:
       size: 18901
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
       hash: md5
-      md5: 913ef56c8cb4bd74e9ce6bdedf62c6c8
-      size: 443628518
+      md5: fdcc00094913e28f7cfb3a8b26891342
+      size: 364332291
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
       hash: md5
       md5: 764080f12fa8bd9310227bc068bd24ce
       size: 94831
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: f8f951d5e67ff315d642a957b161ab3b
-      size: 9578
+      md5: 3a3e2c2e687641ed16932a2f89f12fbc
+      size: 9682
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: ffe94f503f729812fcdc8c0fe00d6b9a
-      size: 7958
+      md5: c111b8cb595de32d173b8f51a10cdc69
+      size: 8004
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
       size: 1185
     - path: src/time_slice.py
       hash: md5
-      md5: c7ab600c544d668711e340aa93abab83
-      size: 2733
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
     - path: src/timeseries.py
       hash: md5
       md5: 8daf330e79e020f1bcdadc94c3b6f6c1
@@ -808,17 +808,17 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: b8502ee4e24a8f96ce4c0c638dc5b83d
-      size: 25573
+      md5: 089bc7e1fd642639b364e33e987725d7
+      size: 25125
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: dd513c9ba91e8bb235a353f389d3e2f6
-      size: 230380
+      md5: c790105a23d358be2fed752b1da665ba
+      size: 230124
     - path: results/cross-task-decoding/Dwight_2025-01-01/trial-predictions/
       hash: md5
-      md5: 062d3145add47bd63a6697a1710fbbb1.dir
-      size: 15578210
+      md5: 83aa1b58be032eb7cbdb13bf100fef78.dir
+      size: 18272142
       nfiles: 364
   cross_task_decoding@2:
     cmd: python scripts/cross_task_decoding.py --dataset Dwight_2025-01-07 --composition_config
@@ -838,32 +838,32 @@ stages:
       size: 16985
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
       hash: md5
-      md5: 0c867b7f8707094728ad4c2dc06fe3f7
-      size: 330905378
+      md5: 4d41bce90a2059c701e7a14ee7f70513
+      size: 278034686
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
       hash: md5
       md5: 7da60759cda7559fe8ba13ab42735334
       size: 67860
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: f8f951d5e67ff315d642a957b161ab3b
-      size: 9578
+      md5: 3a3e2c2e687641ed16932a2f89f12fbc
+      size: 9682
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: ffe94f503f729812fcdc8c0fe00d6b9a
-      size: 7958
+      md5: c111b8cb595de32d173b8f51a10cdc69
+      size: 8004
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
       size: 1185
     - path: src/time_slice.py
       hash: md5
-      md5: c7ab600c544d668711e340aa93abab83
-      size: 2733
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
     - path: src/timeseries.py
       hash: md5
       md5: 8daf330e79e020f1bcdadc94c3b6f6c1
@@ -895,17 +895,17 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: a8f0695ba161f31723b41c94af980306
-      size: 25110
+      md5: 9363d8e75e162381471a14c17d46a0d5
+      size: 25773
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 4622b0031fc8c6e433f2960b9c904505
-      size: 219274
+      md5: 767f43ed57beb9a79f3c2c3342c86310
+      size: 218082
     - path: results/cross-task-decoding/Dwight_2025-01-07/trial-predictions/
       hash: md5
-      md5: 92f1e7d0999826e02f9168b3f45206b6.dir
-      size: 14619803
+      md5: f1cc4a17ede3c19b6c47607a655d0023.dir
+      size: 16937889
       nfiles: 344
   prep_lfads_tensors@0:
     cmd: python scripts/prep_lfads_tensors.py data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet

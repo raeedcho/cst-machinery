@@ -124,11 +124,16 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
         .rename(index=state_mapper, level='state')
         .groupby('trial_id', group_keys=False)
         .apply(lambda df: time_slice.reindex_trial_from_event(df, event='Go Cue'))
-        .loc[(slice(None),slice(None),slice('-0.5 sec','3sec')),:]
+        .pipe(time_slice.slice_by_time,time_slice=slice('-0.5 sec','3 sec'),timecol='time')
     )
 
     scale_PCA_pipeline = make_pipeline(
         crystal_models.SoftnormScaler(),
+        # crystal_models.BaselineShifter(
+        #     ref_event='Hold Center (Ambiguous Cue)',
+        #     ref_slice=slice('-0.5 sec','0 sec'),
+        #     timecol='time'
+        # ),
         PCA(n_components=15),
     )
     neural_data = (
