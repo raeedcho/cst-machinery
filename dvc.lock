@@ -220,8 +220,8 @@ stages:
       size: 10014
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
       hash: md5
-      md5: b616c9a41aa4669a3bc6f391e5518e42
-      size: 319419540
+      md5: e171ef4175e95788f5ebb26fdc3c98a5
+      size: 241636228
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
       hash: md5
       md5: a83c7def39bb003658289e857f45e545
@@ -236,16 +236,16 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: 7cd80b2a754e416480ce673b465a8dfc
-      size: 6737
+      md5: c111b8cb595de32d173b8f51a10cdc69
+      size: 8004
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     - path: src/time_slice.py
       hash: md5
-      md5: c7ab600c544d668711e340aa93abab83
-      size: 2733
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
     params:
       params.yaml:
         dir_structure:
@@ -520,8 +520,8 @@ stages:
       size: 18901
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
       hash: md5
-      md5: 913ef56c8cb4bd74e9ce6bdedf62c6c8
-      size: 443628518
+      md5: fdcc00094913e28f7cfb3a8b26891342
+      size: 364332291
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
       hash: md5
       md5: 764080f12fa8bd9310227bc068bd24ce
@@ -536,16 +536,16 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: 7cd80b2a754e416480ce673b465a8dfc
-      size: 6737
+      md5: c111b8cb595de32d173b8f51a10cdc69
+      size: 8004
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     - path: src/time_slice.py
       hash: md5
-      md5: c7ab600c544d668711e340aa93abab83
-      size: 2733
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
     params:
       params.yaml:
         dir_structure:
@@ -592,8 +592,8 @@ stages:
       size: 16985
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
       hash: md5
-      md5: 0c867b7f8707094728ad4c2dc06fe3f7
-      size: 330905378
+      md5: 4d41bce90a2059c701e7a14ee7f70513
+      size: 278034686
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
       hash: md5
       md5: 7da60759cda7559fe8ba13ab42735334
@@ -608,16 +608,16 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: 7cd80b2a754e416480ce673b465a8dfc
-      size: 6737
+      md5: c111b8cb595de32d173b8f51a10cdc69
+      size: 8004
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     - path: src/time_slice.py
       hash: md5
-      md5: c7ab600c544d668711e340aa93abab83
-      size: 2733
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
     params:
       params.yaml:
         dir_structure:
@@ -929,8 +929,8 @@ stages:
       size: 6254
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     params:
       params.yaml:
         dir_structure:
@@ -979,8 +979,8 @@ stages:
       size: 6254
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     params:
       params.yaml:
         dir_structure:
@@ -1029,8 +1029,8 @@ stages:
       size: 6254
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     params:
       params.yaml:
         dir_structure:
@@ -1066,9 +1066,9 @@ stages:
     deps:
     - path: conf/lfads
       hash: md5
-      md5: 4b5b39405b9deb9c4bcc6769e9afd7b5.dir
-      size: 5755
-      nfiles: 8
+      md5: 2cc85385a31ef86861d0dff3ab25718f.dir
+      size: 11903
+      nfiles: 9
     - path: data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5
       hash: md5
       md5: 60842f6e951c3ee6ae74bf0bab83b58e
@@ -1275,9 +1275,9 @@ stages:
     deps:
     - path: conf/lfads
       hash: md5
-      md5: 4b5b39405b9deb9c4bcc6769e9afd7b5.dir
-      size: 5755
-      nfiles: 8
+      md5: 2cc85385a31ef86861d0dff3ab25718f.dir
+      size: 11903
+      nfiles: 9
     - path: data/pre-lfads-tensors/Dwight_2025-01-01_tensors.hdf5
       hash: md5
       md5: f52411a76ce8c9fdf1cc6a577dc83e43
@@ -1484,9 +1484,9 @@ stages:
     deps:
     - path: conf/lfads
       hash: md5
-      md5: 4b5b39405b9deb9c4bcc6769e9afd7b5.dir
-      size: 5755
-      nfiles: 8
+      md5: 2cc85385a31ef86861d0dff3ab25718f.dir
+      size: 11903
+      nfiles: 9
     - path: data/pre-lfads-tensors/Dwight_2025-01-07_tensors.hdf5
       hash: md5
       md5: 5a026d7a39b3293fda3ee5e6544e1265
@@ -1702,7 +1702,7 @@ stages:
       size: 691506576
     - path: scripts/merge_lfads_outputs.py
       hash: md5
-      md5: f0440f5a34b41b3b2f82532bf97213b5
+      md5: 8fac7c148201cda65a8b2dced809c47c
       size: 3956
     - path: src/chop_merge.py
       hash: md5
@@ -1710,8 +1710,8 @@ stages:
       size: 6254
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     params:
       params.yaml:
         dir_structure:
@@ -1753,7 +1753,7 @@ stages:
       size: 927628064
     - path: scripts/merge_lfads_outputs.py
       hash: md5
-      md5: f0440f5a34b41b3b2f82532bf97213b5
+      md5: 8fac7c148201cda65a8b2dced809c47c
       size: 3956
     - path: src/chop_merge.py
       hash: md5
@@ -1761,8 +1761,8 @@ stages:
       size: 6254
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     params:
       params.yaml:
         dir_structure:
@@ -1804,7 +1804,7 @@ stages:
       size: 681228008
     - path: scripts/merge_lfads_outputs.py
       hash: md5
-      md5: f0440f5a34b41b3b2f82532bf97213b5
+      md5: 8fac7c148201cda65a8b2dced809c47c
       size: 3956
     - path: src/chop_merge.py
       hash: md5
@@ -1812,8 +1812,8 @@ stages:
       size: 6254
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     params:
       params.yaml:
         dir_structure:
