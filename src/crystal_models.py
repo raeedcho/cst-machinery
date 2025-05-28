@@ -175,3 +175,40 @@ class VarimaxTransformer(BaseEstimator,TransformerMixin):
 
     def transform(self,X):
         return X @ self.rotation_matrix_
+
+class TrialframeDPCA(BaseEstimator,TransformerMixin):
+    """
+    dPCA model for trialframe data.
+    note: this only works for CIS right now
+    """
+    def __init__(self, protect=None, **dpca_kwargs):
+        self.model = dPCA.dPCA(**(dpca_kwargs or {}))
+        if protect is not None:
+            self.model.protect = protect
+
+    def fit(self,X,y=None,**fit_kwargs):
+        tensor = self.make_tensor(X)
+        self.model.fit(X=tensor)
+        return self
+
+    def transform(self,X,marginalization=None):
+        out = self.model.transform(X.values.T,marginalization='t').T
+        return pd.DataFrame(
+            out,
+            index=X.index,
+        )
+
+    def make_tensor(self,X: pd.DataFrame) -> np.ndarray:
+        """
+        Convert the input data to a tensor format suitable for dPCA.
+        """
+        index_to_drop = list(set(X.index.names)-{'trial_id','time'})
+        trials = (
+            X
+            .reset_index(level=index_to_drop, drop=True)
+            .stack()
+            .reorder_levels(['trial_id','channel','time'])
+            .to_xarray()
+        )
+
+        return np.mean(trials, axis=0).to_numpy()
