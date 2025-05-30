@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import scipy.signal as scs
 from . import munge
+from .time_slice import slice_by_time, reindex_trial_from_event
 
 def get_sample_spacing(df: pd.DataFrame) -> float:
     time_diffs = munge.get_index_level(df, 'time').diff()

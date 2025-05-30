@@ -1,6 +1,4 @@
 import pandas as pd
-import numpy as np
-from .time_slice import slice_by_time, reindex_trial_from_event
 
 def get_index_level(df,level=None):
     if level is None:
