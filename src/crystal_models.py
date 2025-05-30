@@ -215,4 +215,4 @@ class TrialframeDPCA(BaseEstimator,TransformerMixin):
             .to_xarray()
         )
 
-        return np.mean(trials, axis=0).to_numpy()
+        return trials.mean(dim='trial_id').to_numpy()

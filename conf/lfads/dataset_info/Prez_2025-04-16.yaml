@@ -1,0 +1,4 @@
+dataset_name: Prez_2025-04-16_tensors.hdf5
+tensor_shape:
+  num_neurons: 93
+  num_time_bins: 60

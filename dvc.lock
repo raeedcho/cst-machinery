@@ -218,10 +218,10 @@ stages:
       hash: md5
       md5: 8b875db5572c7a55dc899e7ca25e99e5
       size: 10014
-    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
       hash: md5
-      md5: e171ef4175e95788f5ebb26fdc3c98a5
-      size: 241636228
+      md5: 2d7b83e9b2b1efe3e2b7f20066f04303
+      size: 392888702
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
       hash: md5
       md5: a83c7def39bb003658289e857f45e545
@@ -236,8 +236,8 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: c111b8cb595de32d173b8f51a10cdc69
-      size: 8004
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
@@ -263,7 +263,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Prez_2022-07-21.log
@@ -272,8 +272,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: 2849ccfa8c9390e4ed44e0014c9d2165
-      size: 1012985
+      md5: 23dd4720923c921e14f339fc50c0d725
+      size: 1705204
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -518,10 +518,10 @@ stages:
       hash: md5
       md5: 1d99c3ffe83a1cf9a485a032a7234289
       size: 18901
-    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
       hash: md5
-      md5: fdcc00094913e28f7cfb3a8b26891342
-      size: 364332291
+      md5: 118f6fe01de2c99ee9ec75fee1cad5e8
+      size: 423231783
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
       hash: md5
       md5: 764080f12fa8bd9310227bc068bd24ce
@@ -536,8 +536,8 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: c111b8cb595de32d173b8f51a10cdc69
-      size: 8004
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
@@ -563,7 +563,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Dwight_2025-01-01.log
@@ -572,8 +572,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: d1b96400418d9ef3ff83c83546727db0
-      size: 1399286
+      md5: 3854d49179db68998e34f75c9f9545c6
+      size: 2497770
   context_axis@2:
     cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-07 --composition_config
       conf/trialframe.yaml --raw_data_dir 
@@ -590,10 +590,10 @@ stages:
       hash: md5
       md5: 72ea541a4cf91b54e2e9b2e7c8e45245
       size: 16985
-    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
       hash: md5
-      md5: 4d41bce90a2059c701e7a14ee7f70513
-      size: 278034686
+      md5: c7b321506bc066b63ca89155ab7440ba
+      size: 307961218
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
       hash: md5
       md5: 7da60759cda7559fe8ba13ab42735334
@@ -608,8 +608,8 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: c111b8cb595de32d173b8f51a10cdc69
-      size: 8004
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
@@ -635,7 +635,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Dwight_2025-01-07.log
@@ -644,8 +644,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: 0d8ead3874d34906d2bcd7df4d395352
-      size: 1253996
+      md5: 53c97e7bf860ed94714253f4f95c7067
+      size: 2459166
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py --dataset Prez_2022-07-21 --composition_config
       conf/trialframe.yaml --raw_data_dir 
@@ -680,8 +680,8 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: c111b8cb595de32d173b8f51a10cdc69
-      size: 8004
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
@@ -721,16 +721,16 @@ stages:
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 51cd8844e1f36d7281758a7c9e0b1c67
+      md5: 56caf48e28ad26b983b88cf89eb93b9e
       size: 24901
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 2247da3b2fca18f9a15e4f7c447ded62
+      md5: 4f8b0c3ecd99f8c2219745ac886c3435
       size: 182160
     - path: results/cross-task-decoding/Prez_2022-07-21/trial-predictions/
       hash: md5
-      md5: 8be273fdffcafa41ab4e25f693943435.dir
+      md5: 64ec6a81711760f874d90437ab5959da.dir
       size: 13976776
       nfiles: 260
   cross_task_decoding@1:
@@ -767,8 +767,8 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: c111b8cb595de32d173b8f51a10cdc69
-      size: 8004
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
@@ -808,16 +808,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 5b05c2d8335647e9d066b7ed7a17152a
+      md5: 03ae7eac97a0acf42674f7fe9bc94ab8
       size: 24341
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 154dd95514626fc0e3e96cdfa3347651
+      md5: 77a735b40c38d072d6f79ecd8e393bbf
       size: 230652
     - path: results/cross-task-decoding/Dwight_2025-01-01/trial-predictions/
       hash: md5
-      md5: 97e436be919b835aff9f200b275f6126.dir
+      md5: 40cf8122c2b2f45fdcce5f3fd7587152.dir
       size: 19137860
       nfiles: 364
   cross_task_decoding@2:
@@ -854,8 +854,8 @@ stages:
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: c111b8cb595de32d173b8f51a10cdc69
-      size: 8004
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
     - path: src/munge.py
       hash: md5
       md5: 3da3a7a4fad17c89e13814b8393f081f
@@ -895,16 +895,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 38c6c2279ebc4c267e3918f76dfbdd5b
+      md5: 14bd4f6d0b6d49ed0979f733a82b3ca8
       size: 24443
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 37817fb5b5ca068370cb8ea8bcbc9f69
+      md5: 71a473701a36a74715e03f6a923c3d20
       size: 216865
     - path: results/cross-task-decoding/Dwight_2025-01-07/trial-predictions/
       hash: md5
-      md5: 467616f083625eaffaf4d4aae58d1582.dir
+      md5: 27d0297590c9abfa8f833072c8ce1dca.dir
       size: 18175382
       nfiles: 344
   prep_lfads_tensors@0:
@@ -2493,7 +2493,7 @@ stages:
       md5: 5b4ce146fe09ae2509115fdd319f6a48
       size: 399
   extract@3:
-    cmd: python scripts/extract_normalized_data.py --dataset Sulley_2025-05-06 --raw_data_dir
+    cmd: python scripts/extract_normalized_data.py --dataset Prez_2025-04-16 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
       conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
@@ -2501,15 +2501,15 @@ stages:
       350
     deps:
     - path: 
-        /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Sulley/2025-05-06/
+        /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Prez/2025-04-16/
       hash: md5
-      md5: ce26cfeda35d267b8a9fb6154dbd9c66.dir
-      size: 1080578509
-      nfiles: 6
+      md5: f23d0ac6558017687562de2f7a46fb9c.dir
+      size: 901967457
+      nfiles: 4
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 06f13746c631851c4671ab2ff80f88a2.dir
-      size: 85280
+      md5: b989170532be627a48d0ec7c4d007c9b.dir
+      size: 85318
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2534,26 +2534,26 @@ stages:
         logging:
           loglevel: INFO
     outs:
-    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_hand-pos.parquet
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
       hash: md5
-      md5: e20b7e7929a35e52a962bd0f0b4cca25
-      size: 133911
-    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_meta.parquet
+      md5: baff4052d0140f6a2e71861b0e1df9b0
+      size: 8072191
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
       hash: md5
-      md5: 97e9c126e2b433cb8683fcd8369d713c
-      size: 10240
-    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-spikes-binned.parquet
+      md5: 6bbfc9198ab7074d7306172d7df0a53d
+      size: 16396
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
       hash: md5
-      md5: e8f887f743cea415baaf9bb680efb45d
-      size: 2342766
-    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_states.parquet
+      md5: c2a13cd1be56e18477643b1ab0c75b14
+      size: 4016311
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
       hash: md5
-      md5: 8559cad15c62298ccb325174aa1421a1
-      size: 51864
-    - path: logs/extract/Sulley_2025-05-06.log
+      md5: 09401ef6a1bd62bbe7f60861d7fcd0e7
+      size: 75073
+    - path: logs/extract/Prez_2025-04-16.log
       hash: md5
-      md5: 2492af094ea9cb404c9d964f25c171ba
-      size: 962
+      md5: 1bc219e244d68fefefa89e6e88defccf
+      size: 1671
   smooth_firing_rates@0:
     cmd: python scripts/smooth_firing_rates.py --dataset Prez_2022-07-21 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
@@ -2602,50 +2602,52 @@ stages:
       md5: d3d2109b3837c8e1fa77c50322c95b36
       size: 222
   smooth_firing_rates@3:
-    cmd: python scripts/smooth_firing_rates.py --dataset Sulley_2025-05-06 --raw_data_dir
+    cmd: python scripts/smooth_firing_rates.py --dataset Prez_2025-04-16 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
-      --trialframe_dir data/trialframe --lfads_dir results/lfads --log_dir logs --loglevel
-      INFO
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO --smoothing_std 0.05s
     deps:
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       hash: md5
       md5: e47b4d05b2cfb19e1f18e6ed4ad78190
       size: 2819
-    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-spikes-binned.parquet
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
       hash: md5
-      md5: e8f887f743cea415baaf9bb680efb45d
-      size: 2342766
+      md5: c2a13cd1be56e18477643b1ab0c75b14
+      size: 4016311
     - path: scripts/smooth_firing_rates.py
       hash: md5
       md5: 315a5ab685748e239c0c943bd312f187
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 6dcbb0b5f12925ae95f3f1bb9bb5bbce
-      size: 1155
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
     params:
       params.yaml:
         dir_structure:
           raw_data_dir: 
             /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
           trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
           lfads_dir: results/lfads
           log_dir: logs
+          results_dir: results
         logging:
           loglevel: INFO
         smooth_firing_rates:
-          window_len: 60
-          overlap: 20
-          group_split: true
+          smoothing_std: 0.05s
     outs:
-    - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-smooth-rates.parquet
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-smooth-rates.parquet
       hash: md5
-      md5: b35a2aba7674158fc5cc52c33c785b37
-      size: 125078727
-    - path: logs/smooth-firing-rates/Sulley_2025-05-06.log
+      md5: 240f3e05cf9aba18099722314a9c8780
+      size: 127415146
+    - path: logs/smooth-firing-rates/Prez_2025-04-16.log
       hash: md5
-      md5: 127a1669e66ef125400242fef86350f9
-      size: 230
+      md5: 38e1b3e19874b07c6e9fa12f75a13f24
+      size: 222
   smooth_firing_rates@2:
     cmd: python scripts/smooth_firing_rates.py --dataset Dwight_2025-01-07 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
@@ -2740,3 +2742,472 @@ stages:
       hash: md5
       md5: 424e81aed5b829dac4028ba60eb27ebb
       size: 230
+  prep_lfads_tensors@3:
+    cmd: python scripts/prep_lfads_tensors.py data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
+      --out data/pre-lfads-tensors/Prez_2025-04-16_tensors.hdf5 --info_path conf/lfads/dataset_info/Prez_2025-04-16.yaml
+      --loglevel INFO --window_len 60 --overlap 20 --group_split --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results
+    deps:
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
+      hash: md5
+      md5: c2a13cd1be56e18477643b1ab0c75b14
+      size: 4016311
+    - path: scripts/prep_lfads_tensors.py
+      hash: md5
+      md5: bf25093776a3d85fa36356dde16a0083
+      size: 4747
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors:
+          window_len: 60
+          overlap: 20
+          group_split: true
+    outs:
+    - path: data/pre-lfads-tensors/Prez_2025-04-16_tensors.hdf5
+      hash: md5
+      md5: 84064ff6059ce2383eea6e9ef113522c
+      size: 14681105
+    - path: logs/prep-lfads-tensors/Prez_2025-04-16_tensors.log
+      hash: md5
+      md5: ee551a83c9d2cea6da16ec023a1cf4cd
+      size: 359
+  train_lfads@3:
+    cmd: python scripts/train_lfads.py --dataset Prez_2025-04-16 --config ../conf/lfads/lfads-torch.yaml
+      --loglevel INFO --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results
+    deps:
+    - path: conf/lfads
+      hash: md5
+      md5: b0c8e7fa7f22e2dca19cb9f444b4c98a.dir
+      size: 11998
+      nfiles: 10
+    - path: data/pre-lfads-tensors/Prez_2025-04-16_tensors.hdf5
+      hash: md5
+      md5: 84064ff6059ce2383eea6e9ef113522c
+      size: 14681105
+    - path: scripts/train_lfads.py
+      hash: md5
+      md5: 816332e9ae46b69f10224280c58e8a78
+      size: 4881
+    - path: src/lfads_callbacks.py
+      hash: md5
+      md5: f4a3b89cf09e1cc1d2131d755727f150
+      size: 9789
+    - path: src/lfads_dvc.py
+      hash: md5
+      md5: dfe8b4f0ff4095f88b84e99c46570b72
+      size: 1299
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+      conf/lfads/callbacks/plots.yaml:
+        raster_plot:
+          _target_: src.lfads_callbacks.RasterPlot
+          log_every_n_epochs: 20
+        trajectory_plot:
+          _target_: src.lfads_callbacks.TrajectoryPlot
+          log_every_n_epochs: 20
+      conf/lfads/datamodule/single_session_datamodule.yaml:
+        _target_: lfads_torch.datamodules.BasicDataModule
+        attr_keys:
+        - train_trial_id
+        - train_chop_id
+        - valid_trial_id
+        - valid_chop_id
+        batch_keys: []
+        batch_size: 250
+        datafile_pattern: ${relpath:data/pre-lfads-tensors/${dataset_info.dataset_name}}
+      conf/lfads/dataset_info/Prez_2025-04-16.yaml:
+        dataset_name: Prez_2025-04-16_tensors.hdf5
+        tensor_shape:
+          num_neurons: 93
+          num_time_bins: 60
+      conf/lfads/lfads-torch.yaml:
+        callbacks:
+          model_checkpoint:
+            _target_: pytorch_lightning.callbacks.ModelCheckpoint
+            monitor: valid/recon_smth
+            mode: min
+            save_top_k: 1
+            save_last: true
+            verbose: false
+            dirpath: lightning_checkpoints
+            auto_insert_metric_name: false
+          early_stopping:
+            _target_: lfads_torch.extensions.tune.EarlyStoppingWithBurnInPeriod
+            monitor: valid/recon_smth
+            mode: min
+            patience: 10
+            min_delta: 0
+            burn_in_period: 
+              ${max:${sum:${model.l2_start_epoch},${model.l2_increase_epoch}},${sum:${model.kl_start_epoch},${model.kl_increase_epoch}}}
+          learning_rate_monitor:
+            _target_: pytorch_lightning.callbacks.LearningRateMonitor
+            logging_interval: epoch
+        defaults:
+        - dataset_info: Prez_2022-07-21
+        - datamodule: single_session_datamodule
+        - model: single_session_model
+        - callbacks: plots
+        - _self_
+        ignore_warnings: false
+        logger:
+          dvclive_logger:
+            _target_: src.lfads_dvc.DVCLiveLFADSLogger
+            save_dvc_exp: false
+            log_model: false
+        posterior_sampling:
+          use_best_ckpt: true
+          fn:
+            _target_: lfads_torch.post_run.analysis.run_posterior_sampling
+            filename: lfads_output.h5
+            num_samples: 50
+        resume_from_checkpoint: false
+        seed: 0
+        trainer:
+          _target_: pytorch_lightning.Trainer
+          accelerator: auto
+          gradient_clip_val: 200
+          max_epochs: 400
+          log_every_n_steps: 5
+      conf/lfads/model/single_session_model.yaml:
+        _target_: lfads_torch.model.LFADS
+        cell_clip: 5.0
+        ci_enc_dim: 80
+        ci_lag: 1
+        co_dim: 4
+        co_prior:
+          _target_: lfads_torch.modules.priors.AutoregressiveMultivariateNormal
+          tau: 10.0
+          nvar: 0.1
+          shape: ${model.co_dim}
+        con_dim: 80
+        dropout_rate: 0.05
+        encod_data_dim: ${dataset_info.tensor_shape.num_neurons}
+        encod_seq_len: ${dataset_info.tensor_shape.num_time_bins}
+        ext_input_dim: 0
+        fac_dim: 40
+        gen_dim: 100
+        ic_dim: 100
+        ic_enc_dim: 20
+        ic_enc_seq_len: 0
+        ic_post_var_min: 0.0001
+        ic_prior:
+          _target_: lfads_torch.modules.priors.MultivariateNormal
+          mean: 0
+          variance: 0.1
+          shape: ${model.ic_dim}
+        infer_aug_stack:
+          _target_: lfads_torch.modules.augmentations.AugmentationStack
+        kl_co_scale: 2e-06
+        kl_ic_scale: 1e-07
+        kl_increase_epoch: 100
+        kl_start_epoch: 0
+        l2_ci_enc_scale: 0.0
+        l2_con_scale: 0.00040741446541662336
+        l2_gen_scale: 0.00021600820741402065
+        l2_ic_enc_scale: 0.0
+        l2_increase_epoch: 10
+        l2_start_epoch: 0
+        loss_scale: 10000.0
+        lr_adam_beta1: 0.9
+        lr_adam_beta2: 0.999
+        lr_adam_epsilon: 1e-07
+        lr_decay: 0.95
+        lr_init: 0.002
+        lr_patience: 6
+        lr_scheduler: false
+        lr_stop: 1e-05
+        readin:
+        - _target_: torch.nn.Identity
+        readout:
+          _target_: torch.nn.ModuleList
+          modules:
+          - _target_: lfads_torch.modules.readin_readout.FanInLinear
+            in_features: ${model.fac_dim}
+            out_features: ${model.encod_data_dim}
+        recon_reduce_mean: true
+        recon_seq_len: ${model.encod_seq_len}
+        reconstruction:
+        - _target_: lfads_torch.modules.recons.Poisson
+        train_aug_stack:
+          _target_: lfads_torch.modules.augmentations.AugmentationStack
+          transforms:
+          - _target_: lfads_torch.modules.augmentations.CoordinatedDropout
+            cd_rate: 0.3
+            cd_pass_rate: 0.0
+            ic_enc_seq_len: ${model.ic_enc_seq_len}
+          - _target_: lfads_torch.modules.augmentations.SpikeJitter
+            width: 2
+          batch_order:
+          - 0
+          loss_order:
+          - 0
+        variational: true
+        weight_decay: 0.0
+    outs:
+    - path: logs/train-lfads/Prez_2025-04-16.log
+      hash: md5
+      md5: 8f86f40d8a23843a416ba0decdd54a13
+      size: 718
+    - path: results/lfads/Prez_2025-04-16/dvclive
+      hash: md5
+      md5: c2ab4b94a1e1cf42747863f2fafcc6fe.dir
+      size: 4244742
+      nfiles: 57
+    - path: results/lfads/Prez_2025-04-16/lfads_model.pt
+      hash: md5
+      md5: 46b320a33313f21ad686ff71c3322cca
+      size: 911182
+    - path: results/lfads/Prez_2025-04-16/lfads_output_Prez_2025-04-16_tensors.h5
+      hash: md5
+      md5: 928f7c9143a88205b435b39dbfe770b2
+      size: 644806545
+    - path: results/lfads/Prez_2025-04-16/lightning_checkpoints
+      hash: md5
+      md5: 260af4140d7366ee6dfcecbbbb1eed27.dir
+      size: 5461668
+      nfiles: 2
+  merge_lfads_outputs@3:
+    cmd: python scripts/merge_lfads_outputs.py --dataset Prez_2025-04-16 --overlap
+      20 --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO
+    deps:
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
+      hash: md5
+      md5: c2a13cd1be56e18477643b1ab0c75b14
+      size: 4016311
+    - path: results/lfads/Prez_2025-04-16/lfads_output_Prez_2025-04-16_tensors.h5
+      hash: md5
+      md5: 928f7c9143a88205b435b39dbfe770b2
+      size: 644806545
+    - path: scripts/merge_lfads_outputs.py
+      hash: md5
+      md5: 8fac7c148201cda65a8b2dced809c47c
+      size: 3956
+    - path: src/chop_merge.py
+      hash: md5
+      md5: 7f06b1b47029cfc660c844ada75a40c9
+      size: 6254
+    - path: src/munge.py
+      hash: md5
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_lfads_tensors.overlap: 20
+    outs:
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
+      hash: md5
+      md5: d5309752f15d13c38e0247108fc2e923
+      size: 249352020
+    - path: logs/merge-lfads-outputs/Prez_2025-04-16.log
+      hash: md5
+      md5: d4e2da29f496eed9a0005482fd71ca2a
+      size: 386
+  cross_task_decoding@3:
+    cmd: python scripts/cross_task_decoding.py --dataset Prez_2025-04-16 --composition_config
+      conf/trialframe.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO
+    deps:
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
+      hash: md5
+      md5: baff4052d0140f6a2e71861b0e1df9b0
+      size: 8072191
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
+      hash: md5
+      md5: 6bbfc9198ab7074d7306172d7df0a53d
+      size: 16396
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
+      hash: md5
+      md5: d5309752f15d13c38e0247108fc2e923
+      size: 249352020
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
+      hash: md5
+      md5: 09401ef6a1bd62bbe7f60861d7fcd0e7
+      size: 75073
+    - path: scripts/cross_task_decoding.py
+      hash: md5
+      md5: 3a3e2c2e687641ed16932a2f89f12fbc
+      size: 9682
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
+    - path: src/munge.py
+      hash: md5
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
+    - path: src/time_slice.py
+      hash: md5
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
+    - path: src/timeseries.py
+      hash: md5
+      md5: 8daf330e79e020f1bcdadc94c3b6f6c1
+      size: 1624
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+      conf/trialframe.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/cross-task-decoding/Prez_2025-04-16.log
+      hash: md5
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
+    - path: 
+        results/cross-task-decoding/Prez_2025-04-16/Prez_2025-04-16_decoder-task-score-heatmap.svg
+      hash: md5
+      md5: 37b713db4c075b0ac7b2f2a4d5ef9067
+      size: 25702
+    - path: 
+        results/cross-task-decoding/Prez_2025-04-16/Prez_2025-04-16_decoder-trial-scores-scatter.svg
+      hash: md5
+      md5: 26dff16771eadd7b7aa0e5b410871af2
+      size: 108144
+    - path: results/cross-task-decoding/Prez_2025-04-16/trial-predictions/
+      hash: md5
+      md5: a4e8a49b2c9864505e7c98fc601febe3.dir
+      size: 4660077
+      nfiles: 82
+  context_axis@3:
+    cmd: python scripts/get_context_axis.py --dataset Prez_2025-04-16 --composition_config
+      conf/trialframe.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors --config_dir
+      conf --lfads_dir results/lfads --log_dir logs --results_dir results --loglevel
+      INFO
+    deps:
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
+      hash: md5
+      md5: baff4052d0140f6a2e71861b0e1df9b0
+      size: 8072191
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
+      hash: md5
+      md5: 6bbfc9198ab7074d7306172d7df0a53d
+      size: 16396
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
+      hash: md5
+      md5: d5309752f15d13c38e0247108fc2e923
+      size: 249352020
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
+      hash: md5
+      md5: 09401ef6a1bd62bbe7f60861d7fcd0e7
+      size: 75073
+    - path: scripts/get_context_axis.py
+      hash: md5
+      md5: 033d31a6b9fd2c9124febc90deb4d444
+      size: 4019
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: cb3a271e04356492194317582a0c5c3b
+      size: 8008
+    - path: src/munge.py
+      hash: md5
+      md5: 3da3a7a4fad17c89e13814b8393f081f
+      size: 1185
+    - path: src/time_slice.py
+      hash: md5
+      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
+      size: 3798
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+      conf/trialframe.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/context_axis/Prez_2025-04-16.log
+      hash: md5
+      md5: 3658fdb2a30f0c7198b496580169ea0e
+      size: 189
+    - path: results/context_axis/Prez_2025-04-16_context_axis.svg
+      hash: md5
+      md5: 138acee597e9f8ec26b4401056d46818
+      size: 638911
