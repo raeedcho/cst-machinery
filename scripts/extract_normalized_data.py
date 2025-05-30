@@ -103,11 +103,20 @@ def save_binned_spikes(smile_data_blocks: dict[str, list[Any]], output_path: Pat
     logger.info(f'Saved binned spikes to {output_path}')
 
 def save_targets(smile_data_blocks: dict[str, list[Any]], output_path: Path) -> None:
+    target_mapper = {
+        'starttarget': 'start',
+        'tasktarget': 'task cue',
+        'reachtarget': 'reach',
+    }
     targets = smile_extract.concat_block_trial_func_results(
         smile_extract.get_trial_targets,
         smile_data_blocks,
     )
-    targets.to_parquet(output_path)
+    (
+        targets
+        .rename(index=target_mapper, level='target')
+        .to_parquet(output_path)
+    )
     logger.info(f'Saved targets to {output_path}')
 
 if __name__ == '__main__':
