@@ -1,11 +1,14 @@
 import numpy as np
 from .time_slice import reindex_trial_from_event, slice_by_time
+from .munge import remove_baseline
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.decomposition import TruncatedSVD,PCA
 from dPCA import dPCA
 import xarray
 import pandas as pd
 from typing import Union
+from functools import partial
+from sklearn.preprocessing import FunctionTransformer
 
 class JointSubspace(BaseEstimator,TransformerMixin):
     '''
@@ -128,25 +131,14 @@ class SoftnormScaler(BaseEstimator,TransformerMixin):
     def transform(self,X):
         return X / (self.activity_range_ + self.norm_const)
 
-class BaselineShifter(BaseEstimator,TransformerMixin):
-    def __init__(self, ref_event: str, ref_slice: slice, timecol: str='time'):
-        self.ref_event = ref_event
-        self.ref_slice = ref_slice
-        self.timecol = timecol
-
-    def fit(self,X,y=None):
-        return self
-
-    def transform(self,X):
-        baseline = (
-            X
-            .groupby('trial_id',group_keys=False)
-            .apply(reindex_trial_from_event,event=self.ref_event,timecol=self.timecol)
-            .pipe(slice_by_time,time_slice=self.ref_slice,timecol=self.timecol)
-            .groupby('trial_id')
-            .agg(lambda s: np.nanmean(s,axis=0))
-        )
-        return X - baseline
+def BaselineShifter(ref_event: str, ref_slice: slice, timecol: str = 'time'):
+    return FunctionTransformer(
+        remove_baseline,
+        validate=False,
+        check_inverse=False,
+        accept_sparse=False,
+        kw_args={'ref_event': ref_event, 'ref_slice': ref_slice, 'timecol': timecol},
+    )
 
 class VarimaxTransformer(BaseEstimator,TransformerMixin):
     def __init__(self, tol=1e-6, max_iter=100):
