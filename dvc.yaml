@@ -18,6 +18,7 @@ stages:
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       outs:
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet

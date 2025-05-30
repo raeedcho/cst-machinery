@@ -1893,8 +1893,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 9f9fb28ff3562b77db86d2dab7fb6f47.dir
-      size: 85519
+      md5: 37fa712d540b5ee217f57e615032d3fb.dir
+      size: 85524
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -1935,6 +1935,10 @@ stages:
       hash: md5
       md5: 764080f12fa8bd9310227bc068bd24ce
       size: 94831
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_targets.parquet
+      hash: md5
+      md5: 940209a9fded1138743fcbf22e159ea3
+      size: 22205
     - path: logs/extract/Dwight_2025-01-01.log
       hash: md5
       md5: fa866b52ff9ac2c2c60e1f3a6df34f83
@@ -1955,8 +1959,8 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 9f9fb28ff3562b77db86d2dab7fb6f47.dir
-      size: 85519
+      md5: 37fa712d540b5ee217f57e615032d3fb.dir
+      size: 85524
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -1997,6 +2001,10 @@ stages:
       hash: md5
       md5: a83c7def39bb003658289e857f45e545
       size: 163452
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_targets.parquet
+      hash: md5
+      md5: c3dc8a604466f4c66ed98e020802fdd8
+      size: 11627
     - path: logs/extract/Prez_2022-07-21.log
       hash: md5
       md5: 9924765a4c1e081b484bd857d88eb28d
@@ -2017,8 +2025,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 620e402833341a463903a0b2e5159d30.dir
-      size: 85476
+      md5: 37fa712d540b5ee217f57e615032d3fb.dir
+      size: 85524
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2059,6 +2067,10 @@ stages:
       hash: md5
       md5: 7da60759cda7559fe8ba13ab42735334
       size: 67860
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_targets.parquet
+      hash: md5
+      md5: a3fa7810002cb30dc8816adb5a793592
+      size: 19457
     - path: logs/extract/Dwight_2025-01-07.log
       hash: md5
       md5: 04bb8254776c10eed833c0a06a21aff7
@@ -2508,8 +2520,8 @@ stages:
       nfiles: 4
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 85ae4af39b41ba46bce0e30c1d6a35dd.dir
-      size: 85438
+      md5: 7b992bf4fd3b8935542698f27a0500c1.dir
+      size: 85524
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2550,6 +2562,10 @@ stages:
       hash: md5
       md5: 09401ef6a1bd62bbe7f60861d7fcd0e7
       size: 75073
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_targets.parquet
+      hash: md5
+      md5: 90ed9a1ca9633c92a5f973838a7d9b41
+      size: 17782
     - path: logs/extract/Prez_2025-04-16.log
       hash: md5
       md5: 71f3e03488c58bd8c066ae569028c13d
