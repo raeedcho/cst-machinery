@@ -21,6 +21,7 @@ stages:
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
       - ${dir_structure.log_dir}/extract/${item.dataset_name}.log
   smooth_firing_rates:

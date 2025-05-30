@@ -43,6 +43,11 @@ def main(args):
         output_folder / f'{dataset}_hand-pos.parquet',
         final_sampling_rate=1/pd.to_timedelta(args.bin_size).total_seconds(),
     )
+    save_cst_cursor(
+        smile_data_blocks,
+        output_folder / f'{dataset}_cst-cursor-pos.parquet',
+        final_sampling_rate=1/pd.to_timedelta(args.bin_size).total_seconds(),
+    )
     save_binned_spikes(
         smile_data_blocks,
         output_folder / f'{dataset}_neural-spikes-binned.parquet',
@@ -81,6 +86,15 @@ def save_phasespace(smile_data_blocks: dict[str, list[Any]], output_path: Path, 
     )
     phasespace.to_parquet(output_path)
     logger.info(f'Saved phasespace to {output_path}')
+
+def save_cst_cursor(smile_data_blocks: dict[str, list[Any]], output_path: Path, **kwargs) -> None:
+    phasespace = smile_extract.concat_block_trial_func_results(
+        smile_extract.get_trial_cst_cursor,
+        smile_data_blocks,
+        **kwargs,
+    )
+    phasespace.to_parquet(output_path)
+    logger.info(f'Saved cst cursor to {output_path}')
 
 def save_binned_spikes(smile_data_blocks: dict[str, list[Any]], output_path: Path, **kwargs) -> None:
     def spike_processor(block_data: list) -> pd.DataFrame:

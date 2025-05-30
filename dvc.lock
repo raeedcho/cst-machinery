@@ -1893,13 +1893,13 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 3bfed909cf1e6efc42865269e9cbca04.dir
-      size: 85514
+      md5: 6c0388ed3eee81b03047f487bf300014.dir
+      size: 87640
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: d7fde05d0b5a7552ea3f0f9f71a61a4e
-      size: 6323
+      md5: 51cea9ce6600ebdb34bfd1d01e19484a
+      size: 6868
     params:
       params.yaml:
         dir_structure:
@@ -1919,10 +1919,14 @@ stages:
         logging:
           loglevel: INFO
     outs:
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_cst-cursor-pos.parquet
+      hash: md5
+      md5: cfd4a68c050185e7807342bfdc9bce9f
+      size: 608553
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
       hash: md5
-      md5: 81cbbfba0ee478e4ca86ff96b81218b0
-      size: 10193845
+      md5: f992e862446c2701bc18847cc5217dfb
+      size: 10193847
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
       hash: md5
       md5: 1d99c3ffe83a1cf9a485a032a7234289
@@ -1941,8 +1945,8 @@ stages:
       size: 22164
     - path: logs/extract/Dwight_2025-01-01.log
       hash: md5
-      md5: fa866b52ff9ac2c2c60e1f3a6df34f83
-      size: 1803
+      md5: 0ab399f5bfcae66a682ad01cf33ba592
+      size: 1912
   extract@0:
     cmd: python scripts/extract_normalized_data.py --dataset Prez_2022-07-21 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
@@ -1959,13 +1963,13 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 3bfed909cf1e6efc42865269e9cbca04.dir
-      size: 85514
+      md5: 6c0388ed3eee81b03047f487bf300014.dir
+      size: 87640
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: d7fde05d0b5a7552ea3f0f9f71a61a4e
-      size: 6323
+      md5: 51cea9ce6600ebdb34bfd1d01e19484a
+      size: 6868
     params:
       params.yaml:
         dir_structure:
@@ -1985,10 +1989,14 @@ stages:
         logging:
           loglevel: INFO
     outs:
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_cst-cursor-pos.parquet
+      hash: md5
+      md5: 5cb89f2d0c05bd912420f4ca622f5e45
+      size: 1109653
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
       hash: md5
-      md5: e72b2166dadd9da5bd4cfcb7549acf9a
-      size: 7467123
+      md5: 409bc9e7c8506c855f56fc0a341fb0ed
+      size: 7467125
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_meta.parquet
       hash: md5
       md5: 8b875db5572c7a55dc899e7ca25e99e5
@@ -2007,8 +2015,8 @@ stages:
       size: 11566
     - path: logs/extract/Prez_2022-07-21.log
       hash: md5
-      md5: 9924765a4c1e081b484bd857d88eb28d
-      size: 1038
+      md5: 860626e4202ea73bc1b3ed5f799c174a
+      size: 1143
   extract@2:
     cmd: python scripts/extract_normalized_data.py --dataset Dwight_2025-01-07 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
@@ -2025,13 +2033,13 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 3bfed909cf1e6efc42865269e9cbca04.dir
-      size: 85514
+      md5: 6c0388ed3eee81b03047f487bf300014.dir
+      size: 87640
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: d7fde05d0b5a7552ea3f0f9f71a61a4e
-      size: 6323
+      md5: 51cea9ce6600ebdb34bfd1d01e19484a
+      size: 6868
     params:
       params.yaml:
         dir_structure:
@@ -2051,10 +2059,14 @@ stages:
         logging:
           loglevel: INFO
     outs:
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_cst-cursor-pos.parquet
+      hash: md5
+      md5: 82eebbf02ecf0de6cdce0603495bef88
+      size: 648793
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
       hash: md5
-      md5: e9247c390f9c940249645ec4a909d997
-      size: 7995502
+      md5: 41cb76ae8a1ebb0b46e0ceb95b21265b
+      size: 7995504
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
       hash: md5
       md5: 72ea541a4cf91b54e2e9b2e7c8e45245
@@ -2073,8 +2085,8 @@ stages:
       size: 19414
     - path: logs/extract/Dwight_2025-01-07.log
       hash: md5
-      md5: 04bb8254776c10eed833c0a06a21aff7
-      size: 1801
+      md5: 4038cfe253d9a8e72f27c55f4db0dee7
+      size: 1910
   prep_lfads_tensors@Prez_2022-07-21:
     cmd: python scripts/prep_lfads_tensors.py data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
       --out data/pre-lfads-tensors/Prez_2022-07-21_tensors.hdf5 --info_path conf/lfads/dataset_info/Prez_2022-07-21.yaml
@@ -2520,13 +2532,13 @@ stages:
       nfiles: 4
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 3bfed909cf1e6efc42865269e9cbca04.dir
-      size: 85514
+      md5: 6c0388ed3eee81b03047f487bf300014.dir
+      size: 87640
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: d7fde05d0b5a7552ea3f0f9f71a61a4e
-      size: 6323
+      md5: 51cea9ce6600ebdb34bfd1d01e19484a
+      size: 6868
     params:
       params.yaml:
         dir_structure:
@@ -2546,10 +2558,14 @@ stages:
         logging:
           loglevel: INFO
     outs:
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_cst-cursor-pos.parquet
+      hash: md5
+      md5: 9d4b2ab19fe1542214a859ef3c24e96c
+      size: 275441
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
       hash: md5
-      md5: baff4052d0140f6a2e71861b0e1df9b0
-      size: 8072191
+      md5: 9186636f1eb57c9f090c1e5e05525735
+      size: 8072193
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
       hash: md5
       md5: 6bbfc9198ab7074d7306172d7df0a53d
@@ -2568,8 +2584,8 @@ stages:
       size: 17710
     - path: logs/extract/Prez_2025-04-16.log
       hash: md5
-      md5: 71f3e03488c58bd8c066ae569028c13d
-      size: 1766
+      md5: de454fdd7859e2ae6469cc0cde3b2e0f
+      size: 1871
   smooth_firing_rates@0:
     cmd: python scripts/smooth_firing_rates.py --dataset Prez_2022-07-21 --raw_data_dir
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
