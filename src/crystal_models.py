@@ -1,6 +1,6 @@
 import numpy as np
 from .time_slice import reindex_trial_from_event, slice_by_time
-from .munge import remove_baseline
+from .timeseries import remove_baseline
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.decomposition import TruncatedSVD,PCA
 from dPCA import dPCA
