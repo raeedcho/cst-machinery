@@ -51,6 +51,10 @@ def main(args):
         max_spike_coincidence=args.max_spike_coincidence,
         rate_artifact_threshold=args.rate_artifact_threshold,
     )
+    save_targets(
+        smile_data_blocks,
+        output_folder / f'{dataset}_targets.parquet',
+    )
 
 def save_meta(smile_data_blocks: dict[str, list[Any]], output_path: Path) -> None:
     meta = smile_extract.concat_block_func_results(
@@ -97,6 +101,14 @@ def save_binned_spikes(smile_data_blocks: dict[str, list[Any]], output_path: Pat
     )
     binned_spikes.to_parquet(output_path)
     logger.info(f'Saved binned spikes to {output_path}')
+
+def save_targets(smile_data_blocks: dict[str, list[Any]], output_path: Path) -> None:
+    targets = smile_extract.concat_block_trial_func_results(
+        smile_extract.get_trial_targets,
+        smile_data_blocks,
+    )
+    targets.to_parquet(output_path)
+    logger.info(f'Saved targets to {output_path}')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract and save trial frame from SMILE data')
