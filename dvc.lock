@@ -1893,8 +1893,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 6c0388ed3eee81b03047f487bf300014.dir
-      size: 87640
+      md5: c0087f14dc9339be6b9574c28976a09b.dir
+      size: 87755
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -1963,8 +1963,8 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 6c0388ed3eee81b03047f487bf300014.dir
-      size: 87640
+      md5: c0087f14dc9339be6b9574c28976a09b.dir
+      size: 87755
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2033,8 +2033,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 6c0388ed3eee81b03047f487bf300014.dir
-      size: 87640
+      md5: c0087f14dc9339be6b9574c28976a09b.dir
+      size: 87755
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2532,8 +2532,8 @@ stages:
       nfiles: 4
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 6c0388ed3eee81b03047f487bf300014.dir
-      size: 87640
+      md5: c0087f14dc9339be6b9574c28976a09b.dir
+      size: 87755
       nfiles: 27
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2568,8 +2568,8 @@ stages:
       size: 8072193
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
       hash: md5
-      md5: 6bbfc9198ab7074d7306172d7df0a53d
-      size: 16396
+      md5: 4eeabdec726bcdd4fafe7909999d62cb
+      size: 15931
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
       hash: md5
       md5: c2a13cd1be56e18477643b1ab0c75b14
