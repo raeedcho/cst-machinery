@@ -92,11 +92,12 @@ stages:
   merge_lfads_outputs:
     foreach: ${datasets}
     do:
-      cmd: python scripts/merge_lfads_outputs.py --dataset ${item.dataset_name} --overlap ${prep_lfads_tensors.overlap} ${dir_structure} ${logging}
+      cmd: python scripts/merge_lfads_outputs.py --dataset ${item.dataset_name} --overlap ${prep_lfads_tensors.overlap} ${merge_lfads_tensors} ${dir_structure} ${logging}
       params:
       - dir_structure
       - logging
       - prep_lfads_tensors.overlap
+      - merge_lfads_tensors
       deps:
       - scripts/merge_lfads_outputs.py
       - src/chop_merge.py

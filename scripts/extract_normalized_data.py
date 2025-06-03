@@ -4,6 +4,7 @@ from pathlib import Path
 import argparse
 from typing import Any
 import logging
+import re
 logger = logging.getLogger(__name__)
 
 def main(args):
@@ -61,10 +62,41 @@ def main(args):
         output_folder / f'{dataset}_targets.parquet',
     )
 
+def trial_name_to_task(trial_name: str) -> str:
+    """
+    Convert a trial name to a task name.
+    """
+    if trial_name.startswith('RandomTargetTask'):
+        return 'RTT'
+    elif trial_name.startswith('CST'):
+        return 'CST'
+    elif trial_name.startswith('CenterOut_20181112'):
+        return 'eye-calibration'
+    elif 'choice' in trial_name:
+        return 'reward-choice'
+    elif 'memory-guided' in trial_name: # Prez/Sulley memory-guided DCO task
+        return 'DCO'
+    elif re.match(r'^R.T.$', trial_name): # Dwight's DCO task
+        return 'DCO'
+    elif re.match(r'^R.T.C$', trial_name): # Dwight's DCO-catch task
+        return 'DCO-catch'
+    elif re.match(r'^R.T.R.T.$', trial_name): # Dwight's DCO choice task
+        return 'reward-choice'
+    elif trial_name.startswith('CenterOut'):
+        return 'CO'
+    else:
+        return trial_name
+
 def save_meta(smile_data_blocks: dict[str, list[Any]], output_path: Path) -> None:
-    meta = smile_extract.concat_block_func_results(
-        smile_extract.get_smile_meta,
-        smile_data_blocks,
+    meta = (
+        smile_extract.concat_block_func_results(
+            smile_extract.get_smile_meta,
+            smile_data_blocks,
+        )
+        .assign(**{
+            'task': lambda df: df['trial name'].apply(trial_name_to_task),
+            'memory': lambda df: df['trial name'].apply(lambda x: 'memory' in x.lower()),
+        })
     )
     meta.to_parquet(output_path)
     logger.info(f'Saved meta information to {output_path}')

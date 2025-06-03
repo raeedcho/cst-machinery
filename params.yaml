@@ -40,3 +40,6 @@ prep_lfads_tensors:
   window_len: 60
   overlap: 20
   group_split: true
+
+merge_lfads_tensors:
+  smooth_pwr: 1
