@@ -1,5 +1,4 @@
 import numpy as np
-from .time_slice import reindex_trial_from_event, slice_by_time
 from .timeseries import remove_baseline
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.decomposition import TruncatedSVD,PCA
@@ -9,7 +8,7 @@ import pandas as pd
 from typing import Union
 from functools import partial
 from sklearn.preprocessing import FunctionTransformer
-
+import dekodec
 class JointSubspace(BaseEstimator,TransformerMixin):
     '''
     Model to find a joint subspace given multiple datasets in the same full-D space 

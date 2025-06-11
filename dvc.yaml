@@ -107,6 +107,32 @@ stages:
       outs:
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       - ${dir_structure.log_dir}/merge-lfads-outputs/${item.dataset_name}.log
+  subspace_split:
+    foreach: ${datasets}
+    do:
+      cmd: python scripts/subspace_split.py --dataset ${item.dataset_name} 
+        --composition_config ${dir_structure.config_dir}/trialframe.yaml
+        ${dir_structure} ${logging} ${subspace_split}
+      params:
+      - logging
+      - dir_structure
+      - subspace_split
+      - conf/trialframe.yaml:
+      deps:
+      - scripts/subspace_split.py
+      - src/munge.py
+      - src/cli.py
+      - src/io.py
+      - src/crystal_models.py
+      - src/time_slice.py
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      outs:
+      - ${dir_structure.log_dir}/subspace-split/${item.dataset_name}.log
+      - ${dir_structure.results_dir}/subspace-split/${item.dataset_name}/${item.dataset_name}_subspace-split-pipeline.pkl
+      - ${dir_structure.results_dir}/subspace-split/${item.dataset_name}/${item.dataset_name}_subspace-split-variance.svg
   context_axis:
     foreach: ${datasets}
     do:

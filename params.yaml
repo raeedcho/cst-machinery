@@ -43,3 +43,7 @@ prep_lfads_tensors:
 
 merge_lfads_tensors:
   smooth_pwr: 1
+
+subspace_split:
+  num_components_per_cond: 15
+  dekodec_var_cutoff: 0.99
