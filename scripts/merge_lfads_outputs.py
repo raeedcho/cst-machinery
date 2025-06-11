@@ -11,7 +11,6 @@ import h5py
 
 def main(args):
     dataset: str = args.dataset
-    monkey, session_date = dataset.split('_')
 
     trialframe_folder: Path = Path(args.trialframe_dir) / dataset
     trialframe_path: Path = trialframe_folder / f'{dataset}_neural-spikes-binned.parquet'
@@ -37,7 +36,7 @@ def main(args):
     lfads_counts: pd.DataFrame = chops_to_frame(
         chops,
         overlap=args.overlap,
-        smooth_pwr=1,
+        smooth_pwr=args.smooth_pwr,
         orig_frame=binned_spikes, # type: ignore
     )
     logger.info(f'Converted chops to frame with shape {lfads_counts.shape}')
@@ -101,6 +100,12 @@ if __name__ == "__main__":
         type=int,
         help='Overlap between windows',
         required=True,
+    )
+    parser.add_argument(
+        '--smooth_pwr',
+        type=float,
+        help='Power for smoothing the chops',
+        default=1,
     )
     parser.add_argument(
         '--trialframe_dir',

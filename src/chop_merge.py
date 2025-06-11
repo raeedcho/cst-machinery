@@ -183,7 +183,7 @@ def chops_to_frame(chops: pd.Series, orig_frame: pd.DataFrame, overlap: int, smo
                 merge_chops(
                     np.stack(trial_chops.values), # type: ignore
                     overlap=overlap,
-                    smooth_pwr=2,
+                    smooth_pwr=smooth_pwr,
                     orig_len=orig_frame.groupby('trial_id').get_group(trial_id).shape[0],
                 ),
                 columns=orig_frame.columns,
