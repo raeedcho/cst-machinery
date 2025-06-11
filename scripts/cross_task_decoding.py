@@ -8,7 +8,7 @@ from src.cli import with_parsed_args, create_default_parser
 import smile_extract
 from pathlib import Path
 from omegaconf import OmegaConf,DictConfig,ListConfig
-from typing import Union
+from typing import Union,Optional
 import logging
 logger = logging.getLogger(__name__)
 
@@ -110,21 +110,28 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
         'Control System': 'Go Cue',
         'Reach to Target 1': 'Go Cue',
         'Hold at Target 1': 'Go Cue', # Sometimes first reach state is skipped in this table (if the first target is in the center)
+        'Reach to Target': 'Go Cue',
     }
     preproc = (
         tf
         .set_index(['task','result','state'],append=True)
-        .pipe(munge.multivalue_xs,keys=['CST','RTT'],level='task')
+        .pipe(munge.multivalue_xs,keys=['CST','RTT','DCO'],level='task')
         .xs(level='result',key='success')
+        .rename(index=state_mapper, level='state')
+        .groupby('trial_id')
+        .filter(lambda df: np.any(munge.get_index_level(df,'state') == 'Go Cue'))
         # .pipe(drop_hand_drop_trials) # type: ignore
     )
 
     trim_pipeline = lambda df: (
         df
-        .rename(index=state_mapper, level='state')
         .groupby('trial_id', group_keys=False)
         .apply(lambda df: time_slice.reindex_trial_from_event(df, event='Go Cue'))
-        .pipe(time_slice.slice_by_time,time_slice=slice('-0.5 sec','3 sec'),timecol='time')
+        .pipe(
+            time_slice.slice_by_time,
+            time_slice=slice(pd.to_timedelta('-0.5s'),pd.to_timedelta('3s')),
+            timecol='time'
+        )
     )
 
     scale_PCA_pipeline = make_pipeline(
@@ -186,10 +193,34 @@ def drop_hand_drop_trials(trialframe: pd.DataFrame)-> pd.DataFrame:
     return trialframe
 
 def decode_single_trials(predictor_data: pd.DataFrame, target_data: pd.Series)->pd.DataFrame:
+    available_tasks = munge.get_index_level(predictor_data,'task').unique()
+    single_task_models ={
+        f'{task}-trained': TaskTrainedDecoder(task=task)
+        for task in available_tasks
+    }
+
+    from itertools import combinations
+    if len(available_tasks) >= 2:
+        dual_task_models = {
+            f'{tasks[0]}-{tasks[1]}-trained': TaskTrainedDecoder(task=list(tasks))
+            for tasks in combinations(available_tasks, 2)
+        }
+    else:
+        dual_task_models = {}
+
+    if len(available_tasks) >= 3:
+        tri_task_models = {
+            f'{tasks[0]}-{tasks[1]}-{tasks[2]}-trained': TaskTrainedDecoder(task=list(tasks))
+            for tasks in combinations(available_tasks, 3)
+        }
+    else:
+        tri_task_models = {}
+
+    # Combine all models into a single dictionary
     models = {
-        'CST-trained': TaskTrainedDecoder(task='CST'),
-        'RTT-trained': TaskTrainedDecoder(task='RTT'),
-        'Dual': TaskTrainedDecoder(task=None),
+        **single_task_models,
+        **dual_task_models,
+        **tri_task_models,
     }
 
     trial_predictions = pd.DataFrame(
@@ -259,7 +290,12 @@ class TaskTrainedDecoder(BaseEstimator,RegressorMixin):
     """
     A linear regression model trained on data from only a single task.
     """
-    def __init__(self,task=None,**kwargs):
+    def __init__(self,task: Optional[Union[str,list[str]]]=None,**kwargs):
+        assert isinstance(task,(str,list)), 'task must be a string or list of strings'
+        if isinstance(task,str):
+            task = [task]
+        assert all(isinstance(t,str) for t in task), 'task must be a string or list of strings'
+
         self.task = task
         self.model = LinearRegression(**kwargs)
     
@@ -270,8 +306,8 @@ class TaskTrainedDecoder(BaseEstimator,RegressorMixin):
         self.output_columns = y.columns
 
         if self.task is not None:
-            X_task = X.xs(level='task',key=self.task)
-            y_task = y.xs(level='task',key=self.task)
+            X_task = munge.multivalue_xs(X,level='task',keys=self.task)
+            y_task = munge.multivalue_xs(y,level='task',keys=self.task)
         else:
             X_task = X
             y_task = y

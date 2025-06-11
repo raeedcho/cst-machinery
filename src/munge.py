@@ -6,7 +6,8 @@ def get_index_level(df,level=None):
     return df.reset_index(level=level)[level]
 
 def multivalue_xs(df: pd.DataFrame,keys: list,level,**kwargs) -> pd.DataFrame:
-    return pd.concat([df.xs(key=key,level=level,drop_level=False,**kwargs) for key in keys])
+    possible_keys = df.groupby(level=level).groups.keys()
+    return pd.concat([df.xs(key=key,level=level,drop_level=False,**kwargs) for key in keys if key in possible_keys])
 
 def hierarchical_assign(df,assign_dict):
     '''
