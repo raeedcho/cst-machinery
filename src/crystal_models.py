@@ -5,9 +5,11 @@ from sklearn.decomposition import TruncatedSVD,PCA
 from dPCA import dPCA
 import xarray
 import pandas as pd
-from typing import Union
+from typing import Union,Optional
 from functools import partial
 from sklearn.preprocessing import FunctionTransformer
+from sklearn.utils.validation import check_is_fitted
+from .time_slice import get_epoch_data
 import dekodec
 class JointSubspace(BaseEstimator,TransformerMixin):
     '''
