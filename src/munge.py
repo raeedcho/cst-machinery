@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def get_index_level(df,level=None):
     if level is None:
@@ -31,3 +32,18 @@ def hierarchical_assign(df,assign_dict):
             ) # type: ignore
         )
     )
+
+def make_dpca_tensor(self,X: pd.DataFrame) -> np.ndarray:
+    """
+    Convert the input data to a tensor format suitable for dPCA.
+    """
+    index_to_drop = list(set(X.index.names)-{'trial_id','time'})
+    trials = (
+        X
+        .reset_index(level=index_to_drop, drop=True)
+        .stack()
+        .reorder_levels(['trial_id','channel','time'])
+        .to_xarray()
+    )
+
+    return trials.mean(dim='trial_id').to_numpy()
