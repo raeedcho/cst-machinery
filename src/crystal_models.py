@@ -197,7 +197,7 @@ class CISFinder(DataFrameTransformer):
     def __init__(
             self,
             reference_task: str='DCO',
-            move_epoch: dict[str,slice] = {'Move': slice(pd.to_timedelta('-0.4s'), pd.to_timedelta('0.6s'))}
+            move_epoch: dict[str,tuple[str,slice]] = {'move': ('Move', slice(pd.to_timedelta('-0.4s'), pd.to_timedelta('0.6s')))}
     ) -> None:
         self.reference_task = reference_task
         self.move_epoch = move_epoch

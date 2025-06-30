@@ -93,7 +93,7 @@ def reindex_trial_from_event(trial: pd.DataFrame,event: str, timecol: str='time'
 
     return reindex_trial_from_time(trial,reference_time,timecol=timecol)
 
-def get_epoch_data(data: pd.DataFrame,epochs: dict, timecol: str='time'):
+def get_epoch_data(data: pd.DataFrame,epochs: dict[str,tuple[str,slice]], timecol: str='time'):
     '''
     Get data arranged by epoch and relative time
 
@@ -103,8 +103,8 @@ def get_epoch_data(data: pd.DataFrame,epochs: dict, timecol: str='time'):
         The data to be arranged by epoch and relative time.
     epochs : dict
         The list of epoch names to be used for grouping the data.
-        Keys correspond to state name and values are datetime slices
-        around the event onset.
+        Keys correspond to the intended name of the epoch,
+        and values are (state name, datetime slices around the state onset).
 
     Returns:
     --------
@@ -116,10 +116,10 @@ def get_epoch_data(data: pd.DataFrame,epochs: dict, timecol: str='time'):
             data
             .groupby('trial_id',group_keys=False)
             .apply(lambda df: reindex_trial_from_event(df,event=event,timecol=timecol))
-            .assign(phase=event)
+            .assign(phase=epoch_name)
             .set_index('phase',append=True)
             .pipe(slice_by_time, time_slice=event_slice, timecol=timecol)
         )
-        for event,event_slice in epochs.items()
+        for epoch_name,(event,event_slice) in epochs.items()
     ]
     return pd.concat(epoch_data_list)
