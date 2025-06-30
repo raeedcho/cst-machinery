@@ -2613,8 +2613,8 @@ stages:
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     params:
       params.yaml:
         dir_structure:
@@ -2660,8 +2660,8 @@ stages:
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     params:
       params.yaml:
         dir_structure:
@@ -2707,8 +2707,8 @@ stages:
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     params:
       params.yaml:
         dir_structure:
@@ -2754,8 +2754,8 @@ stages:
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     params:
       params.yaml:
         dir_structure:
