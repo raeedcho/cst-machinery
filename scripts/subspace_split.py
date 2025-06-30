@@ -70,7 +70,12 @@ def precondition_data(tf: pd.DataFrame)->pd.DataFrame:
 
     return neural_data # type: ignore
 
-def plot_split_subspace_variance(unsplit_activity, split_activity) -> Figure:
+def plot_split_subspace_variance(
+        unsplit_activity,
+        split_activity,
+        grouper='task',
+        group_order = ['CST','RTT','DCO']
+        ) -> Figure:
     neural_data = pd.concat(
         {'unsplit': unsplit_activity, 'split': split_activity},
         axis=1,
@@ -80,7 +85,7 @@ def plot_split_subspace_variance(unsplit_activity, split_activity) -> Figure:
     compared_var = (
         neural_data
         .stack(level='neural space')
-        .groupby(['task', 'neural space'])
+        .groupby([grouper, 'neural space'])
         .apply(subspace_tools.calculate_fraction_variance)
         .stack(level='component')
         .to_frame(name='fraction variance')
@@ -90,8 +95,8 @@ def plot_split_subspace_variance(unsplit_activity, split_activity) -> Figure:
         data=compared_var,
         x='component',
         y='fraction variance',
-        hue='task',
-        hue_order=['CST', 'RTT', 'DCO'],
+        hue=grouper,
+        hue_order=group_order,
         kind='bar',
         row='neural space',
         sharex=True,
