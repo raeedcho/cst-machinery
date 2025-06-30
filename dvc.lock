@@ -212,40 +212,40 @@ stages:
     deps:
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
       hash: md5
-      md5: e72b2166dadd9da5bd4cfcb7549acf9a
-      size: 7467123
+      md5: 409bc9e7c8506c855f56fc0a341fb0ed
+      size: 7467125
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_meta.parquet
       hash: md5
-      md5: 8b875db5572c7a55dc899e7ca25e99e5
-      size: 10014
+      md5: b15c8219fe21a14f59ee8dd08997612b
+      size: 11163
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
       hash: md5
-      md5: 2d7b83e9b2b1efe3e2b7f20066f04303
-      size: 392888702
+      md5: 30ac0c52988fffc7f1b8940f0fca5578
+      size: 390007011
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
       hash: md5
       md5: a83c7def39bb003658289e857f45e545
       size: 163452
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 033d31a6b9fd2c9124febc90deb4d444
-      size: 4019
+      md5: 5920486d916e1cdf5403ff424706833f
+      size: 5039
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: cb3a271e04356492194317582a0c5c3b
-      size: 8008
+      md5: 7e927403d10a01683e52173fce953613
+      size: 10437
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     - path: src/time_slice.py
       hash: md5
-      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
-      size: 3798
+      md5: 5e74cdf9f88934d87228f68741a8ca2d
+      size: 3910
     params:
       params.yaml:
         dir_structure:
@@ -272,8 +272,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: 23dd4720923c921e14f339fc50c0d725
-      size: 1705204
+      md5: effa7289ead90383ebfc56f3da3baf38
+      size: 1553337
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -512,40 +512,40 @@ stages:
     deps:
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
       hash: md5
-      md5: 81cbbfba0ee478e4ca86ff96b81218b0
-      size: 10193845
+      md5: f992e862446c2701bc18847cc5217dfb
+      size: 10193847
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
       hash: md5
-      md5: 1d99c3ffe83a1cf9a485a032a7234289
-      size: 18901
+      md5: 47857174e293c7901f8a43f1f6e0f0bd
+      size: 20430
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
       hash: md5
-      md5: 118f6fe01de2c99ee9ec75fee1cad5e8
-      size: 423231783
+      md5: 2db0df4c9e15781de2b6155bf2a13aa5
+      size: 410171861
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
       hash: md5
       md5: 764080f12fa8bd9310227bc068bd24ce
       size: 94831
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 033d31a6b9fd2c9124febc90deb4d444
-      size: 4019
+      md5: 5920486d916e1cdf5403ff424706833f
+      size: 5039
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: cb3a271e04356492194317582a0c5c3b
-      size: 8008
+      md5: 7e927403d10a01683e52173fce953613
+      size: 10437
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     - path: src/time_slice.py
       hash: md5
-      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
-      size: 3798
+      md5: 5e74cdf9f88934d87228f68741a8ca2d
+      size: 3910
     params:
       params.yaml:
         dir_structure:
@@ -572,8 +572,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: 3854d49179db68998e34f75c9f9545c6
-      size: 2497770
+      md5: a9850606dc3c3a367fca6561ff9d1569
+      size: 2981255
   context_axis@2:
     cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-07 --composition_config
       conf/trialframe.yaml --raw_data_dir 
@@ -584,40 +584,40 @@ stages:
     deps:
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
       hash: md5
-      md5: e9247c390f9c940249645ec4a909d997
-      size: 7995502
+      md5: 41cb76ae8a1ebb0b46e0ceb95b21265b
+      size: 7995504
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
       hash: md5
-      md5: 72ea541a4cf91b54e2e9b2e7c8e45245
-      size: 16985
+      md5: e73900bf22d26b690340625a78af69fd
+      size: 18453
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
       hash: md5
-      md5: c7b321506bc066b63ca89155ab7440ba
-      size: 307961218
+      md5: 8b208140518b1ee2965c0cb2e797b1d4
+      size: 299181644
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
       hash: md5
       md5: 7da60759cda7559fe8ba13ab42735334
       size: 67860
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 033d31a6b9fd2c9124febc90deb4d444
-      size: 4019
+      md5: 5920486d916e1cdf5403ff424706833f
+      size: 5039
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: cb3a271e04356492194317582a0c5c3b
-      size: 8008
+      md5: 7e927403d10a01683e52173fce953613
+      size: 10437
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     - path: src/time_slice.py
       hash: md5
-      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
-      size: 3798
+      md5: 5e74cdf9f88934d87228f68741a8ca2d
+      size: 3910
     params:
       params.yaml:
         dir_structure:
@@ -644,8 +644,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: 53c97e7bf860ed94714253f4f95c7067
-      size: 2459166
+      md5: 50da0fbdec4c78a3fdd36093d6bfaf25
+      size: 2818244
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py --dataset Prez_2022-07-21 --composition_config
       conf/trialframe.yaml --raw_data_dir 
@@ -3189,40 +3189,40 @@ stages:
     deps:
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
       hash: md5
-      md5: baff4052d0140f6a2e71861b0e1df9b0
-      size: 8072191
+      md5: 9186636f1eb57c9f090c1e5e05525735
+      size: 8072193
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
       hash: md5
-      md5: 6bbfc9198ab7074d7306172d7df0a53d
-      size: 16396
+      md5: 5eaf0ac7ff34860aefeafbbd3ca13e4a
+      size: 17663
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
       hash: md5
-      md5: d5309752f15d13c38e0247108fc2e923
-      size: 249352020
+      md5: 10c9ec9791aa2ac1d71cac05c1d4d3b1
+      size: 243354895
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
       hash: md5
       md5: 09401ef6a1bd62bbe7f60861d7fcd0e7
       size: 75073
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 033d31a6b9fd2c9124febc90deb4d444
-      size: 4019
+      md5: 5920486d916e1cdf5403ff424706833f
+      size: 5039
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: cb3a271e04356492194317582a0c5c3b
-      size: 8008
+      md5: 7e927403d10a01683e52173fce953613
+      size: 10437
     - path: src/munge.py
       hash: md5
-      md5: 3da3a7a4fad17c89e13814b8393f081f
-      size: 1185
+      md5: 5412a6d334212d606a1d097eba67584a
+      size: 1499
     - path: src/time_slice.py
       hash: md5
-      md5: e844f50e2ba8a36aeba1c15cc59c9eb7
-      size: 3798
+      md5: 5e74cdf9f88934d87228f68741a8ca2d
+      size: 3910
     params:
       params.yaml:
         dir_structure:
@@ -3249,8 +3249,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2025-04-16_context_axis.svg
       hash: md5
-      md5: 138acee597e9f8ec26b4401056d46818
-      size: 638911
+      md5: c5343fb6d7560ab19383510c65da092c
+      size: 637715
   subspace_split@0:
     cmd: python scripts/subspace_split.py --dataset Prez_2022-07-21 --composition_config
       conf/trialframe.yaml --raw_data_dir 

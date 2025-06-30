@@ -86,6 +86,9 @@ def reindex_trial_from_event(trial: pd.DataFrame,event: str, timecol: str='time'
             .values[-1]
         )
     except KeyError:
+        Warning(
+            f"Event '{event}' not found in trial data. Using NaT as reference time."
+        )
         reference_time = pd.NaT
 
     return reindex_trial_from_time(trial,reference_time,timecol=timecol)
