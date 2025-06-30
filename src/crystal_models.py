@@ -108,7 +108,7 @@ class JointSubspace(BaseEstimator,TransformerMixin):
             (pd.DataFrame) New DataFrame with an additional column containing the
                 projected data (column name is f'{self.signal}_joint_pca')
         '''
-        assert hasattr(self,'P_'), "Model not yet fitted"
+        check_is_fitted(self,'P_')
 
         if self.remove_latent_offsets:
             return (
@@ -130,6 +130,7 @@ class SoftnormScaler(BaseEstimator,TransformerMixin):
         return self
 
     def transform(self,X):
+        check_is_fitted(self, 'activity_range_')
         return X / (self.activity_range_ + self.norm_const)
 
 def BaselineShifter(ref_event: str, ref_slice: slice, timecol: str = 'time'):
