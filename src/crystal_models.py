@@ -171,39 +171,44 @@ class VarimaxTransformer(BaseEstimator,TransformerMixin):
     def transform(self,X):
         return X @ self.rotation_matrix_
 
-class TrialframeDPCA(BaseEstimator,TransformerMixin):
-    """
-    dPCA model for trialframe data.
-    note: this only works for CIS right now
-    """
-    def __init__(self, protect=None, **dpca_kwargs):
-        self.model = dPCA.dPCA(**(dpca_kwargs or {}))
-        if protect is not None:
-            self.model.protect = protect
+class DataFrameTransformer(BaseEstimator,TransformerMixin):
+    def __init__(self, transformer):
+        self.transformer = transformer
 
-    def fit(self,X,y=None,**fit_kwargs):
-        tensor = self.make_tensor(X)
-        self.model.fit(X=tensor)
+    def fit(self,X,y=None):
+        self.transformer.fit(X,y)
         return self
 
-    def transform(self,X,marginalization=None):
-        out = self.model.transform(X.values.T,marginalization='t').T
+    def transform(self, X):
+        output = self.transformer.transform(X)
         return pd.DataFrame(
-            out,
+            output,
             index=X.index,
+            columns=range(output.shape[1]),
         )
 
-    def make_tensor(self,X: pd.DataFrame) -> np.ndarray:
-        """
-        Convert the input data to a tensor format suitable for dPCA.
-        """
-        index_to_drop = list(set(X.index.names)-{'trial_id','time'})
-        trials = (
+class CISFinder(DataFrameTransformer):
+    """
+    model for trialframe data to find CIS.
+    """
+    def __init__(
+            self,
+            reference_task: str='DCO',
+            move_epoch: dict[str,slice] = {'Move': slice(pd.to_timedelta('-0.4s'), pd.to_timedelta('0.6s'))}
+    ) -> None:
+        self.reference_task = reference_task
+        self.move_epoch = move_epoch
+        transformer = PCA()
+        super().__init__(transformer)
+
+    def fit(self,X,y=None,**fit_kwargs):
+        tensor = (
             X
-            .reset_index(level=index_to_drop, drop=True)
-            .stack()
-            .reorder_levels(['trial_id','channel','time'])
-            .to_xarray()
+            .xs(level='task',key=self.reference_task)
+            .pipe(get_epoch_data,epochs=self.move_epoch)
+            .groupby('time')
+            .mean()
+            .values
         )
-
-        return trials.mean(dim='trial_id').to_numpy()
+        self.transformer.fit(X=tensor)
+        return self
