@@ -2,7 +2,7 @@ import numpy as np
 from .timeseries import remove_baseline
 from sklearn.base import TransformerMixin, BaseEstimator
 from sklearn.decomposition import TruncatedSVD,PCA
-from dPCA import dPCA
+from dPCA.dPCA import dPCA
 import xarray
 import pandas as pd
 from typing import Union,Optional
@@ -10,6 +10,7 @@ from functools import partial
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.utils.validation import check_is_fitted
 from .time_slice import get_epoch_data
+from .munge import make_dpca_tensor
 import dekodec
 class JointSubspace(BaseEstimator,TransformerMixin):
     '''
@@ -215,3 +216,45 @@ class CISFinder(DataFrameTransformer):
         )
         self.transformer.fit(X=tensor)
         return self
+
+class PhaseConcatDPCA(DataFrameTransformer):
+    def __init__(self,conditions: list[str], protect: list[str]=['t'], **dpca_kwargs):
+        assert conditions[-1] == 'time', "Last condition must be 'time' for PhaseConcatDPCA"
+        assert 'labels' in dpca_kwargs, "Must provide 'labels' in dpca_kwargs"
+        assert dpca_kwargs['labels'][-1] == 't', "Last label must be 't' for PhaseConcatDPCA"
+
+        self.conditions = conditions
+        self.protect = protect
+        transformer = dPCA(**dpca_kwargs)
+        transformer.protect = self.protect  # Protect the time condition
+        super().__init__(transformer=transformer)
+
+    def fit(self, X, y=None):
+        tensor = (
+            X
+            .groupby('phase')
+            .apply(
+                # lambda df: make_dpca_trial_tensor(df,conditions=self.conditions)
+                lambda df: make_dpca_tensor(df,conditions=self.conditions)
+            )
+            .pipe(np.concatenate,axis=-1)  # Concatenate along the time dimension
+        )
+        # self.transformer.fit(X=np.nanmean(tensor,axis=0),trialX=tensor)
+        self.transformer.fit(X=tensor)
+        self.is_fitted_ = True  # Mark as fitted
+        return self
+
+    def transform(self, X) -> pd.DataFrame:
+        check_is_fitted(self, 'transformer')
+
+        out = self.transformer.transform(X.values.T)
+        return pd.concat(
+            {
+                marg: pd.DataFrame(
+                    marg_proj.T,
+                    index=X.index,
+                )
+                for marg,marg_proj in out.items()
+            },
+            axis=1,
+        )

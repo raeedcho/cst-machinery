@@ -33,17 +33,58 @@ def hierarchical_assign(df,assign_dict):
         )
     )
 
-def make_dpca_tensor(self,X: pd.DataFrame) -> np.ndarray:
+def make_dpca_tensor(trialframe: pd.DataFrame,conditions: list[str]) -> np.ndarray:
     """
     Convert the input data to a tensor format suitable for dPCA.
     """
-    index_to_drop = list(set(X.index.names)-{'trial_id','time'})
-    trials = (
-        X
-        .reset_index(level=index_to_drop, drop=True)
+    tensor = (
+        trialframe
+        .groupby(conditions)
+        .mean()
         .stack()
-        .reorder_levels(['trial_id','channel','time'])
+        .reorder_levels(['channel'] + conditions)
         .to_xarray()
+        .to_numpy()
     )
 
-    return trials.mean(dim='trial_id').to_numpy()
+    return tensor
+
+def make_dpca_tensor_simple(trialframe: pd.DataFrame,conditions: list[str]) -> np.ndarray:
+    """
+    Convert the input data to a tensor format suitable for dPCA.
+    Note: This version for some reason does not output the same tensor as make_dpca_tensor.
+    dPCA also works worse on it for some reason.
+    """
+    tensor = (
+        trialframe
+        .stack()
+        .groupby(['channel'] + conditions).mean()
+        .to_xarray()
+        .to_numpy()
+    )
+
+    return tensor
+
+def make_dpca_trial_tensor(trialframe: pd.DataFrame,conditions: list[str]) -> np.ndarray:
+    """
+    Convert the input data to a tensor format suitable for dPCA.
+    This version outputs a tensor with trials as the first dimension,
+    for dPCA auto-regularization.
+
+    It produces bad results for some reason...
+    """
+    tensor = (
+        trialframe
+        .stack()
+        .to_frame(name='activity') # type: ignore
+        .assign(**{
+            'trial num': lambda df: df.groupby(['channel']+conditions).cumcount(),
+        })
+        .set_index('trial num',append=True)
+        .groupby(['trial num','channel'] + conditions).mean()
+        .to_xarray()
+        ['activity']
+        .to_numpy()
+    )
+
+    return tensor
