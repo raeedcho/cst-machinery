@@ -10,7 +10,7 @@ from .munge import (
     multivalue_xs,
     hierarchical_assign,
 )
-from .timeseries import estimate_kinematic_derivative
+from .timeseries import estimate_kinematic_derivative, estimate_kinematic_derivative_savgol
 from .states import get_movement_state_renamer, reassign_state
 
 def setup_logging(args, subfolder_name: str='default') -> None:
@@ -107,12 +107,31 @@ def generic_preproc(args) -> pd.DataFrame:
         .xs(level='result',key='success')
         .rename(index=state_mapper, level='state')
         .groupby('trial_id').filter(lambda df: np.any(get_index_level(df,'state') == 'Go Cue'))
+        # .pipe(hierarchical_assign,{
+        #     'hand velocity': lambda df: (
+        #         df['hand position']
+        #         .groupby('trial_id',group_keys=False)
+        #         .apply(estimate_kinematic_derivative_savgol, deriv=1)
+        #     ),
+        #     'hand acceleration': lambda df: (
+        #         df['hand position']
+        #         .groupby('trial_id',group_keys=False)
+        #         .apply(estimate_kinematic_derivative_savgol, deriv=2)
+        #     ),
+        # })
         .pipe(hierarchical_assign,{
             'hand velocity': lambda df: (
                 df['hand position']
                 .groupby('trial_id',group_keys=False)
                 .apply(estimate_kinematic_derivative, deriv=1, cutoff=30)
-            )
+            ),
+        })
+        .pipe(hierarchical_assign,{
+            'hand acceleration': lambda df: (
+                df['hand velocity']
+                .groupby('trial_id',group_keys=False)
+                .apply(estimate_kinematic_derivative, deriv=1, cutoff=30)
+            ),
         })
         .groupby('state').filter(lambda df: df.name != 'Reach to Center')
         .pipe(reassign_state,new_state=lambda df: get_movement_state_renamer(
