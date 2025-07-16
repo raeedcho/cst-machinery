@@ -53,3 +53,27 @@ def reassign_state(trialframe: pd.DataFrame, new_state: Union[pd.Series,Callable
         .reset_index(level='state', drop=True)
         .set_index('state', append=True)
     )
+
+def detect_movements(
+        hand_pos: pd.DataFrame,
+) -> pd.Series:
+    """
+    Detect movements based on hand velocity and acceleration.
+    Steps:
+    1) differentiate position to get velocity and acceleration.
+    2) find the distribution of vel and acc during the hold period.
+    3) use mahalanobis distance from hold period distribution to detect movements.
+    4) return a boolean Series indicating whether a movement is detected.
+
+    Parameters
+    ----------
+    hand_pos : pd.DataFrame
+        DataFrame containing hand position data with 'x', 'y', and 'z' columns.
+
+    Returns
+    -------
+    pd.Series
+        Series indicating whether a movement is detected.
+    """
+    
+    pass
