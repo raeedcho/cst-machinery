@@ -109,3 +109,19 @@ def remove_baseline(
         .agg(lambda s: np.nanmean(s,axis=0))
     )
     return tf - baseline
+
+def hold_mahal_distance(points: pd.DataFrame, reference: pd.DataFrame=hold_data, projmat: Optional[np.ndarray]=None) -> pd.DataFrame:
+    if projmat is None:
+        num_dims = points.shape[1]
+        projmat = np.eye(num_dims)
+
+    projected_ref = reference @ projmat
+    projected_points = points @ projmat
+
+    ref_mean = projected_ref.mean().values[np.newaxis,:]
+    ref_cov = projected_ref.cov().values
+    
+    return pd.DataFrame(
+        cdist(projected_points,ref_mean,metric='mahalanobis',VI=np.linalg.pinv(ref_cov)),
+        index=points.index,
+    )
