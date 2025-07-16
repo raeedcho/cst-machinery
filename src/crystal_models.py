@@ -264,3 +264,170 @@ class PhaseConcatDPCA(DataFrameTransformer):
             },
             axis=1,
         )
+
+class MarginalizedDeconstructor(BaseEstimator,TransformerMixin):
+    """
+    Model to deconstruct delay center out data using marginalizations and dekodec.
+    With marginalizations, decompose into direction-specific and condition-invariant components.
+    With dekodec, decompose each component set into prep- and move-unique components
+    and components shared across prep and move phases.
+    """
+    def __init__(
+            self,
+            n_comps_per_phase: int = 10,
+            training_epochs: dict[str,tuple[str,slice]] = {
+                'prep': ('Target On', slice(pd.to_timedelta('100ms'), pd.to_timedelta('400ms'))),
+                'move': ('Move', slice(pd.to_timedelta('-100ms'), pd.to_timedelta('200ms'))),
+            },
+            dekodec_var_cutoff: float = 0.99,
+        ) -> None:
+        self.n_comps_per_phase = n_comps_per_phase
+        self.training_epochs = training_epochs
+        self.dekodec_var_cutoff = dekodec_var_cutoff
+
+        prep_move_pipeline = Pipeline([
+            ('reduction', JointSubspace(
+                n_comps_per_cond=self.n_comps_per_phase,
+                condition='phase',
+                remove_latent_offsets=False,
+            )),
+            ('dekodec', dekodec.DekODec(
+                var_cutoff=self.dekodec_var_cutoff,
+                condition='phase',
+                split_transform=True,
+            )),
+        ])
+        self.prep_move_cis = clone(prep_move_pipeline)
+        self.prep_move_dir = clone(prep_move_pipeline)
+
+    def fit(self, X, y=None):
+        dco_data = (
+            X
+            .xs(level='task',key='DCO')
+            .pipe(get_epoch_data,epochs=self.training_epochs)
+        )
+
+        cis_marginal = (
+            dco_data
+            .groupby(['phase','time']).mean()
+        )
+        dir_marginal = (
+            (dco_data-cis_marginal)
+            .groupby(['target direction','phase','time']).mean()
+        )
+        
+        self.prep_move_cis.fit(cis_marginal)
+        self.prep_move_dir.fit(dir_marginal)
+        self.is_fitted_ = True  # Mark as fitted
+
+    def transform(self, X, marg: Optional[str] = None):
+        
+        if marg == 'cis':
+            check_is_fitted(self, 'prep_move_cis')
+            out = self.prep_move_cis.transform(X)
+        elif marg == 'dir':
+            check_is_fitted(self, 'prep_move_dir')
+            out = self.prep_move_dir.transform(X)
+        else:
+            check_is_fitted(self, 'prep_move_cis')
+            check_is_fitted(self, 'prep_move_dir')
+            out = pd.concat(
+                {
+                    'cis': self.prep_move_cis.transform(X),
+                    'dir': self.prep_move_dir.transform(X),
+                },
+                axis=1,
+                names=['marg', 'space', 'component'],
+            )
+
+        return out
+
+class CISDirPartition(BaseEstimator,TransformerMixin):
+    """
+    Model to partition data into condition-invariant and direction-specific components.
+    Uses a pipeline to deconstruct the data into condition-invariant and direction-specific components.
+    Pipeline consists of:
+        - Reduction (JointSubspace): to reduce the dimensionality of the data, balancing by variance in each condition.
+        - CIS/Dir decomposition (CISFinder): to find condition invariant signals
+        - Prep/Move decomposition (DekODec): to decompose the condition invariant signals into prep- and move-unique components
+    """
+    def __init__(
+            self,
+            n_comps_per_cond: int=10,
+            reference_task: str='DCO',
+            training_epochs: dict[str,tuple[str,slice]] = {
+                'prep': ('Target On', slice(pd.to_timedelta('100ms'), pd.to_timedelta('400ms'))),
+                'move': ('Move', slice(pd.to_timedelta('-100ms'), pd.to_timedelta('200ms'))),
+            },
+            var_cutoff: float = 0.99,
+            split_transform: bool = True,
+    ):
+        self.n_comps_per_cond = n_comps_per_cond
+        self.reference_task = reference_task
+        self.training_epochs = training_epochs
+        self.var_cutoff = var_cutoff
+        self.split_transform = split_transform
+
+    def fit(self, X, y=None):
+        training_data = (
+            X
+            .xs(level='task', key=self.reference_task)
+            .pipe(get_epoch_data, epochs=self.training_epochs)
+        )
+
+        reduction_model = JointSubspace(
+            n_comps_per_cond=self.n_comps_per_cond,
+            condition='phase',
+            remove_latent_offsets=False,
+        )
+        prep_move_model = dekodec.DekODec(
+            var_cutoff=self.var_cutoff,
+            condition='phase',
+            split_transform=self.split_transform,
+        )
+
+        reduction_model.fit(training_data)
+        reduced_data =reduction_model.transform(training_data)
+
+        cis_potent,cis_null = dekodec.get_potent_null(
+            (
+                reduced_data
+                .groupby(['phase','time']).mean()
+                .values
+            ),
+            var_cutoff=self.var_cutoff,
+        )
+
+        cis_null_data = reduced_data @ cis_null
+        prep_move_model.fit(cis_null_data)
+
+        self.unsplit_projmat_ = reduction_model.P_
+        self.subspaces_ = {
+            'cis': reduction_model.P_ @ cis_potent,
+            **{
+                space: reduction_model.P_ @ cis_null @ projmat
+                for space, projmat in prep_move_model.subspaces_.items()
+            }
+        }
+
+    def transform(self,X):
+        check_is_fitted(self, 'subspaces_')
+
+        if self.split_transform:
+            return self.transform_split(X)
+        else:
+            return self.transform_full(X)
+
+    def transform_full(self, X):
+        return X @ np.column_stack(tuple(self.subspaces_.values()))
+
+    def transform_split(self, X):
+        return pd.concat(
+            {
+                space: X @ proj_mat
+                for space,proj_mat in self.subspaces_.items()
+            },
+            axis=1,
+            names=['space','component'],
+        )
+
