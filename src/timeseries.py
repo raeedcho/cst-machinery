@@ -3,6 +3,8 @@ import numpy as np
 import scipy.signal as scs
 from . import munge
 from .time_slice import slice_by_time, reindex_trial_from_event
+from scipy.spatial.distance import cdist
+from typing import Optional
 
 def get_sample_spacing(df: pd.DataFrame) -> float:
     time_diffs = munge.get_index_level(df, 'time').diff()
@@ -16,7 +18,11 @@ def get_sample_spacing(df: pd.DataFrame) -> float:
     
     return sample_spacing
 
-def estimate_kinematic_derivative(trial_signal: pd.DataFrame, deriv: int = 1, cutoff: float = 30)->pd.DataFrame:
+def estimate_kinematic_derivative(
+        trial_signal: pd.DataFrame,
+        deriv: int = 1,
+        cutoff: float = 30
+    ) -> pd.DataFrame:
     # assert that columns are not a multiindex, so we know we're working with one "signal"
     assert not isinstance(trial_signal.columns, pd.MultiIndex), 'must work with only one "signal"'
     assert deriv == 1, 'only first derivative is supported currently'
@@ -36,6 +42,34 @@ def estimate_kinematic_derivative(trial_signal: pd.DataFrame, deriv: int = 1, cu
         ))
         .pipe(lambda x: pd.DataFrame(
             np.gradient(x.values, sample_spacing, axis=0),
+            columns=x.columns,
+            index=x.index
+        ))
+    )
+
+def estimate_kinematic_derivative_savgol(
+        trial_signal: pd.DataFrame,
+        deriv: int = 1,
+        window_length: int = 31,
+        polyorder: int = 7,
+    ) -> pd.DataFrame:
+    """ Estimate the kinematic derivative using Savitzky-Golay filter.
+
+    """
+    # assert that columns are not a multiindex, so we know we're working with one "signal"
+    assert not isinstance(trial_signal.columns, pd.MultiIndex), 'must work with only one "signal"'
+
+    return (
+        trial_signal
+        .pipe(lambda x: pd.DataFrame(
+            scs.savgol_filter(
+                x.values,
+                window_length,
+                polyorder,
+                deriv=deriv,
+                delta=get_sample_spacing(x),
+                axis=0,
+            ),
             columns=x.columns,
             index=x.index
         ))
