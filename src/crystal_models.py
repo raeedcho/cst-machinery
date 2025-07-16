@@ -9,6 +9,8 @@ from typing import Union,Optional
 from functools import partial
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.utils.validation import check_is_fitted
+from sklearn.pipeline import Pipeline
+from sklearn.base import clone
 from .time_slice import get_epoch_data
 from .munge import make_dpca_tensor
 import dekodec
@@ -210,7 +212,7 @@ class CISFinder(DataFrameTransformer):
             X
             .xs(level='task',key=self.reference_task)
             .pipe(get_epoch_data,epochs=self.move_epoch)
-            .groupby('time')
+            .groupby(['phase','time'])
             .mean()
             .values
         )
@@ -218,6 +220,12 @@ class CISFinder(DataFrameTransformer):
         return self
 
 class PhaseConcatDPCA(DataFrameTransformer):
+    """
+    dPCA model for trialframe data that concatenates phases of trials along the time dimension.
+    Note: I originally wrote this because I thought dPCA would be better than using PCA
+    on marginalized data to find CIS and direction-specific components, but it turns out
+    marginalized PCA works better, for some inexplicable reason.
+    """
     def __init__(self,conditions: list[str], protect: list[str]=['t'], **dpca_kwargs):
         assert conditions[-1] == 'time', "Last condition must be 'time' for PhaseConcatDPCA"
         assert 'labels' in dpca_kwargs, "Must provide 'labels' in dpca_kwargs"
@@ -234,12 +242,10 @@ class PhaseConcatDPCA(DataFrameTransformer):
             X
             .groupby('phase')
             .apply(
-                # lambda df: make_dpca_trial_tensor(df,conditions=self.conditions)
                 lambda df: make_dpca_tensor(df,conditions=self.conditions)
             )
             .pipe(np.concatenate,axis=-1)  # Concatenate along the time dimension
         )
-        # self.transformer.fit(X=np.nanmean(tensor,axis=0),trialX=tensor)
         self.transformer.fit(X=tensor)
         self.is_fitted_ = True  # Mark as fitted
         return self
