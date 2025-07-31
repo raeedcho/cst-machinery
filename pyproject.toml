@@ -1,0 +1,44 @@
+[build-system]
+requires = [
+    "setuptools>=61.0.0",
+    "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "src"
+version = "0.1.0"
+description = "CST-RTT-DCO analysis tools"
+authors = [
+    { name = "Raeed Chowdhury" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "pandas",
+    "pyarrow",
+    "seaborn",
+    "matplotlib",
+    "scikit-learn",
+    "omegaconf",
+    "altair",
+    "dvc",
+    "dvclive[lightning]",
+    "xarray",
+    "numexpr",
+    "numba",
+    "dpca",
+    "dynamax[notebooks]",
+    "jupyter",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "black",
+    "isort"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
