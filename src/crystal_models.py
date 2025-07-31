@@ -14,7 +14,7 @@ from sklearn.base import clone
 from .time_slice import get_epoch_data
 from .munge import make_dpca_tensor
 import dekodec
-class JointSubspace(BaseEstimator,TransformerMixin):
+class JointSubspace(TransformerMixin, BaseEstimator):
     '''
     Model to find a joint subspace given multiple datasets in the same full-D space 
     and a number of dimensions to use for each dataset.
@@ -122,7 +122,7 @@ class JointSubspace(BaseEstimator,TransformerMixin):
         else:
             return X @ self.P_
 
-class SoftnormScaler(BaseEstimator,TransformerMixin):
+class SoftnormScaler(TransformerMixin, BaseEstimator):
     def __init__(self, norm_const=5):
         self.norm_const = norm_const
 
@@ -145,7 +145,7 @@ def BaselineShifter(ref_event: str, ref_slice: slice, timecol: str = 'time'):
         kw_args={'ref_event': ref_event, 'ref_slice': ref_slice, 'timecol': timecol},
     )
 
-class VarimaxTransformer(BaseEstimator,TransformerMixin):
+class VarimaxTransformer(TransformerMixin, BaseEstimator):
     def __init__(self, tol=1e-6, max_iter=100):
         self.tol = tol
         self.max_iter = max_iter
@@ -177,7 +177,7 @@ class VarimaxTransformer(BaseEstimator,TransformerMixin):
     def transform(self,X):
         return X @ self.rotation_matrix_
 
-class DataFrameTransformer(BaseEstimator,TransformerMixin):
+class DataFrameTransformer(TransformerMixin, BaseEstimator):
     def __init__(self, transformer):
         self.transformer = transformer
 
@@ -265,7 +265,7 @@ class PhaseConcatDPCA(DataFrameTransformer):
             axis=1,
         )
 
-class MarginalizedDeconstructor(BaseEstimator,TransformerMixin):
+class MarginalizedDeconstructor(TransformerMixin, BaseEstimator):
     """
     Model to deconstruct delay center out data using marginalizations and dekodec.
     With marginalizations, decompose into direction-specific and condition-invariant components.
@@ -342,7 +342,7 @@ class MarginalizedDeconstructor(BaseEstimator,TransformerMixin):
 
         return out
 
-class CISDirPartition(BaseEstimator,TransformerMixin):
+class CISDirPartition(TransformerMixin, BaseEstimator):
     """
     Model to partition data into condition-invariant and direction-specific components.
     Uses a pipeline to deconstruct the data into condition-invariant and direction-specific components.
@@ -402,6 +402,7 @@ class CISDirPartition(BaseEstimator,TransformerMixin):
         prep_move_model.fit(cis_null_data)
 
         self.unsplit_projmat_ = reduction_model.P_
+        self.cis_null_projmat_ = reduction_model.P_ @ cis_null
         self.subspaces_ = {
             'cis': reduction_model.P_ @ cis_potent,
             **{
