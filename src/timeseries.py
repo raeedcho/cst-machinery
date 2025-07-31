@@ -110,7 +110,7 @@ def remove_baseline(
     )
     return tf - baseline
 
-def hold_mahal_distance(points: pd.DataFrame, reference: pd.DataFrame=hold_data, projmat: Optional[np.ndarray]=None) -> pd.DataFrame:
+def hold_mahal_distance(points: pd.DataFrame, reference: pd.DataFrame, projmat: Optional[np.ndarray]=None) -> pd.DataFrame:
     if projmat is None:
         num_dims = points.shape[1]
         projmat = np.eye(num_dims)
