@@ -133,7 +133,7 @@ def generic_preproc(args) -> pd.DataFrame:
                 .apply(estimate_kinematic_derivative, deriv=1, cutoff=30)
             ),
         })
-        .groupby('state').filter(lambda df: df.name != 'Reach to Center')
+        # .groupby('state').filter(lambda df: df.name != 'Reach to Center')
         .pipe(reassign_state,new_state=lambda df: get_movement_state_renamer(
             df['hand position'],
             start_targets,
