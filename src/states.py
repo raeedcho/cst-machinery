@@ -1,4 +1,5 @@
 from .munge import get_index_level
+from .time_slice import state_list_to_transitions, state_transitions_to_list
 import numpy as np
 import pandas as pd
 from typing import Callable,Union
@@ -8,6 +9,20 @@ def get_movement_state_renamer(
         start_target_info: pd.DataFrame,
         go_state: str = 'Go Cue'
 ) -> pd.Series:
+
+    old_states = get_index_level(hand_pos, 'state')
+    state_transition_times = state_list_to_transitions(old_states, timecol='time')
+
+    trial_info = (
+        state_transition_times
+        .reset_index()
+        .groupby('trial_id')
+        .first()
+        .drop(columns=['new_state','time'])
+    )
+
+    cursor_radius = 2
+
     start_exit_time = (
         (hand_pos[['x','y']] - start_target_info[['x','y']])
         .apply(
@@ -15,21 +30,34 @@ def get_movement_state_renamer(
             axis=1
         ) # type: ignore
         .rename('distance from start target')
-        .gt(start_target_info['radius'])
+        .gt(start_target_info['radius']+cursor_radius)
         .loc[hand_pos.index]
         .to_frame('out of start target')
         .assign(**{
             'go state': lambda df: get_index_level(df, 'state') == go_state,
             'moving': lambda df: df['out of start target'] & df['go state'],
-            'state': lambda df: np.where(
-                df['moving'],
-                'Move',
-                get_index_level(df, 'state'),
-            ),
         })
-        ['state']
+        .loc[lambda df: df['moving']]
+        .pipe(get_index_level, level='time')
+        .groupby('trial_id')
+        .min()
+        .to_frame()
+        .assign(new_state='Move')
+        .assign(**trial_info)
+        .reset_index()
+        .set_index(state_transition_times.index.names)
     )
-    return start_exit_time
+
+    new_state_transitions: pd.Series = (
+        pd.concat([state_transition_times,start_exit_time])
+        .groupby('trial_id',group_keys=False)
+        .apply(lambda df: df.sort_values(by='time'))
+        .squeeze() # type: ignore
+    )
+
+    new_states = state_transitions_to_list(new_state_transitions, new_index=old_states.index)
+
+    return new_states
 
 def reassign_state(trialframe: pd.DataFrame, new_state: Union[pd.Series,Callable]) -> pd.DataFrame:
     """
