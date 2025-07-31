@@ -33,7 +33,7 @@ def slice_by_time(data: pd.DataFrame, time_slice: slice, timecol: str='time') ->
     multiindex_slicer: tuple[slice] = num_indices_before_time*(slice(None),) + (time_slice,)
     return data.loc[multiindex_slicer,:]
 
-def get_state_transition_times(state_list: pd.Series, timecol: str='time') -> pd.Series:
+def state_list_to_transitions(state_list: pd.Series, timecol: str='time') -> pd.Series:
     timestep = (
         state_list
         .reset_index(level=timecol)
@@ -56,15 +56,26 @@ def get_state_transition_times(state_list: pd.Series, timecol: str='time') -> pd
         .loc[
             lambda df: df['previous_state']!=df['new_state']
         ]
+        ['new_state']
         .reset_index(level=timecol)
         .dropna(axis=0,how='any')
         .set_index('new_state',append=True)
-        [timecol]
+        .squeeze()
     )
     
     return state_transition_times
 
-from typing import Optional
+def state_transitions_to_list(state_transitions: pd.Series, new_index: pd.Index) -> pd.Series:
+    return (
+        state_transitions
+        .reset_index(level='new_state')
+        .set_index('time', append=True)
+        .reorder_levels(new_index.names)
+        .reindex(new_index)
+        .ffill()
+        .squeeze()
+        .rename('state')
+    )
 
 def reindex_trial_from_time(trial: pd.DataFrame,reference_time: Union[pd.Timedelta,NaTType], timecol: str='time') -> pd.DataFrame:
     return (
@@ -81,7 +92,7 @@ def reindex_trial_from_event(trial: pd.DataFrame,event: str, timecol: str='time'
         reference_time = (
             trial
             .pipe(get_index_level,level='state')
-            .pipe(get_state_transition_times,timecol=timecol)
+            .pipe(state_list_to_transitions,timecol=timecol)
             .xs(level='new_state',key=event)
             .values[-1]
         )
