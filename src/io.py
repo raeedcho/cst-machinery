@@ -82,15 +82,21 @@ def generic_preproc(args) -> pd.DataFrame:
     into a format that works for most of the analyses in this package.
     """
     state_mapper = {
+        'Center Hold': 'Hold Center (Ambiguous Cue)',
         'Hold Center (CST Cue)': 'Target On',
         'Hold Center (RTT Cue)': 'Target On',
         'Reach Target On': 'Target On',
+        'Target Cue': 'Target On',
         'Center Hold 2': 'Memory Delay',
+        'Hold Center (Memory)': 'Memory Delay',
+        'Memory Period': 'Memory Delay',
         'Control System': 'Go Cue',
         'Reach to Target 1': 'Go Cue',
         'Hold at Target 1': 'Go Cue', # Sometimes first reach state is skipped in this table (if the first target is in the center)
         'Cheat Period': 'Go Cue', # Period after go cue but when animal has to keep hand still (to avoid predicting go cue in training)
         'Reach Target No Cheat': 'Go Cue',
+        'No Cheat Window': 'Go Cue',
+        'Target Acquire': 'Go Cue',
         'Reach to Target': 'Go Cue',
     }
 
@@ -107,18 +113,6 @@ def generic_preproc(args) -> pd.DataFrame:
         .xs(level='result',key='success')
         .rename(index=state_mapper, level='state')
         .groupby('trial_id').filter(lambda df: np.any(get_index_level(df,'state') == 'Go Cue'))
-        # .pipe(hierarchical_assign,{
-        #     'hand velocity': lambda df: (
-        #         df['hand position']
-        #         .groupby('trial_id',group_keys=False)
-        #         .apply(estimate_kinematic_derivative_savgol, deriv=1)
-        #     ),
-        #     'hand acceleration': lambda df: (
-        #         df['hand position']
-        #         .groupby('trial_id',group_keys=False)
-        #         .apply(estimate_kinematic_derivative_savgol, deriv=2)
-        #     ),
-        # })
         .pipe(hierarchical_assign,{
             'hand velocity': lambda df: (
                 df['hand position']
@@ -134,10 +128,11 @@ def generic_preproc(args) -> pd.DataFrame:
             ),
         })
         # .groupby('state').filter(lambda df: df.name != 'Reach to Center')
-        .pipe(reassign_state,new_state=lambda df: get_movement_state_renamer(
-            df['hand position'],
-            start_targets,
-        ))
+        # this next step seems to fail for Sulley dataset for some reason
+        # .pipe(reassign_state,new_state=lambda df: get_movement_state_renamer(
+        #     df['hand position'],
+        #     start_targets,
+        # ))
     )
 
     return preproc

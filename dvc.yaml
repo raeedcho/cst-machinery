@@ -149,6 +149,7 @@ stages:
       - src/cli.py
       - src/crystal_models.py
       - src/time_slice.py
+      - src/io.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet

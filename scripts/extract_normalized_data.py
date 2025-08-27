@@ -74,6 +74,8 @@ def trial_name_to_task(trial_name: str) -> str:
         return 'eye-calibration'
     elif 'choice' in trial_name:
         return 'reward-choice'
+    elif 'MG LeftRight' in trial_name: # Sulley memory-guided left-right task
+        return 'DCO'
     elif 'memory-guided' in trial_name: # Prez/Sulley memory-guided DCO task
         return 'DCO'
     elif re.match(r'^R.T.$', trial_name): # Dwight's DCO task

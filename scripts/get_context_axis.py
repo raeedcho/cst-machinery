@@ -17,6 +17,7 @@ from src.crystal_models import SoftnormScaler
 from src.munge import get_index_level, multivalue_xs
 from src.time_slice import reindex_trial_from_event, slice_by_time
 from src.cli import with_parsed_args, create_default_parser
+from src.io import generic_preproc
 
 @with_parsed_args(
     parser_creator=create_default_parser,
@@ -35,13 +36,7 @@ def main(args):
 
     trialframe_dir = Path(args.trialframe_dir)
     composition_config = OmegaConf.load(args.composition_config)
-    tf = smile_extract.compose_from_frames(
-        meta=pd.read_parquet(trialframe_dir / dataset / f'{dataset}_{composition_config.info}.parquet'),
-        trialframe_dict={
-            key: pd.read_parquet(trialframe_dir / dataset / f'{dataset}_{filepart}.parquet')
-            for key, filepart in composition_config.composition.items()
-        }
-    )
+    tf = generic_preproc(args)
     data = process_trial_frame(tf)
     logger.info(f'Loaded trial frame from {dataset}')
 
@@ -54,26 +49,11 @@ def main(args):
     logger.info(f'Wrote context axis plot to {output_path}')
 
 def process_trial_frame(trialframe: pd.DataFrame) -> pd.DataFrame:
-    state_mapper = {
-        'Hold Center (CST Cue)': 'Hold Center (Task Cue)',
-        'Hold Center (RTT Cue)': 'Hold Center (Task Cue)',
-        'Reach Target On': 'Hold Center (Task Cue)',
-        'Control System': 'Go Cue',
-        'Reach to Target 1': 'Go Cue',
-        'Hold at Target 1': 'Go Cue', # Sometimes first reach state is skipped in this table (if the first target is in the center)
-        'Cheat Period': 'Go Cue', # Period after go cue but when animal has to keep hand still (to avoid predicting go cue in training)
-        'Reach Target No Cheat': 'Go Cue',
-        'Reach to Target': 'Go Cue',
-    }
     return (
         trialframe
-        .set_index(['task','result','state'],append=True)
         ['motor cortex']
-        .pipe(multivalue_xs,keys=['CST','RTT','DCO'],level='task') # type: ignore
-        .xs(level='result',key='success')
-        .rename(index=state_mapper,level='state')
         .groupby('trial_id')
-        .filter(lambda df: np.any(get_index_level(df,'state') == 'Hold Center (Task Cue)'))
+        .filter(lambda df: np.any(get_index_level(df,'state') == 'Target On'))
         .groupby('state')
         .filter(lambda df: df.name != 'Reach to Center')
         .pipe(SoftnormScaler().fit_transform)
@@ -84,7 +64,7 @@ def fit_context_lda(data: pd.DataFrame)->Pipeline:
         data
         .pipe(multivalue_xs,keys=['CST','RTT'],level='task') # type: ignore
         .groupby('trial_id',group_keys=False)
-        .apply(reindex_trial_from_event,event='Hold Center (Task Cue)')
+        .apply(reindex_trial_from_event,event='Target On')
         .pipe(slice_by_time,time_slice=slice(pd.to_timedelta('1 sec'),pd.to_timedelta('3 sec')),timecol='time')
     )
     lda_pipe = Pipeline([
@@ -98,7 +78,7 @@ def plot_context_axis(data: pd.DataFrame, lda_pipe: Pipeline) -> Figure:
     test_data = (
         data
         .groupby('trial_id',group_keys=False)
-        .apply(reindex_trial_from_event,event='Hold Center (Task Cue)')
+        .apply(reindex_trial_from_event,event='Target On')
         .pipe(slice_by_time,time_slice=slice(pd.to_timedelta('-1 sec'),pd.to_timedelta('3 sec')),timecol='time')
     )
 
