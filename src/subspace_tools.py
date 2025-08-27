@@ -40,6 +40,8 @@ def subspace_overlap_index(X,Y,var_cutoff=0.99):
     assert X.ndim == 2, 'X must be a 2D array'
     assert Y.ndim == 2, 'Y must be a 2D array'
 
+    Y_potent, Y_null = dekodec.get_potent_null(Y,num_dims=10)
+
     return frac_var_explained_by_subspace(X,Y_potent)
 
 def bootstrap_subspace_overlap(signal_grouped,num_bootstraps=100,var_cutoff=0.99):
