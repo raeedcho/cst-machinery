@@ -1947,8 +1947,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 04451b141f4398db05afb26175cb2e29.dir
-      size: 122934
+      md5: 01e63e093cf4819bb6024ffaa8670116.dir
+      size: 122846
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2020,8 +2020,8 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 04451b141f4398db05afb26175cb2e29.dir
-      size: 122934
+      md5: 01e63e093cf4819bb6024ffaa8670116.dir
+      size: 122846
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2093,8 +2093,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 04451b141f4398db05afb26175cb2e29.dir
-      size: 122934
+      md5: 01e63e093cf4819bb6024ffaa8670116.dir
+      size: 122846
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2616,8 +2616,8 @@ stages:
       nfiles: 4
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 04451b141f4398db05afb26175cb2e29.dir
-      size: 122934
+      md5: 01e63e093cf4819bb6024ffaa8670116.dir
+      size: 122846
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -2688,16 +2688,16 @@ stages:
     - path: 
         data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
       hash: md5
-      md5: 4b3fec641775a1018912891a578d61d6
-      size: 6512056
+      md5: 1768709d723f8e64a2edef4064cbd978
+      size: 6513639
     - path: scripts/smooth_firing_rates.py
       hash: md5
       md5: 315a5ab685748e239c0c943bd312f187
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 5412a6d334212d606a1d097eba67584a
-      size: 1499
+      md5: 25816a688ede328710c885af6d847e12
+      size: 2774
     params:
       params.yaml:
         dir_structure:
@@ -2717,8 +2717,8 @@ stages:
     - path: 
         data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
       hash: md5
-      md5: e171ef4175e95788f5ebb26fdc3c98a5
-      size: 241636228
+      md5: 001360bd1216386ca1825e5af111b6e1
+      size: 241637811
     - path: logs/smooth-firing-rates/Prez_2022-07-21.log
       hash: md5
       md5: d3d2109b3837c8e1fa77c50322c95b36
@@ -2739,16 +2739,16 @@ stages:
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
       hash: md5
-      md5: c2a13cd1be56e18477643b1ab0c75b14
-      size: 4016311
+      md5: 570ab62002aec8c05e881c04f2f6062c
+      size: 4017274
     - path: scripts/smooth_firing_rates.py
       hash: md5
       md5: 315a5ab685748e239c0c943bd312f187
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 5412a6d334212d606a1d097eba67584a
-      size: 1499
+      md5: 25816a688ede328710c885af6d847e12
+      size: 2774
     params:
       params.yaml:
         dir_structure:
@@ -2768,8 +2768,8 @@ stages:
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-smooth-rates.parquet
       hash: md5
-      md5: 240f3e05cf9aba18099722314a9c8780
-      size: 127415146
+      md5: a75850e68845192784bfefb9501cfef2
+      size: 127416109
     - path: logs/smooth-firing-rates/Prez_2025-04-16.log
       hash: md5
       md5: 38e1b3e19874b07c6e9fa12f75a13f24
@@ -2790,16 +2790,16 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-spikes-binned.parquet
       hash: md5
-      md5: a19d200539cd91d48203f90064e91450
-      size: 7345949
+      md5: 2a1658d1d1788860271cb27d38328bea
+      size: 7347192
     - path: scripts/smooth_firing_rates.py
       hash: md5
       md5: 315a5ab685748e239c0c943bd312f187
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 5412a6d334212d606a1d097eba67584a
-      size: 1499
+      md5: 25816a688ede328710c885af6d847e12
+      size: 2774
     params:
       params.yaml:
         dir_structure:
@@ -2819,8 +2819,8 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
       hash: md5
-      md5: 4d41bce90a2059c701e7a14ee7f70513
-      size: 278034686
+      md5: 4398d0d40e739a88cd0f6fa94dcf7dc9
+      size: 278035929
     - path: logs/smooth-firing-rates/Dwight_2025-01-07.log
       hash: md5
       md5: 63c00e4d40ccf73f62483be273d0b43a
@@ -2841,16 +2841,16 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
       hash: md5
-      md5: ba161a5f8dc88fb94a6d2e9109f3b949
-      size: 10219040
+      md5: ffc07393f94ba6aeff0f25ba973865ab
+      size: 10220363
     - path: scripts/smooth_firing_rates.py
       hash: md5
       md5: 315a5ab685748e239c0c943bd312f187
       size: 2535
     - path: src/munge.py
       hash: md5
-      md5: 5412a6d334212d606a1d097eba67584a
-      size: 1499
+      md5: 25816a688ede328710c885af6d847e12
+      size: 2774
     params:
       params.yaml:
         dir_structure:
@@ -2870,8 +2870,8 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
       hash: md5
-      md5: fdcc00094913e28f7cfb3a8b26891342
-      size: 364332291
+      md5: 941116e8b3d96722ad96109e645b59ba
+      size: 364333614
     - path: logs/smooth-firing-rates/Dwight_2025-01-01.log
       hash: md5
       md5: 424e81aed5b829dac4028ba60eb27ebb
@@ -3724,8 +3724,8 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 04451b141f4398db05afb26175cb2e29.dir
-      size: 122934
+      md5: 01e63e093cf4819bb6024ffaa8670116.dir
+      size: 122846
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
@@ -3780,3 +3780,54 @@ stages:
       hash: md5
       md5: 2754fe370ed2f84e3a87ee6e01fe2743
       size: 10166
+  smooth_firing_rates@4:
+    cmd: python scripts/smooth_firing_rates.py --dataset Sulley_2025-05-06 
+      --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --smoothing_std 0.05s
+    deps:
+    - path: 
+        /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
+      hash: md5
+      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
+      size: 2819
+    - path: 
+        data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-spikes-binned.parquet
+      hash: md5
+      md5: d36f5543a6bd3457f06fad59aa61eb2c
+      size: 2344039
+    - path: scripts/smooth_firing_rates.py
+      hash: md5
+      md5: 315a5ab685748e239c0c943bd312f187
+      size: 2535
+    - path: src/munge.py
+      hash: md5
+      md5: 25816a688ede328710c885af6d847e12
+      size: 2774
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        smooth_firing_rates:
+          smoothing_std: 0.05s
+    outs:
+    - path: 
+        data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-smooth-rates.parquet
+      hash: md5
+      md5: 554b5acd7df2dd48868756b22c945ba6
+      size: 74762253
+    - path: logs/smooth-firing-rates/Sulley_2025-05-06.log
+      hash: md5
+      md5: 127a1669e66ef125400242fef86350f9
+      size: 230
