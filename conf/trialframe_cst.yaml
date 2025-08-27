@@ -1,0 +1,7 @@
+# file names amendments for each piece of the trial frame
+info: 'meta'
+composition:
+  state: 'states'
+  hand position: 'hand-pos'
+  cst cursor position: 'cst-cursor-pos'
+  motor cortex: 'neural-lfads-rates'
