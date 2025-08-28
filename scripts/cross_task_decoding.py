@@ -5,6 +5,7 @@ from matplotlib.figure import Figure
 import seaborn as sns
 from src import munge, time_slice, crystal_models, timeseries
 from src.cli import with_parsed_args, create_default_parser
+from src.io import generic_preproc
 import smile_extract
 from pathlib import Path
 from omegaconf import OmegaConf,DictConfig,ListConfig
@@ -41,15 +42,7 @@ def main(args):
         level=args.loglevel,
     )
 
-    trialframe_dir = Path(args.trialframe_dir)
-    composition_config = OmegaConf.load(args.composition_config)
-    tf = smile_extract.compose_from_frames(
-        meta=pd.read_parquet(trialframe_dir / dataset / f'{dataset}_{composition_config.info}.parquet'),
-        trialframe_dict={
-            key: pd.read_parquet(trialframe_dir / dataset / f'{dataset}_{filepart}.parquet')
-            for key, filepart in composition_config.composition.items()
-        }
-    )
+    tf = generic_preproc(args)
     neural_data, hand_data = precondition_data(tf)
 
     trial_predictions = decode_single_trials(neural_data,hand_data['x'])
@@ -106,18 +99,8 @@ def main(args):
         plt.close(trial_fig)
 
 def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
-    state_mapper = {
-        'Control System': 'Go Cue',
-        'Reach to Target 1': 'Go Cue',
-        'Hold at Target 1': 'Go Cue', # Sometimes first reach state is skipped in this table (if the first target is in the center)
-        'Reach to Target': 'Go Cue',
-    }
     preproc = (
         tf
-        .set_index(['task','result','state'],append=True)
-        .pipe(munge.multivalue_xs,keys=['CST','RTT','DCO'],level='task')
-        .xs(level='result',key='success')
-        .rename(index=state_mapper, level='state')
         .groupby('trial_id')
         .filter(lambda df: np.any(munge.get_index_level(df,'state') == 'Go Cue'))
         # .pipe(drop_hand_drop_trials) # type: ignore
