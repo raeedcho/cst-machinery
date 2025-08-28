@@ -21,6 +21,14 @@ def get_movement_state_renamer(
         .drop(columns=['new_state','time'])
     )
 
+    # get only first element of start target info per trial
+    start_target_info = (
+        start_target_info
+        .groupby('trial_id')
+        .last()
+    )
+
+    start_targ_radius = start_target_info['radius'].max()
     cursor_radius = 2
 
     start_exit_time = (
@@ -30,7 +38,7 @@ def get_movement_state_renamer(
             axis=1
         ) # type: ignore
         .rename('distance from start target')
-        .gt(start_target_info['radius']+cursor_radius)
+        .gt(start_targ_radius + cursor_radius)
         .loc[hand_pos.index]
         .to_frame('out of start target')
         .assign(**{

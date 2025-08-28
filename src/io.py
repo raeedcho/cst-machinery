@@ -66,9 +66,11 @@ def get_targets(
         raise FileNotFoundError(f"Directory {trialframe_dir} does not exist.")
 
     target_name_mapper = {
+        'center': 'start',
+        'starttarget': 'start',
         'touchbarcircle': 'start',
         'reachtargettouchbarmg': 'outer',
-        'reach': 'outer',
+        'reachtarget': 'outer',
     }
     targets = (
         pd.read_parquet(trialframe_dir / dataset / f'{dataset}_targets.parquet')
@@ -127,12 +129,12 @@ def generic_preproc(args) -> pd.DataFrame:
                 .apply(estimate_kinematic_derivative, deriv=1, cutoff=30)
             ),
         })
-        # .groupby('state').filter(lambda df: df.name != 'Reach to Center')
+        .groupby('state').filter(lambda df: df.name != 'Reach to Center')
         # this next step seems to fail for Sulley dataset for some reason
-        # .pipe(reassign_state,new_state=lambda df: get_movement_state_renamer(
-        #     df['hand position'],
-        #     start_targets,
-        # ))
+        .pipe(reassign_state,new_state=lambda df: get_movement_state_renamer(
+            df['hand position'],
+            start_targets,
+        ))
     )
 
     return preproc
