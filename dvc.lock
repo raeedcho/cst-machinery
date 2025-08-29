@@ -4257,11 +4257,11 @@ stages:
     outs:
     - path: logs/train-lfads/Sulley_2025-05-06.log
       hash: md5
-      md5: 865fef8d42ee06c5f2c4a350eed7b2ab
-      size: 720
+      md5: 3b2f0522a8e5f4c7ec35b3ea5f1651d7
+      size: 1128
     - path: results/lfads/Sulley_2025-05-06/dvclive
       hash: md5
-      md5: 8b6945c34fc943c9aaf19178e74d5e86.dir
+      md5: e475f978fb6496acba132ade0bcd0693.dir
       size: 3970798
       nfiles: 57
     - path: results/lfads/Sulley_2025-05-06/lfads_model.pt
