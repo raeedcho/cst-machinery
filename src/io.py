@@ -71,6 +71,7 @@ def get_targets(
         'touchbarcircle': 'start',
         'reachtargettouchbarmg': 'outer',
         'reachtarget': 'outer',
+        'target left right': 'outer',
     }
     targets = (
         pd.read_parquet(trialframe_dir / dataset / f'{dataset}_targets.parquet')

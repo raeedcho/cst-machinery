@@ -222,18 +222,18 @@ stages:
       md5: d5ee8205809c3d255332c87092559b3c
       size: 11258
     - path: 
-        data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-smooth-rates.parquet
+        data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
       hash: md5
-      md5: 001360bd1216386ca1825e5af111b6e1
-      size: 241637811
+      md5: 9d6c81342c9fbf30bb29cf3dde2a0760
+      size: 390008749
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
       hash: md5
       md5: fc9c83251804e5e18ef740241d45db16
       size: 163500
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 5920486d916e1cdf5403ff424706833f
-      size: 5039
+      md5: 14eec8e1bb03871ad4d34bb17f9d376d
+      size: 3857
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -242,6 +242,10 @@ stages:
       hash: md5
       md5: 58f6ce8683f8ad8a7822973cb3dfca3d
       size: 20915
+    - path: src/io.py
+      hash: md5
+      md5: c40a42247657ac69d96535508fc49572
+      size: 5039
     - path: src/munge.py
       hash: md5
       md5: 25816a688ede328710c885af6d847e12
@@ -267,7 +271,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Prez_2022-07-21.log
@@ -276,8 +280,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: 82c356f51e0a2050bfbf8a93edc56db6
-      size: 1477377
+      md5: 66014a317c44cbab093f417c206a0bcd
+      size: 1554458
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -530,18 +534,18 @@ stages:
       md5: 37e3260abfc0071e916ad44a793cb2bb
       size: 20526
     - path: 
-        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-smooth-rates.parquet
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
       hash: md5
-      md5: 941116e8b3d96722ad96109e645b59ba
-      size: 364333614
+      md5: 0973b9fab03cb37b2328a5ebc4ca339e
+      size: 410173442
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
       hash: md5
       md5: 9fd57d741d91ef02d85ba7d81e128c27
       size: 94879
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 5920486d916e1cdf5403ff424706833f
-      size: 5039
+      md5: 14eec8e1bb03871ad4d34bb17f9d376d
+      size: 3857
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -550,6 +554,10 @@ stages:
       hash: md5
       md5: 58f6ce8683f8ad8a7822973cb3dfca3d
       size: 20915
+    - path: src/io.py
+      hash: md5
+      md5: c40a42247657ac69d96535508fc49572
+      size: 5039
     - path: src/munge.py
       hash: md5
       md5: 25816a688ede328710c885af6d847e12
@@ -575,7 +583,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Dwight_2025-01-01.log
@@ -584,8 +592,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: 3861fb016bed41accc85153aa2f79f6e
-      size: 2615076
+      md5: 6b4e51bd6b22c83b64ac4b5c979dab6b
+      size: 2964018
   context_axis@2:
     cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-07 
       --composition_config conf/trialframe.yaml --raw_data_dir 
@@ -603,18 +611,18 @@ stages:
       md5: 929f9f54d3227f1f12957cd18aad11fd
       size: 18549
     - path: 
-        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-smooth-rates.parquet
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
       hash: md5
-      md5: 4398d0d40e739a88cd0f6fa94dcf7dc9
-      size: 278035929
+      md5: 45d3d135444ffe7e6d3a6ae058476d71
+      size: 299183129
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
       hash: md5
       md5: d2d945114c98d68daddf22ccb3e0e528
       size: 67908
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 5920486d916e1cdf5403ff424706833f
-      size: 5039
+      md5: 14eec8e1bb03871ad4d34bb17f9d376d
+      size: 3857
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -623,6 +631,10 @@ stages:
       hash: md5
       md5: 58f6ce8683f8ad8a7822973cb3dfca3d
       size: 20915
+    - path: src/io.py
+      hash: md5
+      md5: c40a42247657ac69d96535508fc49572
+      size: 5039
     - path: src/munge.py
       hash: md5
       md5: 25816a688ede328710c885af6d847e12
@@ -648,7 +660,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Dwight_2025-01-07.log
@@ -657,8 +669,8 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: 2d21c91d7dbf705c39418e06e7b19d05
-      size: 2256150
+      md5: d1bf362a86d1e9f00c723af184b142c8
+      size: 2819167
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py --dataset Prez_2022-07-21 
       --composition_config conf/trialframe.yaml --raw_data_dir 
@@ -3303,18 +3315,18 @@ stages:
       md5: 41f460607d9b757c1aec9a5eda8dde33
       size: 17759
     - path: 
-        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-smooth-rates.parquet
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
       hash: md5
-      md5: a75850e68845192784bfefb9501cfef2
-      size: 127416109
+      md5: 77454d600f0dee8e5718f35033733d01
+      size: 243356044
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
       hash: md5
       md5: b538cb445f3225ab4224d03c22d578a4
       size: 75121
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 5920486d916e1cdf5403ff424706833f
-      size: 5039
+      md5: 14eec8e1bb03871ad4d34bb17f9d376d
+      size: 3857
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -3323,6 +3335,10 @@ stages:
       hash: md5
       md5: 58f6ce8683f8ad8a7822973cb3dfca3d
       size: 20915
+    - path: src/io.py
+      hash: md5
+      md5: c40a42247657ac69d96535508fc49572
+      size: 5039
     - path: src/munge.py
       hash: md5
       md5: 25816a688ede328710c885af6d847e12
@@ -3348,7 +3364,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Prez_2025-04-16.log
@@ -3357,8 +3373,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2025-04-16_context_axis.svg
       hash: md5
-      md5: 1599a5a8955e9217994b642fb184a425
-      size: 534936
+      md5: 78da1dbb89f62814be0b534ddd130d8b
+      size: 634716
   subspace_split@0:
     cmd: python scripts/subspace_split.py --dataset Prez_2022-07-21 
       --composition_config conf/trialframe.yaml --raw_data_dir 
@@ -3848,10 +3864,10 @@ stages:
       md5: bfc8f45d4d3cffbae7ef91a6a1dee150
       size: 11518
     - path: 
-        data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-smooth-rates.parquet
+        data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_neural-lfads-rates.parquet
       hash: md5
-      md5: 554b5acd7df2dd48868756b22c945ba6
-      size: 74762253
+      md5: 2335981c867c7e2c4c605f182a9f0363
+      size: 222287375
     - path: data/trialframe/Sulley_2025-05-06/Sulley_2025-05-06_states.parquet
       hash: md5
       md5: 8d465d245ef749db5dcdbc3597a4d2ec
@@ -3870,8 +3886,8 @@ stages:
       size: 20915
     - path: src/io.py
       hash: md5
-      md5: d67a505b7ceb37fd53c10706972f14dc
-      size: 4872
+      md5: c40a42247657ac69d96535508fc49572
+      size: 5039
     - path: src/munge.py
       hash: md5
       md5: 25816a688ede328710c885af6d847e12
@@ -3897,7 +3913,7 @@ stages:
         composition:
           state: states
           hand position: hand-pos
-          motor cortex: neural-smooth-rates
+          motor cortex: neural-lfads-rates
         info: meta
     outs:
     - path: logs/context_axis/Sulley_2025-05-06.log
@@ -3906,8 +3922,8 @@ stages:
       size: 193
     - path: results/context_axis/Sulley_2025-05-06_context_axis.svg
       hash: md5
-      md5: 583410aa89ddf2c3cd057d4a6126ec9b
-      size: 797072
+      md5: d16629c13bbd40ccf25a184ce37bf2cc
+      size: 1026448
   cross_task_decoding@4:
     cmd: python scripts/cross_task_decoding.py --dataset Sulley_2025-05-06 
       --composition_config conf/trialframe.yaml --raw_data_dir 
