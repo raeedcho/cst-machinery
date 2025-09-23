@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import xarray as xr
 
 def get_index_level(df,level=None):
     if level is None:
@@ -29,33 +30,46 @@ def hierarchical_assign(df,assign_dict):
     assign_dict : dict of pandas.DataFrame or callable
         dictionary of dataframes to assign to df
     '''
-    return (
-        df
-        .join(
-            pd.concat(
-                [val(df) if callable(val) else val for val in assign_dict.values()], # type: ignore
-                axis=1,
-                keys=assign_dict.keys(),
-                names=['signal','channel'],
-            ) # type: ignore
-        )
+    # Keep original columns as-is (flat or multiindex). We'll append hierarchical blocks.
+
+    # Build a hierarchical (signal, channel) column block to append
+    frames = []
+    for key, val in assign_dict.items():
+        res: pd.DataFrame = val(df) if callable(val) else val  # type: ignore[assignment]
+        # Ensure index alignment
+        res = res.reindex(df.index)
+        # Reduce to single column level so we can add ('signal','channel') on top
+        if isinstance(res.columns, pd.MultiIndex):
+            res = res.copy()
+            res.columns = res.columns.get_level_values(-1)
+            res.columns.name = 'channel'
+        frames.append(res)
+
+    right = pd.concat(
+        frames,
+        axis=1,
+        keys=list(assign_dict.keys()),
+        names=['signal', 'channel'],
     )
+    # Concatenate along columns to avoid merge-level mismatch issues
+    return pd.concat([df, right], axis=1)
 
 def make_dpca_tensor(trialframe: pd.DataFrame,conditions: list[str]) -> np.ndarray:
     """
     Convert the input data to a tensor format suitable for dPCA.
     """
-    tensor = (
+    xr_obj = (
         trialframe
         .groupby(conditions)
         .mean()
         .stack()
         .reorder_levels(['channel'] + conditions)
         .to_xarray()
-        .to_numpy()
     )
-
-    return tensor
+    if isinstance(xr_obj, xr.DataArray):
+        return xr_obj.to_numpy()
+    # If it's a Dataset (e.g., due to top-level column names), collapse to DataArray
+    return xr_obj.to_array().squeeze().to_numpy()
 
 def make_dpca_tensor_simple(trialframe: pd.DataFrame,conditions: list[str]) -> np.ndarray:
     """
@@ -63,15 +77,15 @@ def make_dpca_tensor_simple(trialframe: pd.DataFrame,conditions: list[str]) -> n
     Note: This version for some reason does not output the same tensor as make_dpca_tensor.
     dPCA also works worse on it for some reason.
     """
-    tensor = (
+    xr_obj = (
         trialframe
         .stack()
         .groupby(['channel'] + conditions).mean()
         .to_xarray()
-        .to_numpy()
     )
-
-    return tensor
+    if isinstance(xr_obj, xr.DataArray):
+        return xr_obj.to_numpy()
+    return xr_obj.to_array().squeeze().to_numpy()
 
 def make_dpca_trial_tensor(trialframe: pd.DataFrame,conditions: list[str]) -> np.ndarray:
     """
