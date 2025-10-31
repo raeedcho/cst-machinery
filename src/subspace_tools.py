@@ -5,7 +5,13 @@ import pandas as pd
 from sklearn.decomposition import PCA, TruncatedSVD
 from sklearn.linear_model import LinearRegression
 import scipy.linalg as la
-import dekodec
+try:
+    import dekodec
+except Exception:  # pragma: no cover - fallback for environments without dekodec
+    class _DekodecPlaceholder:
+        def get_potent_null(self, *args, **kwargs):
+            raise ImportError("dekodec is not installed; get_potent_null is unavailable")
+    dekodec = _DekodecPlaceholder()
 
 def frac_var_explained_by_subspace(X,subspace):
     '''
@@ -87,7 +93,7 @@ def bootstrap_subspace_overlap(signal_grouped,num_bootstraps=100,var_cutoff=0.99
                 axis=1
             ),
             'subspace_overlap_rand' : lambda df : df.apply(
-                lambda row : subspace_overlap_index(util.random_array_like(row['signal_data']),row['signal_proj'],var_cutoff=var_cutoff),
+                lambda row : subspace_overlap_index(np.random.standard_normal(row['signal_data'].shape), row['signal_proj'], var_cutoff=var_cutoff),
                 axis=1
             )
         })
@@ -110,7 +116,14 @@ def calc_projected_variance(X,proj_matrix):
     Returns:
         (float) projected variance
     '''
-    pass
+    # Validate shapes
+    assert X.ndim == 2, 'X must be a 2D array'
+    assert proj_matrix.ndim == 2, 'proj_matrix must be a 2D array'
+    assert X.shape[1] == proj_matrix.shape[0], 'proj_matrix must have same number of rows as X has features'
+
+    X_cov = np.cov(X, rowvar=False)
+    # Total variance in the projected subspace equals trace(P^T Cov(X) P)
+    return float(np.trace(proj_matrix.T @ X_cov @ proj_matrix))
 
 def find_potent_null_space(X,Y):
     '''

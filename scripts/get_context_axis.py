@@ -1,6 +1,5 @@
 import numpy as np
 import pandas as pd
-import smile_extract
 import seaborn as sns
 from matplotlib.figure import Figure
 
@@ -14,8 +13,7 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.pipeline import Pipeline
 
 from src.crystal_models import SoftnormScaler
-from src.munge import get_index_level, multivalue_xs
-from src.time_slice import reindex_trial_from_event, slice_by_time
+from trialframe import get_index_level, multivalue_xs, reindex_trial_from_event, slice_by_time
 from src.cli import with_parsed_args, create_default_parser
 from src.io import generic_preproc
 

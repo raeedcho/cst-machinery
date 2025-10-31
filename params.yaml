@@ -23,9 +23,9 @@ datasets:
 - monkey: Prez
   date: '2025-04-16'
   dataset_name: Prez_2025-04-16
-- monkey: Sulley
-  date: '2025-05-06'
-  dataset_name: Sulley_2025-05-06
+# - monkey: Sulley
+#   date: '2025-05-06'
+#   dataset_name: Sulley_2025-05-06
 
 extract:
   bin_size: 10ms

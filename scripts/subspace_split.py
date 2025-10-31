@@ -3,7 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 import seaborn as sns
-from src import munge, time_slice, crystal_models, timeseries, subspace_tools, io
+import trialframe as tfr
+from src import crystal_models, subspace_tools, io
 from src.cli import with_parsed_args, create_default_parser
 from sklearn.pipeline import make_pipeline
 from dekodec import DekODec
@@ -58,11 +59,11 @@ def precondition_data(tf: pd.DataFrame)->pd.DataFrame:
     neural_data = (
         tf
         .set_index(['task','result','state'],append=True)
-        .pipe(munge.multivalue_xs,keys=['CST','RTT','DCO'],level='task')
+        .pipe(tfr.multivalue_xs,keys=['CST','RTT','DCO'],level='task')
         .xs(level='result',key='success')
         .rename(index=state_mapper, level='state')
         .groupby('trial_id')
-        .filter(lambda df: np.any(munge.get_index_level(df,'state') == 'Go Cue'))
+        .filter(lambda df: np.any(tfr.get_index_level(df,'state') == 'Go Cue'))
         .groupby('state')
         .filter(lambda df: df.name != 'Reach to Center')
         ['motor cortex']

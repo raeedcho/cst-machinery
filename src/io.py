@@ -5,12 +5,13 @@ import pandas as pd
 import numpy as np
 import smile_extract
 from typing import Union
-from .munge import (
+from trialframe import (
     get_index_level,
     multivalue_xs,
     hierarchical_assign,
+    estimate_kinematic_derivative,
+    estimate_kinematic_derivative_savgol,
 )
-from .timeseries import estimate_kinematic_derivative, estimate_kinematic_derivative_savgol
 from .states import get_movement_state_renamer, reassign_state
 
 def setup_logging(args, subfolder_name: str='default') -> None:

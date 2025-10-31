@@ -7,7 +7,7 @@ from pathlib import Path
 import pandas as pd
 import numpy as np
 from src.chop_merge import frame_to_chops
-from src.munge import get_index_level
+from trialframe import get_index_level
 
 from sklearn.model_selection import GroupShuffleSplit, ShuffleSplit
 import h5py

@@ -1,6 +1,6 @@
 import numpy as np
-from .timeseries import remove_baseline
-from sklearn.base import TransformerMixin, BaseEstimator
+from trialframe import remove_baseline
+from sklearn.base import TransformerMixin, BaseEstimator, ClassifierMixin
 from sklearn.decomposition import TruncatedSVD,PCA
 from dPCA.dPCA import dPCA
 import xarray
@@ -11,9 +11,14 @@ from sklearn.preprocessing import FunctionTransformer
 from sklearn.utils.validation import check_is_fitted
 from sklearn.pipeline import Pipeline
 from sklearn.base import clone
-from .time_slice import get_epoch_data
-from .munge import make_dpca_tensor
+from trialframe import get_epoch_data
+from .dpca_tensor import make_dpca_tensor
 import dekodec
+import pymanopt
+import torch
+from dynamax.hidden_markov_model import LinearAutoregressiveHMM
+from jax import vmap
+
 class JointSubspace(TransformerMixin, BaseEstimator):
     '''
     Model to find a joint subspace given multiple datasets in the same full-D space 
@@ -432,3 +437,140 @@ class CISDirPartition(TransformerMixin, BaseEstimator):
             names=['space','component'],
         )
 
+class OrthogonalSpacePartition(TransformerMixin, BaseEstimator):
+    """
+    Orthogonal Space Partition (OSP) model for trialframe data.
+    (Elsayed et al. 2016 method)
+    """
+    def __init__(
+            self,
+            n_components_per_cond=None,
+            condition=None,
+        ):
+        assert condition is not None, "Must provide condition column name"
+
+        self.n_components_per_cond = n_components_per_cond
+        self.condition = condition
+
+    def fit(self, X, y=None):
+        X_conds_dict = {
+            cond: tab.values
+            for cond,tab in X.groupby(self.condition)
+        }
+        self.subspaces_ = self.partition_space(X_conds_dict, n_components_per_cond=self.n_components_per_cond)
+
+        return self
+
+    def transform(self,X):
+        '''
+        Projects data into unique subspaces.
+
+        Arguments:
+            X - (pd.DataFrame)
+                DataFrame containing data (e.g. firing rates) and condition (e.g. task)
+
+        Returns:
+            (pd.DataFrame) New DataFrame with an additional column containing the
+                projected data (column names are f'{self.signal}_{subspace_name}')
+        '''
+        check_is_fitted(self, 'subspaces_')
+        return X @ np.column_stack(tuple(self.subspaces_.values()))
+
+    def partition_space(self, X_conds_dict, n_components_per_cond: Optional[int]=None):
+        num_unique_dims = np.array([n_components_per_cond for cond in X_conds_dict.keys()])
+        total_unique_dims = np.sum(num_unique_dims)
+
+        covar_conds = {
+            cond: torch.from_numpy(np.cov(tab, rowvar=False).astype('float64'))
+            for cond,tab in X_conds_dict.items()
+        }
+
+        #manifold = pymanopt.manifolds.Stiefel(Z.shape[1],total_unique_dims)
+        #@pymanopt.function.pytorch(manifold)
+        #def cost(Q):
+        #    return torch.sum(torch.square(Z @ Q - Z_uniques))
+        #problem = pymanopt.Problem(manifold,cost)
+        #optimizer = pymanopt.optimizers.TrustRegions()
+        #result = optimizer.run(problem)
+        #Q_all_uniques = flip_positive(result.point)
+        
+        #subspaces = {
+        #    f'{cond.lower()}_unique': arr for cond,arr in zip(
+        #        X_conds.keys(),
+        #        np.split(Q_all_uniques,np.cumsum(num_unique_dims),axis=1)[:-1]
+        #    )
+        #}
+        #subspaces['shared'] = max_var_rotate(
+        #    null_space(np.column_stack(tuple(subspaces.values())).T),
+        #    np.vstack(tuple(X_conds.values())),
+        #)
+
+        #return subspaces
+
+class DynamicStateInference(ClassifierMixin, BaseEstimator):
+    """
+    Model to infer dynamic states from trialframe data.
+    Uses an auto-regressive hidden Markov model (AR-HMM) to infer states.
+    """
+    def __init__(
+            self,
+            num_states: int = 5,
+            num_lags: int = 1,
+            reference_task: str='DCO',
+            training_epochs: dict[str,tuple[str,slice]] = {
+                'trial': ('Go Cue', slice(pd.to_timedelta('-900ms'),pd.to_timedelta('1000ms'))),
+            },
+            num_iters: int = 100,
+    ):
+        self.num_states = num_states
+        self.num_lags = num_lags
+        self.reference_task = reference_task
+        self.training_epochs = training_epochs
+        self.num_iters = num_iters
+
+    def fit(self, X, y=None):
+        training_data = (
+            X
+            .xs(level='task', key=self.reference_task)
+            .pipe(get_epoch_data, epochs=self.training_epochs)
+            .groupby('trial_id')
+            .apply(lambda x: x.values)
+            .pipe(np.stack)
+        )
+
+        self.model_ = LinearAutoregressiveHMM(
+            num_states=self.num_states,
+            emission_dim=training_data.shape[-1],
+            num_lags=self.num_lags,
+        )
+
+        init_params, init_props = self.model_.initialize(
+            method='kmeans',
+            emissions=training_data,
+        )
+
+        training_inputs = vmap(self.model_.compute_inputs)(training_data)
+
+        self.fitted_params_, self.lps = self.model_.fit_em(
+            params=init_params,
+            props=init_props,
+            emissions=training_data,
+            inputs=training_inputs,
+            num_iters=self.num_iters,
+        )
+
+    def score(self, X, y=None):
+        """
+        Predicts the most likely state sequence for the given data.
+        """
+        check_is_fitted(self, 'fitted_params_')
+        emissions = (
+            X
+            .xs(level='task', key=self.reference_task)
+            .pipe(get_epoch_data, epochs=self.training_epochs)
+            .groupby('trial_id')
+            .apply(lambda x: x.values)
+            .pipe(np.stack)
+        )
+        inputs = vmap(self.model_.compute_inputs)(emissions)
+        return self.model_.predict(emissions=emissions, inputs=inputs)

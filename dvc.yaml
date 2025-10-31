@@ -34,7 +34,7 @@ stages:
       - smooth_firing_rates
       deps:
       - scripts/smooth_firing_rates.py
-      - src/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
       outs:
@@ -54,7 +54,7 @@ stages:
       - dir_structure
       deps:
       - scripts/prep_lfads_tensors.py
-      - src/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - src/chop_merge.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
       outs:
@@ -101,7 +101,7 @@ stages:
       deps:
       - scripts/merge_lfads_outputs.py
       - src/chop_merge.py
-      - src/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
       - ${dir_structure.results_dir}/lfads/${item.dataset_name}/lfads_output_${item.dataset_name}_tensors.h5
       outs:
@@ -120,11 +120,11 @@ stages:
       - conf/trialframe.yaml:
       deps:
       - scripts/subspace_split.py
-      - src/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - src/cli.py
       - src/io.py
       - src/crystal_models.py
-      - src/time_slice.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
@@ -145,10 +145,10 @@ stages:
       - conf/trialframe.yaml:
       deps:
       - scripts/get_context_axis.py
-      - src/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - src/cli.py
       - src/crystal_models.py
-      - src/time_slice.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - src/io.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
@@ -170,11 +170,11 @@ stages:
       - conf/trialframe.yaml:
       deps:
       - scripts/cross_task_decoding.py
-      - src/munge.py
       - src/cli.py
       - src/crystal_models.py
-      - src/time_slice.py
-      - src/timeseries.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/timeseries.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet

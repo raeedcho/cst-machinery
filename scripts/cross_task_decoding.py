@@ -3,7 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 import seaborn as sns
-from src import munge, time_slice, crystal_models, timeseries
+import trialframe as tfr
+from src import crystal_models
 from src.cli import with_parsed_args, create_default_parser
 from src.io import generic_preproc
 import smile_extract
@@ -102,16 +103,16 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
     preproc = (
         tf
         .groupby('trial_id')
-        .filter(lambda df: np.any(munge.get_index_level(df,'state') == 'Go Cue'))
+        .filter(lambda df: np.any(tfr.get_index_level(df,'state') == 'Go Cue'))
         # .pipe(drop_hand_drop_trials) # type: ignore
     )
 
     trim_pipeline = lambda df: (
         df
         .groupby('trial_id', group_keys=False)
-        .apply(lambda df: time_slice.reindex_trial_from_event(df, event='Go Cue'))
+        .apply(lambda df: tfr.reindex_trial_from_event(df, event='Go Cue'))
         .pipe(
-            time_slice.slice_by_time,
+            tfr.slice_by_time,
             time_slice=slice(pd.to_timedelta('-0.5s'),pd.to_timedelta('3s')),
             timecol='time'
         )
@@ -140,7 +141,7 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
         preproc
         ['hand position']
         .groupby('trial_id',group_keys=False)
-        .apply(timeseries.estimate_kinematic_derivative, deriv=1, cutoff=30)
+        .apply(tfr.estimate_kinematic_derivative, deriv=1, cutoff=30)
         .pipe(trim_pipeline)
     )
 
@@ -157,7 +158,7 @@ def drop_hand_drop_trials(trialframe: pd.DataFrame)-> pd.DataFrame:
     # Drop any trials where vert_hand_out_of_bounds is True
     trial_ids_to_drop = hand_pos.index[vert_hand_out_of_bounds].get_level_values('trial_id').unique()
     dropped_trials = (
-        munge.multivalue_xs(
+        tfr.multivalue_xs(
             trialframe,
             keys=trial_ids_to_drop,
             level='trial_id',
@@ -176,7 +177,7 @@ def drop_hand_drop_trials(trialframe: pd.DataFrame)-> pd.DataFrame:
     return trialframe
 
 def decode_single_trials(predictor_data: pd.DataFrame, target_data: pd.Series)->pd.DataFrame:
-    available_tasks = munge.get_index_level(predictor_data,'task').unique()
+    available_tasks = tfr.get_index_level(predictor_data,'task').unique()
     single_task_models ={
         f'{task}-trained': TaskTrainedDecoder(task=task)
         for task in available_tasks
@@ -246,7 +247,7 @@ def plot_trial_predictions(true_data: pd.Series,pred_data: pd.DataFrame)-> Figur
         .stack(level='model')
         .to_frame('hand velocity')
     ) # type: ignore
-    task = munge.get_index_level(data,'task').unique()
+    task = tfr.get_index_level(data,'task').unique()
     assert len(task)==1, 'Data contains multiple trials'
 
     fig,ax = plt.subplots(figsize=(6,3))
@@ -262,7 +263,7 @@ def plot_trial_predictions(true_data: pd.Series,pred_data: pd.DataFrame)-> Figur
     ax.set(
         xlabel='time (s)',
         ylabel='hand velocity (cm/s)',
-        title=munge.get_index_level(data,'task').unique(),    
+        title=tfr.get_index_level(data,'task').unique(),
     )
     ax.axvline(0, color='k', linestyle='--')
     sns.despine(ax=ax,trim=True)
@@ -289,8 +290,8 @@ class TaskTrainedDecoder(BaseEstimator,RegressorMixin):
         self.output_columns = y.columns
 
         if self.task is not None:
-            X_task = munge.multivalue_xs(X,level='task',keys=self.task)
-            y_task = munge.multivalue_xs(y,level='task',keys=self.task)
+            X_task = tfr.multivalue_xs(X,level='task',keys=self.task)
+            y_task = tfr.multivalue_xs(y,level='task',keys=self.task)
         else:
             X_task = X
             y_task = y

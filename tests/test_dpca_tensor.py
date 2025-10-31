@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from src.munge import make_dpca_tensor, make_dpca_tensor_simple
+from src.dpca_tensor import make_dpca_tensor, make_dpca_tensor_simple
 
 
 def test_make_dpca_tensor_shapes():

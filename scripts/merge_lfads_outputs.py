@@ -5,7 +5,7 @@ logger = logging.getLogger(__name__)
 from pathlib import Path
 import pandas as pd
 from src.chop_merge import chops_to_frame
-from src.munge import get_index_level
+from trialframe import get_index_level
 
 import h5py
 

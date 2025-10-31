@@ -2,7 +2,7 @@ import argparse
 import logging
 from pathlib import Path
 import pandas as pd
-from src.munge import get_index_level
+from trialframe import get_index_level
 from smile_extract.smoothing import smooth_data
 
 logger = logging.getLogger(__name__)

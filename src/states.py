@@ -1,5 +1,4 @@
-from .munge import get_index_level
-from .time_slice import state_list_to_transitions, state_transitions_to_list
+from trialframe import get_index_level, state_list_to_transitions, state_transitions_to_list
 import numpy as np
 import pandas as pd
 from typing import Callable,Union
