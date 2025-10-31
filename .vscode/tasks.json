@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run pytest with coverage",
+			"type": "shell",
+			"command": "conda run --name feedback-machinery python -m pytest",
+			"problemMatcher": [
+				"$pytest"
+			],
+			"group": "build"
+		}
+	]
+}
