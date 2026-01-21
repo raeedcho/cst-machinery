@@ -1959,13 +1959,13 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 85b5a509dd7e3a4c4171bb4779fb796c.dir
-      size: 144567
+      md5: 5fa5ebe66c04d9b08443b920636dfe19.dir
+      size: 144737
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5dcf990600f043cefb9fd462321e6840
-      size: 7867
+      md5: 58ee07924af05e4f0bbafced5a2cb342
+      size: 8172
     params:
       params.yaml:
         dir_structure:
@@ -1988,8 +1988,8 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_cst-cursor-pos.parquet
       hash: md5
-      md5: 036b6a24f78a497c3a9f66dd62020b59
-      size: 608616
+      md5: a2cc12cf76c297e34cb7c1b7416a7ccb
+      size: 9405053
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
       hash: md5
       md5: f51176e6e7c949be93d13dcde80af7e9
@@ -2032,13 +2032,13 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 85b5a509dd7e3a4c4171bb4779fb796c.dir
-      size: 144567
+      md5: 5fa5ebe66c04d9b08443b920636dfe19.dir
+      size: 144737
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5dcf990600f043cefb9fd462321e6840
-      size: 7867
+      md5: 58ee07924af05e4f0bbafced5a2cb342
+      size: 8172
     params:
       params.yaml:
         dir_structure:
@@ -2061,8 +2061,8 @@ stages:
     - path: 
         data/trialframe/Prez_2022-07-21/Prez_2022-07-21_cst-cursor-pos.parquet
       hash: md5
-      md5: 5cc3850d5e3d0125f6bc6f9dd8edc976
-      size: 1109715
+      md5: 19b7f61eb5fb6de27b85bce60b1bfde0
+      size: 5848831
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
       hash: md5
       md5: 1178222dbec74394f52cae3e94da867f
@@ -2105,13 +2105,13 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 85b5a509dd7e3a4c4171bb4779fb796c.dir
-      size: 144567
+      md5: 5fa5ebe66c04d9b08443b920636dfe19.dir
+      size: 144737
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5dcf990600f043cefb9fd462321e6840
-      size: 7867
+      md5: 58ee07924af05e4f0bbafced5a2cb342
+      size: 8172
     params:
       params.yaml:
         dir_structure:
@@ -2134,8 +2134,8 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_cst-cursor-pos.parquet
       hash: md5
-      md5: bcccbd8c03ae5586c7b7d42d9dcc66af
-      size: 648856
+      md5: 46e246e3fd1ae729413f05a932ff5eda
+      size: 7001759
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
       hash: md5
       md5: 8cedfff4f25005a31005f7eeae8f205b
@@ -2628,13 +2628,13 @@ stages:
       nfiles: 4
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: 85b5a509dd7e3a4c4171bb4779fb796c.dir
-      size: 144567
+      md5: 5fa5ebe66c04d9b08443b920636dfe19.dir
+      size: 144737
       nfiles: 36
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 5dcf990600f043cefb9fd462321e6840
-      size: 7867
+      md5: 58ee07924af05e4f0bbafced5a2cb342
+      size: 8172
     params:
       params.yaml:
         dir_structure:
@@ -2657,8 +2657,8 @@ stages:
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_cst-cursor-pos.parquet
       hash: md5
-      md5: d803be633b72bd2a3f91bad1687a302d
-      size: 275503
+      md5: 21caabbc1e4fbb8f4eb4c1e80a39ff09
+      size: 7740750
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
       hash: md5
       md5: b4b994748715f9a381d3f1572f8b86e1
