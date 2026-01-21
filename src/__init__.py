@@ -7,3 +7,4 @@ from . import cli
 from . import io
 from . import states
 from . import subspace_tools
+from . import ofc_model
