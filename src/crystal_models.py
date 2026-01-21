@@ -127,20 +127,6 @@ class JointSubspace(TransformerMixin, BaseEstimator):
         else:
             return X @ self.P_
 
-class SoftnormScaler(TransformerMixin, BaseEstimator):
-    def __init__(self, norm_const=5):
-        self.norm_const = norm_const
-
-    def fit(self,X,y=None):
-        def get_range(arr,axis=None):
-            return np.nanmax(arr,axis=axis)-np.nanmin(arr,axis=axis)
-        self.activity_range_ = get_range(X,axis=0)
-        return self
-
-    def transform(self,X):
-        check_is_fitted(self, 'activity_range_')
-        return X / (self.activity_range_ + self.norm_const)
-
 def BaselineShifter(ref_event: str, ref_slice: slice, timecol: str = 'time'):
     return FunctionTransformer(
         remove_baseline,
