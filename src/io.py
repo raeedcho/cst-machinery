@@ -111,8 +111,7 @@ def generic_preproc(args) -> pd.DataFrame:
 
     preproc = (
         load_trial_frame(args)
-        .set_index(['task','result','state'],append=True)
-        [['hand position','motor cortex']]
+        .set_index('state',append=True)
         .pipe(multivalue_xs, level='task', keys=['CST','RTT','DCO'])
         .xs(level='result',key='success')
         .rename(index=state_mapper, level='state')
@@ -127,6 +126,20 @@ def generic_preproc(args) -> pd.DataFrame:
         .pipe(hierarchical_assign,{
             'hand acceleration': lambda df: (
                 df['hand velocity']
+                .groupby('trial_id',group_keys=False)
+                .apply(estimate_kinematic_derivative, deriv=1, cutoff=30)
+            ),
+        })
+        .pipe(hierarchical_assign,{
+            'cursor velocity': lambda df: (
+                df['cursor position']
+                .groupby('trial_id',group_keys=False)
+                .apply(estimate_kinematic_derivative, deriv=1, cutoff=30)
+            ),
+        })
+        .pipe(hierarchical_assign,{
+            'cursor acceleration': lambda df: (
+                df['cursor velocity']
                 .groupby('trial_id',group_keys=False)
                 .apply(estimate_kinematic_derivative, deriv=1, cutoff=30)
             ),

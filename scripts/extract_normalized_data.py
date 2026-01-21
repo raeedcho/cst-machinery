@@ -122,12 +122,19 @@ def save_phasespace(smile_data_blocks: dict[str, list[Any]], output_path: Path, 
     logger.info(f'Saved phasespace to {output_path}')
 
 def save_cst_cursor(smile_data_blocks: dict[str, list[Any]], output_path: Path, **kwargs) -> None:
-    phasespace = smile_extract.concat_block_trial_func_results(
+    cursor = smile_extract.concat_block_trial_func_results(
+        smile_extract.get_trial_hand_data,
+        smile_data_blocks,
+        **kwargs,
+    )
+    cst_cursor = smile_extract.concat_block_trial_func_results(
         smile_extract.get_trial_cst_cursor,
         smile_data_blocks,
         **kwargs,
     )
-    phasespace.to_parquet(output_path)
+    common_index = cursor.index.intersection(cst_cursor.index)
+    cursor.loc[common_index] = cst_cursor.loc[common_index].reindex(columns=cursor.columns)
+    cursor.to_parquet(output_path)
     logger.info(f'Saved cst cursor to {output_path}')
 
 def save_binned_spikes(smile_data_blocks: dict[str, list[Any]], output_path: Path, **kwargs) -> None:
