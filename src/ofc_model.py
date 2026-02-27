@@ -1,6 +1,6 @@
 import numpy as np
 import jax.numpy as jnp
-from ioc.examples.problem import ControlTask
+from ioc.examples.problem import ControlTask, PartiallyObservableControlTask
 
 
 def augment_system(A0, B0, Q0, H0, delay, dt):
@@ -67,12 +67,13 @@ def augment_system(A0, B0, Q0, H0, delay, dt):
     return A, B, Q, H
 
 
-class CSTProblem(ControlTask):
+class CSTProblem(PartiallyObservableControlTask):
     def __init__(
         self,
         lam=5,
         signal_dependent_noise_const=1.5,
         motor_noise_const=0.4,
+        hand_obs_noise=1e-3,
         T = 800, # total time steps
         dt=0.01, # time step (seconds)
         delay=0.06,
@@ -144,7 +145,14 @@ class CSTProblem(ControlTask):
         D0 = jnp.eye(obs_dim) * 1e-3
         E0 = jnp.eye(state_dim) * 0.
 
-        super().__init__(A, B, C, C0, H, D, D0, E0, Q, R, x0, S0, B0=B0, V0=V0)
+        # Experimenters only observe instantaneous cursor position and hand position
+        S = jnp.zeros((2, state_dim))
+        S = S.at[0, 0].set(1)  # cursor position
+        S = S.at[1, 2].set(1)  # hand position
+        U = jnp.zeros((2, 2))  # observation noise
+        U = U.at[1, 1].set(hand_obs_noise)
+
+        super().__init__(A, B, C, C0, H, D, D0, E0, Q, R, x0, S0, B0=B0, V0=V0, S=S, U=U)
 
 def get_cst_pos_control(**kwargs):
     return CSTProblem(pos_cost_exp=5, vel_cost_exp=-15, **kwargs)
