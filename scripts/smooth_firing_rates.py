@@ -2,8 +2,7 @@ import argparse
 import logging
 from pathlib import Path
 import pandas as pd
-from trialframe import get_index_level
-from smile_extract.smoothing import smooth_data
+from trialframe import get_index_level, smooth_data
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +38,7 @@ def main(args):
         .transform(
             smooth_data,
             dt=bin_size,
-            std=pd.to_timedelta(args.smoothing_std).total_seconds(),
+            kernel_params={'std': pd.to_timedelta(args.smoothing_std).total_seconds()},
             backend='convolve',
         )
     )
