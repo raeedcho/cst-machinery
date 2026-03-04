@@ -133,6 +133,39 @@ stages:
       - ${dir_structure.log_dir}/subspace-split/${item.dataset_name}.log
       - ${dir_structure.results_dir}/subspace-split/${item.dataset_name}/${item.dataset_name}_subspace-split-pipeline.pkl
       - ${dir_structure.results_dir}/subspace-split/${item.dataset_name}/${item.dataset_name}_subspace-split-variance.svg
+  prep_move_split:
+    foreach: ${datasets}
+    do:
+      cmd: python scripts/prep_move_split.py --dataset ${item.dataset_name} 
+        --composition_config ${dir_structure.config_dir}/trialframe.yaml
+        ${dir_structure} ${logging} ${prep_move_split}
+      params:
+      - logging
+      - dir_structure
+      - prep_move_split
+      - conf/trialframe.yaml:
+      deps:
+      - scripts/prep_move_split.py
+      - src/cli.py
+      - src/io.py
+      - src/plot.py
+      - src/crystal_models.py
+      - src/subspace_tools.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      outs:
+      - ${dir_structure.log_dir}/prep-move-split/${item.dataset_name}.log
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-partition.pkl
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-variance.svg
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-cis.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-move_unique.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-prep_unique.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-shared.parquet
   context_axis:
     foreach: ${datasets}
     do:

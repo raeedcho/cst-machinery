@@ -47,3 +47,12 @@ merge_lfads_tensors:
 subspace_split:
   num_components_per_cond: 15
   dekodec_var_cutoff: 0.99
+
+prep_move_split:
+  n_comps_per_cond: 15
+  var_cutoff: 0.99
+  reference_task: DCO
+  prep_start: '-300ms'
+  prep_end: '0ms'
+  move_start: '-100ms'
+  move_end: '200ms'
