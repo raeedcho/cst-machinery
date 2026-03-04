@@ -1,11 +1,11 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 import seaborn as sns
 import trialframe as tfr
 from src import crystal_models, subspace_tools, io
 from src.cli import with_parsed_args, create_default_parser
+from src.plot import plot_split_subspace_variance
 from sklearn.pipeline import make_pipeline
 from dekodec import DekODec
 import cloudpickle
@@ -70,42 +70,6 @@ def precondition_data(tf: pd.DataFrame)->pd.DataFrame:
     )
 
     return neural_data # type: ignore
-
-def plot_split_subspace_variance(
-        unsplit_activity,
-        split_activity,
-        grouper='task',
-        group_order = ['CST','RTT','DCO']
-        ) -> Figure:
-    neural_data = pd.concat(
-        {'unsplit': unsplit_activity, 'split': split_activity},
-        axis=1,
-        names=['neural space', 'component']
-    )
-
-    compared_var = (
-        neural_data
-        .stack(level='neural space')
-        .groupby([grouper, 'neural space'])
-        .apply(subspace_tools.calculate_fraction_variance)
-        .stack(level='component')
-        .to_frame(name='fraction variance')
-    )
-
-    g = sns.catplot(
-        data=compared_var,
-        x='component',
-        y='fraction variance',
-        hue=grouper,
-        hue_order=group_order,
-        kind='bar',
-        row='neural space',
-        sharex=True,
-        sharey=True,
-        aspect=3,
-        height=2,
-    )
-    return g.figure
 
 if __name__=='__main__':
     parser = create_default_parser(

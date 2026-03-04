@@ -1,8 +1,69 @@
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 from matplotlib.patches import Circle, Rectangle
 import matplotlib as mpl
 from matplotlib import animation
+import numpy as np
 import pandas as pd
+import seaborn as sns
+from . import subspace_tools
+
+
+def plot_split_subspace_variance(
+        unsplit_activity: pd.DataFrame,
+        split_activity: pd.DataFrame,
+        grouper: str = 'task',
+        group_order: list[str] = ['CST', 'RTT', 'DCO'],
+) -> Figure:
+    """
+    Plot the fraction of variance captured by each component, comparing
+    unsplit (joint) vs split (prep/move) subspaces.
+
+    Parameters
+    ----------
+    unsplit_activity : pd.DataFrame
+        Neural activity projected into joint (unsplit) subspace.
+    split_activity : pd.DataFrame
+        Neural activity projected into split subspaces (prep/move unique + shared).
+    grouper : str
+        Index level to group by (e.g. 'task' or 'phase').
+    group_order : list[str]
+        Order of groups for plotting.
+
+    Returns
+    -------
+    matplotlib.figure.Figure
+        The generated figure.
+    """
+    neural_data = pd.concat(
+        {'unsplit': unsplit_activity, 'split': split_activity},
+        axis=1,
+        names=['neural space', 'component'],
+    )
+
+    compared_var = (
+        neural_data
+        .stack(level='neural space')
+        .groupby([grouper, 'neural space'])
+        .apply(subspace_tools.calculate_fraction_variance)
+        .stack(level='component')
+        .to_frame(name='fraction variance')
+    )
+
+    g = sns.catplot(
+        data=compared_var,
+        x='component',
+        y='fraction variance',
+        hue=grouper,
+        hue_order=group_order,
+        kind='bar',
+        row='neural space',
+        sharex=True,
+        sharey=True,
+        aspect=3,
+        height=2,
+    )
+    return g.figure
 
 def plot_hand_trace(trial: pd.DataFrame, targets, ax=None,timecol='time',trace_component='x'):
     if ax is None:
@@ -160,7 +221,9 @@ def animate_trial_monitor_no_raster(trial):
 
     return anim
 
-for trial_to_plot in [52,71]:
-    anim = animate_trial_monitor_no_raster(td.loc[td['trial_id']==trial_to_plot].squeeze())
-    anim_name = src.util.format_outfile_name(td,postfix=f'trial_{trial_to_plot}_monitor_anim')
-    anim.save(os.path.join('../results/2022_sfn_poster/',anim_name+'.mp4'),writer='ffmpeg',fps=30,dpi=400)
+# Legacy animation code — only runs when executed directly
+if __name__ == '__main__':
+    for trial_to_plot in [52,71]:
+        anim = animate_trial_monitor_no_raster(td.loc[td['trial_id']==trial_to_plot].squeeze())
+        anim_name = src.util.format_outfile_name(td,postfix=f'trial_{trial_to_plot}_monitor_anim')
+        anim.save(os.path.join('../results/2022_sfn_poster/',anim_name+'.mp4'),writer='ffmpeg',fps=30,dpi=400)
