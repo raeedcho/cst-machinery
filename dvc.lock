@@ -4334,3 +4334,1598 @@ stages:
       hash: md5
       md5: 76999b5649392bbde17796759c71552f
       size: 399
+  movement_kinematics_plots@2:
+    cmd: python scripts/movement_kinematics_plots.py --dataset Dwight_2025-01-07
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --hand_trial_start=-500ms --hand_trial_end=3000ms 
+      --target_onset_start=-100ms --target_onset_end=500ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_cst-cursor-pos.parquet
+      hash: md5
+      md5: 46e246e3fd1ae729413f05a932ff5eda
+      size: 7001759
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
+      hash: md5
+      md5: 8cedfff4f25005a31005f7eeae8f205b
+      size: 7995567
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
+      hash: md5
+      md5: 929f9f54d3227f1f12957cd18aad11fd
+      size: 18549
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
+      hash: md5
+      md5: 1226793694a7251fbfe40fbde789c0e8
+      size: 299129110
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
+      hash: md5
+      md5: d2d945114c98d68daddf22ccb3e0e528
+      size: 67908
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_targets.parquet
+      hash: md5
+      md5: 411d753e24b94158cca01e2afbc217ee
+      size: 19488
+    - path: scripts/movement_kinematics_plots.py
+      hash: md5
+      md5: a53828d36c1acc7273452f07094ecd93
+      size: 3684
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        movement_kinematics_plots:
+          hand_trial_start: -500ms
+          hand_trial_end: 3000ms
+          target_onset_start: -100ms
+          target_onset_end: 500ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/movement-kinematics-plots/Dwight_2025-01-07.log
+      hash: md5
+      md5: 87b458649dcb0fb08a0b5300a86a7f43
+      size: 138
+    - path: 
+        results/movement-kinematics/Dwight_2025-01-07/Dwight_2025-01-07_hand-movements.svg
+      hash: md5
+      md5: 4013e2ee95b424bb90bcc9e4dab48cca
+      size: 6869655
+    - path: 
+        results/movement-kinematics/Dwight_2025-01-07/Dwight_2025-01-07_rtt-target-onset-kinematics.svg
+      hash: md5
+      md5: 4375f5fcbf64d728f5073307c43956a8
+      size: 3564566
+  prep_move_split@2:
+    cmd: python scripts/prep_move_split.py --dataset Prez_2025-04-16 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --n_comps_per_cond 15 --var_cutoff 0.99 
+      --reference_task DCO --prep_start=-300ms --prep_end=0ms 
+      --move_start=-100ms --move_end=200ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_cst-cursor-pos.parquet
+      hash: md5
+      md5: 21caabbc1e4fbb8f4eb4c1e80a39ff09
+      size: 7740750
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
+      hash: md5
+      md5: b4b994748715f9a381d3f1572f8b86e1
+      size: 8072256
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
+      hash: md5
+      md5: 41f460607d9b757c1aec9a5eda8dde33
+      size: 17759
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
+      hash: md5
+      md5: 65c84c239996a85857f7b808fdc59c84
+      size: 243009050
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
+      hash: md5
+      md5: b538cb445f3225ab4224d03c22d578a4
+      size: 75121
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_targets.parquet
+      hash: md5
+      md5: a49f79f8894a1dbac235b5e89ebae56a
+      size: 17779
+    - path: scripts/prep_move_split.py
+      hash: md5
+      md5: 85a41c9e1c6346e7fba4a2143a881458
+      size: 5276
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    - path: src/subspace_tools.py
+      hash: md5
+      md5: f76834fe44c277df41ee82e9e3beecca
+      size: 5954
+    - path: src/targets.py
+      hash: md5
+      md5: cc1356b03374f2477d405440a1a6857f
+      size: 2046
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_move_split:
+          n_comps_per_cond: 15
+          var_cutoff: 0.99
+          reference_task: DCO
+          prep_start: -300ms
+          prep_end: 0ms
+          move_start: -100ms
+          move_end: 200ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-cis.parquet
+      hash: md5
+      md5: 83bd83e8056b21d1948e3a797b5a4efd
+      size: 2267873
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-move_unique.parquet
+      hash: md5
+      md5: e09615d7f8c9cbf72ee2d30e219b9f27
+      size: 13439528
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-prep_unique.parquet
+      hash: md5
+      md5: 7d4d29a587bf8b4987ae6f8d580064df
+      size: 11205185
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-shared.parquet
+      hash: md5
+      md5: e922d9100a3658eb97a469380513d0ca
+      size: 6736525
+    - path: logs/prep-move-split/Prez_2025-04-16.log
+      hash: md5
+      md5: 55fc3326e0ff9e2a47ace48e8eef0952
+      size: 962
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-partition.pkl
+      hash: md5
+      md5: 722a6c34ffb9b57a3cb26de29c5665a4
+      size: 67059
+  prep_move_split_plots@2:
+    cmd: python scripts/prep_move_split_plots.py --dataset Prez_2025-04-16 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --reference_task DCO --prep_start=-300ms 
+      --prep_end=0ms --move_start=-100ms --move_end=200ms 
+      --target_onset_start=-100ms --target_onset_end=500ms 
+      --proj_prep_start=-500ms --proj_prep_end=500ms --proj_move_start=-500ms 
+      --proj_move_end=1000ms --all_trial_start=-1000ms --all_trial_end=3000ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_cst-cursor-pos.parquet
+      hash: md5
+      md5: 21caabbc1e4fbb8f4eb4c1e80a39ff09
+      size: 7740750
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
+      hash: md5
+      md5: b4b994748715f9a381d3f1572f8b86e1
+      size: 8072256
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
+      hash: md5
+      md5: 41f460607d9b757c1aec9a5eda8dde33
+      size: 17759
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
+      hash: md5
+      md5: 65c84c239996a85857f7b808fdc59c84
+      size: 243009050
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
+      hash: md5
+      md5: b538cb445f3225ab4224d03c22d578a4
+      size: 75121
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_targets.parquet
+      hash: md5
+      md5: a49f79f8894a1dbac235b5e89ebae56a
+      size: 17779
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-partition.pkl
+      hash: md5
+      md5: 722a6c34ffb9b57a3cb26de29c5665a4
+      size: 67059
+    - path: scripts/prep_move_split_plots.py
+      hash: md5
+      md5: d320cc951e61084bcc80ffd78883dcbb
+      size: 7927
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    - path: src/plot.py
+      hash: md5
+      md5: f8227b68d6ec0780c2f9c5750313e09e
+      size: 8000
+    - path: src/targets.py
+      hash: md5
+      md5: cc1356b03374f2477d405440a1a6857f
+      size: 2046
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_move_split:
+          n_comps_per_cond: 15
+          var_cutoff: 0.99
+          reference_task: DCO
+          prep_start: -300ms
+          prep_end: 0ms
+          move_start: -100ms
+          move_end: 200ms
+        prep_move_split_plots:
+          target_onset_start: -100ms
+          target_onset_end: 500ms
+          proj_prep_start: -500ms
+          proj_prep_end: 500ms
+          proj_move_start: -500ms
+          proj_move_end: 1000ms
+          all_trial_start: -1000ms
+          all_trial_end: 3000ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/prep-move-split-plots/Prez_2025-04-16.log
+      hash: md5
+      md5: abcef88a084c824b5dadc2cd84740656
+      size: 711
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-variance.svg
+      hash: md5
+      md5: 0b3449f78bab9eee36f75ac049eb3ece
+      size: 87561
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-all-tasks.svg
+      hash: md5
+      md5: d1b70aa7a093c91d8f9aedb8606acda4
+      size: 5937486
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-dco.svg
+      hash: md5
+      md5: 735289264bc2a4e2c849a0d84776d8bb
+      size: 710093
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-rtt-target-onset.svg
+      hash: md5
+      md5: 881f7a4d275f2450eefaa9cfb6312fe0
+      size: 1843173
+  neural_explained_variance@2:
+    cmd: python scripts/neural_explained_variance.py --dataset Dwight_2025-01-07
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --reference_state Move --variance_threshold 0.95 
+      --min_plot_components 15
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_cst-cursor-pos.parquet
+      hash: md5
+      md5: 46e246e3fd1ae729413f05a932ff5eda
+      size: 7001759
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
+      hash: md5
+      md5: 8cedfff4f25005a31005f7eeae8f205b
+      size: 7995567
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
+      hash: md5
+      md5: 929f9f54d3227f1f12957cd18aad11fd
+      size: 18549
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
+      hash: md5
+      md5: 1226793694a7251fbfe40fbde789c0e8
+      size: 299129110
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
+      hash: md5
+      md5: d2d945114c98d68daddf22ccb3e0e528
+      size: 67908
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_targets.parquet
+      hash: md5
+      md5: 411d753e24b94158cca01e2afbc217ee
+      size: 19488
+    - path: scripts/neural_explained_variance.py
+      hash: md5
+      md5: b9d7f4a0f723bad720b286439145ec62
+      size: 3199
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        neural_explained_variance:
+          reference_state: Move
+          variance_threshold: 0.95
+          min_plot_components: 15
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/neural-explained-variance/Dwight_2025-01-07.log
+      hash: md5
+      md5: 564b9965cd3523be36e3d23476279012
+      size: 371
+    - path: 
+        results/neural-explained-variance/Dwight_2025-01-07/Dwight_2025-01-07_neural-explained-variance-95pct-dims.csv
+      hash: md5
+      md5: c0f03ef4de29d5db735dff703002566d
+      size: 43
+    - path: 
+        results/neural-explained-variance/Dwight_2025-01-07/Dwight_2025-01-07_neural-explained-variance-curves.svg
+      hash: md5
+      md5: 73f3bdaa8092aa595f99e837b7b5ff94
+      size: 31463
+  prep_move_split@0:
+    cmd: python scripts/prep_move_split.py --dataset Dwight_2025-01-01 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --n_comps_per_cond 15 --var_cutoff 0.99 
+      --reference_task DCO --prep_start=-300ms --prep_end=0ms 
+      --move_start=-100ms --move_end=200ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_cst-cursor-pos.parquet
+      hash: md5
+      md5: a2cc12cf76c297e34cb7c1b7416a7ccb
+      size: 9405053
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
+      hash: md5
+      md5: f51176e6e7c949be93d13dcde80af7e9
+      size: 10193910
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
+      hash: md5
+      md5: 37e3260abfc0071e916ad44a793cb2bb
+      size: 20526
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
+      hash: md5
+      md5: ee478b660a46b177d7da845ed89cd116
+      size: 409986171
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
+      hash: md5
+      md5: 9fd57d741d91ef02d85ba7d81e128c27
+      size: 94879
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_targets.parquet
+      hash: md5
+      md5: 435b68ae22f64f94ad0bf42644dd51f8
+      size: 22236
+    - path: scripts/prep_move_split.py
+      hash: md5
+      md5: 85a41c9e1c6346e7fba4a2143a881458
+      size: 5276
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    - path: src/subspace_tools.py
+      hash: md5
+      md5: f76834fe44c277df41ee82e9e3beecca
+      size: 5954
+    - path: src/targets.py
+      hash: md5
+      md5: cc1356b03374f2477d405440a1a6857f
+      size: 2046
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_move_split:
+          n_comps_per_cond: 15
+          var_cutoff: 0.99
+          reference_task: DCO
+          prep_start: -300ms
+          prep_end: 0ms
+          move_start: -100ms
+          move_end: 200ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-cis.parquet
+      hash: md5
+      md5: a6dfc455c45f6e69777dd7715ad75b18
+      size: 5701366
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-move_unique.parquet
+      hash: md5
+      md5: ee15f10b84aea59a344b5b6d7f373f80
+      size: 13243036
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-prep_unique.parquet
+      hash: md5
+      md5: dfc2e20c429012caefbfb0bf97cdc098
+      size: 18899298
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-shared.parquet
+      hash: md5
+      md5: a20120f11479bd1ab42aa8ff8eec2533
+      size: 18899297
+    - path: logs/prep-move-split/Dwight_2025-01-01.log
+      hash: md5
+      md5: 061e91c17a79e833dbdd2ba880747cb3
+      size: 989
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-partition.pkl
+      hash: md5
+      md5: 17f35e9627df3700e3b5dd7b401a1b36
+      size: 91659
+  prep_move_split@1:
+    cmd: python scripts/prep_move_split.py --dataset Dwight_2025-01-07 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --n_comps_per_cond 15 --var_cutoff 0.99 
+      --reference_task DCO --prep_start=-300ms --prep_end=0ms 
+      --move_start=-100ms --move_end=200ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_cst-cursor-pos.parquet
+      hash: md5
+      md5: 46e246e3fd1ae729413f05a932ff5eda
+      size: 7001759
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
+      hash: md5
+      md5: 8cedfff4f25005a31005f7eeae8f205b
+      size: 7995567
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
+      hash: md5
+      md5: 929f9f54d3227f1f12957cd18aad11fd
+      size: 18549
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
+      hash: md5
+      md5: 1226793694a7251fbfe40fbde789c0e8
+      size: 299129110
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
+      hash: md5
+      md5: d2d945114c98d68daddf22ccb3e0e528
+      size: 67908
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_targets.parquet
+      hash: md5
+      md5: 411d753e24b94158cca01e2afbc217ee
+      size: 19488
+    - path: scripts/prep_move_split.py
+      hash: md5
+      md5: 85a41c9e1c6346e7fba4a2143a881458
+      size: 5276
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    - path: src/subspace_tools.py
+      hash: md5
+      md5: f76834fe44c277df41ee82e9e3beecca
+      size: 5954
+    - path: src/targets.py
+      hash: md5
+      md5: cc1356b03374f2477d405440a1a6857f
+      size: 2046
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_move_split:
+          n_comps_per_cond: 15
+          var_cutoff: 0.99
+          reference_task: DCO
+          prep_start: -300ms
+          prep_end: 0ms
+          move_start: -100ms
+          move_end: 200ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-cis.parquet
+      hash: md5
+      md5: 3d892755987d00634fd648e3fbdbf1df
+      size: 6704386
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-move_unique.parquet
+      hash: md5
+      md5: d3eef3e14d0df976bb576be0883ec71b
+      size: 13372647
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-prep_unique.parquet
+      hash: md5
+      md5: 1203cafa68761369c2284274d6569bb2
+      size: 15039709
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-shared.parquet
+      hash: md5
+      md5: 8ec7e5587e180ef42a5ad0fc2375866b
+      size: 15039709
+    - path: logs/prep-move-split/Dwight_2025-01-07.log
+      hash: md5
+      md5: 571a157a2402926e57eebe6b1ae82ee3
+      size: 987
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-partition.pkl
+      hash: md5
+      md5: 39f349737cf604c95d51d3f7f6baef60
+      size: 85059
+  prep_move_split_plots@0:
+    cmd: python scripts/prep_move_split_plots.py --dataset Dwight_2025-01-01 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --reference_task DCO --prep_start=-300ms 
+      --prep_end=0ms --move_start=-100ms --move_end=200ms 
+      --target_onset_start=-100ms --target_onset_end=500ms 
+      --proj_prep_start=-500ms --proj_prep_end=500ms --proj_move_start=-500ms 
+      --proj_move_end=1000ms --all_trial_start=-1000ms --all_trial_end=3000ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_cst-cursor-pos.parquet
+      hash: md5
+      md5: a2cc12cf76c297e34cb7c1b7416a7ccb
+      size: 9405053
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
+      hash: md5
+      md5: f51176e6e7c949be93d13dcde80af7e9
+      size: 10193910
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
+      hash: md5
+      md5: 37e3260abfc0071e916ad44a793cb2bb
+      size: 20526
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
+      hash: md5
+      md5: ee478b660a46b177d7da845ed89cd116
+      size: 409986171
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
+      hash: md5
+      md5: 9fd57d741d91ef02d85ba7d81e128c27
+      size: 94879
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_targets.parquet
+      hash: md5
+      md5: 435b68ae22f64f94ad0bf42644dd51f8
+      size: 22236
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-partition.pkl
+      hash: md5
+      md5: 17f35e9627df3700e3b5dd7b401a1b36
+      size: 91659
+    - path: scripts/prep_move_split_plots.py
+      hash: md5
+      md5: d320cc951e61084bcc80ffd78883dcbb
+      size: 7927
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    - path: src/plot.py
+      hash: md5
+      md5: f8227b68d6ec0780c2f9c5750313e09e
+      size: 8000
+    - path: src/targets.py
+      hash: md5
+      md5: cc1356b03374f2477d405440a1a6857f
+      size: 2046
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_move_split:
+          n_comps_per_cond: 15
+          var_cutoff: 0.99
+          reference_task: DCO
+          prep_start: -300ms
+          prep_end: 0ms
+          move_start: -100ms
+          move_end: 200ms
+        prep_move_split_plots:
+          target_onset_start: -100ms
+          target_onset_end: 500ms
+          proj_prep_start: -500ms
+          proj_prep_end: 500ms
+          proj_move_start: -500ms
+          proj_move_end: 1000ms
+          all_trial_start: -1000ms
+          all_trial_end: 3000ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/prep-move-split-plots/Dwight_2025-01-01.log
+      hash: md5
+      md5: fa6ba94afacfd43573128e4663f95b4a
+      size: 719
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-variance.svg
+      hash: md5
+      md5: 433383a9e6856ec05bfaf296f9d56448
+      size: 86515
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-all-tasks.svg
+      hash: md5
+      md5: 0f1e580f856061ee012643d810ecad53
+      size: 12866420
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-dco.svg
+      hash: md5
+      md5: 894c15cd078df97074000406797d4a60
+      size: 3024152
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-rtt-target-onset.svg
+      hash: md5
+      md5: 87da98bf868441af70f5640f23ae9846
+      size: 4141613
+  prep_move_split_plots@1:
+    cmd: python scripts/prep_move_split_plots.py --dataset Dwight_2025-01-07 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --reference_task DCO --prep_start=-300ms 
+      --prep_end=0ms --move_start=-100ms --move_end=200ms 
+      --target_onset_start=-100ms --target_onset_end=500ms 
+      --proj_prep_start=-500ms --proj_prep_end=500ms --proj_move_start=-500ms 
+      --proj_move_end=1000ms --all_trial_start=-1000ms --all_trial_end=3000ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_cst-cursor-pos.parquet
+      hash: md5
+      md5: 46e246e3fd1ae729413f05a932ff5eda
+      size: 7001759
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
+      hash: md5
+      md5: 8cedfff4f25005a31005f7eeae8f205b
+      size: 7995567
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_meta.parquet
+      hash: md5
+      md5: 929f9f54d3227f1f12957cd18aad11fd
+      size: 18549
+    - path: 
+        data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-lfads-rates.parquet
+      hash: md5
+      md5: 1226793694a7251fbfe40fbde789c0e8
+      size: 299129110
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_states.parquet
+      hash: md5
+      md5: d2d945114c98d68daddf22ccb3e0e528
+      size: 67908
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_targets.parquet
+      hash: md5
+      md5: 411d753e24b94158cca01e2afbc217ee
+      size: 19488
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-partition.pkl
+      hash: md5
+      md5: 39f349737cf604c95d51d3f7f6baef60
+      size: 85059
+    - path: scripts/prep_move_split_plots.py
+      hash: md5
+      md5: d320cc951e61084bcc80ffd78883dcbb
+      size: 7927
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/crystal_models.py
+      hash: md5
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    - path: src/plot.py
+      hash: md5
+      md5: f8227b68d6ec0780c2f9c5750313e09e
+      size: 8000
+    - path: src/targets.py
+      hash: md5
+      md5: cc1356b03374f2477d405440a1a6857f
+      size: 2046
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        prep_move_split:
+          n_comps_per_cond: 15
+          var_cutoff: 0.99
+          reference_task: DCO
+          prep_start: -300ms
+          prep_end: 0ms
+          move_start: -100ms
+          move_end: 200ms
+        prep_move_split_plots:
+          target_onset_start: -100ms
+          target_onset_end: 500ms
+          proj_prep_start: -500ms
+          proj_prep_end: 500ms
+          proj_move_start: -500ms
+          proj_move_end: 1000ms
+          all_trial_start: -1000ms
+          all_trial_end: 3000ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/prep-move-split-plots/Dwight_2025-01-07.log
+      hash: md5
+      md5: 27bbd3115634697a22ea73b918a66477
+      size: 719
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-variance.svg
+      hash: md5
+      md5: 053c1740bd7fc4812beffd2f199e8e97
+      size: 86521
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-all-tasks.svg
+      hash: md5
+      md5: 6aa8201d44fb2cbd66db5644171e20d5
+      size: 11321825
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-dco.svg
+      hash: md5
+      md5: 2272ba6155462bae5b7515eb458de9ae
+      size: 2241204
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-rtt-target-onset.svg
+      hash: md5
+      md5: f61f28d965ada611f63adbb75bb2892d
+      size: 3556201
+  movement_kinematics_plots@0:
+    cmd: python scripts/movement_kinematics_plots.py --dataset Prez_2022-07-21 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --hand_trial_start=-500ms --hand_trial_end=3000ms 
+      --target_onset_start=-100ms --target_onset_end=500ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Prez_2022-07-21/Prez_2022-07-21_cst-cursor-pos.parquet
+      hash: md5
+      md5: 19b7f61eb5fb6de27b85bce60b1bfde0
+      size: 5848831
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
+      hash: md5
+      md5: 1178222dbec74394f52cae3e94da867f
+      size: 7467188
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_meta.parquet
+      hash: md5
+      md5: d5ee8205809c3d255332c87092559b3c
+      size: 11258
+    - path: 
+        data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
+      hash: md5
+      md5: 89c5c3a35db7fc9d2039fabb42460e5e
+      size: 390223751
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
+      hash: md5
+      md5: fc9c83251804e5e18ef740241d45db16
+      size: 163500
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_targets.parquet
+      hash: md5
+      md5: f457703b9556958c8e6c4d3ed7fa6200
+      size: 11652
+    - path: scripts/movement_kinematics_plots.py
+      hash: md5
+      md5: a53828d36c1acc7273452f07094ecd93
+      size: 3684
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        movement_kinematics_plots:
+          hand_trial_start: -500ms
+          hand_trial_end: 3000ms
+          target_onset_start: -100ms
+          target_onset_end: 500ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/movement-kinematics-plots/Prez_2022-07-21.log
+      hash: md5
+      md5: 4e735ec7ab6a4f87a53a1b55a1aa6948
+      size: 134
+    - path: 
+        results/movement-kinematics/Prez_2022-07-21/Prez_2022-07-21_hand-movements.svg
+      hash: md5
+      md5: 72209497d4f129354d16b1f39884bbc1
+      size: 7579921
+    - path: 
+        results/movement-kinematics/Prez_2022-07-21/Prez_2022-07-21_rtt-target-onset-kinematics.svg
+      hash: md5
+      md5: cad0ce0f40d5db15f55defc125dcfdeb
+      size: 3134630
+  movement_kinematics_plots@1:
+    cmd: python scripts/movement_kinematics_plots.py --dataset Dwight_2025-01-01
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --hand_trial_start=-500ms --hand_trial_end=3000ms 
+      --target_onset_start=-100ms --target_onset_end=500ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_cst-cursor-pos.parquet
+      hash: md5
+      md5: a2cc12cf76c297e34cb7c1b7416a7ccb
+      size: 9405053
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
+      hash: md5
+      md5: f51176e6e7c949be93d13dcde80af7e9
+      size: 10193910
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
+      hash: md5
+      md5: 37e3260abfc0071e916ad44a793cb2bb
+      size: 20526
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
+      hash: md5
+      md5: ee478b660a46b177d7da845ed89cd116
+      size: 409986171
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
+      hash: md5
+      md5: 9fd57d741d91ef02d85ba7d81e128c27
+      size: 94879
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_targets.parquet
+      hash: md5
+      md5: 435b68ae22f64f94ad0bf42644dd51f8
+      size: 22236
+    - path: scripts/movement_kinematics_plots.py
+      hash: md5
+      md5: a53828d36c1acc7273452f07094ecd93
+      size: 3684
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        movement_kinematics_plots:
+          hand_trial_start: -500ms
+          hand_trial_end: 3000ms
+          target_onset_start: -100ms
+          target_onset_end: 500ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/movement-kinematics-plots/Dwight_2025-01-01.log
+      hash: md5
+      md5: 0a867f62a0ef4d5db8a2d0d3bf01870c
+      size: 138
+    - path: 
+        results/movement-kinematics/Dwight_2025-01-01/Dwight_2025-01-01_hand-movements.svg
+      hash: md5
+      md5: aaf906fec957cbfd607fd01146a6df9a
+      size: 8200888
+    - path: 
+        results/movement-kinematics/Dwight_2025-01-01/Dwight_2025-01-01_rtt-target-onset-kinematics.svg
+      hash: md5
+      md5: 002fc9f4156064ec2d3b490a2fea6d85
+      size: 4153265
+  movement_kinematics_plots@3:
+    cmd: python scripts/movement_kinematics_plots.py --dataset Prez_2025-04-16 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --hand_trial_start=-500ms --hand_trial_end=3000ms 
+      --target_onset_start=-100ms --target_onset_end=500ms
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_cst-cursor-pos.parquet
+      hash: md5
+      md5: 21caabbc1e4fbb8f4eb4c1e80a39ff09
+      size: 7740750
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
+      hash: md5
+      md5: b4b994748715f9a381d3f1572f8b86e1
+      size: 8072256
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
+      hash: md5
+      md5: 41f460607d9b757c1aec9a5eda8dde33
+      size: 17759
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
+      hash: md5
+      md5: 65c84c239996a85857f7b808fdc59c84
+      size: 243009050
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
+      hash: md5
+      md5: b538cb445f3225ab4224d03c22d578a4
+      size: 75121
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_targets.parquet
+      hash: md5
+      md5: a49f79f8894a1dbac235b5e89ebae56a
+      size: 17779
+    - path: scripts/movement_kinematics_plots.py
+      hash: md5
+      md5: a53828d36c1acc7273452f07094ecd93
+      size: 3684
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        movement_kinematics_plots:
+          hand_trial_start: -500ms
+          hand_trial_end: 3000ms
+          target_onset_start: -100ms
+          target_onset_end: 500ms
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/movement-kinematics-plots/Prez_2025-04-16.log
+      hash: md5
+      md5: 3032f7b0a192f0bd19133a28d462b365
+      size: 134
+    - path: 
+        results/movement-kinematics/Prez_2025-04-16/Prez_2025-04-16_hand-movements.svg
+      hash: md5
+      md5: 5fbe812e5e7da609e72611336ecabf92
+      size: 2585414
+    - path: 
+        results/movement-kinematics/Prez_2025-04-16/Prez_2025-04-16_rtt-target-onset-kinematics.svg
+      hash: md5
+      md5: 2813fe60d2509b31f48350ff2d1eefd3
+      size: 1845711
+  neural_explained_variance@0:
+    cmd: python scripts/neural_explained_variance.py --dataset Prez_2022-07-21 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --reference_state Move --variance_threshold 0.95 
+      --min_plot_components 15
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Prez_2022-07-21/Prez_2022-07-21_cst-cursor-pos.parquet
+      hash: md5
+      md5: 19b7f61eb5fb6de27b85bce60b1bfde0
+      size: 5848831
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
+      hash: md5
+      md5: 1178222dbec74394f52cae3e94da867f
+      size: 7467188
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_meta.parquet
+      hash: md5
+      md5: d5ee8205809c3d255332c87092559b3c
+      size: 11258
+    - path: 
+        data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-lfads-rates.parquet
+      hash: md5
+      md5: 89c5c3a35db7fc9d2039fabb42460e5e
+      size: 390223751
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_states.parquet
+      hash: md5
+      md5: fc9c83251804e5e18ef740241d45db16
+      size: 163500
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_targets.parquet
+      hash: md5
+      md5: f457703b9556958c8e6c4d3ed7fa6200
+      size: 11652
+    - path: scripts/neural_explained_variance.py
+      hash: md5
+      md5: b9d7f4a0f723bad720b286439145ec62
+      size: 3199
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        neural_explained_variance:
+          reference_state: Move
+          variance_threshold: 0.95
+          min_plot_components: 15
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/neural-explained-variance/Prez_2022-07-21.log
+      hash: md5
+      md5: 1925f7476a7dc61d90aa04c127ebf135
+      size: 361
+    - path: 
+        results/neural-explained-variance/Prez_2022-07-21/Prez_2022-07-21_neural-explained-variance-95pct-dims.csv
+      hash: md5
+      md5: 1093caf22c31ae18e9adc3c890518ed7
+      size: 38
+    - path: 
+        results/neural-explained-variance/Prez_2022-07-21/Prez_2022-07-21_neural-explained-variance-curves.svg
+      hash: md5
+      md5: c39d13aa7c341ab9ff9cfb5f284db61e
+      size: 29478
+  neural_explained_variance@1:
+    cmd: python scripts/neural_explained_variance.py --dataset Dwight_2025-01-01
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --reference_state Move --variance_threshold 0.95 
+      --min_plot_components 15
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_cst-cursor-pos.parquet
+      hash: md5
+      md5: a2cc12cf76c297e34cb7c1b7416a7ccb
+      size: 9405053
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
+      hash: md5
+      md5: f51176e6e7c949be93d13dcde80af7e9
+      size: 10193910
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_meta.parquet
+      hash: md5
+      md5: 37e3260abfc0071e916ad44a793cb2bb
+      size: 20526
+    - path: 
+        data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-lfads-rates.parquet
+      hash: md5
+      md5: ee478b660a46b177d7da845ed89cd116
+      size: 409986171
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_states.parquet
+      hash: md5
+      md5: 9fd57d741d91ef02d85ba7d81e128c27
+      size: 94879
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_targets.parquet
+      hash: md5
+      md5: 435b68ae22f64f94ad0bf42644dd51f8
+      size: 22236
+    - path: scripts/neural_explained_variance.py
+      hash: md5
+      md5: b9d7f4a0f723bad720b286439145ec62
+      size: 3199
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        neural_explained_variance:
+          reference_state: Move
+          variance_threshold: 0.95
+          min_plot_components: 15
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/neural-explained-variance/Dwight_2025-01-01.log
+      hash: md5
+      md5: 257fd09ebfde411436bb722363b7ed6a
+      size: 371
+    - path: 
+        results/neural-explained-variance/Dwight_2025-01-01/Dwight_2025-01-01_neural-explained-variance-95pct-dims.csv
+      hash: md5
+      md5: f32d0c0611adfc6e2cdb7240f1afa038
+      size: 44
+    - path: 
+        results/neural-explained-variance/Dwight_2025-01-01/Dwight_2025-01-01_neural-explained-variance-curves.svg
+      hash: md5
+      md5: b0c2da009eaa334d7b32234975adaadd
+      size: 30271
+  neural_explained_variance@3:
+    cmd: python scripts/neural_explained_variance.py --dataset Prez_2025-04-16 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
+      /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+      --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
+      --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
+      results --loglevel INFO --reference_state Move --variance_threshold 0.95 
+      --min_plot_components 15
+    deps:
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      hash: md5
+      md5: 104358e9760992632e4c81e32b04b62e
+      size: 1761
+    - path: 
+        /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      hash: md5
+      md5: 0d3ef4549bce1e1cbf5b79565166ce02
+      size: 1100
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      hash: md5
+      md5: 1ed03fe5a1859ccf362a27f9c3a5ddfa
+      size: 4335
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_cst-cursor-pos.parquet
+      hash: md5
+      md5: 21caabbc1e4fbb8f4eb4c1e80a39ff09
+      size: 7740750
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
+      hash: md5
+      md5: b4b994748715f9a381d3f1572f8b86e1
+      size: 8072256
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_meta.parquet
+      hash: md5
+      md5: 41f460607d9b757c1aec9a5eda8dde33
+      size: 17759
+    - path: 
+        data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-lfads-rates.parquet
+      hash: md5
+      md5: 65c84c239996a85857f7b808fdc59c84
+      size: 243009050
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_states.parquet
+      hash: md5
+      md5: b538cb445f3225ab4224d03c22d578a4
+      size: 75121
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_targets.parquet
+      hash: md5
+      md5: a49f79f8894a1dbac235b5e89ebae56a
+      size: 17779
+    - path: scripts/neural_explained_variance.py
+      hash: md5
+      md5: b9d7f4a0f723bad720b286439145ec62
+      size: 3199
+    - path: src/cli.py
+      hash: md5
+      md5: fd65067b8ed9d0eeda247565f9a3a6fd
+      size: 3092
+    - path: src/io.py
+      hash: md5
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
+    params:
+      params.yaml:
+        dir_structure:
+          raw_data_dir: 
+            /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
+          trialframe_dir: data/trialframe
+          pre-lfads_dir: data/pre-lfads-tensors
+          config_dir: conf
+          lfads_dir: results/lfads
+          log_dir: logs
+          results_dir: results
+        logging:
+          loglevel: INFO
+        neural_explained_variance:
+          reference_state: Move
+          variance_threshold: 0.95
+          min_plot_components: 15
+      conf/trialframe_cst.yaml:
+        composition:
+          state: states
+          hand position: hand-pos
+          cursor position: cst-cursor-pos
+          motor cortex: neural-lfads-rates
+        info: meta
+    outs:
+    - path: logs/neural-explained-variance/Prez_2025-04-16.log
+      hash: md5
+      md5: b36c26df24561bfb10048ef2d39883a4
+      size: 361
+    - path: 
+        results/neural-explained-variance/Prez_2025-04-16/Prez_2025-04-16_neural-explained-variance-95pct-dims.csv
+      hash: md5
+      md5: 979bc1fe5afffc3813bed746376d6625
+      size: 44
+    - path: 
+        results/neural-explained-variance/Prez_2025-04-16/Prez_2025-04-16_neural-explained-variance-curves.svg
+      hash: md5
+      md5: be30ab5cdb77961ef9c0eb4e6b43b6f8
+      size: 30270

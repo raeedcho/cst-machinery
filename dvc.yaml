@@ -134,38 +134,153 @@ stages:
       - ${dir_structure.results_dir}/subspace-split/${item.dataset_name}/${item.dataset_name}_subspace-split-pipeline.pkl
       - ${dir_structure.results_dir}/subspace-split/${item.dataset_name}/${item.dataset_name}_subspace-split-variance.svg
   prep_move_split:
-    foreach: ${datasets}
+    foreach: ${prep_move_datasets}
     do:
       cmd: python scripts/prep_move_split.py --dataset ${item.dataset_name} 
-        --composition_config ${dir_structure.config_dir}/trialframe.yaml
-        ${dir_structure} ${logging} ${prep_move_split}
+        --composition_config ${dir_structure.config_dir}/trialframe_cst.yaml
+        ${dir_structure} ${logging}
+        --n_comps_per_cond ${prep_move_split.n_comps_per_cond}
+        --var_cutoff ${prep_move_split.var_cutoff}
+        --reference_task ${prep_move_split.reference_task}
+        --prep_start=${prep_move_split.prep_start}
+        --prep_end=${prep_move_split.prep_end}
+        --move_start=${prep_move_split.move_start}
+        --move_end=${prep_move_split.move_end}
       params:
       - logging
       - dir_structure
       - prep_move_split
-      - conf/trialframe.yaml:
+      - conf/trialframe_cst.yaml:
       deps:
       - scripts/prep_move_split.py
       - src/cli.py
       - src/io.py
-      - src/plot.py
+      - src/targets.py
       - src/crystal_models.py
       - src/subspace_tools.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
       outs:
       - ${dir_structure.log_dir}/prep-move-split/${item.dataset_name}.log
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-partition.pkl
-      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-variance.svg
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-cis.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-move_unique.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-prep_unique.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-shared.parquet
+  prep_move_split_plots:
+    foreach: ${prep_move_datasets}
+    do:
+      cmd: python scripts/prep_move_split_plots.py --dataset ${item.dataset_name} 
+        --composition_config ${dir_structure.config_dir}/trialframe_cst.yaml
+        ${dir_structure} ${logging}
+        --reference_task ${prep_move_split.reference_task}
+        --prep_start=${prep_move_split.prep_start}
+        --prep_end=${prep_move_split.prep_end}
+        --move_start=${prep_move_split.move_start}
+        --move_end=${prep_move_split.move_end}
+        --target_onset_start=${prep_move_split_plots.target_onset_start}
+        --target_onset_end=${prep_move_split_plots.target_onset_end}
+        --proj_prep_start=${prep_move_split_plots.proj_prep_start}
+        --proj_prep_end=${prep_move_split_plots.proj_prep_end}
+        --proj_move_start=${prep_move_split_plots.proj_move_start}
+        --proj_move_end=${prep_move_split_plots.proj_move_end}
+        --all_trial_start=${prep_move_split_plots.all_trial_start}
+        --all_trial_end=${prep_move_split_plots.all_trial_end}
+      params:
+      - logging
+      - dir_structure
+      - prep_move_split
+      - prep_move_split_plots
+      - conf/trialframe_cst.yaml:
+      deps:
+      - scripts/prep_move_split_plots.py
+      - src/cli.py
+      - src/io.py
+      - src/plot.py
+      - src/targets.py
+      - src/crystal_models.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-partition.pkl
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
+      outs:
+      - ${dir_structure.log_dir}/prep-move-split-plots/${item.dataset_name}.log
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-variance.svg
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-dco.svg
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-all-tasks.svg
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-rtt-target-onset.svg
+  movement_kinematics_plots:
+    foreach: ${datasets}
+    do:
+      cmd: python scripts/movement_kinematics_plots.py --dataset ${item.dataset_name} 
+        --composition_config ${dir_structure.config_dir}/trialframe_cst.yaml
+        ${dir_structure} ${logging}
+        --hand_trial_start=${movement_kinematics_plots.hand_trial_start}
+        --hand_trial_end=${movement_kinematics_plots.hand_trial_end}
+        --target_onset_start=${movement_kinematics_plots.target_onset_start}
+        --target_onset_end=${movement_kinematics_plots.target_onset_end}
+      params:
+      - logging
+      - dir_structure
+      - movement_kinematics_plots
+      - conf/trialframe_cst.yaml:
+      deps:
+      - scripts/movement_kinematics_plots.py
+      - src/cli.py
+      - src/io.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
+      outs:
+      - ${dir_structure.log_dir}/movement-kinematics-plots/${item.dataset_name}.log
+      - ${dir_structure.results_dir}/movement-kinematics/${item.dataset_name}/${item.dataset_name}_hand-movements.svg
+      - ${dir_structure.results_dir}/movement-kinematics/${item.dataset_name}/${item.dataset_name}_rtt-target-onset-kinematics.svg
+  neural_explained_variance:
+    foreach: ${datasets}
+    do:
+      cmd: python scripts/neural_explained_variance.py --dataset ${item.dataset_name} 
+        --composition_config ${dir_structure.config_dir}/trialframe_cst.yaml
+        ${dir_structure} ${logging} ${neural_explained_variance}
+      params:
+      - logging
+      - dir_structure
+      - neural_explained_variance
+      - conf/trialframe_cst.yaml:
+      deps:
+      - scripts/neural_explained_variance.py
+      - src/cli.py
+      - src/io.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
+      outs:
+      - ${dir_structure.log_dir}/neural-explained-variance/${item.dataset_name}.log
+      - ${dir_structure.results_dir}/neural-explained-variance/${item.dataset_name}/${item.dataset_name}_neural-explained-variance-curves.svg
+      - ${dir_structure.results_dir}/neural-explained-variance/${item.dataset_name}/${item.dataset_name}_neural-explained-variance-95pct-dims.csv
   context_axis:
     foreach: ${datasets}
     do:

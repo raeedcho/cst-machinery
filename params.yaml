@@ -27,6 +27,19 @@ datasets:
 #   date: '2025-05-06'
 #   dataset_name: Sulley_2025-05-06
 
+# Subset used for prep-move neural partition stages.
+# Sessions before 2023 do not include DCO, so they are excluded here.
+prep_move_datasets:
+- monkey: Dwight
+  date: '2025-01-01'
+  dataset_name: Dwight_2025-01-01
+- monkey: Dwight
+  date: '2025-01-07'
+  dataset_name: Dwight_2025-01-07
+- monkey: Prez
+  date: '2025-04-16'
+  dataset_name: Prez_2025-04-16
+
 extract:
   bin_size: 10ms
   min_firing_rate: 0.1
@@ -56,3 +69,24 @@ prep_move_split:
   prep_end: '0ms'
   move_start: '-100ms'
   move_end: '200ms'
+
+prep_move_split_plots:
+  target_onset_start: '-100ms'
+  target_onset_end: '500ms'
+  proj_prep_start: '-500ms'
+  proj_prep_end: '500ms'
+  proj_move_start: '-500ms'
+  proj_move_end: '1000ms'
+  all_trial_start: '-1000ms'
+  all_trial_end: '3000ms'
+
+movement_kinematics_plots:
+  hand_trial_start: '-500ms'
+  hand_trial_end: '3000ms'
+  target_onset_start: '-100ms'
+  target_onset_end: '500ms'
+
+neural_explained_variance:
+  reference_state: Move
+  variance_threshold: 0.95
+  min_plot_components: 15

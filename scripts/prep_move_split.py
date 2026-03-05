@@ -7,7 +7,7 @@ Fits a CISDirPartition model that decomposes neural population activity into:
   - Move-unique subspace
   - Shared prep/move subspace
 
-Saves the fitted model, a diagnostic variance plot, transformed neural parquet,
+Saves the fitted model, transformed neural subspace parquets,
 and logs the subspace overlap index (SOI) between preparatory and movement activity.
 
 Intended as a DVC pipeline stage (see dvc.yaml: prep_move_split).
@@ -23,7 +23,6 @@ from trialframe import SoftnormScaler, get_epoch_data
 from src import crystal_models, subspace_tools
 from src.io import generic_preproc, get_targets, setup_logging, setup_results_dir
 from src.targets import get_target_direction
-from src.plot import plot_split_subspace_variance
 from src.cli import create_default_parser
 
 logger = logging.getLogger(__name__)
@@ -78,26 +77,13 @@ def main(args):
         }, f)
     logger.info(f'Saved model to {model_path}')
 
-    # Generate diagnostic variance plot
+    # Compute and log subspace overlap index
     train_data = (
         neural_data
         .xs(level='task', key=args.reference_task)
         .pipe(get_epoch_data, epochs=training_epochs)
     )
     unsplit_activity = train_data @ partition_model.unsplit_projmat_
-    split_activity = partition_model.transform_full(train_data)
-
-    fig = plot_split_subspace_variance(
-        unsplit_activity,
-        split_activity,
-        grouper='phase',
-        group_order=['prep', 'move'],
-    )
-    plot_path = results_dir / f'{dataset}_prep-move-variance.svg'
-    fig.savefig(plot_path)
-    logger.info(f'Saved variance plot to {plot_path}')
-
-    # Compute and log subspace overlap index
     soi = subspace_tools.subspace_overlap_index(
         unsplit_activity.xs(level='phase', key='prep').values,
         unsplit_activity.xs(level='phase', key='move').values,

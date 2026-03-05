@@ -6,3 +6,7 @@
 /Prez_2025-04-16_neural-lfads-rates.parquet
 /Prez_2025-04-16_targets.parquet
 /Prez_2025-04-16_cst-cursor-pos.parquet
+/Prez_2025-04-16_neural-partition-cis.parquet
+/Prez_2025-04-16_neural-partition-move_unique.parquet
+/Prez_2025-04-16_neural-partition-prep_unique.parquet
+/Prez_2025-04-16_neural-partition-shared.parquet
