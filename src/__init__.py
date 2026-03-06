@@ -1,10 +1,3 @@
-from . import dpca_tensor
-from . import crystal_models
-from . import chop_merge
-from . import lfads_dvc
-from . import lfads_callbacks
-from . import cli
-from . import io
-from . import states
-from . import subspace_tools
-from . import ofc_model
+# Submodules are imported directly by each script that needs them.
+# No eager imports here — lfads_callbacks, crystal_models, and ofc_model
+# all pull in torch/pytorch_lightning/jax and should only load when needed.

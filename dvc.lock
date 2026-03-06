@@ -4496,12 +4496,12 @@ stages:
       size: 5515
     - path: src/subspace_tools.py
       hash: md5
-      md5: f76834fe44c277df41ee82e9e3beecca
-      size: 5954
+      md5: 8ae70b4ec3220446dd47586b4f12a1f8
+      size: 5872
     - path: src/targets.py
       hash: md5
-      md5: cc1356b03374f2477d405440a1a6857f
-      size: 2046
+      md5: d696f5525d1c947cc66a99be8a601ed8
+      size: 2020
     params:
       params.yaml:
         dir_structure:
@@ -4539,17 +4539,17 @@ stages:
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-move_unique.parquet
       hash: md5
-      md5: e09615d7f8c9cbf72ee2d30e219b9f27
+      md5: 0d019cd3630fa827d14a9614805e2afd
       size: 13439528
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-prep_unique.parquet
       hash: md5
-      md5: 7d4d29a587bf8b4987ae6f8d580064df
+      md5: 24b19ab34f67fd90c950ccdbb82171e5
       size: 11205185
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-shared.parquet
       hash: md5
-      md5: e922d9100a3658eb97a469380513d0ca
+      md5: dfbdeee94babb0b25b9f2b72e3cb0ca8
       size: 6736525
     - path: logs/prep-move-split/Prez_2025-04-16.log
       hash: md5
@@ -4558,7 +4558,7 @@ stages:
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-partition.pkl
       hash: md5
-      md5: 722a6c34ffb9b57a3cb26de29c5665a4
+      md5: 81f37a0722a17476248dd6b9b35830fc
       size: 67059
   prep_move_split_plots@2:
     cmd: python scripts/prep_move_split_plots.py --dataset Prez_2025-04-16 
@@ -4614,12 +4614,12 @@ stages:
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-partition.pkl
       hash: md5
-      md5: 722a6c34ffb9b57a3cb26de29c5665a4
+      md5: 81f37a0722a17476248dd6b9b35830fc
       size: 67059
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: d320cc951e61084bcc80ffd78883dcbb
-      size: 7927
+      md5: 94c10c559320d0c5830267ae187b2f2a
+      size: 11919
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -4638,8 +4638,8 @@ stages:
       size: 8000
     - path: src/targets.py
       hash: md5
-      md5: cc1356b03374f2477d405440a1a6857f
-      size: 2046
+      md5: d696f5525d1c947cc66a99be8a601ed8
+      size: 2020
     params:
       params.yaml:
         dir_structure:
@@ -4680,28 +4680,38 @@ stages:
     outs:
     - path: logs/prep-move-split-plots/Prez_2025-04-16.log
       hash: md5
-      md5: abcef88a084c824b5dadc2cd84740656
-      size: 711
+      md5: de9cf7d04522adc8c7265e504e8a48fd
+      size: 1227
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-variance.svg
       hash: md5
-      md5: 0b3449f78bab9eee36f75ac049eb3ece
-      size: 87561
+      md5: ec041f872619add765a23bea53e39d41
+      size: 87598
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-all-tasks.svg
       hash: md5
-      md5: d1b70aa7a093c91d8f9aedb8606acda4
-      size: 5937486
+      md5: fb12e26b4dcb69a3b136e011eff1f8dd
+      size: 5938632
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-dco.svg
       hash: md5
-      md5: 735289264bc2a4e2c849a0d84776d8bb
-      size: 710093
+      md5: 7ba714122230ddf06fe40d1165c6ea05
+      size: 710279
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: 881f7a4d275f2450eefaa9cfb6312fe0
-      size: 1843173
+      md5: d9562d547023ccf342783f1e9e5403d4
+      size: 1843538
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.json
+      hash: md5
+      md5: 3f940ca0e81a144f17059c72adbbd48a
+      size: 516725
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.svg
+      hash: md5
+      md5: c1db2672f6249cb43a66c73329e5c333
+      size: 6347726
   neural_explained_variance@2:
     cmd: python scripts/neural_explained_variance.py --dataset Dwight_2025-01-07
       --composition_config conf/trialframe_cst.yaml --raw_data_dir 
@@ -4868,12 +4878,12 @@ stages:
       size: 5515
     - path: src/subspace_tools.py
       hash: md5
-      md5: f76834fe44c277df41ee82e9e3beecca
-      size: 5954
+      md5: 8ae70b4ec3220446dd47586b4f12a1f8
+      size: 5872
     - path: src/targets.py
       hash: md5
-      md5: cc1356b03374f2477d405440a1a6857f
-      size: 2046
+      md5: d696f5525d1c947cc66a99be8a601ed8
+      size: 2020
     params:
       params.yaml:
         dir_structure:
@@ -4911,17 +4921,17 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-move_unique.parquet
       hash: md5
-      md5: ee15f10b84aea59a344b5b6d7f373f80
-      size: 13243036
+      md5: 74a04ad836c8dc8b35b5ac110b6bf6aa
+      size: 13243039
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-prep_unique.parquet
       hash: md5
-      md5: dfc2e20c429012caefbfb0bf97cdc098
-      size: 18899298
+      md5: a00f15fce4d9e3ce108b4f4d6a59ff82
+      size: 18899297
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-shared.parquet
       hash: md5
-      md5: a20120f11479bd1ab42aa8ff8eec2533
+      md5: 5ec7bd151286278370a589e9e515e7df
       size: 18899297
     - path: logs/prep-move-split/Dwight_2025-01-01.log
       hash: md5
@@ -4930,7 +4940,7 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-partition.pkl
       hash: md5
-      md5: 17f35e9627df3700e3b5dd7b401a1b36
+      md5: fa5c56415887677834dec2d92dd9f1fe
       size: 91659
   prep_move_split@1:
     cmd: python scripts/prep_move_split.py --dataset Dwight_2025-01-07 
@@ -4999,12 +5009,12 @@ stages:
       size: 5515
     - path: src/subspace_tools.py
       hash: md5
-      md5: f76834fe44c277df41ee82e9e3beecca
-      size: 5954
+      md5: 8ae70b4ec3220446dd47586b4f12a1f8
+      size: 5872
     - path: src/targets.py
       hash: md5
-      md5: cc1356b03374f2477d405440a1a6857f
-      size: 2046
+      md5: d696f5525d1c947cc66a99be8a601ed8
+      size: 2020
     params:
       params.yaml:
         dir_structure:
@@ -5042,18 +5052,18 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-move_unique.parquet
       hash: md5
-      md5: d3eef3e14d0df976bb576be0883ec71b
+      md5: 40dbb2ecf3a825b822ab0069d1c3c518
       size: 13372647
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-prep_unique.parquet
       hash: md5
-      md5: 1203cafa68761369c2284274d6569bb2
+      md5: a384922950993a8af00350f2928231e6
       size: 15039709
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-shared.parquet
       hash: md5
-      md5: 8ec7e5587e180ef42a5ad0fc2375866b
-      size: 15039709
+      md5: dc04df263f276aa9512411e4252cdcf6
+      size: 15039711
     - path: logs/prep-move-split/Dwight_2025-01-07.log
       hash: md5
       md5: 571a157a2402926e57eebe6b1ae82ee3
@@ -5061,7 +5071,7 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-partition.pkl
       hash: md5
-      md5: 39f349737cf604c95d51d3f7f6baef60
+      md5: ab65adfa48b0e704eb58c1bba71e84ce
       size: 85059
   prep_move_split_plots@0:
     cmd: python scripts/prep_move_split_plots.py --dataset Dwight_2025-01-01 
@@ -5117,12 +5127,12 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-partition.pkl
       hash: md5
-      md5: 17f35e9627df3700e3b5dd7b401a1b36
+      md5: fa5c56415887677834dec2d92dd9f1fe
       size: 91659
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: d320cc951e61084bcc80ffd78883dcbb
-      size: 7927
+      md5: 94c10c559320d0c5830267ae187b2f2a
+      size: 11919
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5141,8 +5151,8 @@ stages:
       size: 8000
     - path: src/targets.py
       hash: md5
-      md5: cc1356b03374f2477d405440a1a6857f
-      size: 2046
+      md5: d696f5525d1c947cc66a99be8a601ed8
+      size: 2020
     params:
       params.yaml:
         dir_structure:
@@ -5183,28 +5193,38 @@ stages:
     outs:
     - path: logs/prep-move-split-plots/Dwight_2025-01-01.log
       hash: md5
-      md5: fa6ba94afacfd43573128e4663f95b4a
-      size: 719
+      md5: 8ba9bafa9b422d9e647c016166804b1f
+      size: 1239
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-variance.svg
       hash: md5
-      md5: 433383a9e6856ec05bfaf296f9d56448
-      size: 86515
+      md5: 71ca467dd82cf31ddbad9e8ce3177599
+      size: 86558
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-all-tasks.svg
       hash: md5
-      md5: 0f1e580f856061ee012643d810ecad53
-      size: 12866420
+      md5: bdbdbe1a34434bd34a66f3978263b19d
+      size: 12922155
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-dco.svg
       hash: md5
-      md5: 894c15cd078df97074000406797d4a60
-      size: 3024152
+      md5: 3df4db6fdffcb9e3abba1640ae2519a7
+      size: 3025578
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: 87da98bf868441af70f5640f23ae9846
-      size: 4141613
+      md5: 1a0426396fcb56f549733aad778e9f7d
+      size: 4141362
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.json
+      hash: md5
+      md5: 9a6321ac2485b75fbd230e9f5a5bebf4
+      size: 517730
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.svg
+      hash: md5
+      md5: 4910c5907eee94a6b117d2abb9e20f2a
+      size: 15048760
   prep_move_split_plots@1:
     cmd: python scripts/prep_move_split_plots.py --dataset Dwight_2025-01-07 
       --composition_config conf/trialframe_cst.yaml --raw_data_dir 
@@ -5259,12 +5279,12 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-partition.pkl
       hash: md5
-      md5: 39f349737cf604c95d51d3f7f6baef60
+      md5: ab65adfa48b0e704eb58c1bba71e84ce
       size: 85059
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: d320cc951e61084bcc80ffd78883dcbb
-      size: 7927
+      md5: 94c10c559320d0c5830267ae187b2f2a
+      size: 11919
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5283,8 +5303,8 @@ stages:
       size: 8000
     - path: src/targets.py
       hash: md5
-      md5: cc1356b03374f2477d405440a1a6857f
-      size: 2046
+      md5: d696f5525d1c947cc66a99be8a601ed8
+      size: 2020
     params:
       params.yaml:
         dir_structure:
@@ -5325,28 +5345,38 @@ stages:
     outs:
     - path: logs/prep-move-split-plots/Dwight_2025-01-07.log
       hash: md5
-      md5: 27bbd3115634697a22ea73b918a66477
-      size: 719
+      md5: 5ccd66c4038602488e7f4e83700bb1e1
+      size: 1239
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-variance.svg
       hash: md5
-      md5: 053c1740bd7fc4812beffd2f199e8e97
-      size: 86521
+      md5: 161e97faea86d0d3095b5725c0791775
+      size: 86558
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-all-tasks.svg
       hash: md5
-      md5: 6aa8201d44fb2cbd66db5644171e20d5
-      size: 11321825
+      md5: 4976c63bcaf228f5e49534018700a7d0
+      size: 11317663
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-dco.svg
       hash: md5
-      md5: 2272ba6155462bae5b7515eb458de9ae
-      size: 2241204
+      md5: 6723842b532689c9908af762e8528e2e
+      size: 2241245
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: f61f28d965ada611f63adbb75bb2892d
-      size: 3556201
+      md5: 3fbdcad22fd693b2428a2a994b04455e
+      size: 3554492
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.json
+      hash: md5
+      md5: eb3c439163b4dbd93c8bbe6beaf8ab38
+      size: 520136
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.svg
+      hash: md5
+      md5: c648afc0148d16376db41d8f35115a88
+      size: 13051681
   movement_kinematics_plots@0:
     cmd: python scripts/movement_kinematics_plots.py --dataset Prez_2022-07-21 
       --composition_config conf/trialframe_cst.yaml --raw_data_dir 

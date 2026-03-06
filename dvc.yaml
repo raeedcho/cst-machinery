@@ -218,6 +218,8 @@ stages:
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
       outs:
       - ${dir_structure.log_dir}/prep-move-split-plots/${item.dataset_name}.log
+      plots:
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.svg
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-variance.svg
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-dco.svg
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-all-tasks.svg

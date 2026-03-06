@@ -1,10 +1,14 @@
 import cloudpickle
+import json
 import logging
+import subprocess
+import sys
 
+import altair as alt
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from trialframe import SoftnormScaler, get_epoch_data
+from trialframe import SoftnormScaler, get_epoch_data, multivalue_xs
 
 from src.io import generic_preproc, get_targets, setup_logging, setup_results_dir
 from src.targets import get_target_direction
@@ -17,6 +21,41 @@ logger = logging.getLogger(__name__)
 def save_figure(fig, out_path):
     fig.savefig(out_path)
     plt.close(fig)
+
+
+def save_split_space_svg(chart, out_path):
+    """Export an Altair chart to SVG via vl-convert in an isolated subprocess.
+
+    Spawning a fresh interpreter prevents conflicts between vl-convert's embedded
+    V8 engine and PyTorch (loaded later when deserializing the partition model).
+    Falls back to saving interactive HTML if SVG export fails.
+
+    Args:
+        chart: Altair Chart object.
+        out_path: Path for the .svg output (or .html on fallback).
+    """
+    convert_script = (
+        "import sys, vl_convert as vlc; "
+        "svg = vlc.vegalite_to_svg(sys.stdin.read()); sys.stdout.write(svg)"
+    )
+    try:
+        result = subprocess.run(
+            [sys.executable, '-c', convert_script],
+            input=json.dumps(chart.to_dict()),
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        if result.returncode == 0 and result.stdout:
+            out_path.write_text(result.stdout)
+            logger.info(f'Saved SVG: {out_path}')
+        else:
+            raise RuntimeError(result.stderr[:500])
+    except Exception as e:
+        logger.warning(f'SVG export failed ({e}); saving as HTML instead')
+        html_path = out_path.with_suffix('.html')
+        chart.save(str(html_path))
+        logger.info(f'Saved HTML fallback: {html_path}')
 
 
 def main(args):
@@ -66,6 +105,48 @@ def main(args):
         group_order=['prep', 'move'],
     )
     save_figure(fig, results_dir / f'{dataset}_prep-move-variance.svg')
+
+    # Plot 1b: split space trajectory (components 0 vs 1, notebook cell 13)
+    split_space = (
+        neural_data
+        .pipe(get_epoch_data, epochs={
+            'hold': ('Target On', slice(pd.to_timedelta('-200ms'), pd.to_timedelta('0ms'))),
+            'trial': ('Go Cue', slice(pd.to_timedelta('-1000ms'),pd.to_timedelta('3000ms'))),
+        })
+        .pipe(partition_model.transform)
+        .pipe(multivalue_xs, axis=1, level='component', keys=[0, 1])
+        .stack(level='space')
+        .rename(columns=lambda col: f'component {col}')
+    )
+
+    # Keep only the columns needed for plotting — drops extra index levels
+    # (monkey, session date, state, etc.) to keep the Altair spec size manageable.
+    _plot_cols = ['trial_id', 'time', 'task', 'space', 'phase', 'component 0', 'component 1']
+    split_space_data = (
+        split_space
+        .reset_index()
+        .assign(time=lambda df: df['time'].dt.total_seconds())
+        [_plot_cols]
+    )
+    alt.data_transformers.disable_max_rows()
+    split_space_chart = alt.Chart(split_space_data).mark_line().encode(
+        x='component 0:Q',
+        y='component 1:Q',
+        color=alt.Color('phase:N').scale(scheme='set1').sort(['hold', 'trial']),
+        row='space:N',
+        column=alt.Column('task:N').sort(['DCO', 'RTT', 'CST']),
+        detail='trial_id',
+        order='time',
+        opacity=alt.value(0.1),
+    ).configure_axis(
+        grid=False,
+    ).configure_view(
+        stroke=None,
+    ).resolve_scale(
+        x='independent',
+        y='independent',
+    )
+    save_split_space_svg(split_space_chart, results_dir / f'{dataset}_split-space-trajectory.svg')
 
     # Shared RTT target-onset epochs (used by projected RTT panel from notebook cell 24)
     target_onset_slice = slice(pd.to_timedelta(args.target_onset_start), pd.to_timedelta(args.target_onset_end))
