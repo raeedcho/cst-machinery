@@ -4,10 +4,9 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 import seaborn as sns
 import trialframe as tfr
-from src import crystal_models
+from trialframe import SoftnormScaler
 from src.cli import with_parsed_args, create_default_parser
 from src.io import generic_preproc
-import smile_extract
 from pathlib import Path
 from omegaconf import OmegaConf,DictConfig,ListConfig
 from typing import Union,Optional
@@ -119,7 +118,7 @@ def precondition_data(tf: pd.DataFrame)->tuple[pd.DataFrame,pd.DataFrame]:
     )
 
     scale_PCA_pipeline = make_pipeline(
-        crystal_models.SoftnormScaler(),
+        SoftnormScaler(),
         # crystal_models.BaselineShifter(
         #     ref_event='Hold Center (Ambiguous Cue)',
         #     ref_slice=slice('-0.5 sec','0 sec'),

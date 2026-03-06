@@ -3,7 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import trialframe as tfr
-from src import crystal_models, subspace_tools, io
+from trialframe import SoftnormScaler
+from src.crystal_models import JointSubspace
+from src.io import setup_logging, setup_results_dir, load_trial_frame
 from src.cli import with_parsed_args, create_default_parser
 from src.plot import plot_split_subspace_variance
 from sklearn.pipeline import make_pipeline
@@ -16,16 +18,16 @@ logger = logging.getLogger(__name__)
 def main(args):
     dataset = args.dataset
     
-    io.setup_logging(args, subfolder_name='subspace-split')
-    results_dir = io.setup_results_dir(args, subfolder_name='subspace-split')
+    setup_logging(args, subfolder_name='subspace-split')
+    results_dir = setup_results_dir(args, subfolder_name='subspace-split')
     
-    tf = io.load_trial_frame(args)
+    tf = load_trial_frame(args)
     logger.info(f'Loaded trial frame from {dataset}')
     neural_data = precondition_data(tf)
 
     subspace_split_pipeline = make_pipeline(
-        crystal_models.SoftnormScaler(),
-        crystal_models.JointSubspace(
+        SoftnormScaler(),
+        JointSubspace(
             n_comps_per_cond=args.num_components_per_cond,
             condition='task',
             remove_latent_offsets=False,
@@ -56,9 +58,10 @@ def precondition_data(tf: pd.DataFrame)->pd.DataFrame:
         'Hold at Target 1': 'Go Cue', # Sometimes first reach state is skipped in this table (if the first target is in the center)
         'Reach to Target': 'Go Cue',
     }
+    # task and result are already in the index from compose_from_frames
     neural_data = (
         tf
-        .set_index(['task','result','state'],append=True)
+        .set_index(['state'],append=True)
         .pipe(tfr.multivalue_xs,keys=['CST','RTT','DCO'],level='task')
         .xs(level='result',key='success')
         .rename(index=state_mapper, level='state')

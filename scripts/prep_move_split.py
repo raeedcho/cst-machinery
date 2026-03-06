@@ -20,7 +20,8 @@ import logging
 from pathlib import Path
 
 from trialframe import SoftnormScaler, get_epoch_data
-from src import crystal_models, subspace_tools
+from src.crystal_models import CISDirPartition
+from src.subspace_tools import subspace_overlap_index
 from src.io import generic_preproc, get_targets, setup_logging, setup_results_dir
 from src.targets import get_target_direction
 from src.cli import create_default_parser
@@ -58,7 +59,7 @@ def main(args):
     }
 
     # Fit CISDirPartition model
-    partition_model = crystal_models.CISDirPartition(
+    partition_model = CISDirPartition(
         n_comps_per_cond=args.n_comps_per_cond,
         reference_task=args.reference_task,
         training_epochs=training_epochs,
@@ -84,7 +85,7 @@ def main(args):
         .pipe(get_epoch_data, epochs=training_epochs)
     )
     unsplit_activity = train_data @ partition_model.unsplit_projmat_
-    soi = subspace_tools.subspace_overlap_index(
+    soi = subspace_overlap_index(
         unsplit_activity.xs(level='phase', key='prep').values,
         unsplit_activity.xs(level='phase', key='move').values,
     )

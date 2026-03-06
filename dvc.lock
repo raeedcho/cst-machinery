@@ -207,7 +207,7 @@ stages:
       size: 177
   context_axis@0:
     cmd: python scripts/get_context_axis.py --dataset Prez_2022-07-21 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -240,20 +240,20 @@ stages:
       size: 163500
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 9a091e9578188970404c393d5542494a
-      size: 3811
+      md5: fb117d7c3e34be531a754e49e4ea1b10
+      size: 3781
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -280,8 +280,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2022-07-21_context_axis.svg
       hash: md5
-      md5: e3c0070175c4eff6b3502eb7241fbba7
-      size: 1949703
+      md5: f2182b3c963cb1176fda49fdd798a449
+      size: 1950790
   extract_dwight@2025-01-01-reward-type-medium-cst-rtt-dco:
     cmd: python scripts/extract_trial_frame.py 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format/Dwight/2025-01-01/Dwight_2025-01-01_reward-type-medium-cst-rtt-dco_sorted.mat
@@ -519,7 +519,7 @@ stages:
       size: 183
   context_axis@1:
     cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-01 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -552,20 +552,20 @@ stages:
       size: 94879
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 9a091e9578188970404c393d5542494a
-      size: 3811
+      md5: fb117d7c3e34be531a754e49e4ea1b10
+      size: 3781
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -592,11 +592,11 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-01_context_axis.svg
       hash: md5
-      md5: eb1511f6e62102ff43524d553a5f7ab2
-      size: 3284820
+      md5: a75eee84533ee071f0528071c40eef1d
+      size: 3307448
   context_axis@2:
     cmd: python scripts/get_context_axis.py --dataset Dwight_2025-01-07 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -629,20 +629,20 @@ stages:
       size: 67908
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 9a091e9578188970404c393d5542494a
-      size: 3811
+      md5: fb117d7c3e34be531a754e49e4ea1b10
+      size: 3781
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -669,11 +669,11 @@ stages:
       size: 193
     - path: results/context_axis/Dwight_2025-01-07_context_axis.svg
       hash: md5
-      md5: 0c89d737b683f02a2e7d5f528f2867ac
-      size: 3205523
+      md5: 636fbb5bdcfe0e16b7b6afb89d2a7d9d
+      size: 3208259
   cross_task_decoding@0:
     cmd: python scripts/cross_task_decoding.py --dataset Prez_2022-07-21 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -710,16 +710,16 @@ stages:
       size: 163500
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 0cd3e4c9a58174034d69398705867ea0
-      size: 10028
+      md5: eb30dabd3279592145bdc0b8c0e72182
+      size: 9999
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     params:
       params.yaml:
         dir_structure:
@@ -747,21 +747,21 @@ stages:
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: f5738499b2e56b48f5ed0a315227b8ac
+      md5: 4aa4fdde182425784855c22bc211958e
       size: 26573
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 7ddcf30356bae756d106e1f4d2ac5bed
-      size: 212676
+      md5: 2d7da3403cb8ec17430d909a2b9b4f1b
+      size: 212706
     - path: results/cross-task-decoding/Prez_2022-07-21/trial-predictions/
       hash: md5
-      md5: 025d6e798d9e69f40de90e1635b3b46b.dir
+      md5: 0362dd87ef0a256aaca2e711b49d56f8.dir
       size: 16013305
       nfiles: 328
   cross_task_decoding@1:
     cmd: python scripts/cross_task_decoding.py --dataset Dwight_2025-01-01 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -798,16 +798,16 @@ stages:
       size: 94879
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 0cd3e4c9a58174034d69398705867ea0
-      size: 10028
+      md5: eb30dabd3279592145bdc0b8c0e72182
+      size: 9999
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     params:
       params.yaml:
         dir_structure:
@@ -835,21 +835,21 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: e0530fc0cd6d835d19ae8d83a9d527a5
+      md5: 741ab31999220a6417580158a3daf3de
       size: 43543
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: b92f3d5f993a8c3083b102d3c5b94eb7
-      size: 325253
+      md5: add5b383b7ebb00da817af3ad51b4e7a
+      size: 325202
     - path: results/cross-task-decoding/Dwight_2025-01-01/trial-predictions/
       hash: md5
-      md5: 872577b36eea1ff22651f6da9537b9ca.dir
+      md5: ae53c5ca92806ee42a1ef56a22bb3d0c.dir
       size: 27922124
       nfiles: 593
   cross_task_decoding@2:
     cmd: python scripts/cross_task_decoding.py --dataset Dwight_2025-01-07 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -886,16 +886,16 @@ stages:
       size: 67908
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 0cd3e4c9a58174034d69398705867ea0
-      size: 10028
+      md5: eb30dabd3279592145bdc0b8c0e72182
+      size: 9999
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     params:
       params.yaml:
         dir_structure:
@@ -923,16 +923,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: e5685ca7917d9b690b43d741d85e79e6
+      md5: 8adbf461305708d0cafa4142de692d70
       size: 42982
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: e144ad67c46a3718c9d03a2979c5709c
-      size: 292153
+      md5: 42b7eecfb8ddab9200229b45292d333f
+      size: 292181
     - path: results/cross-task-decoding/Dwight_2025-01-07/trial-predictions/
       hash: md5
-      md5: 5fdbfe6c6ac5b00392c5582ba51640a1.dir
+      md5: 6656d56c1cd5db08c6c56287eec893a6.dir
       size: 24267490
       nfiles: 521
   prep_lfads_tensors@0:
@@ -2692,15 +2692,14 @@ stages:
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
       results --loglevel INFO --smoothing_std 0.05s
     deps:
-    - path: 
-        /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
-      hash: md5
-      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
-      size: 2819
     - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       hash: md5
       md5: 104358e9760992632e4c81e32b04b62e
       size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/smoothing.py
+      hash: md5
+      md5: f224c9a733622bc378c7d3b3b4c4b4cc
+      size: 5898
     - path: 
         data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
       hash: md5
@@ -2708,8 +2707,8 @@ stages:
       size: 6370749
     - path: scripts/smooth_firing_rates.py
       hash: md5
-      md5: 0630473714f5e5a267a929f770963f9f
-      size: 2536
+      md5: bee8e0f4a78aed88b60b58a0606c4c6b
+      size: 2520
     params:
       params.yaml:
         dir_structure:
@@ -2743,15 +2742,14 @@ stages:
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
       results --loglevel INFO --smoothing_std 0.05s
     deps:
-    - path: 
-        /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
-      hash: md5
-      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
-      size: 2819
     - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       hash: md5
       md5: 104358e9760992632e4c81e32b04b62e
       size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/smoothing.py
+      hash: md5
+      md5: f224c9a733622bc378c7d3b3b4c4b4cc
+      size: 5898
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-spikes-binned.parquet
       hash: md5
@@ -2759,8 +2757,8 @@ stages:
       size: 3564702
     - path: scripts/smooth_firing_rates.py
       hash: md5
-      md5: 0630473714f5e5a267a929f770963f9f
-      size: 2536
+      md5: bee8e0f4a78aed88b60b58a0606c4c6b
+      size: 2520
     params:
       params.yaml:
         dir_structure:
@@ -2794,15 +2792,14 @@ stages:
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
       results --loglevel INFO --smoothing_std 0.05s
     deps:
-    - path: 
-        /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
-      hash: md5
-      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
-      size: 2819
     - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       hash: md5
       md5: 104358e9760992632e4c81e32b04b62e
       size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/smoothing.py
+      hash: md5
+      md5: f224c9a733622bc378c7d3b3b4c4b4cc
+      size: 5898
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-spikes-binned.parquet
       hash: md5
@@ -2810,8 +2807,8 @@ stages:
       size: 7313107
     - path: scripts/smooth_firing_rates.py
       hash: md5
-      md5: 0630473714f5e5a267a929f770963f9f
-      size: 2536
+      md5: bee8e0f4a78aed88b60b58a0606c4c6b
+      size: 2520
     params:
       params.yaml:
         dir_structure:
@@ -2845,15 +2842,14 @@ stages:
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
       results --loglevel INFO --smoothing_std 0.05s
     deps:
-    - path: 
-        /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
-      hash: md5
-      md5: e47b4d05b2cfb19e1f18e6ed4ad78190
-      size: 2819
     - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       hash: md5
       md5: 104358e9760992632e4c81e32b04b62e
       size: 1761
+    - path: /Users/raeed/codebase/0-projects/trialframe/trialframe/smoothing.py
+      hash: md5
+      md5: f224c9a733622bc378c7d3b3b4c4b4cc
+      size: 5898
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-spikes-binned.parquet
       hash: md5
@@ -2861,8 +2857,8 @@ stages:
       size: 10024030
     - path: scripts/smooth_firing_rates.py
       hash: md5
-      md5: 0630473714f5e5a267a929f770963f9f
-      size: 2536
+      md5: bee8e0f4a78aed88b60b58a0606c4c6b
+      size: 2520
     params:
       params.yaml:
         dir_structure:
@@ -3212,7 +3208,7 @@ stages:
       size: 386
   cross_task_decoding@3:
     cmd: python scripts/cross_task_decoding.py --dataset Prez_2025-04-16 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -3249,16 +3245,16 @@ stages:
       size: 75121
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: 0cd3e4c9a58174034d69398705867ea0
-      size: 10028
+      md5: eb30dabd3279592145bdc0b8c0e72182
+      size: 9999
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     params:
       params.yaml:
         dir_structure:
@@ -3286,21 +3282,21 @@ stages:
     - path: 
         results/cross-task-decoding/Prez_2025-04-16/Prez_2025-04-16_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 41a0e277f492d7d4b3012a16e3f139d1
+      md5: 8dbeff193408fc4f7fd81a4969bc8a9b
       size: 42651
     - path: 
         results/cross-task-decoding/Prez_2025-04-16/Prez_2025-04-16_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: d25b10ba221d446a8ba3bc9ccb4efbba
-      size: 166991
+      md5: 038e8255534f2c5163e1b61cd9ac2c4d
+      size: 166963
     - path: results/cross-task-decoding/Prez_2025-04-16/trial-predictions/
       hash: md5
-      md5: ff9b206842a2d691d1ca6f683d682537.dir
+      md5: 01db596358ae7efaf6ad6027993844d8.dir
       size: 11028911
       nfiles: 222
   context_axis@3:
     cmd: python scripts/get_context_axis.py --dataset Prez_2025-04-16 
-      --composition_config conf/trialframe.yaml --raw_data_dir 
+      --composition_config conf/trialframe_cst.yaml --raw_data_dir 
       /Users/raeed/Library/CloudStorage/OneDrive-UniversityofPittsburgh/0-projects/cst-rtt/cst-data/smile_format
       --trialframe_dir data/trialframe --pre-lfads_dir data/pre-lfads-tensors 
       --config_dir conf --lfads_dir results/lfads --log_dir logs --results_dir 
@@ -3333,20 +3329,20 @@ stages:
       size: 75121
     - path: scripts/get_context_axis.py
       hash: md5
-      md5: 9a091e9578188970404c393d5542494a
-      size: 3811
+      md5: fb117d7c3e34be531a754e49e4ea1b10
+      size: 3781
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -3373,8 +3369,8 @@ stages:
       size: 189
     - path: results/context_axis/Prez_2025-04-16_context_axis.svg
       hash: md5
-      md5: e9e2c69f38e706c0c9f9e4d254f32d35
-      size: 1375952
+      md5: dd430d88a74eb470b75107e8ce2f9bfa
+      size: 1385760
   subspace_split@0:
     cmd: python scripts/subspace_split.py --dataset Prez_2022-07-21 
       --composition_config conf/trialframe.yaml --raw_data_dir 
@@ -3411,20 +3407,20 @@ stages:
       size: 163500
     - path: scripts/subspace_split.py
       hash: md5
-      md5: f85c3bcef17872c9097079e76808b672
-      size: 4243
+      md5: 06b5a276576a307adfc3a89d83b20311
+      size: 3471
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -3455,13 +3451,13 @@ stages:
     - path: 
         results/subspace-split/Prez_2022-07-21/Prez_2022-07-21_subspace-split-pipeline.pkl
       hash: md5
-      md5: 826f2eb57d3b4363817fd1e882e91f28
-      size: 52832
+      md5: 5d036c9f2f56df0d859918c7c1f44d31
+      size: 52860
     - path: 
         results/subspace-split/Prez_2022-07-21/Prez_2022-07-21_subspace-split-variance.svg
       hash: md5
-      md5: 0f34a06e60dbf504bcb8ff1423571f7b
-      size: 90479
+      md5: 13095dee5a84c3afbfa6eccb618693e7
+      size: 90526
   subspace_split@1:
     cmd: python scripts/subspace_split.py --dataset Dwight_2025-01-01 
       --composition_config conf/trialframe.yaml --raw_data_dir 
@@ -3498,20 +3494,20 @@ stages:
       size: 94879
     - path: scripts/subspace_split.py
       hash: md5
-      md5: f85c3bcef17872c9097079e76808b672
-      size: 4243
+      md5: 06b5a276576a307adfc3a89d83b20311
+      size: 3471
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -3542,13 +3538,13 @@ stages:
     - path: 
         results/subspace-split/Dwight_2025-01-01/Dwight_2025-01-01_subspace-split-pipeline.pkl
       hash: md5
-      md5: 03e0ce582915043443147b673356b364
-      size: 71037
+      md5: 6d5a94152093abf12e761ba6554a5bd1
+      size: 71068
     - path: 
         results/subspace-split/Dwight_2025-01-01/Dwight_2025-01-01_subspace-split-variance.svg
       hash: md5
-      md5: e35596f5f4d7cd5afe22d08172b7ef48
-      size: 150856
+      md5: 0d9053d5926304fb6da12a7c686a4057
+      size: 150877
   subspace_split@2:
     cmd: python scripts/subspace_split.py --dataset Dwight_2025-01-07 
       --composition_config conf/trialframe.yaml --raw_data_dir 
@@ -3585,20 +3581,20 @@ stages:
       size: 67908
     - path: scripts/subspace_split.py
       hash: md5
-      md5: f85c3bcef17872c9097079e76808b672
-      size: 4243
+      md5: 06b5a276576a307adfc3a89d83b20311
+      size: 3471
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -3629,13 +3625,13 @@ stages:
     - path: 
         results/subspace-split/Dwight_2025-01-07/Dwight_2025-01-07_subspace-split-pipeline.pkl
       hash: md5
-      md5: 3e0262e7c383b70cb693510b881c7553
-      size: 67734
+      md5: f86ac094e80d59ef3aa66c019878ca3c
+      size: 67762
     - path: 
         results/subspace-split/Dwight_2025-01-07/Dwight_2025-01-07_subspace-split-variance.svg
       hash: md5
-      md5: d3f2240aa5e5e27bcfc189ff905c5cad
-      size: 151862
+      md5: e6a9e188c3469f43684c545709fdf643
+      size: 151894
   subspace_split@3:
     cmd: python scripts/subspace_split.py --dataset Prez_2025-04-16 
       --composition_config conf/trialframe.yaml --raw_data_dir 
@@ -3672,20 +3668,20 @@ stages:
       size: 75121
     - path: scripts/subspace_split.py
       hash: md5
-      md5: f85c3bcef17872c9097079e76808b672
-      size: 4243
+      md5: 06b5a276576a307adfc3a89d83b20311
+      size: 3471
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
       size: 3092
     - path: src/crystal_models.py
       hash: md5
-      md5: e81712c4eefc0101f294a31b38284402
-      size: 20781
+      md5: 19498e1504a1c7d812961065de3f6a78
+      size: 20306
     - path: src/io.py
       hash: md5
-      md5: 4d2b8fd7005febe77e11f2777776583f
-      size: 5028
+      md5: 7fff93f4e5bd95e99acf8897f494877d
+      size: 5515
     params:
       params.yaml:
         dir_structure:
@@ -3716,13 +3712,13 @@ stages:
     - path: 
         results/subspace-split/Prez_2025-04-16/Prez_2025-04-16_subspace-split-pipeline.pkl
       hash: md5
-      md5: f088385b368049b9e7d36e405b53e9e4
-      size: 56223
+      md5: 450b1a829939b13a1b9a3bc029f4fdc7
+      size: 56251
     - path: 
         results/subspace-split/Prez_2025-04-16/Prez_2025-04-16_subspace-split-variance.svg
       hash: md5
-      md5: 85f845c1b36f2152b15a63af952c5bb7
-      size: 150908
+      md5: 28d0c44f656ea68d2f2dcbcdf1063de8
+      size: 150896
   extract@4:
     cmd: python scripts/extract_normalized_data.py --dataset Sulley_2025-05-06 
       --raw_data_dir 
@@ -4480,8 +4476,8 @@ stages:
       size: 17779
     - path: scripts/prep_move_split.py
       hash: md5
-      md5: 85a41c9e1c6346e7fba4a2143a881458
-      size: 5276
+      md5: 42ed4ffd7fde8ae4a19947bea04df929
+      size: 5300
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -4539,18 +4535,18 @@ stages:
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-move_unique.parquet
       hash: md5
-      md5: 0d019cd3630fa827d14a9614805e2afd
-      size: 13439528
+      md5: 4d8a71a03347e50fa2af5acd888b5cc9
+      size: 13439530
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-prep_unique.parquet
       hash: md5
-      md5: 24b19ab34f67fd90c950ccdbb82171e5
+      md5: 40df9db3ce15cd3229001d45e015ff44
       size: 11205185
     - path: 
         data/trialframe/Prez_2025-04-16/Prez_2025-04-16_neural-partition-shared.parquet
       hash: md5
-      md5: dfbdeee94babb0b25b9f2b72e3cb0ca8
-      size: 6736525
+      md5: c66d26ecb37b95b17d4fcefd5a5bd5ce
+      size: 6736527
     - path: logs/prep-move-split/Prez_2025-04-16.log
       hash: md5
       md5: 55fc3326e0ff9e2a47ace48e8eef0952
@@ -4558,7 +4554,7 @@ stages:
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-partition.pkl
       hash: md5
-      md5: 81f37a0722a17476248dd6b9b35830fc
+      md5: 9194d600212b24ea18c90bc1d5229ab9
       size: 67059
   prep_move_split_plots@2:
     cmd: python scripts/prep_move_split_plots.py --dataset Prez_2025-04-16 
@@ -4614,12 +4610,12 @@ stages:
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-partition.pkl
       hash: md5
-      md5: 81f37a0722a17476248dd6b9b35830fc
+      md5: 9194d600212b24ea18c90bc1d5229ab9
       size: 67059
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: 94c10c559320d0c5830267ae187b2f2a
-      size: 11919
+      md5: 4f46376e291fc714233012d2206548ba
+      size: 10034
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -4680,38 +4676,33 @@ stages:
     outs:
     - path: logs/prep-move-split-plots/Prez_2025-04-16.log
       hash: md5
-      md5: de9cf7d04522adc8c7265e504e8a48fd
-      size: 1227
+      md5: 801ec8ef0e158ae3bc083f38d09fdc87
+      size: 1119
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-variance.svg
       hash: md5
-      md5: ec041f872619add765a23bea53e39d41
+      md5: dde7fefda8135e6fdbaf2cf04bb748fb
       size: 87598
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-all-tasks.svg
       hash: md5
-      md5: fb12e26b4dcb69a3b136e011eff1f8dd
-      size: 5938632
+      md5: feb2e81244f4d4df299d0df69fbaee2b
+      size: 5938872
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-dco.svg
       hash: md5
-      md5: 7ba714122230ddf06fe40d1165c6ea05
-      size: 710279
+      md5: f1462ee12cdc469b1e2269008d9303e2
+      size: 710273
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: d9562d547023ccf342783f1e9e5403d4
-      size: 1843538
+      md5: b7456168e19a88a4ea4a6e902927f07e
+      size: 1843557
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.json
       hash: md5
-      md5: 3f940ca0e81a144f17059c72adbbd48a
-      size: 516725
-    - path: 
-        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.svg
-      hash: md5
-      md5: c1db2672f6249cb43a66c73329e5c333
-      size: 6347726
+      md5: 5487745843c8303411b2c93bad02d7df
+      size: 54309713
   neural_explained_variance@2:
     cmd: python scripts/neural_explained_variance.py --dataset Dwight_2025-01-07
       --composition_config conf/trialframe_cst.yaml --raw_data_dir 
@@ -4862,8 +4853,8 @@ stages:
       size: 22236
     - path: scripts/prep_move_split.py
       hash: md5
-      md5: 85a41c9e1c6346e7fba4a2143a881458
-      size: 5276
+      md5: 42ed4ffd7fde8ae4a19947bea04df929
+      size: 5300
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -4921,17 +4912,17 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-move_unique.parquet
       hash: md5
-      md5: 74a04ad836c8dc8b35b5ac110b6bf6aa
-      size: 13243039
+      md5: 24c511e2291144ca153a7bf00f260695
+      size: 13243035
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-prep_unique.parquet
       hash: md5
-      md5: a00f15fce4d9e3ce108b4f4d6a59ff82
+      md5: bb2cbd8a11e816099e43d4b986613536
       size: 18899297
     - path: 
         data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_neural-partition-shared.parquet
       hash: md5
-      md5: 5ec7bd151286278370a589e9e515e7df
+      md5: 697c8bff599ebe399e3ca54ba2fd79bb
       size: 18899297
     - path: logs/prep-move-split/Dwight_2025-01-01.log
       hash: md5
@@ -4940,7 +4931,7 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-partition.pkl
       hash: md5
-      md5: fa5c56415887677834dec2d92dd9f1fe
+      md5: 587b8d6e76bd0545aabee3bb43901934
       size: 91659
   prep_move_split@1:
     cmd: python scripts/prep_move_split.py --dataset Dwight_2025-01-07 
@@ -4993,8 +4984,8 @@ stages:
       size: 19488
     - path: scripts/prep_move_split.py
       hash: md5
-      md5: 85a41c9e1c6346e7fba4a2143a881458
-      size: 5276
+      md5: 42ed4ffd7fde8ae4a19947bea04df929
+      size: 5300
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5052,18 +5043,18 @@ stages:
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-move_unique.parquet
       hash: md5
-      md5: 40dbb2ecf3a825b822ab0069d1c3c518
+      md5: 8d4c35903b2ce01d33f73b1c73020686
       size: 13372647
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-prep_unique.parquet
       hash: md5
-      md5: a384922950993a8af00350f2928231e6
+      md5: 2be7e72e0246d853d5f283b69666240d
       size: 15039709
     - path: 
         data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_neural-partition-shared.parquet
       hash: md5
-      md5: dc04df263f276aa9512411e4252cdcf6
-      size: 15039711
+      md5: 949817b6c26d76ff7772cb6c0e77d6e5
+      size: 15039709
     - path: logs/prep-move-split/Dwight_2025-01-07.log
       hash: md5
       md5: 571a157a2402926e57eebe6b1ae82ee3
@@ -5071,7 +5062,7 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-partition.pkl
       hash: md5
-      md5: ab65adfa48b0e704eb58c1bba71e84ce
+      md5: 9b23021cc51c8f2cfa6ce4506875c3d3
       size: 85059
   prep_move_split_plots@0:
     cmd: python scripts/prep_move_split_plots.py --dataset Dwight_2025-01-01 
@@ -5127,12 +5118,12 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-partition.pkl
       hash: md5
-      md5: fa5c56415887677834dec2d92dd9f1fe
+      md5: 587b8d6e76bd0545aabee3bb43901934
       size: 91659
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: 94c10c559320d0c5830267ae187b2f2a
-      size: 11919
+      md5: 4f46376e291fc714233012d2206548ba
+      size: 10034
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5193,38 +5184,33 @@ stages:
     outs:
     - path: logs/prep-move-split-plots/Dwight_2025-01-01.log
       hash: md5
-      md5: 8ba9bafa9b422d9e647c016166804b1f
-      size: 1239
+      md5: 562bcc08b212370fe736bf2191854ea5
+      size: 1127
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-variance.svg
       hash: md5
-      md5: 71ca467dd82cf31ddbad9e8ce3177599
+      md5: e9bc7db832989907bf55751953317017
       size: 86558
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-all-tasks.svg
       hash: md5
-      md5: bdbdbe1a34434bd34a66f3978263b19d
-      size: 12922155
+      md5: 0e9ab607828584ff909f95330d4c2a68
+      size: 12922144
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-dco.svg
       hash: md5
-      md5: 3df4db6fdffcb9e3abba1640ae2519a7
-      size: 3025578
+      md5: da309182bd78c70558bba688d4e92cbe
+      size: 3025579
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: 1a0426396fcb56f549733aad778e9f7d
-      size: 4141362
+      md5: fa11986ab09e46f2f0edaea249b63120
+      size: 4141334
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.json
       hash: md5
-      md5: 9a6321ac2485b75fbd230e9f5a5bebf4
-      size: 517730
-    - path: 
-        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.svg
-      hash: md5
-      md5: 4910c5907eee94a6b117d2abb9e20f2a
-      size: 15048760
+      md5: 8bc81bcca26a1b24200b9456265c0773
+      size: 127938710
   prep_move_split_plots@1:
     cmd: python scripts/prep_move_split_plots.py --dataset Dwight_2025-01-07 
       --composition_config conf/trialframe_cst.yaml --raw_data_dir 
@@ -5279,12 +5265,12 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-partition.pkl
       hash: md5
-      md5: ab65adfa48b0e704eb58c1bba71e84ce
+      md5: 9b23021cc51c8f2cfa6ce4506875c3d3
       size: 85059
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: 94c10c559320d0c5830267ae187b2f2a
-      size: 11919
+      md5: 4f46376e291fc714233012d2206548ba
+      size: 10034
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5345,38 +5331,33 @@ stages:
     outs:
     - path: logs/prep-move-split-plots/Dwight_2025-01-07.log
       hash: md5
-      md5: 5ccd66c4038602488e7f4e83700bb1e1
-      size: 1239
+      md5: 5af9fdb732f3abeaf1bdad031c152802
+      size: 1127
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-variance.svg
       hash: md5
-      md5: 161e97faea86d0d3095b5725c0791775
+      md5: 82c1e3a3862625017414e919752f97e1
       size: 86558
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-all-tasks.svg
       hash: md5
-      md5: 4976c63bcaf228f5e49534018700a7d0
-      size: 11317663
+      md5: 1bc5981a110130a77e934936623eec14
+      size: 11317871
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-dco.svg
       hash: md5
-      md5: 6723842b532689c9908af762e8528e2e
-      size: 2241245
+      md5: 1764df5c673e658d563458c367de2584
+      size: 2241244
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: 3fbdcad22fd693b2428a2a994b04455e
-      size: 3554492
+      md5: f752d30bb0ad0a6205426af24cb02fda
+      size: 3554520
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.json
       hash: md5
-      md5: eb3c439163b4dbd93c8bbe6beaf8ab38
-      size: 520136
-    - path: 
-        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.svg
-      hash: md5
-      md5: c648afc0148d16376db41d8f35115a88
-      size: 13051681
+      md5: b200cd9b4d4b44c481abfa0ba6232e6e
+      size: 110489282
   movement_kinematics_plots@0:
     cmd: python scripts/movement_kinematics_plots.py --dataset Prez_2022-07-21 
       --composition_config conf/trialframe_cst.yaml --raw_data_dir 
@@ -5959,3 +5940,66 @@ stages:
       hash: md5
       md5: be30ab5cdb77961ef9c0eb4e6b43b6f8
       size: 30270
+  prep_move_split_svg@0:
+    cmd: python scripts/vegalite_to_svg.py --input 
+      results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.json
+      --output 
+      results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.svg
+    deps:
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.json
+      hash: md5
+      md5: 8bc81bcca26a1b24200b9456265c0773
+      size: 127938710
+    - path: scripts/vegalite_to_svg.py
+      hash: md5
+      md5: 6fb4739f1b8057fd4036bcfb655a43bc
+      size: 1256
+    outs:
+    - path: 
+        results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.svg
+      hash: md5
+      md5: d0e549bc3e3900eda4da82ceba7cacb0
+      size: 15052219
+  prep_move_split_svg@1:
+    cmd: python scripts/vegalite_to_svg.py --input 
+      results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.json
+      --output 
+      results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.svg
+    deps:
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.json
+      hash: md5
+      md5: b200cd9b4d4b44c481abfa0ba6232e6e
+      size: 110489282
+    - path: scripts/vegalite_to_svg.py
+      hash: md5
+      md5: 6fb4739f1b8057fd4036bcfb655a43bc
+      size: 1256
+    outs:
+    - path: 
+        results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.svg
+      hash: md5
+      md5: bb43e46da27fc18507bc303bcfde37bb
+      size: 13063934
+  prep_move_split_svg@2:
+    cmd: python scripts/vegalite_to_svg.py --input 
+      results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.json
+      --output 
+      results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.svg
+    deps:
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.json
+      hash: md5
+      md5: 5487745843c8303411b2c93bad02d7df
+      size: 54309713
+    - path: scripts/vegalite_to_svg.py
+      hash: md5
+      md5: 6fb4739f1b8057fd4036bcfb655a43bc
+      size: 1256
+    outs:
+    - path: 
+        results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.svg
+      hash: md5
+      md5: de551218509325ba40af786c2d0b35e2
+      size: 6362781

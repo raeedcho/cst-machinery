@@ -1,8 +1,6 @@
 import cloudpickle
 import json
 import logging
-import subprocess
-import sys
 
 import altair as alt
 import matplotlib.pyplot as plt
@@ -23,39 +21,17 @@ def save_figure(fig, out_path):
     plt.close(fig)
 
 
-def save_split_space_svg(chart, out_path):
-    """Export an Altair chart to SVG via vl-convert in an isolated subprocess.
+def save_vegalite_spec(chart, out_path):
+    """Save an Altair chart as a Vega-Lite JSON spec.
 
-    Spawning a fresh interpreter prevents conflicts between vl-convert's embedded
-    V8 engine and PyTorch (loaded later when deserializing the partition model).
-    Falls back to saving interactive HTML if SVG export fails.
+    The spec is converted to SVG in a separate DVC stage (prep_move_split_svg)
+    by vegalite_to_svg.py, which runs in a fresh process without torch loaded.
 
     Args:
         chart: Altair Chart object.
-        out_path: Path for the .svg output (or .html on fallback).
+        out_path: Path for the .json output.
     """
-    convert_script = (
-        "import sys, vl_convert as vlc; "
-        "svg = vlc.vegalite_to_svg(sys.stdin.read()); sys.stdout.write(svg)"
-    )
-    try:
-        result = subprocess.run(
-            [sys.executable, '-c', convert_script],
-            input=json.dumps(chart.to_dict()),
-            capture_output=True,
-            text=True,
-            timeout=120,
-        )
-        if result.returncode == 0 and result.stdout:
-            out_path.write_text(result.stdout)
-            logger.info(f'Saved SVG: {out_path}')
-        else:
-            raise RuntimeError(result.stderr[:500])
-    except Exception as e:
-        logger.warning(f'SVG export failed ({e}); saving as HTML instead')
-        html_path = out_path.with_suffix('.html')
-        chart.save(str(html_path))
-        logger.info(f'Saved HTML fallback: {html_path}')
+    out_path.write_text(json.dumps(chart.to_dict()))
 
 
 def main(args):
@@ -146,7 +122,7 @@ def main(args):
         x='independent',
         y='independent',
     )
-    save_split_space_svg(split_space_chart, results_dir / f'{dataset}_split-space-trajectory.svg')
+    save_vegalite_spec(split_space_chart, results_dir / f'{dataset}_split-space-trajectory.json')
 
     # Shared RTT target-onset epochs (used by projected RTT panel from notebook cell 24)
     target_onset_slice = slice(pd.to_timedelta(args.target_onset_start), pd.to_timedelta(args.target_onset_end))

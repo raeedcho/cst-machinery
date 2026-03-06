@@ -35,7 +35,7 @@ stages:
       deps:
       - scripts/smooth_firing_rates.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
-      - /Users/raeed/codebase/0-projects/smile-extraction/smile_extract/smoothing.py
+      - /Users/raeed/codebase/0-projects/trialframe/trialframe/smoothing.py
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-spikes-binned.parquet
       outs:
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-smooth-rates.parquet
@@ -218,12 +218,23 @@ stages:
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
       outs:
       - ${dir_structure.log_dir}/prep-move-split-plots/${item.dataset_name}.log
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.json
       plots:
-      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.svg
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-variance.svg
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-dco.svg
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-all-tasks.svg
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_projected-activity-rtt-target-onset.svg
+  prep_move_split_svg:
+    foreach: ${prep_move_datasets}
+    do:
+      cmd: python scripts/vegalite_to_svg.py
+        --input ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.json
+        --output ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.svg
+      deps:
+      - scripts/vegalite_to_svg.py
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.json
+      plots:
+      - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.svg
   movement_kinematics_plots:
     foreach: ${datasets}
     do:
@@ -287,7 +298,7 @@ stages:
     foreach: ${datasets}
     do:
       cmd: python scripts/get_context_axis.py --dataset ${item.dataset_name} 
-        --composition_config ${dir_structure.config_dir}/trialframe.yaml
+        --composition_config ${dir_structure.config_dir}/trialframe_cst.yaml
         ${dir_structure} ${logging}
       params:
       - logging
@@ -312,7 +323,7 @@ stages:
     foreach: ${datasets}
     do:
       cmd: python scripts/cross_task_decoding.py --dataset ${item.dataset_name} 
-        --composition_config ${dir_structure.config_dir}/trialframe.yaml
+        --composition_config ${dir_structure.config_dir}/trialframe_cst.yaml
         ${dir_structure} ${logging}
       params:
       - logging

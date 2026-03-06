@@ -12,8 +12,7 @@ from sklearn.decomposition import PCA, TruncatedSVD
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.pipeline import Pipeline
 
-from src.crystal_models import SoftnormScaler
-from trialframe import get_index_level, multivalue_xs, reindex_trial_from_event, slice_by_time
+from trialframe import get_index_level, multivalue_xs, reindex_trial_from_event, slice_by_time, SoftnormScaler
 from src.cli import with_parsed_args, create_default_parser
 from src.io import generic_preproc
 
