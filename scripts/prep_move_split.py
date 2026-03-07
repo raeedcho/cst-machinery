@@ -18,12 +18,12 @@ import pandas as pd
 import cloudpickle
 import logging
 from pathlib import Path
+from sklearn.pipeline import make_pipeline
 
 from trialframe import SoftnormScaler, get_epoch_data
 from src.crystal_models import CISDirPartition
 from src.subspace_tools import subspace_overlap_index
-from src.io import generic_preproc, get_targets, setup_logging, setup_results_dir
-from src.targets import get_target_direction
+from src.io import generic_preproc, setup_logging, setup_results_dir
 from src.cli import create_default_parser
 
 logger = logging.getLogger(__name__)
@@ -35,22 +35,10 @@ def main(args):
     setup_logging(args, subfolder_name='prep-move-split')
     results_dir = setup_results_dir(args, subfolder_name='prep-move-split')
 
-    # Load preprocessed data and target directions
+    # Load preprocessed data
     preproc = generic_preproc(args)
-    targets = get_targets(args.trialframe_dir, dataset)
-    target_dir = get_target_direction(targets)
-    logger.info(f'Loaded preprocessed data and target directions for {dataset}')
-
-    # Softnorm and add target direction
-    softnormer = SoftnormScaler()
-    neural_data = (
-        preproc
-        .assign(**{'target direction': target_dir})
-        .set_index('target direction', append=True)
-        ['motor cortex']
-        .pipe(softnormer.fit_transform)
-    )
-    logger.info(f'Softnormed neural data: {neural_data.shape}')
+    neural_data = preproc['motor cortex']
+    logger.info(f'Loaded preprocessed data for {dataset}')
 
     # Define training epochs
     training_epochs = {
@@ -58,32 +46,34 @@ def main(args):
         'move': ('Move', slice(pd.to_timedelta(args.move_start), pd.to_timedelta(args.move_end))),
     }
 
-    # Fit CISDirPartition model
-    partition_model = CISDirPartition(
-        n_comps_per_cond=args.n_comps_per_cond,
-        reference_task=args.reference_task,
-        training_epochs=training_epochs,
-        var_cutoff=args.var_cutoff,
-        split_transform=True,
+    # Create and fit sklearn pipeline: softnorm → partition
+    pipeline = make_pipeline(
+        SoftnormScaler(),
+        CISDirPartition(
+            n_comps_per_cond=args.n_comps_per_cond,
+            reference_task=args.reference_task,
+            training_epochs=training_epochs,
+            var_cutoff=args.var_cutoff,
+            split_transform=True,
+        )
     )
-    partition_model.fit(neural_data)
-    logger.info(f'Fitted CISDirPartition model to {dataset}')
+    pipeline.fit(neural_data)
+    logger.info(f'Fitted softnorm + CISDirPartition pipeline to {dataset}')
 
-    # Save model
+    # Save pipeline
     model_path = results_dir / f'{dataset}_prep-move-partition.pkl'
     with open(model_path, 'wb') as f:
-        cloudpickle.dump({
-            'softnormer': softnormer,
-            'partition_model': partition_model,
-        }, f)
-    logger.info(f'Saved model to {model_path}')
+        cloudpickle.dump(pipeline, f)
+    logger.info(f'Saved pipeline to {model_path}')
 
     # Compute and log subspace overlap index
-    train_data = (
+    partition_model = pipeline.named_steps['cisdirpartition']
+    train_data_raw = (
         neural_data
         .xs(level='task', key=args.reference_task)
         .pipe(get_epoch_data, epochs=training_epochs)
     )
+    train_data = pipeline.named_steps['softnormscaler'].transform(train_data_raw)
     unsplit_activity = train_data @ partition_model.unsplit_projmat_
     soi = subspace_overlap_index(
         unsplit_activity.xs(level='phase', key='prep').values,
@@ -92,11 +82,15 @@ def main(args):
     logger.info(f'{dataset} subspace overlap index (prep→move): {soi:.4f}')
 
     # Transform ALL neural data and save each subspace to its own parquet
-    transformed = partition_model.transform_split(neural_data)
+    transformed = partition_model.transform_split(pipeline.named_steps['softnormscaler'].transform(neural_data))
 
-    # Reset index to ['block', 'trial_id', 'time'] for composition compatibility
-    extra_levels = [n for n in transformed.index.names if n not in ('block', 'trial_id', 'time')]
-    transformed = transformed.reset_index(level=extra_levels, drop=True)
+    # Strip to basic 3-level index for composition compatibility
+    # Keep only: 'block', 'trial_id', 'time'
+    basic_index_names = ['block', 'trial_id', 'time']
+    extra_levels = [name for name in transformed.index.names if name not in basic_index_names]
+    if extra_levels:
+        transformed = transformed.reset_index(level=extra_levels, drop=True)
+        logger.info(f'Stripped metadata levels {extra_levels} for composition compatibility')
 
     parquet_dir = Path(args.trialframe_dir) / dataset
     

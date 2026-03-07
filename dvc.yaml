@@ -125,10 +125,10 @@ stages:
       - src/io.py
       - src/crystal_models.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       outs:
       - ${dir_structure.log_dir}/subspace-split/${item.dataset_name}.log
       - ${dir_structure.results_dir}/subspace-split/${item.dataset_name}/${item.dataset_name}_subspace-split-pipeline.pkl
@@ -161,11 +161,11 @@ stages:
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
       outs:
       - ${dir_structure.log_dir}/prep-move-split/${item.dataset_name}.log
@@ -178,7 +178,7 @@ stages:
     foreach: ${prep_move_datasets}
     do:
       cmd: python scripts/prep_move_split_plots.py --dataset ${item.dataset_name} 
-        --composition_config ${dir_structure.config_dir}/trialframe_cst.yaml
+        --composition_config ${dir_structure.config_dir}/trialframe_partition.yaml
         ${dir_structure} ${logging}
         --reference_task ${prep_move_split.reference_task}
         --prep_start=${prep_move_split.prep_start}
@@ -198,7 +198,7 @@ stages:
       - dir_structure
       - prep_move_split
       - prep_move_split_plots
-      - conf/trialframe_cst.yaml:
+      - conf/trialframe_partition.yaml:
       deps:
       - scripts/prep_move_split_plots.py
       - src/cli.py
@@ -210,12 +210,16 @@ stages:
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_prep-move-partition.pkl
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-cis.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-move_unique.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-prep_unique.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-partition-shared.parquet
       outs:
       - ${dir_structure.log_dir}/prep-move-split-plots/${item.dataset_name}.log
       - ${dir_structure.results_dir}/prep-move-split/${item.dataset_name}/${item.dataset_name}_split-space-trajectory.json
@@ -256,11 +260,11 @@ stages:
       - src/io.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
       outs:
       - ${dir_structure.log_dir}/movement-kinematics-plots/${item.dataset_name}.log
@@ -284,11 +288,11 @@ stages:
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/state_space.py
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_targets.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_cst-cursor-pos.parquet
       outs:
       - ${dir_structure.log_dir}/neural-explained-variance/${item.dataset_name}.log
@@ -311,10 +315,10 @@ stages:
       - src/crystal_models.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
       - src/io.py
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       outs:
       - ${dir_structure.log_dir}/context_axis/${item.dataset_name}.log
       plots:
@@ -336,10 +340,10 @@ stages:
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/munge.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/timeseries.py
       - /Users/raeed/codebase/0-projects/trialframe/trialframe/time_slice.py
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${info}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.state}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.hand position}.parquet
-      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_${composition.motor cortex}.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_meta.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_states.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_hand-pos.parquet
+      - ${dir_structure.trialframe_dir}/${item.dataset_name}/${item.dataset_name}_neural-lfads-rates.parquet
       outs:
       - ${dir_structure.log_dir}/cross-task-decoding/${item.dataset_name}.log
       plots:

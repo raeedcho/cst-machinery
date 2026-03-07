@@ -6,7 +6,7 @@ import altair as alt
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-from trialframe import SoftnormScaler, get_epoch_data, multivalue_xs
+from trialframe import get_epoch_data
 
 from src.io import generic_preproc, get_targets, setup_logging, setup_results_dir
 from src.targets import get_target_direction
@@ -16,7 +16,11 @@ from src.cli import create_default_parser
 logger = logging.getLogger(__name__)
 
 
+# -----------------------------------------------------------------------------
+# IO helpers
+# -----------------------------------------------------------------------------
 def save_figure(fig, out_path):
+    """Save a matplotlib figure and close it to free memory."""
     fig.savefig(out_path)
     plt.close(fig)
 
@@ -34,46 +38,60 @@ def save_vegalite_spec(chart, out_path):
     out_path.write_text(json.dumps(chart.to_dict()))
 
 
-def main(args):
-    dataset = args.dataset
-
-    setup_logging(args, subfolder_name='prep-move-split-plots')
-    results_dir = setup_results_dir(args, subfolder_name='prep-move-split')
-
-    preproc = generic_preproc(args)
-    targets = get_targets(args.trialframe_dir, dataset)
-    target_dir = get_target_direction(targets)
-    logger.info(f'Loaded preprocessed data and target directions for {dataset}')
-
+# -----------------------------------------------------------------------------
+# Data/model prep helpers
+# -----------------------------------------------------------------------------
+def load_partition_pipeline(results_dir, dataset):
+    """Load fitted sklearn pipeline (softnorm + partition) from disk."""
     model_path = results_dir / f'{dataset}_prep-move-partition.pkl'
     with open(model_path, 'rb') as f:
-        model_bundle = cloudpickle.load(f)
+        pipeline = cloudpickle.load(f)
+    logger.info(f'Loaded fitted pipeline from {model_path}')
+    return pipeline
 
-    softnormer: SoftnormScaler = model_bundle['softnormer']
-    partition_model = model_bundle['partition_model']
-    logger.info(f'Loaded fitted partition model from {model_path}')
 
-    neural_data = (
-        preproc
+def prepare_neural_data(preproc):
+    """Isolate motor cortex data."""
+    return preproc['motor cortex']
+
+
+def assign_target_direction(data, target_dir):
+    # Attach target direction to index
+    return (
+        data
         .assign(**{'target direction': target_dir})
         .set_index('target direction', append=True)
-        ['motor cortex']
-        .pipe(softnormer.transform)
     )
 
+# -----------------------------------------------------------------------------
+# Plot panel helpers
+# -----------------------------------------------------------------------------
+def plot_split_variance_panel(neural_data, transformed_data, pipeline, args, results_dir, dataset):
+    """Generate prep/move variance explained plot comparing unsplit vs split activity."""
     training_epochs = {
         'prep': ('Go Cue', slice(pd.to_timedelta(args.prep_start), pd.to_timedelta(args.prep_end))),
         'move': ('Move', slice(pd.to_timedelta(args.move_start), pd.to_timedelta(args.move_end))),
     }
 
-    # Plot 1: split/unsplit variance comparison (from notebook cell 19 context)
-    train_data = (
+    partition_model = pipeline.named_steps['cisdirpartition']
+    train_data_raw = (
         neural_data
         .xs(level='task', key=args.reference_task)
         .pipe(get_epoch_data, epochs=training_epochs)
     )
+    train_data = pipeline.named_steps['softnormscaler'].transform(train_data_raw)
     unsplit_activity = train_data @ partition_model.unsplit_projmat_
-    split_activity = partition_model.transform_full(train_data)
+    unsplit_activity.columns = pd.RangeIndex(unsplit_activity.shape[1], name='component')
+
+    split_activity = (
+        transformed_data
+        .xs(level='task', key=args.reference_task)
+        .pipe(get_epoch_data, epochs=training_epochs)
+    )
+    if isinstance(split_activity.columns, pd.MultiIndex):
+        split_activity = split_activity.sort_index(axis=1)
+        split_activity.columns = pd.RangeIndex(split_activity.shape[1], name='component')
+
     fig = plot_split_subspace_variance(
         unsplit_activity,
         split_activity,
@@ -82,33 +100,70 @@ def main(args):
     )
     save_figure(fig, results_dir / f'{dataset}_prep-move-variance.svg')
 
-    # Plot 1b: split space trajectory (components 0 vs 1, notebook cell 13)
-    split_space = (
-        neural_data
+
+def build_split_space_data(transformed_data):
+    """Build long-form split-space component dataframe for trajectory plotting."""
+    long_df = (
+        transformed_data
         .pipe(get_epoch_data, epochs={
             'hold': ('Target On', slice(pd.to_timedelta('-200ms'), pd.to_timedelta('0ms'))),
-            'trial': ('Go Cue', slice(pd.to_timedelta('-1000ms'),pd.to_timedelta('3000ms'))),
+            'trial': ('Go Cue', slice(pd.to_timedelta('-1000ms'), pd.to_timedelta('3000ms'))),
         })
-        .pipe(partition_model.transform)
-        .pipe(multivalue_xs, axis=1, level='component', keys=[0, 1])
-        .stack(level='space')
-        .rename(columns=lambda col: f'component {col}')
-    )
-
-    # Keep only the columns needed for plotting — drops extra index levels
-    # (monkey, session date, state, etc.) to keep the Altair spec size manageable.
-    _plot_cols = ['trial_id', 'time', 'task', 'space', 'phase', 'component 0', 'component 1']
-    split_space_data = (
-        split_space
+        .stack(level='space')  # Move space from columns to index
+        [[0, 1]]  # Select only first two components
+        .rename(columns=lambda x: f'component {x}')  # Rename component columns
         .reset_index()
         .assign(time=lambda df: df['time'].dt.total_seconds())
-        [_plot_cols]
     )
+
+    plot_cols = ['trial_id', 'time', 'task', 'space', 'phase', 'target direction', 'component 0', 'component 1']
+    return long_df[plot_cols]
+
+
+def apply_split_space_colors(split_space_data):
+    """Add custom color groups for hold/trial and DCO direction shades."""
+    split_space_data = split_space_data.copy()
+    split_space_data['color_group'] = 'hold'
+
+    trial_mask = split_space_data['phase'] == 'trial'
+    split_space_data.loc[trial_mask & (split_space_data['task'] == 'RTT'), 'color_group'] = 'RTT trial'
+    split_space_data.loc[trial_mask & (split_space_data['task'] == 'CST'), 'color_group'] = 'CST trial'
+
+    dco_trial_mask = trial_mask & (split_space_data['task'] == 'DCO')
+    split_space_data.loc[dco_trial_mask, 'color_group'] = (
+        'DCO trial ' + split_space_data.loc[dco_trial_mask, 'target direction'].astype(str)
+    )
+
+    dco_groups = sorted(
+        split_space_data.loc[dco_trial_mask, 'color_group']
+        .dropna()
+        .unique()
+        .tolist()
+    )
+
+    if dco_groups:
+        if len(dco_groups) == 1:
+            dco_colors = ['#2ca02c']
+        else:
+            dco_colors = sns.light_palette('#2ca02c', n_colors=len(dco_groups) + 2).as_hex()[2:]
+    else:
+        dco_colors = []
+
+    color_domain = ['hold', 'RTT trial', 'CST trial'] + dco_groups
+    color_range = ['#b3b3b3', '#ff7f0e', '#1f77b4'] + dco_colors
+    return split_space_data, color_domain, color_range
+
+
+def plot_split_space_trajectory_panel(transformed_data, results_dir, dataset):
+    """Create and save split-space trajectory Vega-Lite spec."""
+    split_space_data = build_split_space_data(transformed_data)
+    split_space_data, color_domain, color_range = apply_split_space_colors(split_space_data)
+
     alt.data_transformers.disable_max_rows()
     split_space_chart = alt.Chart(split_space_data).mark_line().encode(
         x='component 0:Q',
         y='component 1:Q',
-        color=alt.Color('phase:N').scale(scheme='set1').sort(['hold', 'trial']),
+        color=alt.Color('color_group:N').scale(domain=color_domain, range=color_range),
         row='space:N',
         column=alt.Column('task:N').sort(['DCO', 'RTT', 'CST']),
         detail='trial_id',
@@ -124,18 +179,22 @@ def main(args):
     )
     save_vegalite_spec(split_space_chart, results_dir / f'{dataset}_split-space-trajectory.json')
 
-    # Shared RTT target-onset epochs (used by projected RTT panel from notebook cell 24)
+
+def get_rtt_epochs(args):
+    """Build RTT target-onset aligned epoch definitions from CLI args."""
     target_onset_slice = slice(pd.to_timedelta(args.target_onset_start), pd.to_timedelta(args.target_onset_end))
-    rtt_epochs = {
+    return {
         'targ 1': ('Go Cue', target_onset_slice),
         'targ 2': ('Reach to Target 2', target_onset_slice),
         'targ 3': ('Reach to Target 3', target_onset_slice),
         'targ 4': ('Reach to Target 4', target_onset_slice),
     }
 
-    # Plot 2: projected DCO activity (notebook cell 19)
+
+def plot_projected_dco_panel(transformed_data, args, results_dir, dataset):
+    """Create and save projected DCO activity panel."""
     projected_activity = (
-        neural_data
+        transformed_data
         .xs(level='task', key=args.reference_task)
         .pipe(get_epoch_data, epochs={
             'prep': (
@@ -147,7 +206,6 @@ def main(args):
                 slice(pd.to_timedelta(args.proj_move_start), pd.to_timedelta(args.proj_move_end)),
             ),
         })
-        .pipe(partition_model.transform)
         .xs(axis=1, level='component', key=0)
         .stack()
         .to_frame('activity')
@@ -177,16 +235,17 @@ def main(args):
     g.set_titles(col_template='{col_name}', row_template='{row_name}')
     save_figure(g.figure, results_dir / f'{dataset}_projected-activity-dco.svg')
 
-    # Plot 3: projected activity over full trial window for all tasks (notebook cell 20)
+
+def plot_projected_all_tasks_panel(transformed_data, args, results_dir, dataset):
+    """Create and save projected activity panel across all tasks."""
     all_projected = (
-        neural_data
+        transformed_data
         .pipe(get_epoch_data, epochs={
             'trial': (
                 'Go Cue',
                 slice(pd.to_timedelta(args.all_trial_start), pd.to_timedelta(args.all_trial_end)),
             ),
         })
-        .pipe(partition_model.transform)
         .xs(axis=1, level='component', key=0)
         .stack()
         .to_frame('activity')
@@ -217,12 +276,13 @@ def main(args):
     g.set_titles(col_template='{col_name}', row_template='{row_name}')
     save_figure(g.figure, results_dir / f'{dataset}_projected-activity-all-tasks.svg')
 
-    # Plot 4: RTT projected activity aligned to target onsets (notebook cell 24)
+
+def plot_rtt_target_onset_panel(transformed_data, rtt_epochs, results_dir, dataset):
+    """Create and save RTT target-onset aligned projected activity panel."""
     rtt_projections = (
-        neural_data
+        transformed_data
         .xs(level='task', key='RTT')
         .pipe(get_epoch_data, epochs=rtt_epochs)
-        .pipe(partition_model.transform)
         .xs(axis=1, level='component', key=0)
         .stack()
         .to_frame('activity')
@@ -251,6 +311,38 @@ def main(args):
     sns.despine(fig=g.figure, trim=True)
     g.set_titles(col_template='{col_name}', row_template='{row_name}')
     save_figure(g.figure, results_dir / f'{dataset}_projected-activity-rtt-target-onset.svg')
+
+
+def main(args):
+    """Generate the full prep-move split plotting suite for a dataset."""
+    dataset = args.dataset
+
+    setup_logging(args, subfolder_name='prep-move-split-plots')
+    results_dir = setup_results_dir(args, subfolder_name='prep-move-split')
+
+    targets = get_targets(args.trialframe_dir, dataset)
+    target_dir = get_target_direction(targets)
+    full_data = (
+        generic_preproc(
+            args,
+            add_kinematics=False,
+        )
+        .pipe(assign_target_direction, target_dir=target_dir)
+    )
+    orig_data = full_data['motor cortex']
+    split_data = full_data[['cis', 'move_unique', 'prep_unique', 'shared']].copy()
+    split_data.columns = split_data.columns.set_names(['space', 'component'])
+    logger.info(f'Loaded preprocessed data and target directions for {dataset}')
+
+    pipeline = load_partition_pipeline(results_dir, dataset)
+
+    plot_split_variance_panel(orig_data, split_data, pipeline, args, results_dir, dataset)
+    plot_split_space_trajectory_panel(split_data, results_dir, dataset)
+    plot_projected_dco_panel(split_data, args, results_dir, dataset)
+    plot_projected_all_tasks_panel(split_data, args, results_dir, dataset)
+
+    rtt_epochs = get_rtt_epochs(args)
+    plot_rtt_target_onset_panel(split_data, rtt_epochs, results_dir, dataset)
 
     logger.info(f'Generated prep-move split plot suite for {dataset}')
 
