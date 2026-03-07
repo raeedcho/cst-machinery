@@ -232,7 +232,7 @@ def score_tasks(true_data: pd.Series,pred_data: pd.DataFrame)->pd.Series:
 def score_groups(true_data: pd.Series,pred_data: pd.DataFrame, grouper: Union[str,list[str]])->pd.Series:
     return (
         pred_data
-        .stack(level='model')
+        .stack(level='model', future_stack=True)
         .to_frame('predicted') # type: ignore
         .assign(true=true_data)
         .groupby(grouper)
@@ -243,7 +243,7 @@ def plot_trial_predictions(true_data: pd.Series,pred_data: pd.DataFrame)-> Figur
     data = (
         pred_data
         .assign(true=true_data)
-        .stack(level='model')
+        .stack(level='model', future_stack=True)
         .to_frame('hand velocity')
     ) # type: ignore
     task = tfr.get_index_level(data,'task').unique()

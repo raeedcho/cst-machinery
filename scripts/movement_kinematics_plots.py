@@ -35,7 +35,7 @@ def main(args):
             ),
         })
         .xs(axis=1, level='channel', key='x')
-        .stack()
+        .stack(future_stack=True)
         .to_frame('hand kinematics')
     )
     g = sns.relplot(
@@ -74,7 +74,7 @@ def main(args):
         .xs(level='task', key='RTT')
         .pipe(get_epoch_data, epochs=rtt_epochs)
         .xs(axis=1, level='channel', key='x')
-        .stack()
+        .stack(future_stack=True)
         .to_frame('kinematics')
         .sort_index(level=['phase', 'time'])
     )

@@ -43,10 +43,10 @@ def plot_split_subspace_variance(
 
     compared_var = (
         neural_data
-        .stack(level='neural space')
+        .stack(level='neural space', future_stack=True)
         .groupby([grouper, 'neural space'])
         .apply(subspace_tools.calculate_fraction_variance)
-        .stack(level='component')
+        .stack(level='component', future_stack=True)
         .to_frame(name='fraction variance')
     )
 

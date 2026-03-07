@@ -5166,8 +5166,8 @@ stages:
       size: 91782
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: 7dfc1514b134a7c525f727bf88613270
-      size: 13888
+      md5: 1acedfc8b184374a4dba2386e7455720
+      size: 13958
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5182,8 +5182,8 @@ stages:
       size: 8488
     - path: src/plot.py
       hash: md5
-      md5: f8227b68d6ec0780c2f9c5750313e09e
-      size: 8000
+      md5: 51dfce7589c29a6dadec87a1ac5d2121
+      size: 8038
     - path: src/targets.py
       hash: md5
       md5: d696f5525d1c947cc66a99be8a601ed8
@@ -5237,22 +5237,22 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_prep-move-variance.svg
       hash: md5
-      md5: ce1c98f00caaea8f750f894448adf526
+      md5: c9eb738e7b120ec8b6599ffb9e78ad68
       size: 86558
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-all-tasks.svg
       hash: md5
-      md5: f2fbfb4b9c3dae40b614659f2c242f0d
+      md5: 7a2aa8468276d1fd0aae5cd00ecf640b
       size: 12922154
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-dco.svg
       hash: md5
-      md5: c1f38b83fbb63dc99d45e4ce8c964338
+      md5: 24fa5123dbad2eb24a25204bbc652b38
       size: 3025582
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: 251bd6018ae155ae7a5cdfe642329505
+      md5: 95b66883b06f86039786b5029c7de109
       size: 4141362
     - path: 
         results/prep-move-split/Dwight_2025-01-01/Dwight_2025-01-01_split-space-trajectory.json

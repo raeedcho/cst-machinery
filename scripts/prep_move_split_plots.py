@@ -109,7 +109,7 @@ def build_split_space_data(transformed_data):
             'hold': ('Target On', slice(pd.to_timedelta('-200ms'), pd.to_timedelta('0ms'))),
             'trial': ('Go Cue', slice(pd.to_timedelta('-1000ms'), pd.to_timedelta('3000ms'))),
         })
-        .stack(level='space')  # Move space from columns to index
+        .stack(level='space', future_stack=True)  # Move space from columns to index
         [[0, 1]]  # Select only first two components
         .rename(columns=lambda x: f'component {x}')  # Rename component columns
         .reset_index()
@@ -207,7 +207,7 @@ def plot_projected_dco_panel(transformed_data, args, results_dir, dataset):
             ),
         })
         .xs(axis=1, level='component', key=0)
-        .stack()
+        .stack(future_stack=True)
         .to_frame('activity')
         .sort_index(level=['phase', 'time'])
     )
@@ -247,7 +247,7 @@ def plot_projected_all_tasks_panel(transformed_data, args, results_dir, dataset)
             ),
         })
         .xs(axis=1, level='component', key=0)
-        .stack()
+        .stack(future_stack=True)
         .to_frame('activity')
         .sort_index(level=['phase', 'time'])
     )
@@ -284,7 +284,7 @@ def plot_rtt_target_onset_panel(transformed_data, rtt_epochs, results_dir, datas
         .xs(level='task', key='RTT')
         .pipe(get_epoch_data, epochs=rtt_epochs)
         .xs(axis=1, level='component', key=0)
-        .stack()
+        .stack(future_stack=True)
         .to_frame('activity')
         .sort_index(level=['phase', 'time'])
     )

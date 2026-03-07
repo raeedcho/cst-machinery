@@ -12,7 +12,7 @@ def make_dpca_tensor(trialframe: pd.DataFrame,conditions: list[str]) -> np.ndarr
         trialframe
         .groupby(conditions)
         .mean()
-        .stack()
+        .stack(future_stack=True)
         .reorder_levels(['channel'] + conditions)
         .to_xarray()
     )
@@ -29,7 +29,7 @@ def make_dpca_tensor_simple(trialframe: pd.DataFrame,conditions: list[str]) -> n
     """
     xr_obj = (
         trialframe
-        .stack()
+        .stack(future_stack=True)
         .groupby(['channel'] + conditions).mean()
         .to_xarray()
     )
@@ -47,7 +47,7 @@ def make_dpca_trial_tensor(trialframe: pd.DataFrame,conditions: list[str]) -> np
     """
     tensor = (
         trialframe
-        .stack()
+        .stack(future_stack=True)
         .to_frame(name='activity') # type: ignore
         .assign(**{
             'trial num': lambda df: df.groupby(['channel']+conditions).cumcount(),
