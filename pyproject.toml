@@ -30,6 +30,7 @@ dependencies = [
     "numexpr",
     "numba",
     "dpca",
+    "cebra",
     "dynamax[notebooks]",
     "jupyter",
     # GitHub dependencies
