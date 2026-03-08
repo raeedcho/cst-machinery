@@ -32,6 +32,12 @@ dependencies = [
     "dpca",
     "dynamax[notebooks]",
     "jupyter",
+    # GitHub dependencies
+    "smile_extract @ git+https://github.com/raeedcho/smile-extraction.git",
+    "dekodec @ git+https://github.com/raeedcho/dekodec.git",
+    "lfads_torch @ git+https://github.com/raeedcho/lfads-torch.git",
+    "trialframe @ git+https://github.com/raeedcho/trialframe.git",
+    "ioc @ git+https://github.com/raeedcho/inverse-optimal-control.git",
 ]
 
 [project.optional-dependencies]
