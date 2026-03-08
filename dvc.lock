@@ -710,8 +710,8 @@ stages:
       size: 163500
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: eb30dabd3279592145bdc0b8c0e72182
-      size: 9999
+      md5: 0201f6198407cd57fa81c86158fabb76
+      size: 10037
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -747,16 +747,16 @@ stages:
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 4aa4fdde182425784855c22bc211958e
+      md5: 470c5e2d3fff45384bcb2357b8a1111b
       size: 26573
     - path: 
         results/cross-task-decoding/Prez_2022-07-21/Prez_2022-07-21_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 2d7da3403cb8ec17430d909a2b9b4f1b
+      md5: 1d7f3abcb90ef0269a325b31d5765ee9
       size: 212706
     - path: results/cross-task-decoding/Prez_2022-07-21/trial-predictions/
       hash: md5
-      md5: 0362dd87ef0a256aaca2e711b49d56f8.dir
+      md5: 0d52ac2602cf62c8711e5396a8927b10.dir
       size: 16013305
       nfiles: 328
   cross_task_decoding@1:
@@ -798,8 +798,8 @@ stages:
       size: 94879
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: eb30dabd3279592145bdc0b8c0e72182
-      size: 9999
+      md5: 0201f6198407cd57fa81c86158fabb76
+      size: 10037
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -835,16 +835,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 741ab31999220a6417580158a3daf3de
+      md5: 30af18ebed49902a4698df6fa9baea5c
       size: 43543
     - path: 
         results/cross-task-decoding/Dwight_2025-01-01/Dwight_2025-01-01_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: add5b383b7ebb00da817af3ad51b4e7a
+      md5: f471d35af18dbde7a65080252a5feeaa
       size: 325202
     - path: results/cross-task-decoding/Dwight_2025-01-01/trial-predictions/
       hash: md5
-      md5: ae53c5ca92806ee42a1ef56a22bb3d0c.dir
+      md5: 02754976bdc7c3c973e3006197285968.dir
       size: 27922124
       nfiles: 593
   cross_task_decoding@2:
@@ -886,8 +886,8 @@ stages:
       size: 67908
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: eb30dabd3279592145bdc0b8c0e72182
-      size: 9999
+      md5: 0201f6198407cd57fa81c86158fabb76
+      size: 10037
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -923,16 +923,16 @@ stages:
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 8adbf461305708d0cafa4142de692d70
+      md5: 254b37d2969f85d16df8b56012e2dc94
       size: 42982
     - path: 
         results/cross-task-decoding/Dwight_2025-01-07/Dwight_2025-01-07_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 42b7eecfb8ddab9200229b45292d333f
+      md5: 4da812ccf3607ca2a03aebe123d8736c
       size: 292181
     - path: results/cross-task-decoding/Dwight_2025-01-07/trial-predictions/
       hash: md5
-      md5: 6656d56c1cd5db08c6c56287eec893a6.dir
+      md5: 95166ea1943f75bf18060cb4d882303d.dir
       size: 24267490
       nfiles: 521
   prep_lfads_tensors@0:
@@ -1959,13 +1959,13 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: d0e1c475d8ea0bbbe5937df5d21b6b19.dir
-      size: 142735
+      md5: ee2ac1563e1e8a3fd3c32565aafd75e4.dir
+      size: 150618
       nfiles: 35
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 58ee07924af05e4f0bbafced5a2cb342
-      size: 8172
+      md5: c5e47e201363184d0903cf00d0fb9aba
+      size: 8811
     params:
       params.yaml:
         dir_structure:
@@ -1990,6 +1990,10 @@ stages:
       hash: md5
       md5: a2cc12cf76c297e34cb7c1b7416a7ccb
       size: 9405053
+    - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_eye.parquet
+      hash: md5
+      md5: aef9bb1a2948598b9f796da33efb5d1c
+      size: 10252342
     - path: data/trialframe/Dwight_2025-01-01/Dwight_2025-01-01_hand-pos.parquet
       hash: md5
       md5: f51176e6e7c949be93d13dcde80af7e9
@@ -2013,8 +2017,8 @@ stages:
       size: 22236
     - path: logs/extract/Dwight_2025-01-01.log
       hash: md5
-      md5: 0ab399f5bfcae66a682ad01cf33ba592
-      size: 1912
+      md5: 025662e06b1ddc3dee176c08750d8546
+      size: 2008
   extract@0:
     cmd: python scripts/extract_normalized_data.py --dataset Prez_2022-07-21 
       --raw_data_dir 
@@ -2032,13 +2036,13 @@ stages:
       nfiles: 3
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: d0e1c475d8ea0bbbe5937df5d21b6b19.dir
-      size: 142735
+      md5: ee2ac1563e1e8a3fd3c32565aafd75e4.dir
+      size: 150618
       nfiles: 35
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 58ee07924af05e4f0bbafced5a2cb342
-      size: 8172
+      md5: c5e47e201363184d0903cf00d0fb9aba
+      size: 8811
     params:
       params.yaml:
         dir_structure:
@@ -2063,6 +2067,10 @@ stages:
       hash: md5
       md5: 19b7f61eb5fb6de27b85bce60b1bfde0
       size: 5848831
+    - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_eye.parquet
+      hash: md5
+      md5: 1d8183330b9d7c982faed740e70d5621
+      size: 7486861
     - path: data/trialframe/Prez_2022-07-21/Prez_2022-07-21_hand-pos.parquet
       hash: md5
       md5: 1178222dbec74394f52cae3e94da867f
@@ -2086,8 +2094,8 @@ stages:
       size: 11652
     - path: logs/extract/Prez_2022-07-21.log
       hash: md5
-      md5: 860626e4202ea73bc1b3ed5f799c174a
-      size: 1143
+      md5: 017de8428608a3974d149da837a8519a
+      size: 1235
   extract@2:
     cmd: python scripts/extract_normalized_data.py --dataset Dwight_2025-01-07 
       --raw_data_dir 
@@ -2105,13 +2113,13 @@ stages:
       nfiles: 5
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: d0e1c475d8ea0bbbe5937df5d21b6b19.dir
-      size: 142735
+      md5: ee2ac1563e1e8a3fd3c32565aafd75e4.dir
+      size: 150618
       nfiles: 35
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 58ee07924af05e4f0bbafced5a2cb342
-      size: 8172
+      md5: c5e47e201363184d0903cf00d0fb9aba
+      size: 8811
     params:
       params.yaml:
         dir_structure:
@@ -2136,6 +2144,10 @@ stages:
       hash: md5
       md5: 46e246e3fd1ae729413f05a932ff5eda
       size: 7001759
+    - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_eye.parquet
+      hash: md5
+      md5: 2a6a017fcdb8803be2f6e93fd5f023d0
+      size: 7957056
     - path: data/trialframe/Dwight_2025-01-07/Dwight_2025-01-07_hand-pos.parquet
       hash: md5
       md5: 8cedfff4f25005a31005f7eeae8f205b
@@ -2159,8 +2171,8 @@ stages:
       size: 19488
     - path: logs/extract/Dwight_2025-01-07.log
       hash: md5
-      md5: 4038cfe253d9a8e72f27c55f4db0dee7
-      size: 1910
+      md5: 4d47431549ea1f95967c4859ffd0d593
+      size: 2006
   prep_lfads_tensors@Prez_2022-07-21:
     cmd: python scripts/prep_lfads_tensors.py 
       data/trialframe/Prez_2022-07-21/Prez_2022-07-21_neural-spikes-binned.parquet
@@ -2628,13 +2640,13 @@ stages:
       nfiles: 4
     - path: /Users/raeed/codebase/0-projects/smile-extraction/smile_extract
       hash: md5
-      md5: d0e1c475d8ea0bbbe5937df5d21b6b19.dir
-      size: 142735
+      md5: ee2ac1563e1e8a3fd3c32565aafd75e4.dir
+      size: 150618
       nfiles: 35
     - path: scripts/extract_normalized_data.py
       hash: md5
-      md5: 58ee07924af05e4f0bbafced5a2cb342
-      size: 8172
+      md5: c5e47e201363184d0903cf00d0fb9aba
+      size: 8811
     params:
       params.yaml:
         dir_structure:
@@ -2659,6 +2671,10 @@ stages:
       hash: md5
       md5: 21caabbc1e4fbb8f4eb4c1e80a39ff09
       size: 7740750
+    - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_eye.parquet
+      hash: md5
+      md5: 72e98b75bbd8364878e57f92da33039c
+      size: 8044520
     - path: data/trialframe/Prez_2025-04-16/Prez_2025-04-16_hand-pos.parquet
       hash: md5
       md5: b4b994748715f9a381d3f1572f8b86e1
@@ -2682,8 +2698,8 @@ stages:
       size: 17779
     - path: logs/extract/Prez_2025-04-16.log
       hash: md5
-      md5: de454fdd7859e2ae6469cc0cde3b2e0f
-      size: 1871
+      md5: 60db4cddd49403a58117c67b626eccf1
+      size: 1963
   smooth_firing_rates@0:
     cmd: python scripts/smooth_firing_rates.py --dataset Prez_2022-07-21 
       --raw_data_dir 
@@ -3245,8 +3261,8 @@ stages:
       size: 75121
     - path: scripts/cross_task_decoding.py
       hash: md5
-      md5: eb30dabd3279592145bdc0b8c0e72182
-      size: 9999
+      md5: 0201f6198407cd57fa81c86158fabb76
+      size: 10037
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -3282,16 +3298,16 @@ stages:
     - path: 
         results/cross-task-decoding/Prez_2025-04-16/Prez_2025-04-16_decoder-task-score-heatmap.svg
       hash: md5
-      md5: 8dbeff193408fc4f7fd81a4969bc8a9b
+      md5: 5cbedd03961f20ae1e54938808cbcbf5
       size: 42651
     - path: 
         results/cross-task-decoding/Prez_2025-04-16/Prez_2025-04-16_decoder-trial-scores-scatter.svg
       hash: md5
-      md5: 038e8255534f2c5163e1b61cd9ac2c4d
+      md5: abeae0169f20062b572d19992cf89b2c
       size: 166963
     - path: results/cross-task-decoding/Prez_2025-04-16/trial-predictions/
       hash: md5
-      md5: 01db596358ae7efaf6ad6027993844d8.dir
+      md5: 7e06de8836691faed84782e043df0cea.dir
       size: 11028911
       nfiles: 222
   context_axis@3:
@@ -4375,8 +4391,8 @@ stages:
       size: 19488
     - path: scripts/movement_kinematics_plots.py
       hash: md5
-      md5: a53828d36c1acc7273452f07094ecd93
-      size: 3684
+      md5: ffcbc0877082420b4bcc841808645da6
+      size: 3718
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -4418,12 +4434,12 @@ stages:
     - path: 
         results/movement-kinematics/Dwight_2025-01-07/Dwight_2025-01-07_hand-movements.svg
       hash: md5
-      md5: 78480224e728309e2ca02a811a539ad4
+      md5: 5f6baa5cecb3a7660fa10f880016ca6d
       size: 6872190
     - path: 
         results/movement-kinematics/Dwight_2025-01-07/Dwight_2025-01-07_rtt-target-onset-kinematics.svg
       hash: md5
-      md5: 9d6704529f5f47d2975cab7eaf0ad506
+      md5: 7f48017049230ef90f14490d20166910
       size: 3562831
   prep_move_split@2:
     cmd: python scripts/prep_move_split.py --dataset Prez_2025-04-16 
@@ -4634,8 +4650,8 @@ stages:
       size: 67182
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: 7dfc1514b134a7c525f727bf88613270
-      size: 13888
+      md5: 1acedfc8b184374a4dba2386e7455720
+      size: 13958
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -4650,8 +4666,8 @@ stages:
       size: 8488
     - path: src/plot.py
       hash: md5
-      md5: f8227b68d6ec0780c2f9c5750313e09e
-      size: 8000
+      md5: 51dfce7589c29a6dadec87a1ac5d2121
+      size: 8038
     - path: src/targets.py
       hash: md5
       md5: d696f5525d1c947cc66a99be8a601ed8
@@ -4705,22 +4721,22 @@ stages:
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_prep-move-variance.svg
       hash: md5
-      md5: 6fa54f7d99fbc2ef48e3acb29bf9e303
+      md5: 2720de954f9211285899202df5e8302e
       size: 87598
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-all-tasks.svg
       hash: md5
-      md5: 3dd2f3e67779df7fbb45db853e7ce2bf
+      md5: e682e114a4cb576a43c72bcb1c26f45a
       size: 5938864
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-dco.svg
       hash: md5
-      md5: 021d06d04d3f8c411480962a99e725c2
+      md5: 94f6f21be7c670072141aa201aacdc84
       size: 710263
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: d599ea0309a14ec504840d66a37645b4
+      md5: 85ccc7c8e61265ee588f24e66e34ebf7
       size: 1843545
     - path: 
         results/prep-move-split/Prez_2025-04-16/Prez_2025-04-16_split-space-trajectory.json
@@ -5337,8 +5353,8 @@ stages:
       size: 85182
     - path: scripts/prep_move_split_plots.py
       hash: md5
-      md5: 7dfc1514b134a7c525f727bf88613270
-      size: 13888
+      md5: 1acedfc8b184374a4dba2386e7455720
+      size: 13958
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5353,8 +5369,8 @@ stages:
       size: 8488
     - path: src/plot.py
       hash: md5
-      md5: f8227b68d6ec0780c2f9c5750313e09e
-      size: 8000
+      md5: 51dfce7589c29a6dadec87a1ac5d2121
+      size: 8038
     - path: src/targets.py
       hash: md5
       md5: d696f5525d1c947cc66a99be8a601ed8
@@ -5408,22 +5424,22 @@ stages:
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_prep-move-variance.svg
       hash: md5
-      md5: 0aa89d7a2a0bbc3d987a5995ecb6cdc0
+      md5: 0431b0f2255b2beafea09083afb36cd4
       size: 86552
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-all-tasks.svg
       hash: md5
-      md5: 673e7eb5dbba59c99f3a5883d1817acd
+      md5: ba8da17a8ba008944b2111a85f50646f
       size: 11347759
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-dco.svg
       hash: md5
-      md5: 2ef0250ea7c94f06286cb36b16a72810
+      md5: dda0b8debab82bceb3dc6df12b44a56a
       size: 2241516
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_projected-activity-rtt-target-onset.svg
       hash: md5
-      md5: 0eb66736172c26f5b4146df949f2ea47
+      md5: 8eff92013423807c2e980e65bd1fcebc
       size: 3554115
     - path: 
         results/prep-move-split/Dwight_2025-01-07/Dwight_2025-01-07_split-space-trajectory.json
@@ -5475,8 +5491,8 @@ stages:
       size: 11652
     - path: scripts/movement_kinematics_plots.py
       hash: md5
-      md5: a53828d36c1acc7273452f07094ecd93
-      size: 3684
+      md5: ffcbc0877082420b4bcc841808645da6
+      size: 3718
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5518,12 +5534,12 @@ stages:
     - path: 
         results/movement-kinematics/Prez_2022-07-21/Prez_2022-07-21_hand-movements.svg
       hash: md5
-      md5: 63edab288e3dc7041c2e920d946730b6
+      md5: 3bd45f1c8cc15ae483b362f55ade8659
       size: 7573984
     - path: 
         results/movement-kinematics/Prez_2022-07-21/Prez_2022-07-21_rtt-target-onset-kinematics.svg
       hash: md5
-      md5: 7d9e493826a1789c54fb4b4cf72bf790
+      md5: 5e193527a8243a1eb82daa8ec797e873
       size: 3132680
   movement_kinematics_plots@1:
     cmd: python scripts/movement_kinematics_plots.py --dataset Dwight_2025-01-01
@@ -5570,8 +5586,8 @@ stages:
       size: 22236
     - path: scripts/movement_kinematics_plots.py
       hash: md5
-      md5: a53828d36c1acc7273452f07094ecd93
-      size: 3684
+      md5: ffcbc0877082420b4bcc841808645da6
+      size: 3718
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5613,12 +5629,12 @@ stages:
     - path: 
         results/movement-kinematics/Dwight_2025-01-01/Dwight_2025-01-01_hand-movements.svg
       hash: md5
-      md5: a1c01cdccce8df86b0ee7560fc548c79
+      md5: e04c9396465f49b6e0e9868ea11e7ada
       size: 8197785
     - path: 
         results/movement-kinematics/Dwight_2025-01-01/Dwight_2025-01-01_rtt-target-onset-kinematics.svg
       hash: md5
-      md5: e94dd9a3350c73f764bd8f580353f52b
+      md5: 383ea4ceb5fa5eb058ba2d36d0d4bd07
       size: 4150460
   movement_kinematics_plots@3:
     cmd: python scripts/movement_kinematics_plots.py --dataset Prez_2025-04-16 
@@ -5665,8 +5681,8 @@ stages:
       size: 17779
     - path: scripts/movement_kinematics_plots.py
       hash: md5
-      md5: a53828d36c1acc7273452f07094ecd93
-      size: 3684
+      md5: ffcbc0877082420b4bcc841808645da6
+      size: 3718
     - path: src/cli.py
       hash: md5
       md5: fd65067b8ed9d0eeda247565f9a3a6fd
@@ -5708,12 +5724,12 @@ stages:
     - path: 
         results/movement-kinematics/Prez_2025-04-16/Prez_2025-04-16_hand-movements.svg
       hash: md5
-      md5: 60eecf9486aeff96ba27d286160bd732
+      md5: 510e1cf544743852a612d48fbf33ed33
       size: 2584105
     - path: 
         results/movement-kinematics/Prez_2025-04-16/Prez_2025-04-16_rtt-target-onset-kinematics.svg
       hash: md5
-      md5: a3ff37e27b77ffdc45817003af871847
+      md5: 2fe90bc587954085adbbf243ea1cda6e
       size: 1847173
   neural_explained_variance@0:
     cmd: python scripts/neural_explained_variance.py --dataset Prez_2022-07-21 

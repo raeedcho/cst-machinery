@@ -1,0 +1,5 @@
+info: 'meta'
+composition:
+  state: 'states'
+  hand position: 'hand-pos'
+  raw eye position: 'eye'

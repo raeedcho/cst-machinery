@@ -20,6 +20,128 @@ Data uses multi-level indices with `trial_id` and `time` as primary levels, but 
 - Use `trialframe` package utilities: `get_index_level()`, `state_list_to_transitions()`, `multivalue_xs()`
 - When slicing or transforming, explicitly preserve or document any index level changes in docstrings
 
+### Trialframe-Based Data Manipulation (Preferred Pattern)
+This project strongly prefers **declarative, composable** data transformations using the `trialframe` package over imperative trial-loop patterns. Use method chaining with `.pipe()` wherever possible for readability and composability.
+
+#### ✅ Preferred: Trialframe-Based with Method Chaining
+```python
+from trialframe import get_epoch_data, get_index_level
+
+def extract_calibration_pairs(trialframe, targets_df, hold_state, ...):
+    """Extract eye-target pairs using epoch extraction + filtering + groupby."""
+    # Define epochs declaratively
+    epochs = {hold_state: (hold_state, time_slice)}
+    
+    # Chain operations: extract → filter → aggregate → join
+    eye_means = (
+        trialframe
+        .pipe(get_epoch_data, epochs=epochs)
+        .loc[lambda df: get_index_level(df, 'state').values == get_index_level(df, 'phase').values]
+        [eye_columns]
+        .groupby('trial_id')
+        .mean()
+    )
+    
+    # Join with targets to get paired data
+    paired = eye_means.join(targets_df[['x', 'y']], how='inner')
+    return paired[eye_columns].values, paired[['x', 'y']].values
+```
+
+**Key advantages:**
+- **Declarative**: Describes *what* to compute, not *how* to loop
+- **Composable**: Each step is a transformation that can be tested independently
+- **Readable**: Operations flow top-to-bottom, left-to-right
+- **Efficient**: Uses pandas vectorization, no Python loops
+
+#### ❌ Discouraged: Imperative Trial Loops
+```python
+# DON'T DO THIS - verbose, error-prone, hard to test
+def extract_calibration_pairs_old(eye_df, meta_df, states_series, ...):
+    eye_positions = []
+    target_positions = []
+    
+    for trial_id in meta_df.index:
+        if meta_df.loc[trial_id, 'task'] != task_filter:
+            continue
+        
+        trial_states = states_series.loc[trial_id]
+        trial_eye = eye_df.loc[trial_id]
+        
+        hold_mask = trial_states == hold_state
+        if not hold_mask.any():
+            continue
+        
+        hold_windows = ...  # complex logic to find windows
+        # ... many lines of manual slicing and averaging
+    
+    return np.array(eye_positions), np.array(target_positions)
+```
+
+**Why avoid:**
+- **Imperative**: Mixes control flow with data transformation
+- **Brittle**: Requires manual index slicing, prone to KeyErrors
+- **Hard to test**: Needs complex fixtures (eye_df, meta_df, states_series separately)
+- **Non-composable**: Difficult to reuse parts of the logic
+
+#### Method Chaining Best Practices
+1. **Use `.pipe()` for custom functions**: Keeps the chain readable
+   ```python
+   df.pipe(get_epoch_data, epochs={...}).pipe(custom_filter, threshold=0.5)
+   ```
+
+2. **Use `.loc[lambda df: ...]` for filtering**: Inline lambdas avoid temporary variables
+   ```python
+   df.loc[lambda x: get_index_level(x, 'state') == 'Target Hold']
+   ```
+
+3. **Use `.assign()` or `hierarchical_assign()` to add columns**: Functional style
+   ```python
+   df.assign(velocity=lambda x: compute_velocity(x['position']))
+   ```
+
+4. **Break chains at logical boundaries**: When intermediate result is reused or named
+   ```python
+   epoch_data = trialframe.pipe(get_epoch_data, epochs=epochs)
+   matching_data = epoch_data.loc[filter_condition]
+   # Now both epoch_data and matching_data are reusable
+   ```
+
+5. **Prefer `get_index_level()` over `.index.get_level_values()`**: More concise
+   ```python
+   # Good
+   states = get_index_level(df, 'state')
+   
+   # Avoid
+   states = df.index.get_level_values('state')
+   ```
+
+#### Function Signatures: Prefer Trialframes
+When designing functions, prefer **single trialframe parameter** over multiple separate DataFrames:
+
+```python
+# ✅ Preferred - single trialframe with states as index level
+def extract_features(trialframe: pd.DataFrame, state_filter: str) -> pd.DataFrame:
+    """Assumes trialframe has 'state' in MultiIndex."""
+    return trialframe.xs(state_filter, level='state')
+
+# ❌ Discouraged - separate dataframes and series
+def extract_features_old(data_df, states_series, meta_df, state_filter):
+    """Requires manual alignment of three separate structures."""
+    # ... complex slicing logic
+```
+
+**Benefits:**
+- Simpler signature (fewer parameters)
+- No alignment issues (state is already in the index)
+- Easier to test (one fixture instead of three)
+- More flexible (caller can add any index levels they need)
+
+#### Real-World Example: Eye Calibration Refactor
+See [src/eye_calibration.py](../src/eye_calibration.py) for a complete before/after example:
+- **Old approach**: 6-7 parameters (eye_df, targets_df, meta_df, states_series, hold_state, task_filter, target_name)
+- **New approach**: 3-5 parameters (trialframe, targets_df, hold_state, eye_columns, time_slice)
+- **Result**: 40% fewer lines, no trial loops, fully testable with simpler fixtures
+
 ### Configuration System (OmegaConf + Hydra)
 - `params.yaml`: Dataset definitions, pipeline hyperparameters, directory paths
 - `conf/trialframe*.yaml`: Data composition specs (which parquet files combine into trial frames)
@@ -113,6 +235,10 @@ Use `@with_parsed_args()` decorator [src/cli.py](../src/cli.py#L59) to auto-pars
 2. **Window continuous data**: `frame_to_chops(df, window_len=60, overlap=20)` creates overlapping segments for LFADS
 3. **Merge predictions**: `chops_to_frame(chops, orig_frame, overlap=20, smooth_pwr=2)` inverts windowing
 4. **State transitions**: `state_list_to_transitions()` → DataFrame of (trial_id, time, old_state, new_state)
+5. **Extract epochs**: `get_epoch_data(trialframe, epochs={'state_name': ('state_name', time_slice)})` → extract time windows per state
+6. **Filter by index level**: `df.loc[lambda x: get_index_level(x, 'state') == 'Target Hold']` → filter using index values
+7. **Aggregate by trial/state**: `df.groupby(['trial_id', 'state']).mean()` → compute per-trial-state statistics
+8. **Join with targets**: `eye_data.join(targets_df[['x', 'y']], how='inner')` → pair behavioral with spatial data
 
 ## Gotchas & Debugging Tips
 - **MultiIndex alignment**: After groupby or reset_index, always verify index structure matches original

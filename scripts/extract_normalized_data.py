@@ -61,6 +61,11 @@ def main(args):
         smile_data_blocks,
         output_folder / f'{dataset}_targets.parquet',
     )
+    save_eye_data(
+        smile_data_blocks,
+        output_folder / f'{dataset}_eye.parquet',
+        final_sampling_rate=1/pd.to_timedelta(args.bin_size).total_seconds(),
+    )
 
 def trial_name_to_task(trial_name: str) -> str:
     """
@@ -164,6 +169,17 @@ def save_targets(smile_data_blocks: dict[str, list[Any]], output_path: Path) -> 
     )
     targets.to_parquet(output_path)
     logger.info(f'Saved targets to {output_path}')
+
+def save_eye_data(smile_data_blocks: dict[str, list[Any]], output_path: Path, **kwargs) -> None:
+    eye_data = smile_extract.concat_block_trial_func_results(
+        smile_extract.get_trial_eye_data,
+        smile_data_blocks,
+        **kwargs,
+    )
+    if eye_data.empty:
+        logger.warning(f'No eye tracking data found; writing empty parquet to {output_path}')
+    eye_data.to_parquet(output_path)
+    logger.info(f'Saved eye data to {output_path}')
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Extract and save trial frame from SMILE data')
