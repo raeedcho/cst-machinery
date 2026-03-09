@@ -24,12 +24,11 @@ dependencies = [
     "scikit-learn",
     "omegaconf",
     "altair",
-    "dvc",
-    "dvclive[lightning]",
     "xarray",
     "numexpr",
     "numba",
     "dpca",
+    "cebra",
     "dynamax[notebooks]",
     "jupyter",
     # GitHub dependencies
@@ -41,6 +40,10 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
+pipeline = [
+    "dvc",
+    "dvclive[lightning]",
+]
 dev = [
     "pytest",
     "pytest-cov",
