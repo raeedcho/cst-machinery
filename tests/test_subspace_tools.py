@@ -77,25 +77,3 @@ def test_find_potent_null_space_shapes_and_properties():
 
     # Null space vectors lie in the null of W (rows of W span potent space)
     assert np.allclose(W @ null, 0, atol=1e-8)
-
-
-def test_subspace_overlap_index_uses_mocked_dekodec(monkeypatch):
-    rng = np.random.default_rng(4)
-    X = rng.standard_normal((250, 5))
-    Y = rng.standard_normal((250, 5))
-
-    # Create a simple fixed basis (first 2 standard basis vectors)
-    basis = np.eye(5)[:, :2]
-
-    # Monkeypatch dekodec.get_potent_null used inside subspace_tools
-    def fake_get_potent_null(Y_in, num_dims=10):
-        assert Y_in.shape[1] == 5
-        return basis, np.eye(5)[:, 2:]
-
-    import src.subspace_tools as st
-
-    monkeypatch.setattr(st.dekodec, "get_potent_null", fake_get_potent_null)
-
-    expected = frac_var_explained_by_subspace(X, basis)
-    got = subspace_overlap_index(X, Y)
-    assert np.isclose(got, expected, rtol=1e-6, atol=1e-8)

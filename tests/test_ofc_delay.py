@@ -32,12 +32,14 @@ def test_cst_problem_no_delay():
     """Test CSTProblem without delay (baseline)."""
     problem = CSTProblem(
         lam=1.5,
-        pos_or_vel='pos',
         signal_dependent_noise_const=1.5,
         motor_noise_const=0.4,
-        trial_length=2,
+        T=100,
         dt=0.01,
         delay=0.0,
+        control_cost_exp=2,
+        vel_cost_exp=-15,
+        pos_cost_exp=10,
     )
     
     # Should have original state dimension (5)
@@ -56,12 +58,14 @@ def test_cst_problem_with_delay():
     """Test CSTProblem with 60ms delay."""
     problem = CSTProblem(
         lam=1.5,
-        pos_or_vel='pos',
         signal_dependent_noise_const=1.5,
         motor_noise_const=0.4,
-        trial_length=2,
+        T=100,
         dt=0.01,
         delay=0.06,
+        control_cost_exp=2,
+        vel_cost_exp=-15,
+        pos_cost_exp=10,
     )
     
     # With delay=0.06, dt=0.01 -> h=6 -> augmented dim = (6+1)*5 = 35
@@ -88,12 +92,14 @@ def test_different_delays():
     for delay in delays:
         problem = CSTProblem(
             lam=1.5,
-            pos_or_vel='pos',
             signal_dependent_noise_const=1.5,
             motor_noise_const=0.4,
-            trial_length=1,
+            T=100,
             dt=dt,
             delay=delay,
+            control_cost_exp=2,
+            vel_cost_exp=-15,
+            pos_cost_exp=10,
         )
         
         h = int(np.floor(delay / dt)) if delay > 0 else 0
